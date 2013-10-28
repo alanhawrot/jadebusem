@@ -75,3 +75,7 @@ def sign_in(request):
 
 def user_panel(request):
     return render(request, 'user/user_panel.html')
+
+
+def about(request):
+    return render(request, 'user/about.html')

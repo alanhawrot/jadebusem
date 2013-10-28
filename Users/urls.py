@@ -8,4 +8,5 @@ urlpatterns = patterns('Users.views',
     (r'^registration/$', 'register'),
     (r'^sign_in/$', 'sign_in'),
     (r'^user_panel/$', 'user_panel'),
+    (r'^about/$', 'about'),
 )
