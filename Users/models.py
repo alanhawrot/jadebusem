@@ -10,7 +10,6 @@ from django.contrib.auth.models import BaseUserManager
 
 #create users methods
 class JadeBusemUserManager(BaseUserManager):
-
     def _create_user(self, email, password,
                      is_staff, is_superuser, **extra_fields):
         """
@@ -36,20 +35,20 @@ class JadeBusemUserManager(BaseUserManager):
         return self._create_user(email, password, True, True,
                                  **extra_fields)
 
+
 #JadeBusem user profile
 class JadeBusemUser(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(_('email address'), max_length=254, unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     address = models.CharField(_('address'), max_length=200, blank=True)
     company_name = models.CharField(_('company name'), max_length=200, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
-        help_text=_('Designates whether the user can log into this admin '
-                    'site.'))
+                                   help_text=_('Designates whether the user can log into this admin '
+                                               'site.'))
     is_active = models.BooleanField(_('active'), default=True,
-        help_text=_('Designates whether this user should be treated as '
-                    'active. Unselect this instead of deleting accounts.'))
+                                    help_text=_('Designates whether this user should be treated as '
+                                                'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = JadeBusemUserManager()
@@ -80,4 +79,3 @@ class JadeBusemUser(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
-        

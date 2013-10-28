@@ -1,12 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from Users.models import JadeBusemUser
 from django.forms import ModelForm
+from django import forms
 
 class RegisterForm(ModelForm):
-    
     class Meta:
         model = JadeBusemUser
-        fields = ['email','password', 'first_name', 'last_name', 'address', 'company_name']
+        fields = ['email', 'password', 'first_name', 'last_name', 'address', 'company_name']
+
 
 class JadeBusemUserCreationForm(UserCreationForm):
     """
@@ -22,6 +23,7 @@ class JadeBusemUserCreationForm(UserCreationForm):
         model = JadeBusemUser
         fields = ("email",)
 
+
 class JadeBusemUserChangeForm(UserChangeForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -34,3 +36,9 @@ class JadeBusemUserChangeForm(UserChangeForm):
 
     class Meta:
         model = JadeBusemUser
+
+
+class SignInForm(forms.Form):
+    email = forms.EmailField(label='Your e-mail address')
+    password = forms.CharField(widget=forms.PasswordInput())
+
