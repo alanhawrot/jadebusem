@@ -29,7 +29,7 @@ class JadeBusemUserAdmin(UserAdmin):
     )
     form = JadeBusemUserChangeForm
     add_form = JadeBusemUserCreationForm
-    list_display = ('email', 'first_name', 'last_name', 'address', 'company_name', 'is_staff')
+    list_display = ('user_id', 'email', 'first_name', 'last_name', 'address', 'company_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name', 'address', 'company_name')
     ordering = ('email',)
 
