@@ -1,7 +1,7 @@
 #PyCharm files
-./**/.idea
+**/.idea
 #Python and django related temporary files.
-./**/*.log
-./**/*.pot
-./**/*.pyc
-./local_settings.py
+**/*.log
+**/*.pot
+**/*.pyc
+local_settings.py
