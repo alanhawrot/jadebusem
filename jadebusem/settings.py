@@ -8,6 +8,7 @@ ADMINS = (
     ('michalsemik', 'alan.hawrot@gmail.com'),
 )
 
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -70,6 +71,10 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    #Actually it break rules below but stills work.
+    #We need it to achieve compatibility.
+    './static/',
+    './schedules/static',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -126,7 +131,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'Users'
+    'Users',
+    'schedules'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
