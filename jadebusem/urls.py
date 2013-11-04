@@ -2,7 +2,6 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-import schedules
 
 admin.autodiscover()
 
@@ -19,4 +18,5 @@ urlpatterns = patterns('',
 
     url(r'^users/', include('Users.urls')),
     url(r'^schedules/', include('schedules.urls')),
+    url(r'^search/', include('SearchEngine.urls')),
 )

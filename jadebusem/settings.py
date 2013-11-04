@@ -6,6 +6,7 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     ('alanhawrot', 'alan.hawrot@gmail.com'),
     ('michalsemik', 'alan.hawrot@gmail.com'),
+    ('mateuszbobinski', 'mat.bobinski@gmail.com'),
 )
 
 
@@ -132,7 +133,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'Users',
-    'schedules'
+    'schedules',
+    'SearchEngine',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
