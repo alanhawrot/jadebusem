@@ -5,7 +5,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('alanhawrot', 'alan.hawrot@gmail.com'),
-    ('michalsemik', 'alan.hawrot@gmail.com'),
+    ('michalsemik', 'michal.semik@gmail.com'),
     ('mateuszbobinski', 'mat.bobinski@gmail.com'),
 )
 
@@ -94,9 +94,9 @@ SECRET_KEY = 'eu6+-i04v%ia1wj7=mxz=n+e7l3!g+!sb^))+_g+or0=r4kufx'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.templates.loaders.filesystem.Loader',
+    'django.templates.loaders.app_directories.Loader',
+#     'django.templates.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,7 +118,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "./template"
+    "./templates"
 )
 
 INSTALLED_APPS = (
