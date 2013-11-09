@@ -134,6 +134,3 @@ def user_panel(request, userid):
                             'success': success,
                             })
     return render_to_response('user/user_panel.html', context)
-
-def about(request):
-    return render(request, 'user/about.html')
