@@ -1,16 +1,18 @@
-<html>
-	<head>
-		<title>Search</title>
-	</head>
-	
-	<body>    
-		<form action="." method="post">
-			<input type="text" name="company_name" value="{{ company_name }}" placeholder="Search for company">
-			<input type="text" name="from" value="{{ search_from }}" placeholder="From...">
-			<input type="text" name="to" value="{{ search_to }}" placeholder="To...">
-			<input type="submit" value="Search">
-			<p>Searching for: {{ company_name }}</p>
-			<p>Searching for route from: {{ search_from }} to {{ search_to }} {{ from_to_error }}</p>
-		</form>
-	</body>
-</html>
+{% extends "jadebusem_site/base.html" %}
+
+{% block title %}
+    Wyszukaj połączenie
+{% endblock %}
+
+{% block content %}
+
+    <form action="." method="post">
+        <input type="text" name="company_name" value="{{ company_name }}" placeholder="Search for company">
+        <input type="text" name="from" value="{{ search_from }}" placeholder="From...">
+        <input type="text" name="to" value="{{ search_to }}" placeholder="To...">
+        <input type="submit" value="Search">
+        <p>Searching for: {{ company_name }}</p>
+        <p>Searching for route from: {{ search_from }} to {{ search_to }} {{ from_to_error }}</p>
+	</form>
+
+{% endblock %}

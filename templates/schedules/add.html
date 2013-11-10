@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html>
-<head>
-    <title></title>
+{% extends "jadebusem_site/base.html" %}
+
+{% block additional_head %}
+    {% load staticfiles %}
     <script src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'scripts/add.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/basic.css' %}" />
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/basic.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Dodaj rozkład
+{% endblock %}
+
+{% block content %}
     <h1>{{ mainheader }}</h1>
 
     <form method="post" enctype="multipart/form-data">
@@ -28,82 +32,83 @@
                 <progress id="imageUploadStatus" value="50" max="100"></progress>
             </article>
             <br/><br/>
-        {%  endif %}
+        {% endif %}
 
 
         {% if form2.show %}
-        <article>
-            <div class="floating">
-                {% if form2.header %}<h2>{{ form2.header }}</h2>{% endif %}
+            <article>
+                <div class="floating">
+                    {% if form2.header %}<h2>{{ form2.header }}</h2>{% endif %}
 
-                <br/>
-                <div id="tracePoints">
-                    {% for tracePoint in schedule.trace_points %}
-                        <input name="tracePoint" class="hiddenTracePoint" type="text" value="{{tracePoint}}" hidden="hidden" />
-                        <span class="viewableTracePoint">{{tracePoint}}</span>
-                        {% if not forloop.last %}
-                        <span> - </span>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div id="tracePointsControl">
-                    <input type="text"
-                       id="tracePointInput"
-                       name="tracePoint"
-                       placeholder="Dodaj punkt trasy"/>
-                    <input id="addTracePoint"
-                           type="button"
-                           value="+"/>
-                </div>
+                    <br/>
 
-                <br/>
-                <div>
-                    {% load filters %}
-                    {% for day in schedule.days %}
-                    <div class="floating centered">
-                        {{ forloop.counter0|days_of_week }}
-                    </div>
-                    {% endfor %}
-                    <div  class="clearing"></div>
-                </div>
-               <div class="days">
-                    {% for day in schedule.days %}
-                    <div class="day floating centered" id="{{forloop.counter0}}">
-                        {% for hour in day %}
-                            <div class="hour">
-                                <input type="text"
-                                       id="hourInput"
-                                       name="hour[{{ forloop.parentloop.counter0 }}]"
-                                       placeholder="8:00"
-                                       value="{{ hour }}"/>
-
-                                <input id="add"
-                                       type="button"
-                                       value="+"
-                                       {% ifnotequal hour '' %}  hidden="hidden" {% endifnotequal %} />
-
-                                <input id="remove"
-                                       type="button"
-                                       value="-"
-                                       {% ifequal hour '' %}  hidden="hidden" {% endifequal %} />
-                                <br/>
-                            </div>
+                    <div id="tracePoints">
+                        {% for tracePoint in schedule.trace_points %}
+                            <input name="tracePoint" class="hiddenTracePoint" type="text" value="{{ tracePoint }}"
+                                   hidden="hidden"/>
+                            <span class="viewableTracePoint">{{ tracePoint }}</span>
+                            {% if not forloop.last %}
+                                <span> - </span>
+                            {% endif %}
                         {% endfor %}
                     </div>
-                {% endfor %}
-                <div  class="clearing"></div>
+                    <div id="tracePointsControl">
+                        <input type="text"
+                               id="tracePointInput"
+                               name="tracePoint"
+                               placeholder="Dodaj punkt trasy"/>
+                        <input id="addTracePoint"
+                               type="button"
+                               value="+"/>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        {% load filters %}
+                        {% for day in schedule.days %}
+                            <div class="floating centered">
+                                {{ forloop.counter0|days_of_week }}
+                            </div>
+                        {% endfor %}
+                        <div class="clearing"></div>
+                    </div>
+                    <div class="days">
+                        {% for day in schedule.days %}
+                            <div class="day floating centered" id="{{ forloop.counter0 }}">
+                                {% for hour in day %}
+                                    <div class="hour">
+                                        <input type="text"
+                                               id="hourInput"
+                                               name="hour[{{ forloop.parentloop.counter0 }}]"
+                                               placeholder="8:00"
+                                               value="{{ hour }}"/>
+
+                                        <input id="add"
+                                               type="button"
+                                               value="+"
+                                                {% ifnotequal hour '' %}  hidden="hidden" {% endifnotequal %} />
+
+                                        <input id="remove"
+                                               type="button"
+                                               value="-"
+                                                {% ifequal hour '' %}  hidden="hidden" {% endifequal %} />
+                                        <br/>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div class="clearing"></div>
+                    </div>
+
+                    <input id="imageSubmit"
+                           type="submit"
+                           name="imageSubmit"
+                           value="Wyślij rozkład">
+
+                    <br/>
                 </div>
-
-                <input id="imageSubmit"
-                       type="submit"
-                       name="imageSubmit"
-                       value="Wyślij rozkład">
-
-                <br/>
-            </div>
-        </article>
+            </article>
         {% endif %}
     </form>
-
-</body>
-</html>
+{% endblock %}

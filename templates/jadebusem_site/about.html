@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About page</title>
-</head>
-<body>
-<article>
-    <h1>JadeBusem information page</h1>
+{% extends "jadebusem_site/base.html" %}
+
+{% block title %}
+    Informacje od Jadę Busem
+{% endblock title %}
+
+{% block content %}
     <p>
         Jadę Busem is a portal that will be created for people that use private bus companies. Basically portal has one
         main
@@ -20,6 +19,4 @@
         An additional advantage of the portal is able to register the company. The company reserves the input schedules,
         which increases the credibility in the eyes of customers.<br>
     </p>
-</article>
-</body>
-</html>
+{% endblock content %}

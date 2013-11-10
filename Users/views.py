@@ -80,7 +80,8 @@ def sign_in(request):
         form = SignInForm()
     return render(request, 'user/sign_in.html', {'form': form, 'error': error})
 
-def user_panel(request, userid):
+
+def user_settings(request, userid):
     u = get_object_or_404(JadeBusemUser, user_id=userid)
     email_error = ""
     password_error = ""
@@ -133,4 +134,4 @@ def user_panel(request, userid):
                             'company_name': u.company_name,
                             'success': success,
                             })
-    return render_to_response('user/user_panel.html', context)
+    return render_to_response('user/user_settings.html', context)

@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Your panel</title>
-</head>
-<body>
-    <p>Here you can manage your account
+{% extends "jadebusem_site/base.html" %}
+
+{% block title %}
+    Twój panel użytkownika
+{% endblock %}
+
+{% block content %}
+
+    <p>Tutaj możesz zarządzać swoim kontem
     		<form action="." method="post">
 			<p><input type="email" name="email" value="{{ email }}" placeholder="E-mail" required> {{ email_error }}</p>
 			<p><input type="password" name="password" value="{{ password }}" placeholder="New password"></p>
@@ -18,5 +20,5 @@
 			{{ success }}
 		</form>
 	</p>
-</body>
-</html>
+
+{% endblock %}

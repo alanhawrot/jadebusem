@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include "jadebusem_site/head.html" %}
+    {% block additional_head %} {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        <img src=../../static/pics/logo.png" alt="Logo JadeBusem">
+        <section id="user_panel">
+            {% include "jadebusem_site/user_panel.html" %}
+        </section>
+    </header>
+
+    <section id="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <nav>
+        {% include "jadebusem_site/nav.html" %}
+    </nav>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+</body>
+</html>
