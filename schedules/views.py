@@ -6,12 +6,22 @@ from schedules.schedule import parse_schedule_from_post, create_empty_viewable_s
 
 
 def add(request):
-    context = { 'mainheader' : 'Dodaj rozkład',
-                'form1': {'show': True,
-                            'header': "Wyślij zdjęcie"},
-                'form2': {'show': True,
-                            'header': "Uzupełnij Formularz"}}
-    _schedule = None
+    if 'email' in request.session:
+        context = { 'mainheader' : 'Dodaj rozkład',
+                    'form1': {'show': True,
+                                'header': "Wyślij zdjęcie"},
+                    'form2': {'show': True,
+                                'header': "Uzupełnij Formularz"},
+                    'login': True,
+                    'user': request.session}
+        _schedule = None
+    else:
+        context = { 'mainheader' : 'Dodaj rozkład',
+                    'form1': {'show': True,
+                                'header': "Wyślij zdjęcie"},
+                    'form2': {'show': True,
+                                'header': "Uzupełnij Formularz"}}
+        _schedule = None
     if request.FILES:
         image = request.FILES.get('imageUpload', '')
         _schedule = parse_schedule_from_image(image)
@@ -26,6 +36,7 @@ def add(request):
 
     context['schedule'] = _schedule
     return render(request, 'schedules/add.html', Context(context))
+
 
 
 

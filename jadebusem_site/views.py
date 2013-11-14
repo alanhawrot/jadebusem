@@ -2,8 +2,14 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'jadebusem_site/index.html')
+    if 'email' in request.session:
+        return render(request, 'jadebusem_site/index.html', {'login': True, 'user': request.session})
+    else:
+        return render(request, 'jadebusem_site/index.html')
 
 
 def about(request):
-    return render(request, 'jadebusem_site/about.html')
+    if 'email' in request.session:
+        return render(request, 'jadebusem_site/about.html', {'login': True, 'user': request.session})
+    else:
+        return render(request, 'jadebusem_site/about.html')

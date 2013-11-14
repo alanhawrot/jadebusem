@@ -1,5 +1,15 @@
 <ul>
-    <li><a href={% url "Users.views.sign_in" %}>Logowanie</a></li>
-    <li><a href={% url "Users.views.register" %}>Rejestracja</a></li>
-{#    <li><a href={% url "Users.views.user_settings" %}>Ustawienia konta</a></li>#}
+    {% if login %}
+        Witaj
+        {% if user.name != "" %}
+            {{ user.name }}
+        {% else %}
+            {{ user.email }}
+        {% endif %}
+        <li><a href="/users/user_settings/{{ user.user_id }}" >Ustawienia konta</a></li>
+        <li><a href="/users/log_out/" >Wyloguj sie</a></li>
+    {% else %}
+        <li><a href={% url "Users.views.sign_in" %}>Logowanie</a></li>
+        <li><a href={% url "Users.views.register" %}>Rejestracja</a></li>
+    {% endif %}
 </ul>

@@ -14,10 +14,21 @@ def search(request):
         elif(request.POST['from'] != ""):
             from_to_error = "Brak miejsca docelowego"
         elif(request.POST['to'] != ""):
-            from_to_error = "Brak miejsca poczatkowego" 
-    return render_to_response('search_engine/search.html', {
+            from_to_error = "Brak miejsca poczatkowego"
+
+    if 'email' in request.session:
+        return render_to_response('search_engine/search.html', {
+                                                            'login': True,
+                                                            'user': request.session,
                                                             'company_name': company_name,
                                                             'search_from': search_from,
                                                             'search_to': search_to,
                                                             'from_to_error': from_to_error,
                                                             })
+    else:
+        return render_to_response('search_engine/search.html', {
+                                                                'company_name': company_name,
+                                                                'search_from': search_from,
+                                                                'search_to': search_to,
+                                                                'from_to_error': from_to_error,
+                                                                })

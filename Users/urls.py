@@ -7,5 +7,6 @@ admin.autodiscover()
 urlpatterns = patterns('Users.views',
     (r'^registration/$', 'register'),
     (r'^sign_in/$', 'sign_in'),
+    (r'^log_out/$', 'log_out'),
     (r'^user_settings/(?P<userid>\d+)/$', 'user_settings'),
 )
