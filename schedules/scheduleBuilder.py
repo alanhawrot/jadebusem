@@ -1,25 +1,39 @@
+import datetime
+from Users.models import JadeBusemUser
+
 __author__ = 'michal'
-from models import Schedule
+from models import Schedule, ScheduleTracePoint, ScheduleDate
 
 class ScheduleBuilder(object):
-    def __init__(self,company,image,author,trace_points):
-
-        self.image=image
-        self.author=author
+    def __init__(self, company, image, author):
+        self.image = image
+        self.author = author
         self.company = company
         self.trace_points = ['']
         self.days = []
         for i in xrange(7):
-            self.days.append([])
+            self.days.append([''])
 
     def build_model(self):
-        pass#model = Schedule(author=,company=comany)
+        user = JadeBusemUser.objects.get(user_id=self.author)
+        schedule_model = Schedule(author=user, company=self.company, image_path=self.image)
+        schedule_model.save()
+        for day in xrange(len(self.days)):
+            for hour in self.days[day]:
+                if hour:
+                    date_model = ScheduleDate(schedule=schedule_model, day=day, time=hour)
+                    schedule_model.scheduledate_set.add(date_model)
+        for trace_point in self.trace_points:
+            if trace_point:
+                trace_point_model = ScheduleTracePoint(schedule=schedule_model, address=trace_point)
+                schedule_model.scheduletracepoint_set.add(trace_point_model)
+        return schedule_model
 
     def parse_hours(self, POST):
         for day in xrange(7):
-            hours = POST.getlist('hour['+str(day)+']', [''])
+            hours = POST.getlist('hour[' + str(day) + ']', [''])
             hours = [x for x in hours if x != ''] + ['']
-            self.days[day].extend(hours)
+            self.days[day] =hours
 
     def parse_trace_points(self, trace_points):
         if len(trace_points) > 1:

@@ -1,40 +1,54 @@
 # coding=utf-8
 from django.shortcuts import render
 from django.template import Context
-from schedules import schedule
-from schedules.schedule import parse_schedule_from_post, create_empty_viewable_schedule, parse_schedule_from_image
+import Users
+from schedules import scheduleBuilder
+from schedules.scheduleBuilder import ScheduleBuilder
 
 
 def add(request):
+    author = request.session.get('user_id')
+    if not author:
+        return Users.views.sign_in()
     if 'email' in request.session:
-        context = { 'mainheader' : 'Dodaj rozkład',
-                    'form1': {'show': True,
-                                'header': "Wyślij zdjęcie"},
-                    'form2': {'show': True,
-                                'header': "Uzupełnij Formularz"},
-                    'login': True,
-                    'user': request.session}
-        _schedule = None
+        context = {'mainheader': 'Dodaj rozkład',
+                   'form1': {'show': True,
+                             'header': "Wyślij zdjęcie"},
+                   'form2': {'show': True,
+                             'header': "Uzupełnij Formularz"},
+                   'login': True,
+                   'user': request.session}
+        schedule = None
     else:
-        context = { 'mainheader' : 'Dodaj rozkład',
-                    'form1': {'show': True,
-                                'header': "Wyślij zdjęcie"},
-                    'form2': {'show': True,
-                                'header': "Uzupełnij Formularz"}}
-        _schedule = None
+        context = {'mainheader': 'Dodaj rozkład',
+                   'form1': {'show': True,
+                             'header': "Wyślij zdjęcie"},
+                   'form2': {'show': True,
+                             'header': "Uzupełnij Formularz"}}
+
+    image = request.FILES.get('imageUpload')
+    company = request.POST.get('companyName','')
+    author = request.session.get('user_id')
+    trace_points = request.POST.getlist('tracePoint',[''])
+
+    schedule = ScheduleBuilder(company=company, author=author, image=image)
+
     if request.FILES:
-        image = request.FILES.get('imageUpload', '')
-        _schedule = parse_schedule_from_image(image)
-        _schedule.company = request.POST.get('companyName', '')
-        context['form1']['show'] = False
         context['mainheader'] = "Weryfikacja danych"
+        context['form1']['show'] = False
         context['form2']['header'] = ''
     elif request.POST:
-        _schedule = parse_schedule_from_post(request.POST)
-    else:
-        _schedule = create_empty_viewable_schedule()
-
-    context['schedule'] = _schedule
+        schedule.parse_hours(request.POST)
+        schedule.parse_trace_points(trace_points)
+        scheduleModel = schedule.build_model()
+        #scheduleModel.scheduletracepoint_set().save()
+        #scheduleModel.scheduledate_set().save()
+        context = {'mainheader': 'Pomyślnie dodano rozkład!',
+               'form1': {'show': False,
+                         'header': ""},
+               'form2': {'show': False,
+                         'header': ""}}
+    context['schedule'] = schedule
     return render(request, 'schedules/add.html', Context(context))
 
 
