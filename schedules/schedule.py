@@ -2,6 +2,8 @@ __author__ = 'michal'
 
 class Schedule(object):
     def __init__(self):
+
+
         self.company = ""
         self.trace_points = []
         self.days = []
@@ -9,6 +11,12 @@ class Schedule(object):
             self.days.append([])
 
 def parse_schedule_from_image(image):
+    """
+
+
+    @param image:
+    @return:
+    """
     return create_empty_viewable_schedule()
 
 

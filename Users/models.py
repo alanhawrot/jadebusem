@@ -80,3 +80,8 @@ class JadeBusemUser(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email])
+
+    def __unicode__(self):
+        if unicode(self.company_name):
+            return unicode(self.company_name)
+        return unicode(self.last_name) + " " + unicode(self.first_name)
