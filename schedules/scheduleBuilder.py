@@ -5,7 +5,7 @@ __author__ = 'michal'
 from models import Schedule, ScheduleTracePoint, ScheduleDate
 
 class ScheduleBuilder(object):
-    def __init__(self, company, image, author):
+    def __init__(self,author, company='', image=None):
         self.image = image
         self.author = author
         self.company = company
