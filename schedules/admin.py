@@ -15,7 +15,8 @@ class ScheduleDateAdmin(admin.TabularInline):
     extra = 0
 
 class ScheduleAdmin(ModelAdmin):
-    fields = ('author','company','image_path','verified')
-    inlines = [TracePointAdmin, ScheduleDateAdmin]
+    fields = ( 'author','company','image_path','verified')
+    list_display = ('author','company', 'image_path','verified')
+    inlines = [TracePointAdmin, ScheduleDateAdmin,]
 
 admin.site.register(Schedule, ScheduleAdmin)

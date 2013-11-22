@@ -4,7 +4,6 @@ from django.db import models
 from Users.models import JadeBusemUser
 from jadebusem.settings import MEDIA_URL
 
-
 def upload_url(self, instance, filename):
     return os.join('http://127.0.0.1:8000/static/schedule_images/', filename)
 

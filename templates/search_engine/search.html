@@ -1,18 +1,72 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% block additional_head %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'scripts/menu.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/menu.css' %}"/>
+{% endblock %}
+
 {% block title %}
     Wyszukaj połączenie
 {% endblock %}
 
 {% block content %}
-
     <form action="." method="post">
-        <input type="text" name="company_name" value="{{ company_name }}" placeholder="Search for company">
-        <input type="text" name="from" value="{{ search_from }}" placeholder="From...">
-        <input type="text" name="to" value="{{ search_to }}" placeholder="To...">
-        <input type="submit" value="Search">
-        <p>Searching for: {{ company_name }}</p>
-        <p>Searching for route from: {{ search_from }} to {{ search_to }} {{ from_to_error }}</p>
-	</form>
+        <select name="company_name">
+                <option selected="selected">Wszystkie</option>
+            {% for company in companies %}
+                <option>{{ company.company }}</option>
+            {% endfor %}
+        </select>
 
+        <input type="text" name="from" value="{{ search_from }}" placeholder="Z...">
+        <input type="text" name="to" value="{{ search_to }}" placeholder="Do...">
+        <input type="submit" value="Search">
+    </form>
+
+    <p>{{ from_to_error }}</p>
+
+    <dl id="menu">
+        {% for id, company, author, trace, schedule in list_of_tabs %}
+
+            <dt>
+                <table>
+
+                    {% if company != "" %}
+                        <tr>
+                            <h1>Firma: {{ company }}</h1>
+                        </tr>
+                    {% endif %}
+
+                    <tr>
+                        <h3>Przystanki: {{ trace }}</h3>
+                    </tr>
+
+                </table>
+            </dt>
+
+            <dd>
+                <table>
+                    <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr>
+                    {% for hours in schedule  %}
+                        <tr>
+                        {% for hour in hours %}
+                            {% if hour == None %}
+                                <td>-</td>
+                            {% else %}
+                                <td>{{ hour }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+                Autor: {{ author }}
+            </dd>
+        {% endfor %}
+    </dl>
+
+    <!-- Create new dropdown menu -->
+    <script type="text/javascript">
+        new Menu('menu');
+    </script>
 {% endblock %}
