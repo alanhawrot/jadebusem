@@ -1,5 +1,7 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
 {% block additional_head %}
     {% load staticfiles %}
     <script type="text/javascript" src="{% static 'scripts/menu.js' %}"></script>
@@ -7,21 +9,21 @@
 {% endblock %}
 
 {% block title %}
-    Wyszukaj połączenie
+    {% trans "Search for connection" %}
 {% endblock %}
 
 {% block content %}
     <form action="." method="post">
         <select name="company_name">
-                <option selected="selected">Wszystkie</option>
+                <option selected="selected">{% trans "All" %}</option>
             {% for company in companies %}
                 <option>{{ company.company }}</option>
             {% endfor %}
         </select>
 
-        <input type="text" name="from" value="{{ search_from }}" placeholder="Z...">
-        <input type="text" name="to" value="{{ search_to }}" placeholder="Do...">
-        <input type="submit" value="Search">
+        <input type="text" name="from" value="{{ search_from }}" placeholder={% trans "From..." %}>
+        <input type="text" name="to" value="{{ search_to }}" placeholder={% trans "To..." %}>
+        <input type="submit" value={% trans "Search" %}>
     </form>
 
     <p>{{ from_to_error }}</p>
@@ -34,12 +36,12 @@
 
                     {% if company != "" %}
                         <tr>
-                            <h1>Firma: {{ company }}</h1>
+                            <h1>{% trans "Company:" %} {{ company }}</h1>
                         </tr>
                     {% endif %}
 
                     <tr>
-                        <h3>Przystanki: {{ trace }}</h3>
+                        <h3>{% trans "Tracepoints:" %} {{ trace }}</h3>
                     </tr>
 
                 </table>
@@ -47,7 +49,7 @@
 
             <dd>
                 <table>
-                    <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr>
+                    {% blocktrans %} <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> {% endblocktrans %}
                     {% for hours in schedule  %}
                         <tr>
                         {% for hour in hours %}
@@ -60,7 +62,7 @@
                         </tr>
                     {% endfor %}
                 </table>
-                Autor: {{ author }}
+                {% trans "Author:" %} {{ author }}
             </dd>
         {% endfor %}
     </dl>

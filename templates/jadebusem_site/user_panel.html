@@ -1,15 +1,16 @@
+{% load i18n %}
 <ul>
     {% if login %}
-        Witaj
+        {% trans 'Welcome' %}
         {% if user.name != "" %}
             {{ user.name }}
         {% else %}
             {{ user.email }}
         {% endif %}
-        <li><a href="/users/user_settings/{{ user.user_id }}" >Ustawienia konta</a></li>
-        <li><a href="/users/log_out/" >Wyloguj sie</a></li>
+        <li><a href="/users/user_settings/{{ user.user_id }}" >{% trans 'Account settings' %}</a></li>
+        <li><a href="/users/log_out/" >{% trans 'Sign out' %}</a></li>
     {% else %}
-        <li><a href={% url "Users.views.sign_in" %}>Logowanie</a></li>
-        <li><a href={% url "Users.views.register" %}>Rejestracja</a></li>
+        <li><a href={% url "Users.views.sign_in" %}>{% trans 'Sign in' %}</a></li>
+        <li><a href={% url "Users.views.register" %}>{% trans 'Register' %}</a></li>
     {% endif %}
 </ul>

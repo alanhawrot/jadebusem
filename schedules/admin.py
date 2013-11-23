@@ -2,6 +2,7 @@ from django.contrib.admin import ModelAdmin
 from django.contrib import admin
 from models import Schedule,ScheduleDate,ScheduleTracePoint
 from django.contrib.admin import widgets
+from django.utils.translation import ugettext as _
 from django.contrib.admin.widgets import AdminTextInputWidget
 from Users.models import JadeBusemUser
 from django.forms import ModelForm, forms
@@ -15,8 +16,8 @@ class ScheduleDateAdmin(admin.TabularInline):
     extra = 0
 
 class ScheduleAdmin(ModelAdmin):
-    fields = ( 'author','company','image_path','verified')
-    list_display = ('author','company', 'image_path','verified')
+    fields = (_('author'), _('company'), _('image_path'), _('verified'))
+    list_display = (_('author'), _('company'), _('image_path'), _('verified'))
     inlines = [TracePointAdmin, ScheduleDateAdmin,]
 
 admin.site.register(Schedule, ScheduleAdmin)

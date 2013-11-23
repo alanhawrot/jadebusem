@@ -1,22 +1,24 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
 {% block title %}
-    Twój panel użytkownika
+    {% trans "Your account panel" %}
 {% endblock %}
 
 {% block content %}
 
-    <p>Tutaj możesz zarządzać swoim kontem
+    <p>{% trans "Here you can manage your account" %}
     		<form action="." method="post">
-			<p><input type="email" name="email" value="{{ email }}" placeholder="E-mail" required> {{ email_error }}</p>
-			<p><input type="password" name="password" value="{{ password }}" placeholder="New password"></p>
-			<p><input type="password" name="password2" value="{{ password }}" placeholder="Re-type new password"> {{ password_error }}</p>
-			<p><input type="text" name="first_name" value="{{ first_name }}" placeholder="First Name"></p>
-			<p><input type="text" name="last_name" value="{{ last_name }}" placeholder="Last Name"></p>
-			<p><input type="text" name="address" value="{{ address }}" placeholder="Address"></p>
-			<p><input type="text" name="company_name" value="{{ company_name }}" placeholder="Company Name"></p>
-			<p><input type="password" name="confirm" value="{{ password }}" placeholder="Type your password to confirm" size="28" required>
-			<input type="submit" value="Save"> {{ confirm_error }}</p>
+			<p><input type="email" name="email" value="{{ email }}" placeholder={% trans "E-mail" %}"" required> {{ email_error }}</p>
+			<p><input type="password" name="password" value="{{ password }}" placeholder={% trans "New password" %}></p>
+			<p><input type="password" name="password2" value="{{ password }}" placeholder={% trans "Re-type new password" %}> {{ password_error }}</p>
+			<p><input type="text" name="first_name" value="{{ first_name }}" placeholder={% trans "First Name" %}></p>
+			<p><input type="text" name="last_name" value="{{ last_name }}" placeholder={% trans "Last Name" %}></p>
+			<p><input type="text" name="address" value="{{ address }}" placeholder={% trans "Address" %}></p>
+			<p><input type="text" name="company_name" value="{{ company_name }}" placeholder={% trans "Company Name" %}></p>
+			<p><input type="password" name="confirm" value="{{ password }}" placeholder={% trans "Type your password to confirm" %}"" size="28" required>
+			<input type="submit" value={% trans "Save" %}> {{ confirm_error }}</p>
 			{{ success }}
 		</form>
 	</p>

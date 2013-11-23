@@ -1,0 +1,485 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-23 19:54+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: SearchEngine/views.py:59 SearchEngine/views.py:72 SearchEngine/views.py:109
+msgid "Error while creating schedule"
+msgstr "Błąd podczas tworzenia rozkładu"
+
+#: SearchEngine/views.py:88 templates/search_engine/search.html:18
+msgid "All"
+msgstr "Wszystkie"
+
+#: Users/admin.py:19
+msgid "Personal info"
+msgstr "Informacje osobiste"
+
+#: Users/admin.py:20
+msgid "Permissions"
+msgstr "Uprawnienia"
+
+#: Users/admin.py:22
+msgid "Important dates"
+msgstr "Ważne daty"
+
+#: Users/forms.py:44
+msgid "Your email address"
+msgstr "Twój adres email"
+
+#: Users/models.py:40
+msgid "user_id"
+msgstr "użytkownik_id"
+
+#: Users/models.py:41
+msgid "email address"
+msgstr "adres email"
+
+#: Users/models.py:42
+msgid "first name"
+msgstr "imię"
+
+#: Users/models.py:43
+msgid "last name"
+msgstr "nazwisko"
+
+#: Users/models.py:44
+msgid "address"
+msgstr "adres"
+
+#: Users/models.py:45
+msgid "company name"
+msgstr "nazwa firmy"
+
+#: Users/models.py:46
+msgid "staff status"
+msgstr "stan personelu"
+
+#: Users/models.py:47
+msgid "Designates whether the user can log into this admin site."
+msgstr "Decyduje, czy użytkownik może zalogować się do sekcji administratora"
+
+#: Users/models.py:49
+msgid "active"
+msgstr "aktywny"
+
+#: Users/models.py:50
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
+"zamiast usuwać konto."
+
+#: Users/models.py:52
+msgid "date joined"
+msgstr "data przyłączenia"
+
+#: Users/models.py:60
+msgid "user"
+msgstr "użytkownik"
+
+#: Users/models.py:61
+msgid "users"
+msgstr "użytkownicy"
+
+#: Users/views.py:38 Users/views.py:122
+msgid "This e-mail is already in use"
+msgstr "Ten adred email jest już używany"
+
+#: Users/views.py:40 Users/views.py:124
+msgid "Passwords do not match"
+msgstr "Hasła się nie zgadzają"
+
+#: Users/views.py:42 Users/views.py:126
+msgid "Password must be at least six characters long"
+msgstr "Hasło powinno mieć co najmniej 6 znaków"
+
+#: Users/views.py:116
+msgid "Changes have been saved!"
+msgstr "Zmiany zostały zapisane"
+
+#: Users/views.py:128
+msgid "Password is incorrect"
+msgstr "Hasło jest niepoprawne"
+
+#: jadebusem/settings.py:44
+msgid "English"
+msgstr "Angielski"
+
+#: jadebusem/settings.py:45
+msgid "Polish"
+msgstr "Polski"
+
+#: schedules/admin.py:19 schedules/admin.py:20
+msgid "author"
+msgstr "autor"
+
+#: schedules/admin.py:19 schedules/admin.py:20
+msgid "company"
+msgstr "firma"
+
+#: schedules/admin.py:19 schedules/admin.py:20
+msgid "image_path"
+msgstr "ścieżka_do_zdjęcia"
+
+#: schedules/admin.py:19 schedules/admin.py:20
+msgid "verified"
+msgstr "zweryfikowany"
+
+#: schedules/models.py:14
+msgid "Company name"
+msgstr "Nazwa firmy"
+
+#: schedules/models.py:15
+msgid "Image path"
+msgstr "Ścieżka do zdjęcia"
+
+#: schedules/models.py:16
+msgid "Is verified"
+msgstr "Czy zweryfikowany"
+
+#: schedules/models.py:19
+msgid "Author: "
+msgstr "Autor"
+
+#: schedules/models.py:19
+msgid ", Company name: "
+msgstr ", Nazwa firmy: "
+
+#: schedules/models.py:24 templates/user/registration.html:17
+#: templates/user/user_settings.html:18
+msgid "Address"
+msgstr "Adres"
+
+#: schedules/models.py:28
+msgid "Poniedziałek"
+msgstr "Monday"
+
+#: schedules/models.py:29
+msgid "Wtorek"
+msgstr "Tuesday"
+
+#: schedules/models.py:30
+msgid "Środa"
+msgstr "Wednesday"
+
+#: schedules/models.py:31
+msgid "Czwartek"
+msgstr "Thursday"
+
+#: schedules/models.py:32
+msgid "Piątek"
+msgstr "Friday"
+
+#: schedules/models.py:33
+msgid "Sobota"
+msgstr "Saturday"
+
+#: schedules/models.py:34
+msgid "Niedziela"
+msgstr "Sunday"
+
+#: schedules/models.py:37
+msgid "Departure time"
+msgstr "Czas odjazdu"
+
+#: schedules/views.py:14 templates/jadebusem_site/nav.html:5
+#: templates/schedules/add.html:13
+msgid "Add schedule"
+msgstr "Dodaj rozkład"
+
+#: schedules/views.py:17 templates/schedules/add.html:33
+msgid "Send picture"
+msgstr "Wyślij zdjęcie"
+
+#: schedules/views.py:20
+msgid "Fill form"
+msgstr "Wypełnij formularz"
+
+#: schedules/views.py:34
+msgid "Data verification"
+msgstr "Weryfikacja daty"
+
+#: schedules/views.py:43
+msgid "Successfully added schedule!"
+msgstr "Pomyślnie dodano rozkład"
+
+#: schedules/templatetags/filters.py:10
+msgid "Monday"
+msgstr "Poniedziałek"
+
+#: schedules/templatetags/filters.py:10
+msgid "Tuesday"
+msgstr "Wtorek"
+
+#: schedules/templatetags/filters.py:10
+msgid "Wednesday"
+msgstr "Środa"
+
+#: schedules/templatetags/filters.py:10
+msgid "Thursday"
+msgstr "Czwartek"
+
+#: schedules/templatetags/filters.py:10
+msgid "Friday"
+msgstr "Piątek"
+
+#: schedules/templatetags/filters.py:10
+msgid "Saturday"
+msgstr "Sobota"
+
+#: schedules/templatetags/filters.py:10
+msgid "Sunday"
+msgstr "Niedziela"
+
+#: templates/jadebusem_site/about.html:6
+msgid "Information about Jadę Busem"
+msgstr "Informacje na temat Jadę Busem"
+
+#: templates/jadebusem_site/about.html:11
+msgid ""
+"\n"
+"        Jadę Busem is a portal that will be created for people that use "
+"private bus companies. Basically portal has one function: to allow users the "
+"most accessible way to get information about routes that interest them.<br>\n"
+"\n"
+"        Jadę Busem is a tool, where we can set places and houres, then we "
+"immidiately get the best company and route for us.<br>\n"
+"\n"
+"        Jadę Busem is a project of Wiki, that allows ordinary users in an "
+"accessible way to enter and update data on schedules. The whole is done by "
+"sending photographs of scheduled to the portal.<br>\n"
+"\n"
+"        An additional advantage of the portal is able to register the "
+"company. The company reserves the input schedules, which increases the "
+"credibility in the eyes of customers.<br>\n"
+"        "
+msgstr ""
+"\n"
+"        Jadę Busem to portal, który został stworzony dla ludzi, którzy "
+"korzystają z usług prywatnych przewoźników. W założeniu portal ma spełniać "
+"jedną główną funkcję: umożliwienie użytkownikom w jak najprzystępniejszy "
+"sposób uzyskanie informacji na temat połączeń, które ich interesują.<br>\n"
+"\n"
+"        Jadę Busem to narzędzie, które umożliwia szybkie uzyskanie "
+"informacji na temat najlepszych połączeń i firm przewoźniczych po podaniu "
+"przez użytkownika miejsc i godzin .<br>\n"
+"\n"
+"        Jadę Busem to projekt Wiki, która pozwala zwykłym użytkownikom "
+"wstawianie i aktualizację rozkładów. Całość procesu jest wykonywana poprzez "
+"wysłanie zdjęcia rozkładu do portalu lub wypełnienie specjalnego formularza."
+"<br>\n"
+"\n"
+"        Kolejną zaletą portalu jest możliwość rejestracji firm "
+"przewoźniczych. Firma taka ma przyznane specjalne konto. Może wstawiać swoje "
+"własne rozkłady, których nikt inny nie może modyfikować. To oczywiście "
+"zwiększa wiarygodność wśród klientów.<br>\n"
+"        "
+
+#: templates/jadebusem_site/base.html:28
+msgid "Footer"
+msgstr "Stopka"
+
+#: templates/jadebusem_site/index.html:11
+msgid "Welcome in Jadę Busem portal!"
+msgstr "Witamy w portalu Jadę Busem "
+
+#: templates/jadebusem_site/language.html:6
+msgid "Language"
+msgstr "Język"
+
+#: templates/jadebusem_site/language.html:17
+#: templates/jadebusem_site/nav.html:7
+msgid "Change language"
+msgstr "Zmień język"
+
+#: templates/jadebusem_site/nav.html:3
+msgid "Main page"
+msgstr "Strona główna"
+
+#: templates/jadebusem_site/nav.html:4 templates/search_engine/search.html:12
+msgid "Search for connection"
+msgstr "Szukaj połączenia"
+
+#: templates/jadebusem_site/nav.html:6
+msgid "About page"
+msgstr "Informacje"
+
+#: templates/jadebusem_site/user_panel.html:4
+msgid "Welcome"
+msgstr "Witaj"
+
+#: templates/jadebusem_site/user_panel.html:10
+msgid "Account settings"
+msgstr "Ustawienia konta"
+
+#: templates/jadebusem_site/user_panel.html:11
+msgid "Sign out"
+msgstr "Wyloguj się"
+
+#: templates/jadebusem_site/user_panel.html:13
+msgid "Sign in"
+msgstr "Zaloguj się"
+
+#: templates/jadebusem_site/user_panel.html:14
+msgid "Register"
+msgstr "Zarejestruj się"
+
+#: templates/schedules/add.html:24
+msgid "Name of the carrier"
+msgstr "Nazwa przewoźnika"
+
+#: templates/schedules/add.html:61
+msgid "Add tracepoint"
+msgstr "Dodaj przystanek"
+
+#: templates/schedules/add.html:109
+msgid "Send schedule"
+msgstr "Wyślij zdjęcie"
+
+#: templates/search_engine/search.html:24
+msgid "From..."
+msgstr "Z..."
+
+#: templates/search_engine/search.html:25
+msgid "To..."
+msgstr "Do..."
+
+#: templates/search_engine/search.html:26
+msgid "Search"
+msgstr "Szukaj"
+
+#: templates/search_engine/search.html:39
+msgid "Company:"
+msgstr "Firma:"
+
+#: templates/search_engine/search.html:44
+msgid "Tracepoints:"
+msgstr "Przystanki:"
+
+#: templates/search_engine/search.html:52
+msgid ""
+" <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</"
+"td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> "
+msgstr ""
+" <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</"
+"td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr> "
+
+#: templates/search_engine/search.html:65
+msgid "Author:"
+msgstr "Autor:"
+
+#: templates/user/registration.html:6
+msgid "Registration"
+msgstr "Rejestracja"
+
+#: templates/user/registration.html:12 templates/user/user_settings.html:13
+msgid "E-mail"
+msgstr "E-mail"
+
+#: templates/user/registration.html:13
+msgid "Password"
+msgstr "Hasło"
+
+#: templates/user/registration.html:14
+msgid "Re-type Password"
+msgstr "Powtórz hasło"
+
+#: templates/user/registration.html:15 templates/user/user_settings.html:16
+msgid "First Name"
+msgstr "Imię"
+
+#: templates/user/registration.html:16 templates/user/user_settings.html:17
+msgid "Last Name"
+msgstr "Nazwisko"
+
+#: templates/user/registration.html:18 templates/user/user_settings.html:19
+msgid "Company Name"
+msgstr "Nazwa firmy"
+
+#: templates/user/registration.html:19
+msgid "Register now"
+msgstr "Zarejestruj się"
+
+#: templates/user/sign_in.html:6
+msgid "Signing in"
+msgstr "Logowanie"
+
+#: templates/user/sign_in.html:13
+msgid ""
+"\n"
+"                Please correct the error below.\n"
+"            "
+msgid_plural ""
+"\n"
+"                Please correct the errors below.\n"
+"            "
+msgstr[0] ""
+"\n"
+"                Proszę popraw błąd poniżej.\n"
+"            "
+msgstr[1] ""
+"\n"
+"                Proszę popraw błędy poniżej.\n"
+"            "
+
+#: templates/user/sign_in.html:23
+msgid "Error, please check your email or password."
+msgstr "Błąd, proszę sprawdź swój adres email i hasło"
+
+#: templates/user/sign_in.html:30
+msgid "Your email address:"
+msgstr "Twój adres email:"
+
+#: templates/user/sign_in.html:35
+msgid "Your password:"
+msgstr "Twoje hasło:"
+
+#: templates/user/sign_in.html:38
+msgid "Submit"
+msgstr "Wyślij"
+
+#: templates/user/thanks.html:11
+msgid "You are registered. Now you can sign in to your account"
+msgstr "Jesteś zarejestrowany. Teraz możesz się zalogować na swoje konto"
+
+#: templates/user/user_settings.html:6
+msgid "Your account panel"
+msgstr "Twój panel"
+
+#: templates/user/user_settings.html:11
+msgid "Here you can manage your account"
+msgstr "Tutaj możesz zarządzać swoim kontem"
+
+#: templates/user/user_settings.html:14
+msgid "New password"
+msgstr "Nowe hasło"
+
+#: templates/user/user_settings.html:15
+msgid "Re-type new password"
+msgstr "Powtórz nowe hasło"
+
+#: templates/user/user_settings.html:20
+msgid "Type your password to confirm"
+msgstr "Wpisz hasło, aby potwierdzić"
+
+#: templates/user/user_settings.html:21
+msgid "Save"
+msgstr "Zapisz"

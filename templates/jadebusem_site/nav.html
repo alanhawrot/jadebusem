@@ -1,6 +1,8 @@
+{% load i18n %}
 <ul>
-    <li><a href={% url "jadebusem_site.views.index" %}>Strona główna</a></li>
-    <li><a href="{% url "SearchEngine.views.search" %}">Szukaj połączenia</a></li>
-    <li><a href={% url "schedules.views.add" %}>Dodaj rozkład</a></li>
-    <li><a href={% url "jadebusem_site.views.about" %}>Informacje o portalu</a></li>
+    <li><a href={% url "jadebusem_site.views.index" %}>{% trans 'Main page' %}</a></li>
+    <li><a href="{% url "SearchEngine.views.search" %}">{% trans 'Search for connection' %}</a></li>
+    <li><a href={% url "schedules.views.add" %}>{% trans 'Add schedule' %}</a></li>
+    <li><a href={% url "jadebusem_site.views.about" %}>{% trans 'About page' %}</a></li>
+    <li><a href={% url "jadebusem_site.views.language" %}>{% trans 'Change language' %}</a></li>
 </ul>
