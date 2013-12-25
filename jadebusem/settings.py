@@ -14,17 +14,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
 
-    # Database on heroku
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1p2jlc6c8el64',
-        'HOST': 'ec2-54-217-218-242.eu-west-1.compute.amazonaws.com',
-        'PORT': 5432,
-        'USER': 'lleumqqzlrwlgb',
-        'PASSWORD': 'rbiSbyT7RH1hBK3HG9rQQTHBKt'
-     }
-
-    # Database created by Michal Semik
+    # Localhost database
     #'default': {
     #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     #    'NAME': 'D:\\Programowanie\\Eclipse workspace\\sqlite.db',                      # Or path to database file if using sqlite3.
@@ -35,16 +25,16 @@ DATABASES = {
     #    'PORT': '',
     #}
 
-    # Localhost database
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    #    'NAME': 'sql420739',                   # Or path to database file if using sqlite3.
+    # Database created by Michal Semik
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'sql420739',                   # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-    #    'USER': 'sql420739',
-    #    'PASSWORD': 'pW3*mD1%',
-    #    'HOST': 'sql4.freesqldatabase.com',   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-    #    'PORT': '3306',                       # Set to empty string for default.
-    #}
+        'USER': 'sql420739',
+        'PASSWORD': 'pW3*mD1%',
+        'HOST': 'sql4.freesqldatabase.com',   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '3306',                       # Set to empty string for default.
+    }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
