@@ -2,18 +2,23 @@ from django.shortcuts import render_to_response
 from schedules.models import Schedule
 from schedules.models import ScheduleTracePoint
 from schedules.models import ScheduleDate
-from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 
+#-------------------------------------------------------------------------------------
+# Function to display schedules
+#-------------------------------------------------------------------------------------
 def display_schedules(schedules, dates, trace_points, list_of_tabs):
+    temp_list = []
     for schedule in schedules:
-        list_of_schedule = create_schedule(schedule, dates, trace_points)
-        list_of_tabs.extend([list_of_schedule])
+        list_of_schedule = create_schedule(schedule, dates, trace_points, "", "")
+        list_of_tabs.extend([[list_of_schedule]])
     return list_of_tabs
 
-
-def create_schedule(schedule, dates, trace_points):
+#-------------------------------------------------------------------------------------
+# Function to create timetable in schedules
+#-------------------------------------------------------------------------------------
+def create_schedule(schedule, dates, trace_points, start, stop):
     list_of_schedule = []
     try:
         # Get only this hours, whose are in this schedule
@@ -61,23 +66,190 @@ def create_schedule(schedule, dates, trace_points):
         trace_in_schedule = trace_points.filter(schedule_id=schedule.id)
 
         trace = ""
+        if start != "":
+            flag = False
+        else:
+            flag = True
         for trace_point in trace_in_schedule:
-            if trace == "":
-                trace = trace_point.address
-            else:
-                trace += " -> " + trace_point.address
+            if start == trace_point.address:
+                flag = True
+            if flag:
+                if trace == "":
+                    trace = trace_point.address
+                else:
+                    trace += " -> " + trace_point.address
+                if stop == trace_point.address:
+                    break
         list_of_schedule.extend([schedule.id, schedule.company, schedule.author, trace])
         list_of_schedule.extend([tab])
     except:
         error = _("Error while creating schedule")
     return list_of_schedule
 
+#-------------------------------------------------------------------------------------
+# Function to check is bus go in that direction which we want
+#-------------------------------------------------------------------------------------
+def isGoodDirection(schedules, trace_points, start_address, end_address, exclude_list):
+    list = []
+    for schedule in schedules:
+            isGoodDirectionFrom = trace_points.filter(schedule_id=schedule.id).filter(address__iexact=start_address)[:1]
+            isGoodDirectionTo = trace_points.filter(schedule_id=schedule.id).filter(address__iexact=end_address)[:1]
 
+            for isF in isGoodDirectionFrom:
+                for isT in isGoodDirectionTo:
+                    if(isF.id < isT.id):
+                        list.append(schedule.id)
+            exclude_list.append(schedule.id)
+    return list
+
+#-------------------------------------------------------------------------------------
+# Algorithm that find schedules with one interchange
+#-------------------------------------------------------------------------------------
+
+def OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error):
+        start_points_id = start_points.exclude(schedule_id__in=exclude_list).values("schedule").distinct()
+        list_of_interchanges = []
+        # For each unused schedule, start to search interchanges
+        for points in start_points_id:
+            list_of_stops = []
+            # Get only those tables that have start place
+            interchange_points = start_points.filter(schedule_id=points['schedule'])
+            interchange_start_point = interchange_points.filter(address__iexact=start_address)
+            id = 0
+            # set "id" to id of start place in each schedule
+            for interchange in interchange_start_point:
+                id = interchange.id
+            # create a list of stops (id > start point means that bus go in a right direction)
+            for interchange in interchange_points:
+                if(id < interchange.id):
+                    list_of_stops.append(interchange.address)
+            # Search for interchanges
+            # Get those schedules that doesn't have start point
+            interchanges_stops_id = ScheduleTracePoint.objects.filter(address__iexact=start_address).values("schedule_id").distinct()
+            interchanges_stops = ScheduleTracePoint.objects.exclude(schedule_id__in=interchanges_stops_id)
+            # Get those schedules that contain any stops form list_of_stops -> 1
+            interchanges_stops_id = interchanges_stops.filter(address__in=list_of_stops).values("schedule_id").distinct()
+            interchanges_stops = ScheduleTracePoint.objects.filter(schedule_id__in=interchanges_stops_id)
+            # Get those schedules (from 1) that contain end point
+            interchanges_stops_id = interchanges_stops.filter(address__iexact=end_address)
+
+            # Checking is bus driving in good direction
+            for inter in interchanges_stops_id:
+                isGoodDirectionFrom = interchanges_stops.filter(schedule_id=inter.schedule_id).filter(address__in=list_of_stops).order_by('id')[:1]
+                isGoodDirectionTo = interchanges_stops.filter(schedule_id=inter.schedule_id).filter(address__iexact=end_address)[:1]
+                for i in isGoodDirectionFrom:
+                    for j in isGoodDirectionTo:
+                        if i.id < j.id:
+                            list_of_interchanges.extend([[points['schedule'], i.address, inter.schedule_id]])
+                            exclude_list.append(points['schedule'])
+                            exclude_list.append(inter.schedule_id)
+
+        if(len(list_of_interchanges) == 0):
+            return error
+
+        # Display shcedules with one interchange
+        for id1, stop, id2 in list_of_interchanges:
+            schedules = Schedule.objects.filter(id=id1)
+            dates = ScheduleDate.objects.filter(schedule_id=id1)
+            trace_points = ScheduleTracePoint.objects.filter(schedule_id=id1)
+            for schedule in schedules:
+                list_of_schedule = create_schedule(schedule, dates, trace_points, "", stop)
+            schedules = Schedule.objects.filter(id=id2)
+            dates = ScheduleDate.objects.filter(schedule_id=id2)
+            trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
+            for schedule in schedules:
+                list_of_schedule2 = create_schedule(schedule, dates, trace_points, stop, "")
+            list_of_tabs.extend([[list_of_schedule, list_of_schedule2]])
+        return ""
+#-------------------------------------------------------------------------------------
+# Algorith that find schedules with two interchanges
+#-------------------------------------------------------------------------------------
+def TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error):
+    start_points_id = start_points.exclude(schedule_id__in=exclude_list).values("schedule").distinct()
+    list_of_end_stops = []
+    list_of_interchanges = []
+
+    # For each unused schedule, start to search interchanges
+    for points in start_points_id:
+        list_of_stops = []
+        # Get only those tables that have start place
+        interchange_points = start_points.filter(schedule_id=points['schedule'])
+        interchange_start_point = interchange_points.filter(address__iexact=start_address)
+        id = 0
+        # set "id" to id of start place in each schedule
+        for interchange in interchange_start_point:
+            id = interchange.id
+        # create a list of stops (id > start point means that bus go in a right direction)
+        for interchange in interchange_points:
+            if(id < interchange.id):
+                list_of_stops.append(interchange.address)
+
+        # Create a list of stops that cointain end point
+        end_points_id = ScheduleTracePoint.objects.exclude(schedule_id__in=exclude_list).exclude(schedule_id__in=start_points_id).filter(address__iexact=end_address).values("schedule").distinct()
+        interchange_points = ""
+        id = 0
+        for i in end_points_id:
+            interchange_points = ScheduleTracePoint.objects.filter(schedule_id=i['schedule'])
+            interchange_end_point = interchange_points.filter(address__iexact=end_address)
+            # set "id" to id of end place in each schedule
+            for interchange in interchange_end_point:
+                id = interchange.id
+            #  create a list of end stops (id < end point means that bus go in a right direction)
+            for interchange in interchange_points:
+                if id > interchange.id:
+                    if interchange.address not in list_of_end_stops:
+                        list_of_end_stops.append(interchange.address)
+
+        # Serching for schedules in list_of_stops and list_of_end_stops
+        indirect_points_id = ScheduleTracePoint.objects.exclude(schedule_id__in=exclude_list).exclude(schedule_id__in=start_points_id).filter(address__in=list_of_stops).values('schedule').distinct()
+        indirect_points_id = ScheduleTracePoint.objects.filter(schedule_id__in=indirect_points_id).filter(address__in=list_of_end_stops).values('schedule').distinct()
+        indirect_points = ScheduleTracePoint.objects.filter(schedule_id__in=indirect_points_id)
+
+        # Checking is bus driving in good direction
+        for i in indirect_points_id:
+            isGoodDirectionFrom = indirect_points.filter(schedule_id=i['schedule']).filter(address__in=list_of_stops).order_by('id')[:1]
+            isGoodDirectionTo = indirect_points.filter(schedule_id=i['schedule']).filter(address__in=list_of_end_stops).order_by('id')[:1]
+            for j in isGoodDirectionFrom:
+                    for k in isGoodDirectionTo:
+                        if j.id < k.id:
+                            last_part_id = ScheduleTracePoint.objects.exclude(schedule_id__in=exclude_list).filter(address__iexact=k.address).values('schedule').distinct()
+                            last_part_id = ScheduleTracePoint.objects.filter(schedule_id__in=last_part_id).filter(address__iexact=end_address).values('schedule').distinct()
+                            for l in last_part_id:
+                                list_of_interchanges.extend([[points['schedule'], j.address, i['schedule'], k.address, l['schedule']]])
+
+    if(len(list_of_interchanges) == 0):
+        return error
+    # Display shcedules with two interchanges
+    for id1, stop, id2, stop2, id3 in list_of_interchanges:
+        schedules = Schedule.objects.filter(id=id1)
+        dates = ScheduleDate.objects.filter(schedule_id=id1)
+        trace_points = ScheduleTracePoint.objects.filter(schedule_id=id1)
+        for schedule in schedules:
+            list_of_schedule = create_schedule(schedule, dates, trace_points, "", stop)
+        schedules = Schedule.objects.filter(id=id2)
+        dates = ScheduleDate.objects.filter(schedule_id=id2)
+        trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
+        for schedule in schedules:
+            list_of_schedule2 = create_schedule(schedule, dates, trace_points, stop, stop2)
+        schedules = Schedule.objects.filter(id=id3)
+        dates = ScheduleDate.objects.filter(schedule_id=id3)
+        trace_points = ScheduleTracePoint.objects.filter(schedule_id=id3)
+        for schedule in schedules:
+            list_of_schedule3 = create_schedule(schedule, dates, trace_points, stop2, "")
+        list_of_tabs.extend([[list_of_schedule, list_of_schedule2, list_of_schedule3]])
+    return ""
+
+
+#-------------------------------------------------------------------------------------
+# Main algorithm to search schedules
+#-------------------------------------------------------------------------------------
 def search(request):
-    from_to_error = ""
+    error = ""
+    search_from = ""
+    search_to = ""
     login = False
     list_of_tabs = []
-    trace_id = ""
+    exclude_list = []
 
     # session
     if 'email' in request.session:
@@ -85,37 +257,52 @@ def search(request):
 
     # search engine
     if request.method == 'POST':
+        start_address = request.POST['from']
+        end_address = request.POST['to']
+
         if (request.POST['company_name'] == _("All")):
             schedules = Schedule.objects.all()
-            trace_points = ScheduleTracePoint.objects.all()
-            dates = ScheduleDate.objects.all()
         else:
             schedules = Schedule.objects.filter(company=request.POST['company_name'])
-            trace_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
-            dates = ScheduleDate.objects.filter(schedule_id__in=schedules)
 
-        if (request.POST['from'] != ""):
-            trace_id = trace_points.filter(address=request.POST['from']).values("schedule_id")
-            schedules = schedules.filter(id__in=trace_id)
-            trace_points = trace_points.filter(schedule_id__in=schedules)
+        # Searching for start point
+        trace_id = ScheduleTracePoint.objects.filter(schedule_id__in=schedules).filter(address__iexact=start_address).values("schedule_id")
+        schedules = schedules.filter(id__in=trace_id)
+        start_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
 
-            if (request.POST['to'] != ""):
-                trace_id = trace_points.filter(address=request.POST['to']).values("schedule_id")
-                schedules = schedules.filter(id__in=trace_id)
-                trace_points = trace_points.filter(schedule_id__in=schedules)
-            dates = dates.filter(schedule_id__in=schedules)
+        # Searching for end point
+        end_points = start_points.filter(address__iexact=end_address).values("schedule_id")
+        schedules = schedules.filter(id__in=end_points)
 
-        elif (request.POST['to'] != ""):
-            from_to_error = _("Error while creating schedule")
+        # Checking is bus driving in good direction
+        list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
 
-        list_of_tabs = display_schedules(schedules, dates, trace_points, list_of_tabs)
+        if(len(list) != 0):
+            schedules = schedules.filter(id__in=list)
+            end_points = start_points.filter(schedule_id__in=list)
+            dates = ScheduleDate.objects.filter(schedule_id__in=list)
+            list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs)
+        else:
+            error = "Sorry, we cant find any schedule."
+            if "interchange" in request.POST.keys():
+                error += " Maybe try to search with interchanges."
+
+        # Searching for interchanges
+        if "interchange" not in request.POST.keys():
+            error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error)
+            error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error)
+
+        search_from = request.POST['from']
+        search_to = request.POST['to']
 
     companies = Schedule.objects.values('company').distinct()
 
     return render_to_response('search_engine/search.html', {
         'login': login,
         'user': request.session,
-        'from_to_error': from_to_error,
+        'error': error,
         'companies': companies,
-        'list_of_tabs': list_of_tabs
+        'search_from': search_from,
+        'search_to': search_to,
+        'list_of_tabs': list_of_tabs,
     })

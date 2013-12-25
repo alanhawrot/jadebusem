@@ -23,6 +23,14 @@ msgstr ""
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
+#: SearchEngine/views.py:284
+msgid "Sorry, we cant find any schedule."
+msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu"
+
+#: SearchEngine/views.py:286
+msgid "Sorry, we cant find any schedule. Maybe try to search with interchanges."
+msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu. Spróbuj wyszukać połączeń z przesiadkami."
+
 #: SearchEngine/views.py:88 templates/search_engine/search.html:18
 msgid "All"
 msgstr "Wszystkie"
@@ -365,6 +373,10 @@ msgstr "Do..."
 #: templates/search_engine/search.html:26
 msgid "Search"
 msgstr "Szukaj"
+
+#: templates/search_engine/search.html:27
+msgid "Avoid interchanges"
+msgstr "Unikaj przesiadek"
 
 #: templates/search_engine/search.html:39
 msgid "Company:"
