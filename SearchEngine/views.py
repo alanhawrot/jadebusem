@@ -243,6 +243,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
 #-------------------------------------------------------------------------------------
 # Main algorithm to search schedules
 #-------------------------------------------------------------------------------------
+
 def search(request):
     error = ""
     search_from = ""
