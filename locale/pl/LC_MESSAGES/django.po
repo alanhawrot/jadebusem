@@ -109,7 +109,7 @@ msgstr "użytkownicy"
 
 #: Users/views.py:38 Users/views.py:122
 msgid "This e-mail is already in use"
-msgstr "Ten adred email jest już używany"
+msgstr "Ten adres email jest już używany"
 
 #: Users/views.py:40 Users/views.py:124
 msgid "Passwords do not match"
