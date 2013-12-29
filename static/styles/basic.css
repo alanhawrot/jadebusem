@@ -135,6 +135,20 @@ input {
     width: 200px;
 }
 
+
+ select {
+   border: 1px solid #E31E24;
+   -moz-appearance: none; /* Firefox */
+   -webkit-appearance: none; /* Safari and Chrome */
+   width: 200px;
+   height: 20px;
+   background: url("/static/images/arrow.png") no-repeat;
+   background-position: 182px 5px;
+   text-indent: 0.01px;          /* Removes default arrow from firefox*/
+   text-overflow: "";               /*Removes default arrow from firefox*/
+}
+
+
 .submitInput {
 
 }
