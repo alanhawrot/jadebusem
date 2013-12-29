@@ -4,15 +4,19 @@ from schedules.models import ScheduleTracePoint
 from schedules.models import ScheduleDate
 from django.utils.translation import ugettext as _
 
+trace = ""
 
 #-------------------------------------------------------------------------------------
 # Function to display schedules
 #-------------------------------------------------------------------------------------
-def display_schedules(schedules, dates, trace_points, list_of_tabs):
+def display_schedules(schedules, dates, trace_points, list_of_tabs, route_list):
     temp_list = []
     for schedule in schedules:
-        list_of_schedule = create_schedule(schedule, dates, trace_points, "", "")
+        dic = create_schedule(schedule, dates, trace_points, "", "")
+        list_of_schedule = dic['list_of_schedule']
+        trace = dic['trace']
         list_of_tabs.extend([[list_of_schedule]])
+        route_list.extend([trace])
     return list_of_tabs
 
 #-------------------------------------------------------------------------------------
@@ -20,6 +24,7 @@ def display_schedules(schedules, dates, trace_points, list_of_tabs):
 #-------------------------------------------------------------------------------------
 def create_schedule(schedule, dates, trace_points, start, stop):
     list_of_schedule = []
+    dic = {'list_of_schedule': [], 'trace': ""}
     try:
         # Get only this hours, whose are in this schedule
         time_in_shedule = dates.filter(schedule_id=schedule.id)
@@ -66,11 +71,16 @@ def create_schedule(schedule, dates, trace_points, start, stop):
         trace_in_schedule = trace_points.filter(schedule_id=schedule.id)
 
         trace = ""
+        trace_temp = ""
         if start != "":
             flag = False
+            flag_temp = False
         else:
             flag = True
+            flag_temp = False
         for trace_point in trace_in_schedule:
+            if flag:
+                flag_temp = True
             if start == trace_point.address:
                 flag = True
             if flag:
@@ -78,13 +88,21 @@ def create_schedule(schedule, dates, trace_points, start, stop):
                     trace = trace_point.address
                 else:
                     trace += " -> " + trace_point.address
+
+                if flag_temp:
+                    if trace_temp == "":
+                        trace_temp = trace_point.address
+                    else:
+                        trace_temp += " -> " + trace_point.address
                 if stop == trace_point.address:
                     break
         list_of_schedule.extend([schedule.id, schedule.company, schedule.author, trace])
         list_of_schedule.extend([tab])
+        dic['list_of_schedule'] = list_of_schedule
+        dic['trace'] = trace_temp
     except:
         error = _("Error while creating schedule")
-    return list_of_schedule
+    return dic
 
 #-------------------------------------------------------------------------------------
 # Function to check is bus go in that direction which we want
@@ -106,7 +124,7 @@ def isGoodDirection(schedules, trace_points, start_address, end_address, exclude
 # Algorithm that find schedules with one interchange
 #-------------------------------------------------------------------------------------
 
-def OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error):
+def OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list):
         start_points_id = start_points.exclude(schedule_id__in=exclude_list).values("schedule").distinct()
         list_of_interchanges = []
         # For each unused schedule, start to search interchanges
@@ -153,18 +171,25 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
             dates = ScheduleDate.objects.filter(schedule_id=id1)
             trace_points = ScheduleTracePoint.objects.filter(schedule_id=id1)
             for schedule in schedules:
-                list_of_schedule = create_schedule(schedule, dates, trace_points, "", stop)
+                dic = create_schedule(schedule, dates, trace_points, "", stop)
+                list_of_schedule = dic['list_of_schedule']
+                trace = dic['trace']
+            temp = trace + " -> "
             schedules = Schedule.objects.filter(id=id2)
             dates = ScheduleDate.objects.filter(schedule_id=id2)
             trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
             for schedule in schedules:
-                list_of_schedule2 = create_schedule(schedule, dates, trace_points, stop, "")
+                dic = create_schedule(schedule, dates, trace_points, stop, "")
+                list_of_schedule2 = dic['list_of_schedule']
+                trace = dic['trace']
+            temp = temp + trace
+            route_list.extend([temp])
             list_of_tabs.extend([[list_of_schedule, list_of_schedule2]])
         return ""
 #-------------------------------------------------------------------------------------
 # Algorith that find schedules with two interchanges
 #-------------------------------------------------------------------------------------
-def TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error):
+def TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list):
     start_points_id = start_points.exclude(schedule_id__in=exclude_list).values("schedule").distinct()
     list_of_end_stops = []
     list_of_interchanges = []
@@ -219,23 +244,34 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
 
     if(len(list_of_interchanges) == 0):
         return error
+
     # Display shcedules with two interchanges
     for id1, stop, id2, stop2, id3 in list_of_interchanges:
         schedules = Schedule.objects.filter(id=id1)
         dates = ScheduleDate.objects.filter(schedule_id=id1)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id1)
         for schedule in schedules:
-            list_of_schedule = create_schedule(schedule, dates, trace_points, "", stop)
+            dic = create_schedule(schedule, dates, trace_points, "", stop)
+            list_of_schedule = dic['list_of_schedule']
+            trace = dic['trace']
+        temp = trace + " -> "
         schedules = Schedule.objects.filter(id=id2)
         dates = ScheduleDate.objects.filter(schedule_id=id2)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
         for schedule in schedules:
-            list_of_schedule2 = create_schedule(schedule, dates, trace_points, stop, stop2)
+            dic = create_schedule(schedule, dates, trace_points, stop, stop2)
+            list_of_schedule2 = dic['list_of_schedule']
+            trace = dic['trace']
+        temp = temp + trace + " -> "
         schedules = Schedule.objects.filter(id=id3)
         dates = ScheduleDate.objects.filter(schedule_id=id3)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id3)
         for schedule in schedules:
-            list_of_schedule3 = create_schedule(schedule, dates, trace_points, stop2, "")
+            dic = create_schedule(schedule, dates, trace_points, stop2, "")
+            list_of_schedule3 = dic['list_of_schedule']
+            trace = dic['trace']
+        temp = temp + trace
+        route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2, list_of_schedule3]])
     return ""
 
@@ -252,6 +288,7 @@ def search(request):
     login = False
     list_of_tabs = []
     exclude_list = []
+    route_list = []
 
     # session
     if 'email' in request.session:
@@ -283,7 +320,7 @@ def search(request):
             schedules = schedules.filter(id__in=list)
             end_points = start_points.filter(schedule_id__in=list)
             dates = ScheduleDate.objects.filter(schedule_id__in=list)
-            list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs)
+            list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
         else:
             error = "Sorry, we cant find any schedule."
             if "interchange" in request.POST.keys():
@@ -291,8 +328,8 @@ def search(request):
 
         # Searching for interchanges
         if "interchange" not in request.POST.keys():
-            error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error)
-            error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error)
+            error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
+            error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
 
         search_from = request.POST['from']
         search_to = request.POST['to']
@@ -307,4 +344,5 @@ def search(request):
         'search_from': search_from,
         'search_to': search_to,
         'list_of_tabs': list_of_tabs,
+        'route_list': route_list
     })
