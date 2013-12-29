@@ -14,23 +14,24 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ mainheader }}</h1>
+    <h3>{{ mainheader }}</h3>
 
     <form method="post" enctype="multipart/form-data">
 
 
-        <input type="text"
+        <input class="textInput" type="text"
                name="companyName"
                placeholder={% trans "Name of the carrier" %}
-               value="{{ schedule.company }}"/>
+                       value="{{ schedule.company }}"/>
         <br/>
 
 
         {% if form1.show %}
             <article>
                 {% if form1.header %}<h2>{{ form1.header }}</h2>{% endif %}
-                <input id="imageUpload" type="file" name="imageUpload" accept="image/*">
-                <input id="imageSubmit" type="submit" name="imageSubmit" value={% trans "Send picture" %}><br/>
+                <input class="fileInput" id="imageUpload" type="file" name="imageUpload" accept="image/*">
+                <inputclass
+                ="submitInput"  id="imageSubmit" type="submit" name="imageSubmit" value={% trans "Send picture" %}><br/>
                 <progress id="imageUploadStatus" value="50" max="100"></progress>
             </article>
             <br/><br/>
@@ -46,7 +47,8 @@
 
                     <div id="tracePoints">
                         {% for tracePoint in schedule.trace_points %}
-                            <input name="tracePoint" class="hiddenTracePoint" type="text" value="{{ tracePoint }}"
+                            <input class="textInput" name="tracePoint" class="hiddenTracePoint" type="text"
+                                   value="{{ tracePoint }}"
                                    hidden="hidden"/>
                             <span class="viewableTracePoint">{{ tracePoint }}</span>
                             {% if not forloop.last %}
@@ -55,11 +57,11 @@
                         {% endfor %}
                     </div>
                     <div id="tracePointsControl">
-                        <input type="text"
+                        <input class="formMargin submitInput" type="text"
                                id="tracePointInput"
                                name="tracePoint"
-                               placeholder={% trans "Add tracepoint"%}/>
-                        <input id="addTracePoint"
+                               placeholder={% trans "Add tracepoint" %}/>
+                        <input class="formMarginLRB submitInput scheduleHourNavigator" id="addTracePoint"
                                type="button"
                                value="+"/>
                     </div>
@@ -69,7 +71,7 @@
                     <div>
                         {% load filters %}
                         {% for day in schedule.days %}
-                            <div class="floating centered">
+                            <div class="floating centered" style="width: 100px">
                                 {{ forloop.counter0|days_of_week }}
                             </div>
                         {% endfor %}
@@ -77,21 +79,21 @@
                     </div>
                     <div class="days">
                         {% for day in schedule.days %}
-                            <div class="day floating centered" id="{{ forloop.counter0 }}">
+                            <div class="day floating centered" id="{{ forloop.counter0 }}" style="width: 100px">
                                 {% for hour in day %}
                                     <div class="hour">
-                                        <input type="text"
+                                        <input class="smallMarginTR textInput scheduleHour" type="text"
                                                id="hourInput"
                                                name="hour[{{ forloop.parentloop.counter0 }}]"
                                                placeholder="8:00"
                                                value="{{ hour }}"/>
 
-                                        <input id="add"
+                                        <input class="smallMarginTR submitInput  scheduleHourNavigator" id="add"
                                                type="button"
                                                value="+"
                                                 {% ifnotequal hour '' %}  hidden="hidden" {% endifnotequal %} />
 
-                                        <input id="remove"
+                                        <input class="smallMarginTR submitInput scheduleHourNavigator" id="remove"
                                                type="button"
                                                value="-"
                                                 {% ifequal hour '' %}  hidden="hidden" {% endifequal %} />
@@ -101,12 +103,14 @@
                             </div>
                         {% endfor %}
                         <div class="clearing"></div>
+                        <div class="centered">
+                            <input class="formMargin submitInput" id="imageSubmit"
+                                   type="submit"
+                                   name="imageSubmit"
+                                   value={% trans "Send schedule" %}>
+                        </div>
                     </div>
 
-                    <input id="imageSubmit"
-                           type="submit"
-                           name="imageSubmit"
-                           value={% trans "Send schedule" %}>
 
                     <br/>
                 </div>

@@ -11,9 +11,10 @@
 
     <header>
         <div class="largeMargin floating">
-            <img src="/static/images/logo.jpg" alt="Logo JadeBusem">
+            <img src="/static/images/logo100dpi.png" alt="Logo JadeBusem">
         </div>
-        <div class="largeMargin floatingRight">
+
+        <div class="floatingRight largeMarginRB">
             <section id="user_panel">
                 {% include "jadebusem_site/user_panel.html" %}
             </section>
@@ -25,18 +26,20 @@
     <nav class="floating">
         {% include "jadebusem_site/nav.html" %}
     </nav>
+
     <div class="floating largeSpacer"> &nbsp;</div>
     <section class="floating largeMarginLRB" id="content">
         {% block content %}
         {% endblock %}
     </section>
+
     <div class="clearing"></div>
     </div>
+
     <footer>
         <div class="floating largeMarginLRB"><p>{% trans 'Footer' %}</p>
         </div>
         <div class="floatingRight largeMarginRB">
-            <img src="/static/images/logo_eb.jpg" alt="Logo JadeBusem">
         </div>
     </footer>
 

@@ -1,9 +1,11 @@
 .floating {
     float: left;
 }
+
 .clearing {
     clear: both;
 }
+
 .centered {
     text-align: center;
 }
@@ -15,11 +17,29 @@
 .largeMargin {
     margin: 30px;
 }
+
 .margin {
     margin: 15px;
 }
+
 .smallMargin {
     margin: 10px;
+}
+
+.smallMarginRB {
+    margin: 0px 10px 10px 0px;
+}
+
+.smallMarginLRB {
+    margin: 0px 10px 10px 10px;
+}
+
+.smallMarginTR {
+    margin: 10px 10px 0px 0px;
+}
+
+.smallMarginLTR {
+    margin: 10px 10px 0px 10px;
 }
 
 .largeMarginRB {
@@ -29,6 +49,124 @@
 .largeMarginLRB {
     margin: 0px 30px 30px 30px;
 }
+
+.formMargin {
+    margin: 20px 20px 20px 20px;
+}
+
+.formMarginLRB {
+    margin: 0px 20px 20px 20px;
+}
+
+td {
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
 .largeSpacer {
     width: 30px;
+}
+
+header {
+    background-image: url("/static/images/top_line.png");
+    background-repeat: repeat-x;
+    background-position: 0px bottom;
+    width: 100%;
+    height: 120px;
+}
+
+footer {
+    background-image: url("/static/images/bottom_line.png");
+    background-repeat: repeat-x;
+    background-position: 0px top;
+    width: 100%;
+    height: 120px;
+    padding-top: 30px;
+}
+
+ul {
+    list-style-type: none;
+
+}
+
+body {
+    font-family: Calibri, Consolas, "Courier New";
+    font-size: 14px;
+    color: #262423;
+}
+
+#logo {
+
+}
+
+#loginNav {
+
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #443f3c;
+}
+
+nav {
+    font-size: 18px;
+}
+
+li {
+    background-image: url("/static/images/li1.png");
+    background-repeat: no-repeat;
+    background-position: 1px center;
+    padding: 1px;
+    padding-left: 20px;
+}
+
+li li {
+    background-image: url("/static/images/li2.png");
+}
+
+input {
+    border: 1px solid #E31E24;
+    height: 20px;
+    width: 200px;
+}
+
+.submitInput {
+
+}
+
+.textInput {
+
+}
+
+.checkboxInput {
+
+}
+
+.radioInput {
+
+}
+
+.fileInput {
+
+}
+
+.selectButton {
+
+}
+
+.selectOption {
+
+}
+
+.scheduleHourNavigator {
+    width: 15px;
+}
+
+.scheduleHour {
+    width: 50px;
 }

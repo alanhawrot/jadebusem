@@ -7,13 +7,14 @@
 {% endblock title %}
 
 {% block content %}
+    <h3>{% trans 'Change language' %}</h3>
     <form action="/i18n/setlang/" method="post">
         <input name="next" type="hidden" value="/"/>
-        <select name="language">
+        <select  class="smallMargin selectButton" name="language">
             {% for lang in LANGUAGES %}
                 <option value="{{ lang.0 }}">{{ lang.1 }}</option>
             {% endfor %}
         </select>
-        <input type="submit" value={% trans "Change language" %}/>
+        <input class="smallMarginLRB submitInput" type="submit" value={% trans "Change language" %}/>
     </form>
 {% endblock content %}

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-
+    <h3>Login</h3>
     {% if form.errors %}
         <p style="color: red;">
             {% blocktrans count form.errors|length as counter %}
@@ -25,17 +25,42 @@
     {% endif %}
 
     <form action="" method="post">
-        <div class="field">
-            {{ form.email.errors }}
-            <label for="id_email">{% trans "Your email address:" %}</label>
-            {{ form.email }}
-        </div>
-        <div class="password">
-            {{ form.password.errors }}
-            <label for="id_password">{% trans "Your password:" %}</label>
-            {{ form.password }}
-        </div>
-        <input type="submit" value={% trans "Submit" %}>
+        <table>
+            {% if form.email.errors %}
+            <tr class="field">
+                <td class="formMargin" colspan="2">
+                    {{ form.email.errors }}
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>
+                    <label for="id_email">{% trans "Your email address:" %}</label>
+                </td>
+                <td>{{ form.email }}
+                </td>
+            </tr>
+            {% if form.password.errors %}
+            <tr class="password">
+                <td colspan="2">
+                    {{ form.password.errors }}
+                </td>
+            </tr>
+            {% endif %}
+            <tr class="field">
+                <td class="formMarginLRB">
+                    <label for="id_password">{% trans "Your password:" %}</label>
+                </td>
+                <td class="formMarginLRB">
+                    {{ form.password }}
+                </td>
+            </tr>
+            <tr>
+                <td class="centered" colspan="2">
+                    <input class="submitInput" type="submit" value={% trans "Submit" %}>
+                </td>
+            </tr>
+        </table>
     </form>
 
 {% endblock %}
