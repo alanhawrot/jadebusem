@@ -1,18 +1,87 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'scripts/menu.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/menu.css' %}"/>
+{% endblock %}
+
 {% block title %}
-    Wyszukaj połączenie
+    {% trans "Search for connection" %}
 {% endblock %}
 
 {% block content %}
-
     <form action="." method="post">
-        <input type="text" name="company_name" value="{{ company_name }}" placeholder="Search for company">
-        <input type="text" name="from" value="{{ search_from }}" placeholder="From...">
-        <input type="text" name="to" value="{{ search_to }}" placeholder="To...">
-        <input type="submit" value="Search">
-        <p>Searching for: {{ company_name }}</p>
-        <p>Searching for route from: {{ search_from }} to {{ search_to }} {{ from_to_error }}</p>
-	</form>
+        <select name="company_name">
+                <option selected="selected">{% trans "All" %}</option>
+            {% for company in companies %}
+                <option>{{ company.company }}</option>
+            {% endfor %}
+        </select>
 
+        <input type="text" name="from" value="{{ search_from }}" placeholder={% trans "From..." %} required>
+        <input type="text" name="to" value="{{ search_to }}" placeholder={% trans "To..." %} required>
+        <input type="checkbox" name="interchange" value="Interchange" id="interchange" />
+        <label for="interchange">{% trans "Avoid interchanges"  %}</label>
+        <input type="submit" value={% trans "Search" %}>
+    </form>
+
+    {% if error != "" %}
+          <p>{% trans error %}</p>
+    {% endif %}
+    <dl id="menu">
+        {% for i in temp %}
+            {{ i.address }}
+        {% endfor %}
+        {{  temp }}
+        {% for i in schedule %}
+            {{ i }}
+        {% endfor %}
+        {% for i in list_of_tabs %}
+            {% for id, company, author, trace, schedule in i %}
+
+                <dt>
+                    <table>
+
+                        {% if company != "" %}
+                            <tr>
+                                <h1>{% trans "Company:" %} {{ company }}</h1>
+                            </tr>
+                        {% endif %}
+
+                        <tr>
+                            <h3>{% trans "Tracepoints:" %} {{ trace }}</h3>
+                        </tr>
+
+                    </table>
+                </dt>
+
+                <dd>
+                    <table>
+                        {% blocktrans %} <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> {% endblocktrans %}
+                        {% for hours in schedule  %}
+                            <tr>
+                            {% for hour in hours %}
+                                {% if hour == None %}
+                                    <td>-</td>
+                                {% else %}
+                                    <td>{{ hour }}</td>
+                                {% endif %}
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    {% trans "Author:" %} {{ author }}
+                </dd>
+            {% endfor %}
+            </br>
+        {% endfor %}
+    </dl>
+
+    <!-- Create new dropdown menu -->
+    <script type="text/javascript">
+        new Menu('menu');
+    </script>
 {% endblock %}

@@ -13,3 +13,10 @@ def about(request):
         return render(request, 'jadebusem_site/about.html', {'login': True, 'user': request.session})
     else:
         return render(request, 'jadebusem_site/about.html')
+
+
+def language(request):
+    if 'email' in request.session:
+        return render(request, 'jadebusem_site/language.html', {'login': True, 'user': request.session})
+    else:
+        return render(request, 'jadebusem_site/language.html')

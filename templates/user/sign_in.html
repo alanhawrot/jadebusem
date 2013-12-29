@@ -1,35 +1,41 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
 {% block title %}
-    Logowanie
+    {% trans "Signing in" %}
 {% endblock %}
 
 {% block content %}
 
     {% if form.errors %}
         <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
+            {% blocktrans count form.errors|length as counter %}
+                Please correct the error below.
+            {% plural %}
+                Please correct the errors below.
+            {% endblocktrans %}
         </p>
     {% endif %}
 
     {% if error %}
         <p style="color: red;">
-            Error, please check your email or password.
+            {% trans "Error, please check your email or password." %}
         </p>
     {% endif %}
 
     <form action="" method="post">
         <div class="field">
             {{ form.email.errors }}
-            <label for="id_email">Your email address:</label>
+            <label for="id_email">{% trans "Your email address:" %}</label>
             {{ form.email }}
         </div>
         <div class="password">
             {{ form.password.errors }}
-            <label for="id_password">Your password:</label>
+            <label for="id_password">{% trans "Your password:" %}</label>
             {{ form.password }}
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value={% trans "Submit" %}>
     </form>
 
 {% endblock %}

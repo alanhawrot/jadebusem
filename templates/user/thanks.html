@@ -1,11 +1,13 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
 {% block title %}
-    Sukces
+    {% trans Success %}
 {% endblock %}
 
 {% block content %}
 
-    <p>Jesteś zarejestrowany! Teraz możesz się zalogować na swoje konto.</p>
+    <p>{% trans "You are registered. Now you can sign in to your account"%}</p>
 
 {% endblock %}

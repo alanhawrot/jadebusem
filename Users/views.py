@@ -6,6 +6,7 @@ from forms import SignInForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
+from django.utils.translation import ugettext as _
 import random
 
 
@@ -34,11 +35,11 @@ def register(request):
                     user.save()
                     return render_to_response('user/thanks.html')
                 except:
-                    email_error = "This e-mail is already in use"
+                    email_error = _("This e-mail is already in use")
             else:
-                password_error = "Passwords do not match"
+                password_error = _("Passwords do not match")
         else:
-            password_error = "Password must be at least six characters long"
+            password_error = _("Password must be at least six characters long")
 
     # if error than display form again but with filled fields and error
     if (email_error != "" or password_error != ""):
@@ -112,19 +113,19 @@ def user_settings(request, userid):
                         if(len(password) >= 6):
                             u.set_password(password)
                             u.save()
-                        success = "Changes have been saved!"
+                        success = _("Changes have been saved!")
                         if(u.first_name != ""):
                             request.session['name'] = u.first_name
                         else:
                             request.session['name'] = ""
                     except:
-                        email_error = "This e-mail is already in use"
+                        email_error = _("This e-mail is already in use")
                 else:
-                    password_error = "Passwords do not match"
+                    password_error = _("Passwords do not match")
             else:
-                password_error = "Password must be at least six characters long"
+                password_error = _("Password must be at least six characters long")
         else:
-            confirm_error = "Password is incorrect"
+            confirm_error = _("Password is incorrect")
 
     if(email_error != "" or password_error != "" or confirm_error != ""): 
         context = Context(

@@ -1,5 +1,7 @@
 {% extends "jadebusem_site/base.html" %}
 
+{% load i18n %}
+
 {% block additional_head %}
     {% load staticfiles %}
     <script src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
@@ -8,7 +10,7 @@
 {% endblock %}
 
 {% block title %}
-    Dodaj rozkład
+    {% trans "Add schedule" %}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +21,7 @@
 
         <input type="text"
                name="companyName"
-               placeholder="Nazwa przewoźnika"
+               placeholder={% trans "Name of the carrier" %}
                value="{{ schedule.company }}"/>
         <br/>
 
@@ -28,7 +30,7 @@
             <article>
                 {% if form1.header %}<h2>{{ form1.header }}</h2>{% endif %}
                 <input id="imageUpload" type="file" name="imageUpload" accept="image/*">
-                <input id="imageSubmit" type="submit" name="imageSubmit" value="Wyślij zdjęcie"><br/>
+                <input id="imageSubmit" type="submit" name="imageSubmit" value={% trans "Send picture" %}><br/>
                 <progress id="imageUploadStatus" value="50" max="100"></progress>
             </article>
             <br/><br/>
@@ -56,7 +58,7 @@
                         <input type="text"
                                id="tracePointInput"
                                name="tracePoint"
-                               placeholder="Dodaj punkt trasy"/>
+                               placeholder={% trans "Add tracepoint"%}/>
                         <input id="addTracePoint"
                                type="button"
                                value="+"/>
@@ -104,7 +106,7 @@
                     <input id="imageSubmit"
                            type="submit"
                            name="imageSubmit"
-                           value="Wyślij rozkład">
+                           value={% trans "Send schedule" %}>
 
                     <br/>
                 </div>

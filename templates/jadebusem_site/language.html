@@ -1,0 +1,19 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Language' %}
+{% endblock title %}
+
+{% block content %}
+    <form action="/i18n/setlang/" method="post">
+        <input name="next" type="hidden" value="/"/>
+        <select name="language">
+            {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value={% trans "Change language" %}/>
+    </form>
+{% endblock content %}

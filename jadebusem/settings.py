@@ -13,6 +13,19 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
+
+    # Localhost database
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #    'NAME': 'D:\\Programowanie\\Eclipse workspace\\sqlite.db',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+    #    'USER': '',
+    #    'PASSWORD': '',
+    #    'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #    'PORT': '',
+    #}
+
+    # Database created by Michal Semik
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'sql420739',                   # Or path to database file if using sqlite3.
@@ -36,7 +49,14 @@ TIME_ZONE = 'Europe/Warsaw'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'en-US'
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('pl', ugettext('Polish')),
+)
 
 SITE_ID = 1
 
@@ -102,6 +122,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -168,3 +189,7 @@ LOGGING = {
         },
     }
 }
+
+LOCALE_PATHS = (
+    'locale',
+)

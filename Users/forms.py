@@ -2,6 +2,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from Users.models import JadeBusemUser
 from django.forms import ModelForm
 from django import forms
+from django.utils.translation import ugettext as _
+
 
 class RegisterForm(ModelForm):
     class Meta:
@@ -39,6 +41,6 @@ class JadeBusemUserChangeForm(UserChangeForm):
 
 
 class SignInForm(forms.Form):
-    email = forms.EmailField(label='Your e-mail address')
+    email = forms.EmailField(label=_('Your email address'))
     password = forms.CharField(widget=forms.PasswordInput())
 

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.template import Context
 from Users.views import sign_in
 from schedules.scheduleBuilder import ScheduleBuilder
+from django.utils.translation import ugettext as _
 
 
 def add(request):
@@ -10,13 +11,13 @@ def add(request):
     if not author:
         return sign_in(request)
     context = {
-        'mainheader': 'Dodaj rozkład',
+        'mainheader': _('Add schedule'),
         'form1': {
             'show': True,
-            'header': "Wyślij zdjęcie"},
+            'header': _("Send picture")},
         'form2': {
             'show': True,
-            'header': "Uzupełnij Formularz"}}
+            'header': _("Fill form")}}
 
     if 'email' in request.session:
         context['login'] = True,
@@ -30,7 +31,7 @@ def add(request):
     scheduleBuilder = ScheduleBuilder(company=company, author=author, image=image)
 
     if request.FILES:
-        context['mainheader'] = "Weryfikacja danych"
+        context['mainheader'] = _("Data verification")
         context['form1']['show'] = False
         context['form2']['header'] = ''
         context['schedule'] = scheduleBuilder
@@ -39,7 +40,7 @@ def add(request):
         scheduleBuilder.parse_trace_points(trace_points)
         scheduleModel = scheduleBuilder.build_model()
         #TODO:handle errors
-        context['mainheader'] = 'Pomyślnie dodano rozkład!'
+        context['mainheader'] = _('Successfully added schedule!')
         context['schedule'] = ScheduleBuilder(author=author)
     else:
         context['schedule'] = scheduleBuilder
