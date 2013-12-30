@@ -161,6 +161,9 @@ input {
     user-select: none;
     cursor: pointer; cursor: hand;
 }
+.submitInput:hover {
+    background: #DDDDDD;
+}
 
 .textInput {
     height: 24px;
