@@ -29,9 +29,15 @@
         {% if form1.show %}
             <article>
                 {% if form1.header %}<h2>{{ form1.header }}</h2>{% endif %}
-                <input class="fileInput" id="imageUpload" type="file" name="imageUpload" accept="image/*">
-                <inputclass
-                ="submitInput"  id="imageSubmit" type="submit" name="imageSubmit" value={% trans "Send picture" %}><br/>
+                <div class="largeMarginRB submitInput centered floating" style="height: 28px !important; overflow: hidden !important;">
+                    <input class="fileInput" id="imageUpload" type="file" name="imageUpload" accept="image/*">
+                    <span class="fileInputText">{% trans 'Pick a photo' %}</span>
+                </div>
+                <div class="floating">
+                    <input class="submitInput" id="imageSubmit" type="submit" name="imageSubmit"
+                           value={% trans "Send picture" %}>
+                </div>
+            <div class="clearing"></div>
                 <progress id="imageUploadStatus" value="50" max="100"></progress>
             </article>
             <br/><br/>
@@ -47,6 +53,7 @@
 
                     <div id="tracePoints">
                         {% for tracePoint in schedule.trace_points %}
+
                             <input class="textInput" name="tracePoint" class="hiddenTracePoint" type="text"
                                    value="{{ tracePoint }}"
                                    hidden="hidden"/>
@@ -57,11 +64,11 @@
                         {% endfor %}
                     </div>
                     <div id="tracePointsControl">
-                        <input class="formMargin submitInput" type="text"
+                        <input class="formMargin textInput" type="text"
                                id="tracePointInput"
                                name="tracePoint"
                                placeholder={% trans "Add tracepoint" %}/>
-                        <input class="formMarginLRB submitInput scheduleHourNavigator" id="addTracePoint"
+                        <input class="formMarginRB submitInput scheduleHourNavigator" id="addTracePoint"
                                type="button"
                                value="+"/>
                     </div>

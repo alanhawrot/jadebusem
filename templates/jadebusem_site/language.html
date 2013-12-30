@@ -9,12 +9,24 @@
 {% block content %}
     <h3>{% trans 'Change language' %}</h3>
     <form action="/i18n/setlang/" method="post">
-        <input name="next" type="hidden" value="/"/>
-        <select  class="smallMargin selectButton" name="language">
-            {% for lang in LANGUAGES %}
-                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-            {% endfor %}
-        </select>
-        <input class="smallMarginLRB submitInput" type="submit" value={% trans "Change language" %}/>
+        <table>
+            <input name="next" type="hidden" value="/"/>
+            <tr>
+                <td colspan="2">
+                    <select class="smallMargin selectButton" name="language">
+                        {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="centered">
+                    <input class="smallMarginLRB submitInput" type="submit" value={% trans "Change language" %}/>
+                </td>
+            </tr>
+
+
+        </table>
     </form>
 {% endblock content %}
