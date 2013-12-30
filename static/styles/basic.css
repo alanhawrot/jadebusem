@@ -131,8 +131,7 @@ li li {
 
 input {
     border: 1px solid #C5C6C6;
-    height: 20px;
-    width: 200px;
+
 }
 
 
@@ -141,7 +140,7 @@ input {
    -moz-appearance: none; /* Firefox */
    -webkit-appearance: none; /* Safari and Chrome */
    width: 200px;
-   height: 20px;
+   height: 24px;
    background: url("/static/images/arrow.png") no-repeat;
    background-position: 182px 5px;
    text-indent: 0.01px;          /* Removes default arrow from firefox*/
@@ -164,7 +163,8 @@ input {
 }
 
 .textInput {
-
+    height: 24px;
+    width: 200px;
 }
 
 .checkboxInput {
@@ -197,8 +197,8 @@ input {
 }
 
 .scheduleHourNavigator {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
 }
 
 .scheduleHour {

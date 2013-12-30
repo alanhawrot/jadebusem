@@ -4,8 +4,8 @@
 
 {% block additional_head %}
     {% load staticfiles %}
-    <script src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
-    <script src="{% static 'scripts/add.js' %}"></script>
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/add.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/basic.css' %}"/>
 {% endblock %}
 
@@ -28,7 +28,7 @@
 
         {% if form1.show %}
             <article>
-                {% if form1.header %}<h2>{{ form1.header }}</h2>{% endif %}
+                {% if form1.header %}<h3>{{ form1.header }}</h3>{% endif %}
                 <div class="largeMarginRB submitInput centered floating" style="height: 28px !important; overflow: hidden !important;">
                     <input class="fileInput" id="imageUpload" type="file" name="imageUpload" accept="image/*">
                     <span class="fileInputText">{% trans 'Pick a photo' %}</span>
@@ -38,7 +38,6 @@
                            value={% trans "Send picture" %}>
                 </div>
             <div class="clearing"></div>
-                <progress id="imageUploadStatus" value="50" max="100"></progress>
             </article>
             <br/><br/>
         {% endif %}
@@ -47,7 +46,7 @@
         {% if form2.show %}
             <article>
                 <div class="floating">
-                    {% if form2.header %}<h2>{{ form2.header }}</h2>{% endif %}
+                    {% if form2.header %}<h3>{{ form2.header }}</h3>{% endif %}
 
                     <br/>
 
