@@ -7,6 +7,10 @@ from jadebusem_site.views import about, index, language
 
 admin.autodiscover()
 
+js_info_dict = {
+    'packages': ('jadebusem',),
+}
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'jadebusem.views.home', name='home'),
@@ -20,6 +24,7 @@ urlpatterns = patterns('',
 
     url(r'^$', index),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'^users/', include('Users.urls')),
     url(r'^schedules/', include('schedules.urls')),
     url(r'^search/', include('SearchEngine.urls')),

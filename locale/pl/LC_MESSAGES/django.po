@@ -8,86 +8,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-23 19:54+0100\n"
+"POT-Creation-Date: 2013-12-30 14:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: SearchEngine/views.py:59 SearchEngine/views.py:72 SearchEngine/views.py:109
+#: .\SearchEngine\views.py:69 .\SearchEngine\views.py:104
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
-#: SearchEngine/views.py:284
-msgid "Sorry, we cant find any schedule."
-msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu"
-
-#: SearchEngine/views.py:286
-msgid "Sorry, we cant find any schedule. Maybe try to search with interchanges."
-msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu. Spróbuj wyszukać połączeń z przesiadkami."
-
-#: SearchEngine/views.py:88 templates/search_engine/search.html:18
+#: .\SearchEngine\views.py:302 .\templates\search_engine\search.html.py:23
 msgid "All"
 msgstr "Wszystkie"
 
-#: Users/admin.py:19
+#: .\Users\admin.py:19
 msgid "Personal info"
 msgstr "Informacje osobiste"
 
-#: Users/admin.py:20
+#: .\Users\admin.py:20
 msgid "Permissions"
 msgstr "Uprawnienia"
 
-#: Users/admin.py:22
+#: .\Users\admin.py:22
 msgid "Important dates"
 msgstr "Ważne daty"
 
-#: Users/forms.py:44
+#: .\Users\forms.py:44
 msgid "Your email address"
 msgstr "Twój adres email"
 
-#: Users/models.py:40
+#: .\Users\models.py:40
 msgid "user_id"
 msgstr "użytkownik_id"
 
-#: Users/models.py:41
+#: .\Users\models.py:41
 msgid "email address"
 msgstr "adres email"
 
-#: Users/models.py:42
+#: .\Users\models.py:42
 msgid "first name"
 msgstr "imię"
 
-#: Users/models.py:43
+#: .\Users\models.py:43
 msgid "last name"
 msgstr "nazwisko"
 
-#: Users/models.py:44
+#: .\Users\models.py:44
 msgid "address"
 msgstr "adres"
 
-#: Users/models.py:45
+#: .\Users\models.py:45
 msgid "company name"
 msgstr "nazwa firmy"
 
-#: Users/models.py:46
+#: .\Users\models.py:46
 msgid "staff status"
 msgstr "stan personelu"
 
-#: Users/models.py:47
+#: .\Users\models.py:47
 msgid "Designates whether the user can log into this admin site."
 msgstr "Decyduje, czy użytkownik może zalogować się do sekcji administratora"
 
-#: Users/models.py:49
+#: .\Users\models.py:49
 msgid "active"
 msgstr "aktywny"
 
-#: Users/models.py:50
+#: .\Users\models.py:50
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
@@ -95,189 +87,200 @@ msgstr ""
 "Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
 "zamiast usuwać konto."
 
-#: Users/models.py:52
+#: .\Users\models.py:52
 msgid "date joined"
 msgstr "data przyłączenia"
 
-#: Users/models.py:60
+#: .\Users\models.py:60
 msgid "user"
 msgstr "użytkownik"
 
-#: Users/models.py:61
+#: .\Users\models.py:61
 msgid "users"
 msgstr "użytkownicy"
 
-#: Users/views.py:38 Users/views.py:122
+#: .\Users\views.py:38 .\Users\views.py:122
 msgid "This e-mail is already in use"
 msgstr "Ten adres email jest już używany"
 
-#: Users/views.py:40 Users/views.py:124
+#: .\Users\views.py:40 .\Users\views.py:124
 msgid "Passwords do not match"
 msgstr "Hasła się nie zgadzają"
 
-#: Users/views.py:42 Users/views.py:126
+#: .\Users\views.py:42 .\Users\views.py:126
 msgid "Password must be at least six characters long"
 msgstr "Hasło powinno mieć co najmniej 6 znaków"
 
-#: Users/views.py:116
+#: .\Users\views.py:116
 msgid "Changes have been saved!"
 msgstr "Zmiany zostały zapisane"
 
-#: Users/views.py:128
+#: .\Users\views.py:128
 msgid "Password is incorrect"
 msgstr "Hasło jest niepoprawne"
 
-#: jadebusem/settings.py:44
+#: .\jadebusem\settings.py:57
 msgid "English"
 msgstr "Angielski"
 
-#: jadebusem/settings.py:45
+#: .\jadebusem\settings.py:58
 msgid "Polish"
 msgstr "Polski"
 
-#: schedules/admin.py:19 schedules/admin.py:20
+#: .\schedules\admin.py:19 .\schedules\admin.py:20
 msgid "author"
 msgstr "autor"
 
-#: schedules/admin.py:19 schedules/admin.py:20
+#: .\schedules\admin.py:19 .\schedules\admin.py:20
 msgid "company"
 msgstr "firma"
 
-#: schedules/admin.py:19 schedules/admin.py:20
+#: .\schedules\admin.py:19 .\schedules\admin.py:20
 msgid "image_path"
 msgstr "ścieżka_do_zdjęcia"
 
-#: schedules/admin.py:19 schedules/admin.py:20
+#: .\schedules\admin.py:19 .\schedules\admin.py:20
 msgid "verified"
 msgstr "zweryfikowany"
 
-#: schedules/models.py:14
+#: .\schedules\models.py:14
 msgid "Company name"
 msgstr "Nazwa firmy"
 
-#: schedules/models.py:15
+#: .\schedules\models.py:15
 msgid "Image path"
 msgstr "Ścieżka do zdjęcia"
 
-#: schedules/models.py:16
+#: .\schedules\models.py:16
 msgid "Is verified"
 msgstr "Czy zweryfikowany"
 
-#: schedules/models.py:19
+#: .\schedules\models.py:19
 msgid "Author: "
 msgstr "Autor"
 
-#: schedules/models.py:19
+#: .\schedules\models.py:19
 msgid ", Company name: "
 msgstr ", Nazwa firmy: "
 
-#: schedules/models.py:24 templates/user/registration.html:17
-#: templates/user/user_settings.html:18
+#: .\schedules\models.py:24 .\templates\user\registration.html.py:39
+#: .\templates\user\user_settings.html.py:43
+#: .\templates\user\user_settings.html.py:44
 msgid "Address"
 msgstr "Adres"
 
-#: schedules/models.py:28
+#: .\schedules\models.py:28
 msgid "Poniedziałek"
 msgstr "Monday"
 
-#: schedules/models.py:29
+#: .\schedules\models.py:29
 msgid "Wtorek"
 msgstr "Tuesday"
 
-#: schedules/models.py:30
+#: .\schedules\models.py:30
 msgid "Środa"
 msgstr "Wednesday"
 
-#: schedules/models.py:31
+#: .\schedules\models.py:31
 msgid "Czwartek"
 msgstr "Thursday"
 
-#: schedules/models.py:32
+#: .\schedules\models.py:32
 msgid "Piątek"
 msgstr "Friday"
 
-#: schedules/models.py:33
+#: .\schedules\models.py:33
 msgid "Sobota"
 msgstr "Saturday"
 
-#: schedules/models.py:34
+#: .\schedules\models.py:34
 msgid "Niedziela"
 msgstr "Sunday"
 
-#: schedules/models.py:37
+#: .\schedules\models.py:37
 msgid "Departure time"
 msgstr "Czas odjazdu"
 
-#: schedules/views.py:14 templates/jadebusem_site/nav.html:5
-#: templates/schedules/add.html:13
+#: .\schedules\views.py:14 .\templates\jadebusem_site\nav.html.py:5
+#: .\templates\schedules\add.html.py:13
 msgid "Add schedule"
 msgstr "Dodaj rozkład"
 
-#: schedules/views.py:17 templates/schedules/add.html:33
+#: .\schedules\views.py:17 .\templates\schedules\add.html.py:38
 msgid "Send picture"
 msgstr "Wyślij zdjęcie"
 
-#: schedules/views.py:20
+#: .\schedules\views.py:20
 msgid "Fill form"
 msgstr "Wypełnij formularz"
 
-#: schedules/views.py:34
+#: .\schedules\views.py:34
 msgid "Data verification"
 msgstr "Weryfikacja daty"
 
-#: schedules/views.py:43
+#: .\schedules\views.py:43
 msgid "Successfully added schedule!"
 msgstr "Pomyślnie dodano rozkład"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Wednesday"
 msgstr "Środa"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Friday"
 msgstr "Piątek"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Saturday"
 msgstr "Sobota"
 
-#: schedules/templatetags/filters.py:10
+#: .\schedules\templatetags\filters.py:10
 msgid "Sunday"
 msgstr "Niedziela"
 
-#: templates/jadebusem_site/about.html:6
+#: .\templates\jadebusem_site\about.html.py:6
 msgid "Information about Jadę Busem"
 msgstr "Informacje na temat Jadę Busem"
 
-#: templates/jadebusem_site/about.html:11
+#: .\templates\jadebusem_site\about.html.py:10
+#, fuzzy
+msgid "About jadebusem"
+msgstr "Informacje"
+
+#: .\templates\jadebusem_site\about.html.py:12
+#, fuzzy
 msgid ""
 "\n"
 "        Jadę Busem is a portal that will be created for people that use "
-"private bus companies. Basically portal has one function: to allow users the "
-"most accessible way to get information about routes that interest them.<br>\n"
+"private bus companies. Basically portal has one\n"
+"        function: to allow users the most accessible way to get information "
+"about routes that interest them.<br>\n"
 "\n"
 "        Jadę Busem is a tool, where we can set places and houres, then we "
-"immidiately get the best company and route for us.<br>\n"
+"immidiately get the best company and route\n"
+"        for us.<br>\n"
 "\n"
 "        Jadę Busem is a project of Wiki, that allows ordinary users in an "
-"accessible way to enter and update data on schedules. The whole is done by "
-"sending photographs of scheduled to the portal.<br>\n"
+"accessible way to enter and update data\n"
+"        on schedules. The whole is done by sending photographs of scheduled "
+"to the portal.<br>\n"
 "\n"
 "        An additional advantage of the portal is able to register the "
-"company. The company reserves the input schedules, which increases the "
-"credibility in the eyes of customers.<br>\n"
+"company. The company reserves the input\n"
+"        schedules, which increases the credibility in the eyes of customers."
+"<br>\n"
 "        "
 msgstr ""
 "\n"
@@ -301,140 +304,163 @@ msgstr ""
 "zwiększa wiarygodność wśród klientów.<br>\n"
 "        "
 
-#: templates/jadebusem_site/base.html:28
+#: .\templates\jadebusem_site\base.html.py:43
 msgid "Footer"
 msgstr "Stopka"
 
-#: templates/jadebusem_site/index.html:11
+#: .\templates\jadebusem_site\index.html.py:11
 msgid "Welcome in Jadę Busem portal!"
 msgstr "Witamy w portalu Jadę Busem "
 
-#: templates/jadebusem_site/language.html:6
+#: .\templates\jadebusem_site\language.html.py:6
 msgid "Language"
 msgstr "Język"
 
-#: templates/jadebusem_site/language.html:17
-#: templates/jadebusem_site/nav.html:7
+#: .\templates\jadebusem_site\language.html.py:10
+#: .\templates\jadebusem_site\language.html.py:25
+#: .\templates\jadebusem_site\nav.html.py:7
 msgid "Change language"
 msgstr "Zmień język"
 
-#: templates/jadebusem_site/nav.html:3
+#: .\templates\jadebusem_site\nav.html.py:3
 msgid "Main page"
 msgstr "Strona główna"
 
-#: templates/jadebusem_site/nav.html:4 templates/search_engine/search.html:12
+#: .\templates\jadebusem_site\nav.html.py:4
+#: .\templates\search_engine\search.html.py:12
 msgid "Search for connection"
 msgstr "Szukaj połączenia"
 
-#: templates/jadebusem_site/nav.html:6
+#: .\templates\jadebusem_site\nav.html.py:6
 msgid "About page"
 msgstr "Informacje"
 
-#: templates/jadebusem_site/user_panel.html:4
+#: .\templates\jadebusem_site\user_panel.html.py:4
 msgid "Welcome"
 msgstr "Witaj"
 
-#: templates/jadebusem_site/user_panel.html:10
+#: .\templates\jadebusem_site\user_panel.html.py:10
 msgid "Account settings"
 msgstr "Ustawienia konta"
 
-#: templates/jadebusem_site/user_panel.html:11
+#: .\templates\jadebusem_site\user_panel.html.py:11
 msgid "Sign out"
 msgstr "Wyloguj się"
 
-#: templates/jadebusem_site/user_panel.html:13
+#: .\templates\jadebusem_site\user_panel.html.py:13
 msgid "Sign in"
 msgstr "Zaloguj się"
 
-#: templates/jadebusem_site/user_panel.html:14
+#: .\templates\jadebusem_site\user_panel.html.py:14
 msgid "Register"
 msgstr "Zarejestruj się"
 
-#: templates/schedules/add.html:24
+#: .\templates\schedules\add.html.py:24
 msgid "Name of the carrier"
 msgstr "Nazwa przewoźnika"
 
-#: templates/schedules/add.html:61
+#: .\templates\schedules\add.html.py:34
+msgid "Pick a photo"
+msgstr ""
+
+#: .\templates\schedules\add.html.py:69
 msgid "Add tracepoint"
 msgstr "Dodaj przystanek"
 
-#: templates/schedules/add.html:109
+#: .\templates\schedules\add.html.py:116
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
 
-#: templates/search_engine/search.html:24
-msgid "From..."
-msgstr "Z..."
-
-#: templates/search_engine/search.html:25
-msgid "To..."
-msgstr "Do..."
-
-#: templates/search_engine/search.html:26
+#: .\templates\search_engine\search.html.py:31
+#: .\templates\search_engine\search.html.py:65
 msgid "Search"
 msgstr "Szukaj"
 
-#: templates/search_engine/search.html:27
+#: .\templates\search_engine\search.html.py:42
+msgid "From..."
+msgstr "Z..."
+
+#: .\templates\search_engine\search.html.py:49
+msgid "To..."
+msgstr "Do..."
+
+#: .\templates\search_engine\search.html.py:59
 msgid "Avoid interchanges"
 msgstr "Unikaj przesiadek"
 
-#: templates/search_engine/search.html:39
+#: .\templates\search_engine\search.html.py:94
 msgid "Company:"
 msgstr "Firma:"
 
-#: templates/search_engine/search.html:44
+#: .\templates\search_engine\search.html.py:99
 msgid "Tracepoints:"
 msgstr "Przystanki:"
 
-#: templates/search_engine/search.html:52
+#: .\templates\search_engine\search.html.py:107
 msgid ""
-" <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</"
-"td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> "
+"\n"
+"                            <tr>\n"
+"                                <td>Hours</td>\n"
+"                                <td>Monday</td>\n"
+"                                <td>Tuesday</td>\n"
+"                                <td>Wednesday</td>\n"
+"                                <td>Thursday</td>\n"
+"                                <td>Friday</td>\n"
+"                                <td>Saturday</td>\n"
+"                                <td>Sunday</td>\n"
+"                            </tr> "
 msgstr ""
-" <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</"
-"td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr> "
 
-#: templates/search_engine/search.html:65
+#: .\templates\search_engine\search.html.py:130
 msgid "Author:"
 msgstr "Autor:"
 
-#: templates/user/registration.html:6
+#: .\templates\search_engine\search.html.py:133
+msgid "Show route"
+msgstr "Pokaż trasę"
+
+#: .\templates\user\registration.html.py:6
 msgid "Registration"
 msgstr "Rejestracja"
 
-#: templates/user/registration.html:12 templates/user/user_settings.html:13
+#: .\templates\user\registration.html.py:16
+#: .\templates\user\user_settings.html.py:16
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/user/registration.html:13
+#: .\templates\user\registration.html.py:21
 msgid "Password"
 msgstr "Hasło"
 
-#: templates/user/registration.html:14
+#: .\templates\user\registration.html.py:27
 msgid "Re-type Password"
 msgstr "Powtórz hasło"
 
-#: templates/user/registration.html:15 templates/user/user_settings.html:16
+#: .\templates\user\registration.html.py:31
+#: .\templates\user\user_settings.html.py:34
 msgid "First Name"
 msgstr "Imię"
 
-#: templates/user/registration.html:16 templates/user/user_settings.html:17
+#: .\templates\user\registration.html.py:35
+#: .\templates\user\user_settings.html.py:39
 msgid "Last Name"
 msgstr "Nazwisko"
 
-#: templates/user/registration.html:18 templates/user/user_settings.html:19
+#: .\templates\user\registration.html.py:44
+#: .\templates\user\user_settings.html.py:48
+#: .\templates\user\user_settings.html.py:50
 msgid "Company Name"
 msgstr "Nazwa firmy"
 
-#: templates/user/registration.html:19
+#: .\templates\user\registration.html.py:47
 msgid "Register now"
 msgstr "Zarejestruj się"
 
-#: templates/user/sign_in.html:6
+#: .\templates\user\sign_in.html.py:6
 msgid "Signing in"
 msgstr "Logowanie"
 
-#: templates/user/sign_in.html:13
+#: .\templates\user\sign_in.html.py:13
 msgid ""
 "\n"
 "                Please correct the error below.\n"
@@ -452,46 +478,87 @@ msgstr[1] ""
 "                Proszę popraw błędy poniżej.\n"
 "            "
 
-#: templates/user/sign_in.html:23
+#: .\templates\user\sign_in.html.py:23
 msgid "Error, please check your email or password."
 msgstr "Błąd, proszę sprawdź swój adres email i hasło"
 
-#: templates/user/sign_in.html:30
+#: .\templates\user\sign_in.html.py:38
 msgid "Your email address:"
 msgstr "Twój adres email:"
 
-#: templates/user/sign_in.html:35
+#: .\templates\user\sign_in.html.py:52
 msgid "Your password:"
 msgstr "Twoje hasło:"
 
-#: templates/user/sign_in.html:38
+#: .\templates\user\sign_in.html.py:60
 msgid "Submit"
 msgstr "Wyślij"
 
-#: templates/user/thanks.html:11
+#: .\templates\user\thanks.html.py:11
 msgid "You are registered. Now you can sign in to your account"
 msgstr "Jesteś zarejestrowany. Teraz możesz się zalogować na swoje konto"
 
-#: templates/user/user_settings.html:6
+#: .\templates\user\user_settings.html.py:6
 msgid "Your account panel"
 msgstr "Twój panel"
 
-#: templates/user/user_settings.html:11
+#: .\templates\user\user_settings.html.py:11
 msgid "Here you can manage your account"
 msgstr "Tutaj możesz zarządzać swoim kontem"
 
-#: templates/user/user_settings.html:14
+#: .\templates\user\user_settings.html.py:15
+#, fuzzy
+msgid "Email"
+msgstr "E-mail"
+
+#: .\templates\user\user_settings.html.py:21
+#, fuzzy
+msgid "New Password"
+msgstr "Nowe hasło"
+
+#: .\templates\user\user_settings.html.py:23
 msgid "New password"
 msgstr "Nowe hasło"
 
-#: templates/user/user_settings.html:15
+#: .\templates\user\user_settings.html.py:27
+#, fuzzy
+msgid "Retype new Password"
+msgstr "Powtórz nowe hasło"
+
+#: .\templates\user\user_settings.html.py:29
 msgid "Re-type new password"
 msgstr "Powtórz nowe hasło"
 
-#: templates/user/user_settings.html:20
+#: .\templates\user\user_settings.html.py:33
+#, fuzzy
+msgid "First name"
+msgstr "imię"
+
+#: .\templates\user\user_settings.html.py:38
+#, fuzzy
+msgid "Last name"
+msgstr "nazwisko"
+
+#: .\templates\user\user_settings.html.py:56
 msgid "Type your password to confirm"
 msgstr "Wpisz hasło, aby potwierdzić"
 
-#: templates/user/user_settings.html:21
+#: .\templates\user\user_settings.html.py:60
 msgid "Save"
 msgstr "Zapisz"
+
+#~ msgid "Sorry, we cant find any schedule."
+#~ msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu"
+
+#~ msgid ""
+#~ "Sorry, we cant find any schedule. Maybe try to search with interchanges."
+#~ msgstr ""
+#~ "Przepraszamy, nie mozna znaleźć takiego rozkładu. Spróbuj wyszukać "
+#~ "połączeń z przesiadkami."
+
+#~ msgid ""
+#~ " <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</"
+#~ "td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> "
+#~ msgstr ""
+#~ " <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</"
+#~ "td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr> "

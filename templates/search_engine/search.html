@@ -40,12 +40,14 @@
                     <td colspan="2">
                         <input class="textInput" type="text" name="from" value="{{ search_from }}"
                                placeholder={% trans "From..." %} required>
+                        <input type="hidden" id="start" value="{{ search_from }}"/>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <input class="textInput" type="text" name="to" value="{{ search_to }}"
                                placeholder={% trans "To..." %} required>
+                        <input type="hidden" id="end" value="{{ search_to }}">
                     </td>
                 </tr>
                 <tr>
@@ -59,7 +61,8 @@
 
                 </tr>
                 <tr>
-                    <td colspan="2" class="centered"><input class="submitInput" type="submit" value={% trans "Search" %}></td>
+                    <td colspan="2" class="centered"><input class="submitInput" type="submit"
+                                                            value={% trans "Search" %}></td>
                 </tr>
 
             </table>
@@ -76,6 +79,9 @@
         {{ temp }}
         {% for i in schedule %}
             {{ i }}
+        {% endfor %}
+        {% for i in route_list %}
+            <input type="hidden" id="route{{ forloop.counter0 }}" value="{{ i }}"/>
         {% endfor %}
         {% for i in list_of_tabs %}
             {% for id, company, author, trace, schedule in i %}
@@ -124,6 +130,10 @@
                     {% trans "Author:" %} {{ author }}
                 </dd>
             {% endfor %}
+            <input class="submitInput" type="button" id="{{ forloop.counter0 }}" value="{% trans 'Show route'%}"
+                   onclick="calcRoute(this.id)"/>
+            <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
+            <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
             </br>
         {% endfor %}
     </dl>

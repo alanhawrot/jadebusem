@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-30 13:54+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: .\admin\js\SelectFilter2.js.c:45
+#, c-format
+msgid "Available %s"
+msgstr "Dostępne %s"
+
+#: .\admin\js\SelectFilter2.js.c:46
+#, c-format
+msgid ""
+"This is the list of available %s. You may choose some by selecting them in "
+"the box below and then clicking the \"Choose\" arrow between the two boxes."
+msgstr ""
+"To jest lista dostępnych %s. Możesz wybrać zaznaczając element na liście pod spodem, "
+"a następnie klikając na strzałkę z napisem \"Wybierz\" pomiędzy tymi dwiema listami."
+
+#: .\admin\js\SelectFilter2.js.c:53
+#, c-format
+msgid "Type into this box to filter down the list of available %s."
+msgstr "Wpisz w to miejsce, aby przefiltrować listę dostępnych %s."
+
+#: .\admin\js\SelectFilter2.js.c:57
+msgid "Filter"
+msgstr "Filtruj"
+
+#: .\admin\js\SelectFilter2.js.c:61
+msgid "Choose all"
+msgstr "Wybierz wszystkie"
+
+#: .\admin\js\SelectFilter2.js.c:61
+#, c-format
+msgid "Click to choose all %s at once."
+msgstr "Kliknij, aby wybrać wszystkie %s jednocześnie"
+
+#: .\admin\js\SelectFilter2.js.c:67
+msgid "Choose"
+msgstr "Wybierz"
+
+#: .\admin\js\SelectFilter2.js.c:69
+msgid "Remove"
+msgstr "Usuń"
+
+#: .\admin\js\SelectFilter2.js.c:75
+#, c-format
+msgid "Chosen %s"
+msgstr "Wybrane %s"
+
+#: .\admin\js\SelectFilter2.js.c:76
+#, c-format
+msgid ""
+"This is the list of chosen %s. You may remove some by selecting them in the "
+"box below and then clicking the \"Remove\" arrow between the two boxes."
+msgstr ""
+"To jest lista wybranych %s. Możesz usunąć wybrane z listy zaznaczając element na liście pod "
+"spodem, a następnie klikając strzałkę \"Usuń\" pomiędzy dwiema listami."
+
+#: .\admin\js\SelectFilter2.js.c:80
+msgid "Remove all"
+msgstr "Usuń wszystkie"
+
+#: .\admin\js\SelectFilter2.js.c:80
+#, c-format
+msgid "Click to remove all chosen %s at once."
+msgstr "Kliknij, aby usunąć wszystkie %s jednocześnie."
+
+#: .\admin\js\actions.js.c:18 .\admin\js\actions.min.js.c:1
+msgid "%(sel)s of %(cnt)s selected"
+msgid_plural "%(sel)s of %(cnt)s selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\admin\js\actions.js.c:109 .\admin\js\actions.min.js.c:5
+msgid ""
+"You have unsaved changes on individual editable fields. If you run an "
+"action, your unsaved changes will be lost."
+msgstr ""
+"Masz niezapisane zmiany. Jeśli kontynuujesz akcję to stracisz wszelkie niezapisane zmiany."
+
+#: .\admin\js\actions.js.c:121 .\admin\js\actions.min.js.c:5
+msgid ""
+"You have selected an action, but you haven't saved your changes to "
+"individual fields yet. Please click OK to save. You'll need to re-run the "
+"action."
+msgstr ""
+"Wybrałeś akcję, ale jeszcze nie zapisałeś zmian. Kliknij OK, aby zapisać. "
+"Będziesz musiał uruchomić akcję jeszcze raz."
+
+#: .\admin\js\actions.js.c:123 .\admin\js\actions.min.js.c:6
+msgid ""
+"You have selected an action, and you haven't made any changes on individual "
+"fields. You're probably looking for the Go button rather than the Save "
+"button."
+msgstr ""
+"Wybrałeś akcję, ale nie dokonałeś żadnych zmian w polach. Prawdopodobnie szukasz przycisku Dalej/Go "
+"niż przycisku Zapisz/Save."
+
+#: .\admin\js\calendar.js.c:26
+msgid ""
+"January February March April May June July August September October November "
+"December"
+msgstr ""
+"Styczeń Luty Marzec Kwiecień Maj Czerwiec Lipiec Sierpień Wrzesień Październik Listopad "
+"Grudzień"
+
+#: .\admin\js\calendar.js.c:27
+msgid "S M T W T F S"
+msgstr "S P W Ś C P N"
+
+#: .\admin\js\collapse.js.c:8 .\admin\js\collapse.js.c:19
+#: .\admin\js\collapse.min.js.c:1
+msgid "Show"
+msgstr "Pokaż"
+
+#: .\admin\js\collapse.js.c:15 .\admin\js\collapse.min.js.c:1
+msgid "Hide"
+msgstr "Schowaj"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:49
+#: .\admin\js\admin\DateTimeShortcuts.js.c:85
+msgid "Now"
+msgstr "Teraz"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:53
+msgid "Clock"
+msgstr "Zegar"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:81
+msgid "Choose a time"
+msgstr "Wybierz czas"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:86
+msgid "Midnight"
+msgstr "Północ"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:87
+msgid "6 a.m."
+msgstr "6 rano"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:88
+msgid "Noon"
+msgstr "Południe"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:92
+#: .\admin\js\admin\DateTimeShortcuts.js.c:204
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:144
+#: .\admin\js\admin\DateTimeShortcuts.js.c:197
+msgid "Today"
+msgstr "Dzisiaj"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:148
+msgid "Calendar"
+msgstr "Kalendarz"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:195
+msgid "Yesterday"
+msgstr "Wczoraj"
+
+#: .\admin\js\admin\DateTimeShortcuts.js.c:199
+msgid "Tomorrow"
+msgstr "Jutro"
+
+#: .\static\scripts\google_maps.js.c:61
+msgid "Route Segment: "
+msgstr "Etap trasy: "
+
+#: .\static\scripts\google_maps.js.c:62
+msgid "From "
+msgstr "Z "
+
+#: .\static\scripts\google_maps.js.c:62
+msgid " to "
+msgstr " do "
+
+#: .\static\scripts\google_maps.js.c:64
+msgid "Estimated duration: "
+msgstr "Szacowany czas: "
+
+#: .\static\scripts\google_maps.js.c:65
+msgid "Distance: "
+msgstr "Dystans: "
