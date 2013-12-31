@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-30 14:00+0100\n"
+"POT-Creation-Date: 2013-12-31 12:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,15 @@ msgstr "Błąd podczas tworzenia rozkładu"
 #: .\SearchEngine\views.py:302 .\templates\search_engine\search.html.py:23
 msgid "All"
 msgstr "Wszystkie"
+
+#: .\SearchEngine\views.py:325
+#, fuzzy
+msgid "Sorry, we cant find any schedule."
+msgstr "Błąd podczas tworzenia rozkładu"
+
+#: .\SearchEngine\views.py:327
+msgid " Maybe try to search with interchanges."
+msgstr " Może spróbuj wyszukać połączenia z przesiadkami."
 
 #: .\Users\admin.py:19
 msgid "Personal info"
@@ -361,7 +370,7 @@ msgstr "Nazwa przewoźnika"
 
 #: .\templates\schedules\add.html.py:34
 msgid "Pick a photo"
-msgstr ""
+msgstr "Wybierz zdjęcie"
 
 #: .\templates\schedules\add.html.py:69
 msgid "Add tracepoint"
@@ -410,6 +419,17 @@ msgid ""
 "                                <td>Sunday</td>\n"
 "                            </tr> "
 msgstr ""
+"\n"
+"                            <tr>\n"
+"                                <td>Godziny</td>\n"
+"                                <td>Poniedziałek</td>\n"
+"                                <td>Wtorek</td>\n"
+"                                <td>Środa</td>\n"
+"                                <td>Czwartek</td>\n"
+"                                <td>Piątek</td>\n"
+"                                <td>Sobota</td>\n"
+"                                <td>Niedziela</td>\n"
+"                            </tr> "
 
 #: .\templates\search_engine\search.html.py:130
 msgid "Author:"
@@ -546,19 +566,3 @@ msgstr "Wpisz hasło, aby potwierdzić"
 #: .\templates\user\user_settings.html.py:60
 msgid "Save"
 msgstr "Zapisz"
-
-#~ msgid "Sorry, we cant find any schedule."
-#~ msgstr "Przepraszamy, nie mozna znaleźć takiego rozkładu"
-
-#~ msgid ""
-#~ "Sorry, we cant find any schedule. Maybe try to search with interchanges."
-#~ msgstr ""
-#~ "Przepraszamy, nie mozna znaleźć takiego rozkładu. Spróbuj wyszukać "
-#~ "połączeń z przesiadkami."
-
-#~ msgid ""
-#~ " <tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</"
-#~ "td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr> "
-#~ msgstr ""
-#~ " <tr><td>Godziny</td><td>Poniedziałek</td><td>Wtorek</td><td>Środa</"
-#~ "td><td>Czwartek</td><td>Piątek</td><td>Sobota</td><td>Niedziela</td></tr> "
