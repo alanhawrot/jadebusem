@@ -9,42 +9,37 @@
 </head>
 <body>
 
-    <header>
-        <div class="largeMargin floating">
-            <a href="/">
-                <img src="/static/images/logo100dpi.png" alt="Logo JadeBusem">
-            </a>
-        </div>
-
-        <div class="floatingRight largeMarginRB">
-            <section id="user_panel">
-                {% include "jadebusem_site/user_panel.html" %}
-            </section>
-        </div>
-        <div class="clearing"></div>
-    </header>
-
-    <div class="largeMarginLRB">
-    <nav class="floating">
-        {% include "jadebusem_site/nav.html" %}
-    </nav>
-
-    <div class="floating largeSpacer"> &nbsp;</div>
-    <section class="floating largeMarginLRB" id="content">
-        {% block content %}
-        {% endblock %}
-        <div id="map-canvas" style="width: 800px; height: 600px"></div>
-    </section>
-
-    <div class="clearing"></div>
+<header>
+    <div class="largeMargin floating">
+        <a href="/">
+            <img src="/static/images/logo100dpi.png" alt="Logo JadeBusem">
+        </a>
     </div>
 
-    <footer>
-        <div class="floating largeMarginLRB"><p>{% trans 'Footer' %}</p>
-        </div>
-        <div class="floatingRight largeMarginRB">
-        </div>
-    </footer>
+    <div class="floatingRight largeMarginRB">
+        <section id="user_panel">
+            {% include "jadebusem_site/user_panel.html" %}
+        </section>
+    </div>
+    <div class="clearing"></div>
+</header>
+
+<div id="mid-container">
+    <nav id="main-menu" style="vertical-align: top">
+        {% include "jadebusem_site/nav.html" %}
+    </nav>
+    <section class="largeMarginLRB" id="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+</div>
+
+<footer>
+    <div class="floating largeMarginLRB"><p>{% trans 'Footer' %}</p>
+    </div>
+    <div class="floatingRight largeMarginRB">
+    </div>
+</footer>
 
 </body>
 </html>

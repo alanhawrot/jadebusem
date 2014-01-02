@@ -58,7 +58,26 @@
     margin: 0px 20px 20px 20px;
 }
 
+table {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+tr {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+
+}
+
 td {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.formTable td {
     padding-bottom: 20px;
     padding-right: 20px;
 }
@@ -103,6 +122,22 @@ body {
 
 }
 
+#mid-container {
+    display: table;
+    width: 100%;
+}
+
+#main-menu {
+    overflow: hidden;
+    display: table-cell;
+}
+
+#content {
+    overflow: hidden;
+    display: table-cell;
+    padding-right: 30px;
+}
+
 a {
     color: #000000;
     text-decoration: none;
@@ -115,6 +150,7 @@ a:hover {
 
 nav {
     font-size: 18px;
+    width: 250px;
 }
 
 li {
@@ -134,19 +170,17 @@ input {
 
 }
 
-
- select {
-   border: 1px solid #C5C6C6;
-   -moz-appearance: none; /* Firefox */
-   -webkit-appearance: none; /* Safari and Chrome */
-   width: 200px;
-   height: 24px;
-   background: url("/static/images/arrow.png") no-repeat;
-   background-position: 182px 5px;
-   text-indent: 0.01px;          /* Removes default arrow from firefox*/
-   text-overflow: "";               /*Removes default arrow from firefox*/
+select {
+    border: 1px solid #C5C6C6;
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    width: 200px;
+    height: 24px;
+    background: url("/static/images/arrow.png") no-repeat;
+    background-position: 182px 5px;
+    text-indent: 0.01px; /* Removes default arrow from firefox*/
+    text-overflow: ""; /*Removes default arrow from firefox*/
 }
-
 
 .submitInput {
     width: 100px;
@@ -159,8 +193,10 @@ input {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: pointer; cursor: hand;
+    cursor: pointer;
+    cursor: hand;
 }
+
 .submitInput:hover {
     background: #DDDDDD;
 }
@@ -184,8 +220,10 @@ input {
     width: 100px !important;
     height: 30px !important;
     opacity: 0 !important;
-    cursor: pointer; cursor: hand;
+    cursor: pointer;
+    cursor: hand;
 }
+
 .fileInputText {
     position: relative;
     top: -32px;
@@ -206,4 +244,38 @@ input {
 
 .scheduleHour {
     width: 50px;
+}
+
+hr {
+    border-top: 1px dotted #C5C6C6;
+    background: #ffffff;
+}
+
+.centeredBlock {
+    display: inline-block;
+<!-- ? ? ? -->
+}
+
+table tr td a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border: 0px;
+
+}
+
+table tr td a:hover {
+    color: #443f3c;
+}
+
+.scheduleTable td {
+    margin: 0px;
+    border: 0px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.tracePoint:hover a {
+    background: #DBDBDB;
+    color: #443f3c;
 }
