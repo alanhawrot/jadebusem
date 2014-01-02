@@ -322,9 +322,9 @@ def search(request):
             dates = ScheduleDate.objects.filter(schedule_id__in=list)
             list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
         else:
-            error = "Sorry, we cant find any schedule."
+            error = _("Sorry, we cant find any schedule.")
             if "interchange" in request.POST.keys():
-                error += " Maybe try to search with interchanges."
+                error += _(" Maybe try to search with interchanges.")
 
         # Searching for interchanges
         if "interchange" not in request.POST.keys():
