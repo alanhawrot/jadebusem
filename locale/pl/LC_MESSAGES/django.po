@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-31 12:40+0100\n"
+"POT-Creation-Date: 2014-01-03 11:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
-#: .\SearchEngine\views.py:302 .\templates\search_engine\search.html.py:23
+#: .\SearchEngine\views.py:302 .\templates\search_engine\search.html.py:33
 msgid "All"
 msgstr "Wszystkie"
 
@@ -310,7 +310,7 @@ msgstr ""
 "zwiększa wiarygodność wśród klientów.<br>\n"
 "        "
 
-#: .\templates\jadebusem_site\base.html.py:43
+#: .\templates\jadebusem_site\base.html.py:42
 msgid "Footer"
 msgstr "Stopka"
 
@@ -333,7 +333,7 @@ msgid "Main page"
 msgstr "Strona główna"
 
 #: .\templates\jadebusem_site\nav.html.py:4
-#: .\templates\search_engine\search.html.py:12
+#: .\templates\search_engine\search.html.py:19
 msgid "Search for connection"
 msgstr "Szukaj połączenia"
 
@@ -377,52 +377,83 @@ msgstr "Dodaj przystanek"
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
 
-#: .\templates\search_engine\search.html.py:18
+#: .\templates\search_engine\search.html.py:28
 msgid "Pick company"
 msgstr "Firma"
 
-#: .\templates\search_engine\search.html.py:31
-#: .\templates\search_engine\search.html.py:65
+#: .\templates\search_engine\search.html.py:41
+#: .\templates\search_engine\search.html.py:75
 msgid "Search"
 msgstr "Szukaj"
 
-#: .\templates\search_engine\search.html.py:37
+#: .\templates\search_engine\search.html.py:47
 msgid "Pick trace points"
 msgstr "Dodaj przystanek"
 
-#: .\templates\search_engine\search.html.py:42
+#: .\templates\search_engine\search.html.py:52
 msgid "From..."
 msgstr "Z..."
 
-#: .\templates\search_engine\search.html.py:49
+#: .\templates\search_engine\search.html.py:59
 msgid "To..."
 msgstr "Do..."
 
-#: .\templates\search_engine\search.html.py:59
+#: .\templates\search_engine\search.html.py:69
 msgid "Avoid interchanges"
 msgstr "Unikaj przesiadek"
 
-#: .\templates\search_engine\search.html.py:94
-msgid "Company:"
+#: .\templates\search_engine\search.html.py:130
+msgid "Trace proposition"
+msgstr "Propozycja trasy"
+
+#: .\templates\search_engine\search.html.py:130
+msgid "Changes"
+msgstr "Przesiadki"
+
+#: .\templates\search_engine\search.html.py:136
+msgid "Company"
 msgstr "Firma:"
 
-#: .\templates\search_engine\search.html.py:99
-msgid "Tracepoints:"
+#: .\templates\search_engine\search.html.py:137
+msgid "Tracepoints"
 msgstr "Przystanki:"
 
-#: .\templates\search_engine\search.html.py:107
+#: .\templates\search_engine\search.html.py:138
+msgid "Distance"
+msgstr "Dystans"
+
+#: .\templates\search_engine\search.html.py:139
+msgid "Duration"
+msgstr "Czas trwania"
+
+#: .\templates\search_engine\search.html.py:140
+msgid "Submitted by"
+msgstr "Wysłany przez"
+
+#: .\templates\search_engine\search.html.py:162
+msgid "Show schedule"
+msgstr "Pokaż rozkład"
+
+#: .\templates\search_engine\search.html.py:173
 msgid ""
 "\n"
-"                            <tr>\n"
-"                                <td>Hours</td>\n"
-"                                <td>Monday</td>\n"
-"                                <td>Tuesday</td>\n"
-"                                <td>Wednesday</td>\n"
-"                                <td>Thursday</td>\n"
-"                                <td>Friday</td>\n"
-"                                <td>Saturday</td>\n"
-"                                <td>Sunday</td>\n"
-"                            </tr> "
+"                                                                    <td>Hours</"
+"td>\n"
+"                                                                    <td>Monday</"
+"td>\n"
+"                                                                    <td>Tuesday</"
+"td>\n"
+"                                                                    <td>Wednesday</"
+"td>\n"
+"                                                                    <td>Thursday</"
+"td>\n"
+"                                                                    <td>Friday</"
+"td>\n"
+"                                                                    <td>Saturday</"
+"td>\n"
+"                                                                    <td>Sunday</"
+"td>\n"
+"                                                                "
 msgstr ""
 "\n"
 "                            <tr>\n"
@@ -435,14 +466,6 @@ msgstr ""
 "                                <td>Sobota</td>\n"
 "                                <td>Niedziela</td>\n"
 "                            </tr> "
-
-#: .\templates\search_engine\search.html.py:130
-msgid "Author:"
-msgstr "Autor:"
-
-#: .\templates\search_engine\search.html.py:133
-msgid "Show route"
-msgstr "Pokaż trasę"
 
 #: .\templates\user\registration.html.py:6
 msgid "Registration"
@@ -553,11 +576,11 @@ msgstr "Powtórz nowe hasło"
 
 #: .\templates\user\user_settings.html.py:33
 msgid "First name"
-msgstr "imię"
+msgstr "Imię"
 
 #: .\templates\user\user_settings.html.py:38
 msgid "Last name"
-msgstr "nazwisko"
+msgstr "Nazwisko"
 
 #: .\templates\user\user_settings.html.py:56
 msgid "Type your password to confirm"

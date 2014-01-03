@@ -127,7 +127,7 @@
                     <div class="trace page" id="{{ id }}" data-page-id="{{ forloop.counter }}">
                         <div class="floating">
                             <div>
-                                <h4>Trace proposition {{ forloop.counter }}, changes: {{ i|length }}</h4>
+                                <h4>{% trans 'Trace proposition' %}: {{ forloop.counter }} {% trans 'Changes' %}: {{ i|length }}</h4>
                             </div>
                             <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
                             <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
@@ -159,7 +159,7 @@
                                             {{ author }}
                                             <td><a class="schedule-link" href="#"
                                                    data-schedule-id="{{ forloop.counter }}">
-                                                show schedule
+                                                {% trans 'Show schedule' %}
                                             </a></td>
                                         </a></td>
                                     </tr>

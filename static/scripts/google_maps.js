@@ -21,7 +21,7 @@ function calcRoute(id) {
     var waypoints = route.split("->");
     for (var i = 1; i < waypoints.length - 1; i++) {
         waypoints[i] = waypoints[i].trim();
-        if (waypoints[i] == end) {
+        if (waypoints[i].toLocaleLowerCase() == end.toLocaleLowerCase()) {
             break;
         } else {
             waypts.push({
