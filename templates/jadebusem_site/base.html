@@ -29,8 +29,12 @@
         {% include "jadebusem_site/nav.html" %}
     </nav>
     <section class="largeMarginLRB" id="content">
-        {% block content %}
-        {% endblock %}
+        <div class="outer-center">
+            <div class="inner-center">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     </section>
 </div>
 

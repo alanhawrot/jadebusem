@@ -5,14 +5,14 @@
 {% block additional_head %}
     {% load staticfiles %}
     <script type="text/javascript" src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
-
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBIXLnzjBwfrS0FlbNpsW3iHkAeCgP6N8&sensor=false">
     </script>
     <script type="text/javascript"
             src="{% static 'scripts/google_maps.js' %}">
     </script>
+    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
+
 {% endblock %}
 
 {% block title %}
@@ -20,192 +20,233 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <div class="centeredBlock" style="text-align: center">
-            <form action="./#page-changer" method="post">
-                <div class="largeMargin floating">
-                    <h3 class="formMargin">{% trans 'Pick company'  %}</h3>
-                    <table class="formTable">
-                        <tr>
-                            <td colspan="2">
-                                <select class="selectButton formMarginLRB" name="company_name">
-                                    <option class="selectOption" selected="selected">{% trans "All" %}</option>
-                                    {% for company in companies %}
-                                        <option>{{ company.company }}</option>
-                                    {% endfor %}
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="centered"><input class="submitInput" type="submit"
-                                                                    value={% trans "Search" %}>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="floating largeMargin">
-                    <h3 class="formMargin">{% trans 'Pick trace points' %}</h3>
-                    <table class="formTable">
-                        <tr>
-                            <td colspan="2">
-                                <input class="textInput" type="text" name="from" value="{{ search_from }}"
-                                       placeholder={% trans "From..." %} required>
-                                <input type="hidden" id="start" value="{{ search_from }}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input class="textInput" type="text" name="to" value="{{ search_to }}"
-                                       placeholder={% trans "To..." %} required>
-                                <input type="hidden" id="end" value="{{ search_to }}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input class="checkboxInput" type="checkbox" name="interchange"
-                                       value="Interchange"
-                                       id="interchange"/>
-                            </td>
-                            <td>
-                                <label for="interchange">{% trans "Avoid interchanges" %}</label>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="centered"><input class="submitInput" type="submit"
-                                                                    value={% trans "Search" %}></td>
-                        </tr>
-
-                    </table>
-                </div>
-                <div class="clearing"></div>
-            </form>
-        </div>
-
-        <div class="clearing pages centeredBlock">
-            {% if error %}
-                <p>{% trans error %}</p>
-            {% endif %}
-
-            {% for i in temp %}
-                {{ i.address }}
-            {% endfor %}
-            {{ temp }}
-            {% for i in schedule %}
-                {{ i }}
-            {% endfor %}
-            {% for i in route_list %}
-                <input type="hidden" id="route{{ forloop.counter0 }}" value="{{ i }}"/>
-            {% endfor %}
-            <div id="current"></div>
-            <div class="centered page-changer centeredBlock" id="page-changer">
-                <div>
-                    <div class="floating smallMarginLRB"><a href="#page-changer" class="previous-page"><img
-                            src="/static/images/arrow_left.png"/></a></div>
-                    <div class="floating" style="line-height: 34px;vertical-align: middle">
-                        {% for i in list_of_tabs %}
-                            <a href="#page-changer" class="change-page"
-                               data-page-id="{{ forloop.counter }}">{{ forloop.counter }}</a>
-                            {% if not forloop.last %}
-                                -
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="floating smallMarginLRB"><a href="#page-changer" class="next-page"><img
-                            src="/static/images/arrow_right.png"/></a></div>
-                    <div class="clearing"></div>
-                </div>
-            </div>
-            {% for i in list_of_tabs %}
-                <div class="trace page" id="{{ id }}" data-page-id="{{ forloop.counter }}">
-                    <div class="floating">
-                        <div>
-                            <h4>Trace proposition {{ forloop.counter }}, changes: {{ i|length }}</h4>
-                            <a href="#" onclick="calcRoute(this.id)">{% trans 'Show route' %}</a>
-                        </div>
-                        <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
-
-                        <table class="scheduleTable">
+    <div class="outer-center">
+        <div class="inner-center">
+            <div style="text-align: center">
+                <form action="./#page-changer" method="post">
+                    <div class="largeMargin floating">
+                        <h3 class="formMargin" style="text-align: left">{% trans 'Pick company' %}</h3>
+                        <table class="formTable">
                             <tr>
-                                <td>{% trans "Company:" %}</td>
-                                <td>{% trans "Tracepoints:" %}</td>
-                                <td>{% trans "Submitted by" %}</td>
-                                <td></td>
+                                <td colspan="2">
+                                    <select class="selectButton formMarginLRB" name="company_name">
+                                        <option class="selectOption" selected="selected">{% trans "All" %}</option>
+                                        {% for company in companies %}
+                                            <option>{{ company.company }}</option>
+                                        {% endfor %}
+                                    </select></td>
                             </tr>
-                            {% for id, company, author, trace, schedule in i %}
-                                <tr class="scheduleTable tracePoint">
-                                    <td>
-                                        <a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
-                                            {{ company }}
-                                        </a></td>
-                                    <td><a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
-                                        {{ trace }}
-                                    </a></td>
-                                    <td><a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
-                                        {{ author }}
-                                    </a></td>
-                                    <td><a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
-                                        show schedule
-                                    </a></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <div class="schedule" id="{{ forloop.counter }}" hidden="hidden">
-                                            <table style="background-color: #dedede">
-                                                <tr>
-                                                    {% blocktrans %}
-                                                        <td>Hours</td>
-                                                        <td>Monday</td>
-                                                        <td>Tuesday</td>
-                                                        <td>Wednesday</td>
-                                                        <td>Thursday</td>
-                                                        <td>Friday</td>
-                                                        <td>Saturday</td>
-                                                        <td>Sunday</td>
-                                                    {% endblocktrans %}
-                                                </tr>
-                                                {% for hours in schedule %}
-                                                    <tr>
-                                                        {% for hour in hours %}
-                                                            {% if not hour %}
-                                                                <td>-</td>
-                                                            {% else %}
-                                                                <td>{{ hour }}</td>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                {% endfor %}
-                                            </table>
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                            <tr>
+                                <td colspan="2" class="centered"><input class="submitInput" type="submit"
+                                                                        value={% trans "Search" %}>
+                                </td>
+                            </tr>
                         </table>
                     </div>
-                    {% if not forloop.last %}
-                        <hr/>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <div class="largeSpacer">&nbsp;</div>
-            {% if list_of_tabs %}
-                <div class="floating largeSpacer">&nbsp;</div>
-                <div class="floating" id="map-canvas" style="width: 500px; height: 400px"></div>
-                <div class="clearing"></div>
-            {% endif %}
-            <div class="largeMargin centered page-changer centeredBlock" id="page-changer">
-                <div>
-                    <div class="floating smallMarginLRB"><a href="#page-changer" class="previous-page"><img
-                            src="/static/images/arrow_left.png"/></a></div>
-                    <div class="floating centered" style="line-height: 34px;vertical-align: middle">
-                        {% for i in list_of_tabs %}
-                            <a href="#page-changer" class="change-page"
-                               data-page-id="{{ forloop.counter }}">{{ forloop.counter }}</a>
-                            {% if not forloop.last %}
-                                -
-                            {% endif %}
-                        {% endfor %}
+                    <div class="floating largeMargin">
+                        <h3 style="text-align: left">{% trans 'Pick trace points' %}</h3>
+                        <table class="formTable">
+                            <tr>
+                                <td colspan="2">
+                                    <input class="textInput" type="text" name="from" value="{{ search_from }}"
+                                           placeholder={% trans "From..." %} required>
+                                    <input type="hidden" id="start" value="{{ search_from }}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input class="textInput" type="text" name="to" value="{{ search_to }}"
+                                           placeholder={% trans "To..." %} required>
+                                    <input type="hidden" id="end" value="{{ search_to }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input class="checkboxInput" type="checkbox" name="interchange"
+                                           value="Interchange"
+                                           id="interchange"/>
+                                </td>
+                                <td>
+                                    <label for="interchange">{% trans "Avoid interchanges" %}</label>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="centered"><input class="submitInput" type="submit"
+                                                                        value={% trans "Search" %}></td>
+                            </tr>
+
+                        </table>
                     </div>
-                    <div class="floating smallMarginLRB"><a href="#page-changer" class="next-page"><img
-                            src="/static/images/arrow_right.png"/></a></div>
+                    <div class="clearing"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-center">
+        <div class="inner-center">
+            <div class="clearing pages">
+                {% if error %}
+                    <p>{% trans error %}</p>
+                {% endif %}
+
+                {% for i in temp %}
+                    {{ i.address }}
+                {% endfor %}
+                {{ temp }}
+                {% for i in schedule %}
+                    {{ i }}
+                {% endfor %}
+                {% for i in route_list %}
+                    <input type="hidden" id="route{{ forloop.counter0 }}" value="{{ i }}"/>
+                {% endfor %}
+                <div id="current"></div>
+                <div class="outer-center">
+                    <div class="inner-center">
+                        <div class="centered page-changer" id="page-changer">
+                            <div>
+                                <div class="floating smallMarginLRB"><a href="#page-changer" class="previous-page"><img
+                                        src="/static/images/arrow_left.png"/></a></div>
+                                <div class="floating" style="line-height: 34px;vertical-align: middle">
+                                    {% for i in list_of_tabs %}
+                                        <a href="#page-changer" class="change-page"
+                                           data-page-id="{{ forloop.counter }}">{{ forloop.counter }}</a>
+                                        {% if not forloop.last %}
+                                            -
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="floating smallMarginLRB"><a href="#page-changer" class="next-page"><img
+                                        src="/static/images/arrow_right.png"/></a></div>
+                                <div class="clearing"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for i in list_of_tabs %}
+                    <div class="trace page" id="{{ id }}" data-page-id="{{ forloop.counter }}">
+                        <div class="floating">
+                            <div>
+                                <h4>Trace proposition {{ forloop.counter }}, changes: {{ i|length }}</h4>
+                            </div>
+                            <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
+                            <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
+                            <table class="scheduleTable">
+                                <tr>
+                                    <td>{% trans "Company" %}</td>
+                                    <td>{% trans "Tracepoints" %}</td>
+                                    <td>{% trans "Distance" %}</td>
+                                    <td>{% trans "Duration" %}</td>
+                                    <td>{% trans "Submitted by" %}</td>
+                                    <td></td>
+                                </tr>
+                                {% for id, company, author, trace, schedule in i %}
+                                    <tr class="scheduleTable tracePoint" id="{{ forloop.counter0 }}">
+                                        <td>
+                                            <a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
+                                                {{ company }}
+                                            </a></td>
+                                        <td><a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
+                                            {{ trace }}
+                                        </a></td>
+                                        <td class="distance"><a class="schedule-link" href="#"
+                                                                data-schedule-id="{{ forloop.counter }}">
+                                        </a></td>
+                                        <td class="duration"><a class="schedule-link" href="#"
+                                                                data-schedule-id="{{ forloop.counter }}">
+                                        </a></td>
+                                        <td><a class="schedule-link" href="#" data-schedule-id="{{ forloop.counter }}">
+                                            {{ author }}
+                                            <td><a class="schedule-link" href="#"
+                                                   data-schedule-id="{{ forloop.counter }}">
+                                                show schedule
+                                            </a></td>
+                                        </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="outer-center">
+                                                <div class="inner-center">
+                                                    <div class="schedule" id="{{ forloop.counter }}" hidden="hidden">
+                                                        <table style="background-color: #dedede">
+                                                            <tr>
+                                                                {% blocktrans %}
+                                                                    <td>Hours</td>
+                                                                    <td>Monday</td>
+                                                                    <td>Tuesday</td>
+                                                                    <td>Wednesday</td>
+                                                                    <td>Thursday</td>
+                                                                    <td>Friday</td>
+                                                                    <td>Saturday</td>
+                                                                    <td>Sunday</td>
+                                                                {% endblocktrans %}
+                                                            </tr>
+                                                            {% for hours in schedule %}
+                                                                <tr>
+                                                                    {% for hour in hours %}
+                                                                        {% if not hour %}
+                                                                            <td>-</td>
+                                                                        {% else %}
+                                                                            <td>{{ hour }}</td>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="largeSpacer">&nbsp;</div>
+                {% if list_of_tabs %}
+                    <script>
+                        $(document).ready(function () {
+                            calcRoute(0);
+                            $(".pages .page-changer .change-page").click(function (eventObj) {
+                                calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
+                            });
+                            $(".pages .page-changer .previous-page").click(function (eventObj) {
+                                calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
+                            });
+                            $(".pages .page-changer .next-page").click(function (eventObj) {
+                                calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
+                            });
+                        });
+                    </script>
+                    <div class="outer-center">
+                        <div class="inner-center">
+                            <div id="map-canvas" style="width: 500px; height: 400px"></div>
+                        </div>
+                    </div>
+                    <div class="clearing"></div>
+                {% endif %}
+                <div class="outer-center">
+                    <div class="inner-center">
+                        <div class="largeMargin centered page-changer" id="page-changer">
+                            <div>
+                                <div class="floating smallMarginLRB"><a href="#page-changer" class="previous-page"><img
+                                        src="/static/images/arrow_left.png"/></a></div>
+                                <div class="floating centered" style="line-height: 34px;vertical-align: middle">
+                                    {% for i in list_of_tabs %}
+                                        <a href="#page-changer" class="change-page"
+                                           data-page-id="{{ forloop.counter }}">{{ forloop.counter }}</a>
+                                        {% if not forloop.last %}
+                                            -
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                                <div class="floating smallMarginLRB"><a href="#page-changer" class="next-page"><img
+                                        src="/static/images/arrow_right.png"/></a></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

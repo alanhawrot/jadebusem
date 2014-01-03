@@ -112,6 +112,9 @@ body {
     font-family: Calibri, Consolas, "Courier New";
     font-size: 14px;
     color: #262423;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 #logo {
@@ -138,6 +141,16 @@ body {
     padding-right: 30px;
 }
 
+.outer-center {
+    float: right;
+    right: 50%;
+    position: relative;
+}
+.inner-center {
+    float: right;
+    right: -50%;
+    position: relative;
+}
 a {
     color: #000000;
     text-decoration: none;

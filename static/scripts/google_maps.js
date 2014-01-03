@@ -58,11 +58,13 @@ function calcRoute(id) {
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
                 var routeSegment = i + 1;
-                summaryPanel.innerHTML += '<b>' + gettext('Route Segment: ') + routeSegment + '</b><br>';
-                summaryPanel.innerHTML += gettext('From ') + route.legs[i].start_address + gettext(' to ');
-                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                summaryPanel.innerHTML += gettext('Estimated duration: ') + route.legs[i].duration.text + '<br>';
-                summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
+//                summaryPanel.innerHTML += '<b>' + gettext('Route Segment: ') + routeSegment + '</b><br>';
+//                summaryPanel.innerHTML += gettext('From ') + route.legs[i].start_address + gettext(' to ');
+//                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[id='" + i + "'] .duration a").html(route.legs[i].duration.text);
+                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[id='" + i + "'] .distance a").html(route.legs[i].distance.text);
+//                summaryPanel.innerHTML += gettext('Estimated duration: ') + route.legs[i].duration.text + '<br>';
+//                summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
             }
         } else {
             document.getElementById('mapError' + id).innerHTML += 'Error in displaying route on map';
