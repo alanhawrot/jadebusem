@@ -48,7 +48,7 @@ $(document).ready(function () {
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".trace").attr("data-page-id");
-        schedule = $(".pages .trace[data-page-id='" + trace_id + "']" + " .schedule[id='" + schedule_id + "']")
+        schedule = $(".pages .trace[data-page-id='" + trace_id + "']" + " .schedule[data-schedule-id='" + schedule_id + "']")
         if (schedule.is('[hidden]')) {
             $(".pages .trace .schedule").attr('hidden', 'hidden');
             schedule.removeAttr('hidden')

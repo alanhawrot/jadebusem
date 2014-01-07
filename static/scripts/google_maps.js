@@ -56,8 +56,8 @@ function calcRoute(id) {
             var summaryPanel = document.getElementById('routeDetails' + id);
             summaryPanel.innerHTML = '';
             for (var i = 0; i < route.legs.length; i++) {
-                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[id='" + i + "'] .duration a").html(route.legs[i].duration.text);
-                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[id='" + i + "'] .distance a").html(route.legs[i].distance.text);
+                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[data-tracePoint='" + i + "'] .duration a").html(route.legs[i].duration.text);
+                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[data-tracePoint='" + i + "'] .distance a").html(route.legs[i].distance.text);
             }
         } else {
             document.getElementById('mapError' + id).innerHTML += 'Error in displaying route on map';
