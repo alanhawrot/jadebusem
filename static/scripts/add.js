@@ -25,9 +25,9 @@ $(document).ready(function(){
         $(this).parent().find('#add').hide();
         day.append(
                 '<div class="hour">' +
-                '<input type="text" id="hourInput" name="hour['+dayIndex+']" placeholder="8:00"></input>' +
-                '<input id="add" type="button" value="+"></input>' +
-                '<input id="remove" type="button" value="-"></input>' +
+                '<input class="smallMarginTR textInput scheduleHour" type="text" name="hour['+dayIndex+']" placeholder="8:00"></input>' +
+                '<input class="smallMarginTR submitInput scheduleHourNavigator" id="add" type="button" value="+"></input>' +
+                '<input class="smallMarginTR submitInput scheduleHourNavigator" id="remove" type="button" value="-"></input>' +
                 '</div>');
         new_element = day.children().last();
         new_element.find('#add').click(addHourClickEvent).show();
