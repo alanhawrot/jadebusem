@@ -15,7 +15,11 @@
                 <td colspan="2">
                     <select class="smallMargin selectButton" name="language">
                         {% for lang in LANGUAGES %}
-                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                            {% if current_lang == lang.0 %}
+                                <option value="{{ lang.0 }}" selected>{{ lang.1 }}</option>
+                            {% else %}
+                                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </td>

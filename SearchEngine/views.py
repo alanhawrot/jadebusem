@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render_to_response
 from schedules.models import Schedule
 from schedules.models import ScheduleTracePoint
@@ -5,6 +7,21 @@ from schedules.models import ScheduleDate
 from django.utils.translation import ugettext as _
 
 trace = ""
+
+#-------------------------------------------------------------------------------------
+# Function to translate polish chars to ascii
+#-------------------------------------------------------------------------------------
+
+def plToAng(text):
+
+    translate = {u'ą':'a', u'ć':'c', u'ę':'e', u'ł':'l', u'ń':'n', u'ó':'o', u'ś':'s', u'ż':'z', u'ź':'z'}
+
+    newText = ''
+    for c in text:
+        if c in translate:
+            c = translate[c]
+        newText = newText + c
+    return newText
 
 #-------------------------------------------------------------------------------------
 # Function to display schedules
@@ -296,43 +313,52 @@ def search(request):
 
     # search engine
     if request.method == 'POST':
-        start_address = request.POST['from']
-        end_address = request.POST['to']
+        if(request.POST['from'] != "" and request.POST['to'] != ""):
+            start_address = plToAng(request.POST['from'])
+            end_address = plToAng(request.POST['to'])
 
-        if (request.POST['company_name'] == _("All")):
-            schedules = Schedule.objects.all()
+            if (request.POST['company_name'] == _("All")):
+                schedules = Schedule.objects.all()
+            else:
+                schedules = Schedule.objects.filter(company=request.POST['company_name'])
+
+            # Searching for start point
+            trace_id = ScheduleTracePoint.objects.filter(schedule_id__in=schedules).filter(address__iexact=start_address).values("schedule_id")
+            schedules = schedules.filter(id__in=trace_id)
+            start_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
+
+            # Searching for end point
+            end_points = start_points.filter(address__iexact=end_address).values("schedule_id")
+            schedules = schedules.filter(id__in=end_points)
+
+            # Checking is bus driving in good direction
+            list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
+
+            if(len(list) != 0):
+                schedules = schedules.filter(id__in=list)
+                end_points = start_points.filter(schedule_id__in=list)
+                dates = ScheduleDate.objects.filter(schedule_id__in=list)
+                list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
+            else:
+                error = _("Sorry, we cant find any schedule.")
+                if "interchange" in request.POST.keys():
+                    error += _(" Maybe try to search with interchanges.")
+
+            # Searching for interchanges
+            if "interchange" not in request.POST.keys():
+                error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
+                error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
+
+            search_from = request.POST['from']
+            search_to = request.POST['to']
         else:
-            schedules = Schedule.objects.filter(company=request.POST['company_name'])
-
-        # Searching for start point
-        trace_id = ScheduleTracePoint.objects.filter(schedule_id__in=schedules).filter(address__iexact=start_address).values("schedule_id")
-        schedules = schedules.filter(id__in=trace_id)
-        start_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
-
-        # Searching for end point
-        end_points = start_points.filter(address__iexact=end_address).values("schedule_id")
-        schedules = schedules.filter(id__in=end_points)
-
-        # Checking is bus driving in good direction
-        list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
-
-        if(len(list) != 0):
-            schedules = schedules.filter(id__in=list)
-            end_points = start_points.filter(schedule_id__in=list)
-            dates = ScheduleDate.objects.filter(schedule_id__in=list)
-            list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
-        else:
-            error = _("Sorry, we cant find any schedule.")
-            if "interchange" in request.POST.keys():
-                error += _(" Maybe try to search with interchanges.")
-
-        # Searching for interchanges
-        if "interchange" not in request.POST.keys():
-            error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
-            error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error, route_list)
-
-        search_from = request.POST['from']
-        search_to = request.POST['to']
+            if (request.POST['company_name'] == _("All")):
+                schedules = Schedule.objects.all()
+            else:
+                schedules = Schedule.objects.filter(company=request.POST['company_name'])
+            trace_points = ScheduleTracePoint.objects.all()
+            dates = ScheduleDate.objects.all()
+            list_of_tabs = display_schedules(schedules, dates, trace_points, list_of_tabs, route_list)
 
     companies = Schedule.objects.values('company').distinct()
 

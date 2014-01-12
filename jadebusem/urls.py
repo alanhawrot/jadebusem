@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 
-from jadebusem_site.views import about, index, language
+from jadebusem_site.views import about, language
 
 admin.autodiscover()
 
@@ -22,12 +22,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', index),
+    url(r'^$', include('SearchEngine.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'^users/', include('Users.urls')),
     url(r'^schedules/', include('schedules.urls')),
-    url(r'^search/', include('SearchEngine.urls')),
     url(r'^about/', about),
     url(r'^language', language),
 )

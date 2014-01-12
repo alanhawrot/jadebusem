@@ -1,6 +1,5 @@
 {% load i18n %}
 <ul>
-    <li><a href={% url "jadebusem_site.views.index" %}>{% trans 'Main page' %}</a></li>
     <li><a href="{% url "SearchEngine.views.search" %}">{% trans 'Search for connection' %}</a></li>
     <li><a href={% url "schedules.views.add" %}>{% trans 'Add schedule' %}</a></li>
     <li><a href={% url "jadebusem_site.views.about" %}>{% trans 'About page' %}</a></li>

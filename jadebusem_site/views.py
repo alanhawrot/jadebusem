@@ -1,12 +1,5 @@
 from django.shortcuts import render
-
-
-def index(request):
-    if 'email' in request.session:
-        return render(request, 'jadebusem_site/index.html', {'login': True, 'user': request.session})
-    else:
-        return render(request, 'jadebusem_site/index.html')
-
+from django.utils import translation
 
 def about(request):
     if 'email' in request.session:
@@ -16,7 +9,8 @@ def about(request):
 
 
 def language(request):
+    current_lang = translation.get_language()
     if 'email' in request.session:
-        return render(request, 'jadebusem_site/language.html', {'login': True, 'user': request.session})
+        return render(request, 'jadebusem_site/language.html', {'login': True, 'user': request.session, 'current_lang': current_lang})
     else:
-        return render(request, 'jadebusem_site/language.html')
+        return render(request, 'jadebusem_site/language.html', {'current_lang': current_lang})
