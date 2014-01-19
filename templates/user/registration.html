@@ -9,37 +9,37 @@
 {% block content %}
 
     <form action="." method="post">
-        <h3>Register</h3>
+        <h3>{% trans 'Register' %}</h3>
         <table class="formTable">
             <tr>
-                <td>Email</td>
+                <td>{% trans 'E-mail' %}</td>
                 <td><input class="textInput" type="email" name="email" value="{{ email }}" placeholder="{% trans "E-mail" %}"
                            required> {{ email_error }}
                 </td>
             <tr>
-                <td>Password</td>
+                <td>{% trans 'Password' %}</td>
                 <td><input class="textInput" type="password" name="password" value="{{ password }}" placeholder="{% trans "Password" %}"
                            required>
                 </td>
             <tr>
-                <td>Re-type Password</td>
+                <td>{% trans 'Re-type Password' %}</td>
                 <td><input class="textInput" type="password" name="password2" value="{{ password }}"
                            placeholder={% trans "Re-type Password" %}"" required> {{ password_error }}
                 </td>
             <tr>
-                <td>First name</td>
+                <td>{% trans 'First name' %}</td>
                 <td><input class="textInput" type="text" name="first_name" value="{{ first_name }}" placeholder={% trans "First Name" %}>
                 </td>
             <tr>
-                <td>Last name</td>
+                <td>{% trans 'Last name' %}td>
                 <td><input class="textInput" type="text" name="last_name" value="{{ last_name }}" placeholder={% trans "Last Name" %}>
                 </td>
             <tr>
-                <td>Address</td>
+                <td>{% trans 'Address' %}</td>
                 <td><input class="textInput" type="text" name="address" value="{{ address }}" placeholder={% trans "Address" %}>
                 </td>
             <tr>
-                <td>Company Name</td>
+                <td>{% trans 'Company Name' %}</td>
                 <td><input class="textInput" type="text" name="company_name" value="{{ company_name }}"
                            placeholder={% trans "Company Name" %}>
                 </td>
