@@ -179,12 +179,12 @@ li li {
 }
 
 input {
-    border: 1px solid #C5C6C6;
+    border: 1px solid #efefef;
 
 }
 
 select {
-    border: 1px solid #C5C6C6;
+    border: 1px solid #efefef;
     -moz-appearance: none; /* Firefox */
     -webkit-appearance: none; /* Safari and Chrome */
     width: 200px;
@@ -198,8 +198,8 @@ select {
 .submitInput {
     width: 100px;
     height: 30px;
-    background: #DBDBDB;
-    border: 1px solid #C5C6C6;
+    background: #f7f6f6;
+    border: 1px solid #efefef;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -211,7 +211,7 @@ select {
 }
 
 .submitInput:hover {
-    background: #DDDDDD;
+    background: #eeeeee;
 }
 
 .textInput {
@@ -226,7 +226,9 @@ select {
 .radioInput {
 
 }
-
+img {
+    border: 0px;
+}
 .fileInput {
     border: 0px !important;
     display: block !important;
@@ -260,7 +262,7 @@ select {
 }
 
 hr {
-    border-top: 1px dotted #C5C6C6;
+    border-top: 1px dotted #efefef;
     background: #ffffff;
 }
 
@@ -289,6 +291,6 @@ table tr td a:hover {
 }
 
 .tracePoint:hover a {
-    background: #DBDBDB;
+    background: #f7f6f6;
     color: #443f3c;
 }
