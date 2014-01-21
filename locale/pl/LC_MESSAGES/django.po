@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 20:14+0100\n"
+"POT-Creation-Date: 2014-01-21 22:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,7 +152,7 @@ msgstr "ścieżka_do_zdjęcia"
 msgid "verified"
 msgstr "zweryfikowany"
 
-#: schedules/models.py:14
+#: schedules/models.py:14 templates/schedules/add.html:50
 msgid "Company name"
 msgstr "Nazwa firmy"
 
@@ -211,11 +211,11 @@ msgid "Departure time"
 msgstr "Czas odjazdu"
 
 #: schedules/views.py:14 templates/jadebusem_site/nav.html:4
-#: templates/schedules/add.html:13
+#: templates/schedules/add.html:12
 msgid "Add schedule"
 msgstr "Dodaj rozkład"
 
-#: schedules/views.py:17 templates/schedules/add.html:38
+#: schedules/views.py:17 templates/schedules/add.html:31
 msgid "Send picture"
 msgstr "Wyślij zdjęcie"
 
@@ -358,19 +358,23 @@ msgstr "Zaloguj się"
 msgid "Register"
 msgstr "Zarejestruj się"
 
-#: templates/schedules/add.html:24
-msgid "Name of the carrier"
-msgstr "Nazwa przewoźnika"
-
-#: templates/schedules/add.html:34
+#: templates/schedules/add.html:27
 msgid "Pick a photo"
 msgstr "Wybierz zdjęcie"
 
-#: templates/schedules/add.html:69
+#: templates/schedules/add.html:52
+msgid "Name of the carrier"
+msgstr "Nazwa przewoźnika"
+
+#: templates/schedules/add.html:56
+msgid "Next trace point"
+msgstr "Następny punkt trasy"
+
+#: templates/schedules/add.html:62
 msgid "Add tracepoint"
 msgstr "Dodaj przystanek"
 
-#: templates/schedules/add.html:116
+#: templates/schedules/add.html:125
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
 
@@ -466,6 +470,7 @@ msgid "E-mail"
 msgstr "E-mail"
 
 #: templates/user/registration.html:20 templates/user/registration.html:21
+#: templates/user/user_settings.html:54
 msgid "Password"
 msgstr "Hasło"
 
