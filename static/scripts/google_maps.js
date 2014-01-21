@@ -54,13 +54,18 @@ function calcRoute(id) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             var summaryPanel = document.getElementById('routeDetails' + id);
-            summaryPanel.innerHTML = '';
+            $('.routeDetails' + id).hide();
+            summaryPanel.innerHTML = '<br><b>' + gettext('Route details:') + '</b><br><br>';
             for (var i = 0; i < route.legs.length; i++) {
-                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[data-tracePoint='" + i + "'] .duration a").html(route.legs[i].duration.text);
-                $(".trace[data-page-id='" + (parseInt(id) + 1) + "'] .tracePoint[data-tracePoint='" + i + "'] .distance a").html(route.legs[i].distance.text);
+                summaryPanel.innerHTML += gettext('Route segment: ') + (i + 1) + '.<br>';
+                summaryPanel.innerHTML += route.legs[i].start_address + ' -> ';
+                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                summaryPanel.innerHTML += gettext('Duration: ') + route.legs[i].duration.text + '<br>';
+                summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
             }
+             $('.routeDetails' + id).show();
         } else {
-            document.getElementById('mapError' + id).innerHTML += 'Error in displaying route on map';
+            document.getElementById('mapError' + id).innerHTML += gettext('Error in displaying route on map');
         }
     });
 }

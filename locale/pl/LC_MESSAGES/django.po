@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-19 14:37+0100\n"
+"POT-Creation-Date: 2014-01-21 20:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -407,31 +407,23 @@ msgstr "Propozycja trasy"
 msgid "Changes"
 msgstr "Przesiadki"
 
-#: templates/search_engine/search.html:141
+#: templates/search_engine/search.html:140
 msgid "Company"
 msgstr "Firma:"
 
-#: templates/search_engine/search.html:142
+#: templates/search_engine/search.html:141
 msgid "Tracepoints"
 msgstr "Przystanki:"
 
-#: templates/search_engine/search.html:143
-msgid "Distance"
-msgstr "Dystans"
-
-#: templates/search_engine/search.html:144
-msgid "Duration"
-msgstr "Czas trwania"
-
-#: templates/search_engine/search.html:145
+#: templates/search_engine/search.html:142
 msgid "Submitted by"
 msgstr "Wysłany przez"
 
-#: templates/search_engine/search.html:170
+#: templates/search_engine/search.html:161
 msgid "Show schedule"
 msgstr "Pokaż rozkład"
 
-#: templates/search_engine/search.html:182
+#: templates/search_engine/search.html:173
 msgid ""
 "\n"
 "                                                                            <td>Hours</"
@@ -587,3 +579,9 @@ msgstr "Wpisz hasło, aby potwierdzić"
 #: templates/user/user_settings.html:60
 msgid "Save"
 msgstr "Zapisz"
+
+#~ msgid "Distance"
+#~ msgstr "Dystans"
+
+#~ msgid "Duration"
+#~ msgstr "Czas trwania"

@@ -135,13 +135,10 @@
                                         <h4>{% trans 'Trace proposition' %}: {{ forloop.counter }} {% trans 'Changes' %}: {{ i|length }}</h4>
                                     </div>
                                     <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
-                                    <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
                                     <table class="scheduleTable">
                                         <tr>
                                             <td>{% trans "Company" %}</td>
                                             <td>{% trans "Tracepoints" %}</td>
-                                            <td>{% trans "Distance" %}</td>
-                                            <td>{% trans "Duration" %}</td>
                                             <td>{% trans "Submitted by" %}</td>
                                             <td></td>
                                         </tr>
@@ -155,12 +152,6 @@
                                                 <td><a class="schedule-link" href="#"
                                                        data-schedule-id="{{ forloop.counter }}">
                                                     {{ trace }}
-                                                </a></td>
-                                                <td class="distance"><a class="schedule-link" href="#"
-                                                                        data-schedule-id="{{ forloop.counter }}">
-                                                </a></td>
-                                                <td class="duration"><a class="schedule-link" href="#"
-                                                                        data-schedule-id="{{ forloop.counter }}">
                                                 </a></td>
                                                 <td><a class="schedule-link" href="#"
                                                        data-schedule-id="{{ forloop.counter }}">
@@ -231,6 +222,9 @@
                             <div class="outer-center">
                                 <div class="inner-center">
                                     <div id="map-canvas" style="width: 500px; height: 400px"></div>
+                                    {% for i in list_of_tabs %}
+                                        <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="clearing"></div>
