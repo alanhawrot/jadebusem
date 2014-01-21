@@ -14,11 +14,11 @@ function initialize() {
 }
 
 function calcRoute(id) {
-    var start = document.getElementById('start').value.trim();
-    var end = document.getElementById('end').value.trim();
     var waypts = [];
     var route = document.getElementById('route' + id).value;
     var waypoints = route.split("->");
+    var start = waypoints[0].trim();
+    var end = waypoints[waypoints.length - 1].trim();
     for (var i = 1; i < waypoints.length - 1; i++) {
         waypoints[i] = waypoints[i].trim();
         if (waypoints[i].toLocaleLowerCase() == end.toLocaleLowerCase()) {
