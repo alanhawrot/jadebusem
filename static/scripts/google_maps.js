@@ -17,8 +17,20 @@ function calcRoute(id) {
     var waypts = [];
     var route = document.getElementById('route' + id).value;
     var waypoints = route.split("->");
-    var start = waypoints[0].trim();
-    var end = waypoints[waypoints.length - 1].trim();
+    var startElement = document.getElementById("start");
+    var endElement = document.getElementById("end");
+    var start;
+    var end;
+    if (startElement.value.trim().length > 0) {
+        start = startElement.value.trim();
+    } else {
+        start = waypoints[0].trim();
+    }
+    if (endElement.value.trim().length > 0) {
+        end = endElement.value.trim();
+    } else {
+        end = waypoints[waypoints.length - 1].trim();
+    }
     for (var i = 1; i < waypoints.length - 1; i++) {
         waypoints[i] = waypoints[i].trim();
         if (waypoints[i].toLocaleLowerCase() == end.toLocaleLowerCase()) {
