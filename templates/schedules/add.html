@@ -6,7 +6,6 @@
     {% load staticfiles %}
     <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static '/static/scripts/add.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/basic.css' %}"/>
 {% endblock %}
 
 {% block title %}
@@ -19,17 +18,11 @@
     <form method="post" enctype="multipart/form-data">
 
 
-        <input class="textInput" type="text"
-               name="companyName"
-               placeholder={% trans "Name of the carrier" %}
-                       value="{{ schedule.company }}"/>
-        <br/>
-
-
-        {% if form1.show %}
+        {% if form1.show and 1 == 0 %}
             <article>
                 {% if form1.header %}<h3>{{ form1.header }}</h3>{% endif %}
-                <div class="largeMarginRB submitInput centered floating" style="height: 28px !important; overflow: hidden !important;">
+                <div class="largeMarginRB submitInput centered floating"
+                     style="height: 28px !important; overflow: hidden !important;">
                     <input class="fileInput" id="imageUpload" type="file" name="imageUpload" accept="image/*">
                     <span class="fileInputText">{% trans 'Pick a photo' %}</span>
                 </div>
@@ -37,19 +30,43 @@
                     <input class="submitInput" id="imageSubmit" type="submit" name="imageSubmit"
                            value={% trans "Send picture" %}>
                 </div>
-            <div class="clearing"></div>
+                <div class="clearing"></div>
             </article>
             <br/><br/>
         {% endif %}
 
-
+        <br/>
         {% if form2.show %}
             <article>
+
+
                 <div class="floating">
                     {% if form2.header %}<h3>{{ form2.header }}</h3>{% endif %}
 
                     <br/>
 
+                    <table class="formTable">
+                        <tr>
+                            <td>{% trans "Company name" %}</td>
+                            <td><input class="textInput" type="text" name="companyName"
+                                       placeholder={% trans "Name of the carrier" %} value="{{ schedule.company }}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Next trace point" %}</td>
+                            <td>
+                                <div id="tracePointsControl">
+                                    <input class="textInput" type="text"
+                                           id="tracePointInput"
+                                           name="nextTracePoint"
+                                           placeholder={% trans "Add tracepoint" %}/>
+                                    <input class="formMarginRB submitInput scheduleHourNavigator" id="addTracePoint"
+                                           type="button"
+                                           value="+"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <div id="tracePoints">
                         {% for tracePoint in schedule.trace_points %}
 
@@ -62,15 +79,7 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div id="tracePointsControl">
-                        <input class="formMargin textInput" type="text"
-                               id="tracePointInput"
-                               name="tracePoint"
-                               placeholder={% trans "Add tracepoint" %}/>
-                        <input class="formMarginRB submitInput scheduleHourNavigator" id="addTracePoint"
-                               type="button"
-                               value="+"/>
-                    </div>
+
 
                     <br/>
 

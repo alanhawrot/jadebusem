@@ -25,9 +25,9 @@ $(document).ready(function(){
         $(this).parent().find('#add').hide();
         day.append(
                 '<div class="hour">' +
-                '<input class="smallMarginTR textInput scheduleHour" type="text" name="hour['+dayIndex+']" placeholder="8:00"></input>' +
-                '<input class="smallMarginTR submitInput scheduleHourNavigator" id="add" type="button" value="+"></input>' +
-                '<input class="smallMarginTR submitInput scheduleHourNavigator" id="remove" type="button" value="-"></input>' +
+                '<input type="text" class="smallMarginTR textInput scheduleHour" id="hourInput" name="hour['+dayIndex+']" placeholder="8:00"></input>' +
+                '<input id="add" class="smallMarginTR submitInput scheduleHourNavigator" type="button" value="+"></input>' +
+                '<input id="remove" class="smallMarginTR submitInput scheduleHourNavigator" type="button" value="-"></input>' +
                 '</div>');
         new_element = day.children().last();
         new_element.find('#add').click(addHourClickEvent).show();
@@ -48,7 +48,6 @@ $(document).ready(function(){
         tracePoints = $('#tracePoints');
         viewableTracepoints = $('#tracePoints .viewableTracePoint');
         if(tracepointsInput.val() != ''){
-            console.log(viewableTracepoints)
             if(viewableTracepoints.length > 1) {
                 tracePoints.append('<span> - </span>');
             }
@@ -56,8 +55,20 @@ $(document).ready(function(){
                                   tracepointsInput.val() + '" hidden="hidden"/>'
             tracePoints.append(newHiddenTracePoint)
             tracePoints.append('<span class="viewableTracePoint">' + tracepointsInput.val() + '</span>');
-            tracepointsInput.attr('value','');
+
+            console.log(tracepointsInput.val());
+            tracepointsInput.removeAttr('value');
+            tracepointsInput.val('');
+            $('#tracePointsControl #tracePointInput').val('');
+            $('#tracePointsControl #tracePointInput').removeAttr('value');
+            $('#tracePointsControl #tracePointInput').html('')
+
         }
+
+        console.log(tracepointsInput.val());
+        console.log(tracepointsInput.html());
+
+        $('#tracePointsControl #tracePointInput').focus()
     }
 
     $("#tracePointsControl #addTracePoint").click(newTracePoint);
