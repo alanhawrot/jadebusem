@@ -178,7 +178,7 @@ li li {
     background-image: url("/static/images/li2.png");
 }
 
-input {
+input :{
     border: 1px solid #efefef;
 
 }
