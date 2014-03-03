@@ -178,8 +178,13 @@ li li {
     background-image: url("/static/images/li2.png");
 }
 
+<<<<<<< HEAD
 input {
     border: 1px solid goldenrod;
+=======
+input :{
+    border: 1px solid #efefef;
+>>>>>>> 69ad516cba9bb228258fe01fca684e7850bc9909
 
 }
 
