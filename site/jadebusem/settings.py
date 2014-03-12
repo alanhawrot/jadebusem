@@ -13,7 +13,15 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-
+    'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+         'NAME': 'd1kj79e4uus55f',                      # Or path to database file if using sqlite3.
+         # The following settings are not used with sqlite3:
+         'USER': 'hriaoepqihdupl',
+         'PASSWORD': 'o6RZgPY-qQX6GCqJLCzlcHydH6',
+         'HOST': 'ec2-184-73-254-144.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+         'PORT': '5432',
+    }
     # Localhost database
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -25,16 +33,16 @@ DATABASES = {
     #     'PORT': '',
     # }
 
-    # Alan's local db
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',
-    }
+    ## Alan's local db
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #    'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
+    #    # The following settings are not used with sqlite3:
+    #    'USER': '',
+    #    'PASSWORD': '',
+    #    'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #    'PORT': '',
+    #}
 
     # Database created by Michal Semik
     #'default': {
