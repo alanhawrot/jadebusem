@@ -5,3 +5,5 @@
 **/*.pot
 **/*.pyc
 local_settings.py
+#Android bin folder
+/android/JadeBusemApp/bin/*
