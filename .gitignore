@@ -6,5 +6,5 @@
 **/*.pyc
 local_settings.py
 #Android bin folder
-/android/JadeBusemApp/bin/*
-/android/JadeBusemApp/out/*
+android/JadeBusemApp/bin/*
+android/JadeBusemApp/out/*
