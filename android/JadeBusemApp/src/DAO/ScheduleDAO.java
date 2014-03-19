@@ -76,6 +76,7 @@ public class ScheduleDAO {
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
+    private String[] allColumnsSchedule = { MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_NAME };
     private String[] allColumnsDate = { MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
             MySQLiteHelper.COLUMN_TIME, MySQLiteHelper.COLUMN_DAY };
     private String[] allColumnsTracePoint = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
@@ -136,11 +137,28 @@ public class ScheduleDAO {
                 + " = " + id, null);
     }
 
-    public List<ScheduleTracePoint> getAllScheduleTracePoint() {
+    public List<Schedule> getAllSchedules() {
+        List<Schedule> schedules = new ArrayList<Schedule>();
+
+        Cursor cursor = database.query(true, MySQLiteHelper.TABLE_SCHEDULE, allColumnsSchedule, null, null, null,
+                null, null, null);
+
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            Schedule schedule = cursorToSchedule(cursor);
+            schedules.add(schedule);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return schedules;
+    }
+
+    public List<ScheduleTracePoint> getAllScheduleTracePoint(long schedule_id) {
         List<ScheduleTracePoint> tracePoints = new ArrayList<ScheduleTracePoint>();
 
-        Cursor cursor = database.query(true, MySQLiteHelper.TABLE_SCHEDULE_TRACE_POINT,
-                allColumnsTracePoint, null, null, null, null, null, null);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_SCHEDULE_TRACE_POINT,
+                allColumnsTracePoint, MySQLiteHelper.COLUMN_SCHEDULE_ID+"=?",
+                new String[] { String.valueOf(schedule_id) }, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -183,6 +201,15 @@ public class ScheduleDAO {
         date.setTime(cursor.getString(2));
         date.setDay(date.toEnum(cursor.getString(3)));
         return date;
+    }
+
+    private Schedule cursorToSchedule(Cursor cursor) {
+        Schedule schedule = new Schedule();
+        schedule.setId(cursor.getLong(0));
+        schedule.setName(cursor.getString(1));
+        schedule.setScheduleDates((ArrayList<ScheduleDate>) getAllScheduleDate(schedule.getId()));
+        schedule.setScheduleTracePoints((ArrayList<ScheduleTracePoint>) getAllScheduleTracePoint(schedule.getId()));
+        return schedule;
     }
 
 }
