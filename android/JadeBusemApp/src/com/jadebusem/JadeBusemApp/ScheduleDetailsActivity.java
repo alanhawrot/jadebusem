@@ -9,7 +9,7 @@ import android.widget.TextView;
 /**
  * Created by alanhawrot on 19.03.14.
  */
-public class DetailsActivity extends Activity {
+public class ScheduleDetailsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

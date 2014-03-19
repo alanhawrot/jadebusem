@@ -58,7 +58,7 @@ public class MainActivity extends ListActivity {
 
         Schedule schedule = (Schedule) getListView().getItemAtPosition(position);
 
-        Intent intent = new Intent(this, DetailsActivity.class);
+        Intent intent = new Intent(this, ScheduleDetailsActivity.class);
         intent.putExtra(SCHEDULE_DETAILS, schedule);
         startActivity(intent);
     }
@@ -75,4 +75,8 @@ public class MainActivity extends ListActivity {
         super.onPause();
     }
 
+    public void startAddScheduleActivity(View view) {
+        Intent intent = new Intent(this, AddScheduleActivity.class);
+        startActivity(intent);
+    }
 }

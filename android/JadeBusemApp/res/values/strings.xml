@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">JadeBusemApp</string>
     <string name="details">Schedule Details</string>
+    <string name="new_schedule">Add New Schedule</string>
 </resources>

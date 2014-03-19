@@ -12,12 +12,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.jadebusem.JadeBusemApp.DetailsActivity"
+        <activity android:name=".ScheduleDetailsActivity"
                   android:label="@string/details"
-                  android:parentActivityName="com.jadebusem.JadeBusemApp.MainActivity">
+                  android:parentActivityName=".MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.jadebusem.JadeBusemApp.MainActivity"/>
+                    android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".AddScheduleActivity"
+                  android:label="@string/new_schedule"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
     </application>
 </manifest>
