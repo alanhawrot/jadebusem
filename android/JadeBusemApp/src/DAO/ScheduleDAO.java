@@ -13,9 +13,11 @@ import java.util.List;
 
 class MySQLiteHelper extends SQLiteOpenHelper {
 
+    public static final String TABLE_SCHEDULE = "Schedule";
     public static final String TABLE_SCHEDULE_TRACE_POINT = "ScheduleTracePoint";
     public static final String TABLE_SCHEDULE_DATE = "ScheduleDate";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_NAME = "name";
     public static final String COLUMN_SCHEDULE_ID = "schedule_id";
     public static final String COLUMN_ADDRESS = "address";
     public static final String COLUMN_TIME = "time";
@@ -25,14 +27,25 @@ class MySQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 3;
 
     // Database creation sql statement
+    private static final String CREATE_TABLE_SCHEDULE = "create table "
+            + TABLE_SCHEDULE + "("
+            + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_NAME + " text not null);";
+
     private static final String CREATE_TABLE_SCHEDULE_TRACE_POINT = "create table "
-            + TABLE_SCHEDULE_TRACE_POINT + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_ADDRESS + " text not null);";
+            + TABLE_SCHEDULE_TRACE_POINT + "("
+            + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_SCHEDULE_ID + " integer, "
+            + COLUMN_ADDRESS + " text not null, "
+            + " foreign key(" + COLUMN_SCHEDULE_ID + ") references " + TABLE_SCHEDULE + "(" + COLUMN_ID + "));";
 
     private static final String CREATE_TABLE_SCHEDULE_DATE = " create table "
-            +  TABLE_SCHEDULE_DATE + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_SCHEDULE_ID
-            + " integer, " + COLUMN_TIME + " text not null, " + COLUMN_DAY + " text not null);";
+            +  TABLE_SCHEDULE_DATE + "("
+            + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_SCHEDULE_ID + " integer, "
+            + COLUMN_TIME + " text not null, "
+            + COLUMN_DAY + " text not null, "
+            + " foreign key(" + COLUMN_SCHEDULE_ID + ") references " + TABLE_SCHEDULE + "(" + COLUMN_ID + "));";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,6 +53,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
+        database.execSQL(CREATE_TABLE_SCHEDULE);
         database.execSQL(CREATE_TABLE_SCHEDULE_TRACE_POINT);
         database.execSQL(CREATE_TABLE_SCHEDULE_DATE);
     }
@@ -51,6 +65,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE_TRACE_POINT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE_DATE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         onCreate(db);
     }
 
@@ -63,7 +78,8 @@ public class ScheduleDAO {
     private MySQLiteHelper dbHelper;
     private String[] allColumnsDate = { MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
             MySQLiteHelper.COLUMN_TIME, MySQLiteHelper.COLUMN_DAY };
-    private String[] allColumnsTracePoint = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_ADDRESS};
+    private String[] allColumnsTracePoint = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
+            MySQLiteHelper.COLUMN_ADDRESS};
 
     public ScheduleDAO(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -77,8 +93,9 @@ public class ScheduleDAO {
         dbHelper.close();
     }
 
-    public ScheduleTracePoint createScheduleTracePoint(String address){
+    public ScheduleTracePoint createScheduleTracePoint(long schedule_id, String address){
         ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_SCHEDULE_ID, schedule_id);
         values.put(MySQLiteHelper.COLUMN_ADDRESS, address);
         long insertId = database.insert(MySQLiteHelper.TABLE_SCHEDULE_TRACE_POINT, null,values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_SCHEDULE_TRACE_POINT,
@@ -154,7 +171,8 @@ public class ScheduleDAO {
     private ScheduleTracePoint cursorToTracePoint(Cursor cursor) {
         ScheduleTracePoint tracePoint = new ScheduleTracePoint();
         tracePoint.setId(cursor.getLong(0));
-        tracePoint.setAddress(cursor.getString(1));
+        tracePoint.setSchedule_id(cursor.getLong(1));
+        tracePoint.setAddress(cursor.getString(2));
         return tracePoint;
     }
 

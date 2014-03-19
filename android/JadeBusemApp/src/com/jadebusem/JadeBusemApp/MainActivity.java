@@ -1,12 +1,7 @@
 package com.jadebusem.JadeBusemApp;
 
-import DAO.*;
-import android.os.Bundle;
-import java.util.List;
-import java.util.Random;
+import DAO.ScheduleDAO;
 import android.app.ListActivity;
-import android.view.View;
-import android.widget.ArrayAdapter;
 
 
 

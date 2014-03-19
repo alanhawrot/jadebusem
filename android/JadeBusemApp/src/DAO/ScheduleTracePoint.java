@@ -2,6 +2,7 @@ package DAO;
 
 public class ScheduleTracePoint {
     private long id;
+    private long schedule_id;
     private String address;
 
     public long getId()
@@ -13,6 +14,10 @@ public class ScheduleTracePoint {
     {
         this.id = id;
     }
+
+    public long getSchedule_id() { return schedule_id; }
+
+    public void setSchedule_id(long schedule_id) { this.schedule_id = schedule_id; }
 
     public String getAddress()
     {
