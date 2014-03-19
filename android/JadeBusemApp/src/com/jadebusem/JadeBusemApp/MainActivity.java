@@ -1,14 +1,29 @@
 package com.jadebusem.JadeBusemApp;
 
-import DAO.ScheduleDAO;
+import DAO.*;
 import android.app.ListActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
-
+import java.util.List;
 
 public class MainActivity extends ListActivity {
     private ScheduleDAO datasource;
 
-/***************************************************************************************************
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        datasource = new ScheduleDAO(this);
+        datasource.open();
+
+        List<Schedule> scheduleList = datasource.getAllSchedules();
+        ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(this, android.R.layout.simple_list_item_1, scheduleList);
+        setListAdapter(scheduleAdapter);
+    }
+
+    /***************************************************************************************************
  *          Uncoment to test ScheduleDate
  * ************************************************************************************************/
  /*      int schedule_id = 30;

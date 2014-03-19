@@ -24,7 +24,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DAY = "day";
 
     private static final String DATABASE_NAME = "jb.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 1;
 
     // Database creation sql statement
     private static final String CREATE_TABLE_SCHEDULE = "create table "
@@ -63,9 +63,9 @@ class MySQLiteHelper extends SQLiteOpenHelper {
         Log.w(MySQLiteHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE_TRACE_POINT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE_DATE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         onCreate(db);
     }
 
@@ -92,6 +92,26 @@ public class ScheduleDAO {
 
     public void close() {
         dbHelper.close();
+    }
+
+    public Schedule createSchedule(String name, ArrayList<ScheduleTracePoint> scheduleTracePoints,
+                                   ArrayList<ScheduleDate> scheduleDates) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_NAME, name);
+        long insertID = database.insert(MySQLiteHelper.TABLE_SCHEDULE, null, values);
+        for (ScheduleTracePoint scheduleTracePoint : scheduleTracePoints) {
+            createScheduleTracePoint(insertID, scheduleTracePoint.getAddress());
+        }
+        for (ScheduleDate scheduleDate : scheduleDates) {
+            createScheduleDate(insertID, scheduleDate.getTime(), scheduleDate.getDay().toString());
+        }
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_SCHEDULE,
+                allColumnsSchedule, MySQLiteHelper.COLUMN_ID + " = " + insertID, null,
+                null, null, null);
+        cursor.moveToFirst();
+        Schedule schedule = cursorToSchedule(cursor);
+        cursor.close();
+        return schedule;
     }
 
     public ScheduleTracePoint createScheduleTracePoint(long schedule_id, String address){
@@ -121,6 +141,18 @@ public class ScheduleDAO {
         ScheduleDate newDate = cursorToDate(cursor);
         cursor.close();
         return newDate;
+    }
+
+    public void deleteSchedule(Schedule schedule) {
+        long id = schedule.getId();
+        System.out.println("Removing schedule with id: " + id);
+        for (ScheduleTracePoint scheduleTracePoint : schedule.getScheduleTracePoints()) {
+            deleteTracePoint(scheduleTracePoint);
+        }
+        for (ScheduleDate scheduleDate : schedule.getScheduleDates()) {
+            deleteDate(scheduleDate);
+        }
+        database.delete(MySQLiteHelper.TABLE_SCHEDULE, MySQLiteHelper.COLUMN_ID + " = " + id, null);
     }
 
     public void deleteTracePoint(ScheduleTracePoint tracePoint) {
