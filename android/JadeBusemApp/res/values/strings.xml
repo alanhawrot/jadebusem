@@ -3,4 +3,6 @@
     <string name="app_name">JadeBusemApp</string>
     <string name="details">Schedule Details</string>
     <string name="new_schedule">Add New Schedule</string>
+    <string name="action_search">Search Schedule</string>
+    <string name="search_schedules">Search Schedules</string>
 </resources>
