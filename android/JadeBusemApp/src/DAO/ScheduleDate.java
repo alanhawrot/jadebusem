@@ -1,5 +1,7 @@
 package DAO;
 
+import java.io.Serializable;
+
 /**
  * Created by Mateusz on 12.03.14.
  */
@@ -8,7 +10,7 @@ enum days {
     MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
 }
 
-public class ScheduleDate {
+public class ScheduleDate implements Serializable {
     private long id;
     private long schedule_id;
     private String time;

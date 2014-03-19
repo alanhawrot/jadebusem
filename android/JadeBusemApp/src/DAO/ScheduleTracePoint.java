@@ -1,6 +1,8 @@
 package DAO;
 
-public class ScheduleTracePoint {
+import java.io.Serializable;
+
+public class ScheduleTracePoint implements Serializable {
     private long id;
     private long schedule_id;
     private String address;

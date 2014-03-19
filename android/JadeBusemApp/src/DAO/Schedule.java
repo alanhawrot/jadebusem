@@ -1,11 +1,12 @@
 package DAO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by alanhawrot on 19.03.14.
  */
-public class Schedule {
+public class Schedule implements Serializable {
     private long id;
     private String name;
     private ArrayList<ScheduleDate> scheduleDates;
