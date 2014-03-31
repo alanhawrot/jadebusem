@@ -1,0 +1,26 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Schedules list' %}
+{% endblock title %}
+
+{% block content %}
+    <h3>{% trans "Schedules list" %}</h3>
+    <table class="formTable">
+        <tr>
+            <td>Company name</td>
+            <td>is verified</td>
+        </tr>
+        {% for schedule in schedules %}
+            <tr>
+                <td><a href="{% url 'schedules.views.modify' schedule_id=schedule.id %}">{{ schedule.verified }}</a>
+                </td>
+                <td><a href="{% url 'schedules.views.modify' schedule.id %}">{{ schedule.company }}</a></td>
+            </tr>
+        {% empty %}
+            {% trans "No schedules found by" %} {{ user.name }}
+        {% endfor %}
+    </table>
+{% endblock content %}

@@ -5,7 +5,7 @@
 {% block additional_head %}
     {% load staticfiles %}
     <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
-    <script src="{% static '/static/scripts/add.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
 {% endblock %}
 
 {% block title %}
@@ -70,16 +70,16 @@
                     <div id="tracePoints">
                         {% for tracePoint in schedule.trace_points %}
 
-                            <input class="textInput" name="tracePoint" class="hiddenTracePoint" type="text"
-                                   value="{{ tracePoint }}"
+                            <input class="textInput hiddenTracePoint" name="tracePoint" type="text"
+                                   value="{{ tracePoint.address }}"
+                                   data-id="{{ tracePoint.id }}"
                                    hidden="hidden"/>
-                            <span class="viewableTracePoint">{{ tracePoint }}</span>
+                            <span class="viewableTracePoint">{{ tracePoint.address }}</span>
                             {% if not forloop.last %}
                                 <span> - </span>
                             {% endif %}
                         {% endfor %}
                     </div>
-
 
                     <br/>
 
