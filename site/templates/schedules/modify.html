@@ -1,0 +1,120 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {% trans "Modify schedule" %}
+{% endblock %}
+
+{% block content %}
+    <h3>{{ mainheader }}</h3>
+
+    <form id="scheduleForm" data-id="{{ schedule.id }}" method="post" enctype="multipart/form-data">
+        <article>
+
+            <div class="floating">
+                {% if form2.header %}<h3>{{ form2.header }}</h3>{% endif %}
+
+                <br/>
+
+                <table class="formTable">
+                    <tr>
+                        <td>{% trans "Company name" %}</td>
+                        <td><input class="textInput" type="text" name="companyName"
+                                   placeholder={% trans "Name of the carrier" %} value="{{ schedule.company }}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Next trace point" %}</td>
+                        <td>
+                            <div id="tracePointsControl">
+                                <input class="textInput" type="text"
+                                       id="tracePointInput"
+                                       name="nextTracePoint"
+                                       placeholder={% trans "Add tracepoint" %}/>
+                                <input class="formMarginRB submitInput scheduleHourNavigator" id="addTracePoint"
+                                       type="button"
+                                       value="+"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div id="tracePoints">
+                    {% for tracePoint in schedule.trace_points %}
+
+                        <input class="textInput hiddenTracePoint" data-id="{{ tracePoint.id }}"
+                               name="{{ tracePoint.id }}" type="text"
+                               value="{{ tracePoint.address }}" hidden="hidden"/>
+                        <span class="viewableTracePoint" name="{{ tracePoint.id }}">{{ tracePoint.address }}</span>
+                        {% if not forloop.last %}
+                            <span> - </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <br/>
+
+                <div>
+                    {% load filters %}
+                    {% for day in schedule.days %}
+                        <div class="floating centered" style="width: 100px">
+                            {{ forloop.counter0|days_of_week }}
+                        </div>
+                    {% endfor %}
+                    <div class="clearing"></div>
+                </div>
+                <div class="days">
+                    {% for day in schedule.days %}
+                        <div class="day floating centered" id="{{ forloop.counter0 }}" data-id="{{ forloop.counter0 }}"
+                             style="width: 100px">
+                            {% for departure in day %}
+                                <div class="hour">
+                                    <input class="smallMarginTR textInput scheduleHour" type="text"
+                                           id="hourInput"
+                                           name="hour[{{ forloop.parentloop.counter0 }}]"
+                                           placeholder="8:00"
+                                           data-id="{{ departure.id }}"
+                                           value="{{ departure.hour | date:"h:i" }}"/>
+
+                                    <input class="smallMarginTR submitInput scheduleHourNavigator" id="add"
+                                           type="button"
+                                           value="+"
+                                            {% ifnotequal departure.hour '' %}  hidden="hidden" {% endifnotequal %} />
+
+                                    <input class="smallMarginTR submitInput scheduleHourNavigator" id="remove"
+                                           type="button"
+                                           value="-"
+                                            {% ifequal departure.hour '' %}  hidden="hidden" {% endifequal %} />
+                                    <br/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="clearing"></div>
+                    <div id="response-info">
+                        <table>
+                            {% for error, message in errors %}
+                                <tr>
+                                    <td class="error-label"><label>{{ error }} error:</label></td>
+                                    <td class="error-message">{{ message }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="centered">
+                        <input class="formMargin submitInput" id="submitSchedule"
+                               type="button"
+                               value={% trans "Send schedule" %}>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </article>
+    </form>
+{% endblock %}
