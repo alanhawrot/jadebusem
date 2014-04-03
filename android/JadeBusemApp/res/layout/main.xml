@@ -4,37 +4,21 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, MainActivity 2"
-            />
-
-<LinearLayout
-    android:id="@+id/group"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
-
+            android:text="Your schedules:"
+            android:id="@+id/MainActivitytextView" android:layout_weight="0" android:gravity="center_horizontal"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:id="@android:id/list" android:layout_gravity="center_horizontal"
+            android:layout_weight="1"/>
     <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add New"
-        android:onClick="onClick"/>
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete First"
-        android:onClick="onClick"/>
-
-</LinearLayout>
-
-<ListView
-    android:id="@android:id/list"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="hello" />
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add new schedule"
+            android:onClick="startAddScheduleActivity"
+            android:id="@+id/button"/>
 </LinearLayout>

@@ -1,15 +1,21 @@
 package DAO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by alanhawrot on 19.03.14.
  */
-public class Schedule {
+public class Schedule implements Serializable {
     private long id;
     private String name;
     private ArrayList<ScheduleDate> scheduleDates;
     private ArrayList<ScheduleTracePoint> scheduleTracePoints;
+
+    public Schedule() {
+        scheduleDates = new ArrayList<ScheduleDate>();
+        scheduleTracePoints = new ArrayList<ScheduleTracePoint>();
+    }
 
     public long getId() {
         return id;
@@ -45,8 +51,7 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" +
-                "name='" + name + '\'' +
-                '}';
+        return name + ": " + scheduleTracePoints.get(0).getAddress() + " -> ... -> "
+                + scheduleTracePoints.get(scheduleTracePoints.size() - 1);
     }
 }

@@ -1,105 +1,99 @@
 package com.jadebusem.JadeBusemApp;
 
+import DAO.Schedule;
 import DAO.ScheduleDAO;
+import DAO.ScheduleDate;
+import DAO.ScheduleTracePoint;
 import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 
+import java.util.List;
 
-
-public class MainActivity extends ListActivity {
-    private ScheduleDAO datasource;
-
-/***************************************************************************************************
- *          Uncoment to test ScheduleDate
- * ************************************************************************************************/
- /*      int schedule_id = 30;
-
-     @Override
-     public void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-         setContentView(R.layout.main);
-
-         datasource = new ScheduleDAO(this);
-         datasource.open();
-
-         List<ScheduleDate> values = datasource.getAllScheduleDate(schedule_id);
-         ArrayAdapter<ScheduleDate> adapter = new ArrayAdapter<ScheduleDate>(this,
-            android.R.layout.simple_list_item_1, values);
-         setListAdapter(adapter);
-     }
-
-    public void onClick(View view) {
-        @SuppressWarnings("unchecked")
-        ArrayAdapter<ScheduleDate> adapter = (ArrayAdapter<ScheduleDate>) getListAdapter();
-        ScheduleDate date = null;
-        switch (view.getId()) {
-            case R.id.add:
-                String[] hours = new String[] { "7:30", "7:45", "7:55", "9:36" };
-                String[] days = new String[] { "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY" };
-                int nextInt = new Random().nextInt(4);
-                int nextIntDay = new Random().nextInt(7);
-                // save the new comment to the database
-                date = datasource.createScheduleDate(schedule_id,hours[nextInt],days[nextIntDay]);
-                adapter.add(date);
-                break;
-            case R.id.delete:
-                if (getListAdapter().getCount() > 0) {
-                    date = (ScheduleDate) getListAdapter().getItem(0);
-                    datasource.deleteDate(date);
-                    adapter.remove(date);
-                }
-                break;
-        }
-        adapter.notifyDataSetChanged();
+class Mock {
+    public static Schedule testSchedule() {
+        Schedule schedule = new Schedule();
+        schedule.setName("Test");
+        ScheduleTracePoint scheduleTracePoint1 = new ScheduleTracePoint();
+        scheduleTracePoint1.setAddress("Kraków");
+        ScheduleTracePoint scheduleTracePoint2 = new ScheduleTracePoint();
+        scheduleTracePoint2.setAddress("Zakopane");
+        schedule.getScheduleTracePoints().add(scheduleTracePoint1);
+        schedule.getScheduleTracePoints().add(scheduleTracePoint2);
+        ScheduleDate scheduleDate = new ScheduleDate();
+        scheduleDate.setTime("7:30");
+        scheduleDate.setDay(scheduleDate.toEnum("MONDAY"));
+        schedule.getScheduleDates().add(scheduleDate);
+        return schedule;
     }
-
-/***************************************************************************************************
-*       End of test ScheduleDate
-***************************************************************************************************/
-
-/***************************************************************************************************
-*          Uncoment to test ScheduleTracePoint
-* *************************************************************************************************/
-/*
-@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
-    datasource = new ScheduleDAO(this);
-    datasource.open();
-
-    List<ScheduleTracePoint> values = datasource.getAllScheduleTracePoint();
-    ArrayAdapter<ScheduleTracePoint> adapter = new ArrayAdapter<ScheduleTracePoint>(this,
-            android.R.layout.simple_list_item_1, values);
-    setListAdapter(adapter);
 }
 
-public void onClick(View view) {
-    @SuppressWarnings("unchecked")
-    ArrayAdapter<ScheduleTracePoint> adapter = (ArrayAdapter<ScheduleTracePoint>) getListAdapter();
-    ScheduleTracePoint tracePoint = null;
-    switch (view.getId()) {
-        case R.id.add:
-            String[] places = new String[] { "Kraków", "Myślenice", "Zakopane", "Nowy Targ" };
-            int nextInt = new Random().nextInt(4);
-            // save the new comment to the database
-            tracePoint = datasource.createScheduleTracePoint(places[nextInt]);
-            adapter.add(tracePoint);
-            break;
-        case R.id.delete:
-            if (getListAdapter().getCount() > 0) {
-            tracePoint = (ScheduleTracePoint) getListAdapter().getItem(0);
-            datasource.deleteTracePoint(tracePoint);
-            adapter.remove(tracePoint);
-            }
-            break;
-    }
-    adapter.notifyDataSetChanged();
+public class MainActivity extends ListActivity {
+
+    private ScheduleDAO datasource;
+    public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        datasource = new ScheduleDAO(this);
+        datasource.open();
+
+//        Schedule schedule = Mock.testSchedule();
+//        datasource.createSchedule(schedule.getName(), schedule.getScheduleTracePoints(), schedule.getScheduleDates());
+
+        List<Schedule> scheduleList = datasource.getAllSchedules();
+        ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(this, android.R.layout.simple_list_item_1, scheduleList);
+        setListAdapter(scheduleAdapter);
     }
 
-/***************************************************************************************************
-*       End of test ScheduleTracePoint
-***************************************************************************************************/
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Schedule schedule = (Schedule) getListView().getItemAtPosition(position);
+
+        Intent intent = new Intent(this, ScheduleDetailsActivity.class);
+        intent.putExtra(SCHEDULE_DETAILS, schedule);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = null;
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     protected void onResume() {
         datasource.open();
@@ -112,4 +106,8 @@ public void onClick(View view) {
         super.onPause();
     }
 
+    public void startAddScheduleActivity(View view) {
+        Intent intent = new Intent(this, AddScheduleActivity.class);
+        startActivity(intent);
+    }
 }
