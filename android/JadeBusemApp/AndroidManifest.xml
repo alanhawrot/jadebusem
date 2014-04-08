@@ -26,6 +26,13 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
         </activity>
+        <activity android:name=".ModifyScheduleActivity"
+            android:label="@string/modify_schedule"
+            android:parentActivityName=".ScheduleDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ScheduleDetailsActivity"/>
+        </activity>
         <activity android:name=".SearchActivity"
                   android:label="@string/search_schedules"
                   android:parentActivityName=".MainActivity">

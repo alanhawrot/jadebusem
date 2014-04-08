@@ -16,4 +16,5 @@ public class SearchActivity extends Activity {
         textView.setText("Tutaj będą wyniki wyszukiwania, zawężona lista");
         setContentView(textView);
     }
+
 }

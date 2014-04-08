@@ -4,6 +4,7 @@ import DAO.Schedule;
 import DAO.ScheduleDAO;
 import DAO.ScheduleDate;
 import DAO.ScheduleTracePoint;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,13 +40,14 @@ public class MainActivity extends ListActivity {
 
     private ScheduleDAO datasource;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
+    public final static String SCHEDULE_DAO = "com.jadebusem.JadeBusemApp.SCHEDULE_DAO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        datasource = new ScheduleDAO(this);
+        datasource = ScheduleDAO.getInstance(this);
         datasource.open();
 
 //        Schedule schedule = Mock.testSchedule();
@@ -110,4 +112,5 @@ public class MainActivity extends ListActivity {
         Intent intent = new Intent(this, AddScheduleActivity.class);
         startActivity(intent);
     }
+
 }

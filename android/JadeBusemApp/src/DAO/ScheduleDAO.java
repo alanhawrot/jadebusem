@@ -73,6 +73,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 
 public class ScheduleDAO {
 
+    private static volatile ScheduleDAO instance = null;
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
@@ -82,8 +83,19 @@ public class ScheduleDAO {
     private String[] allColumnsTracePoint = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
             MySQLiteHelper.COLUMN_ADDRESS};
 
-    public ScheduleDAO(Context context) {
+    private ScheduleDAO(Context context) {
         dbHelper = new MySQLiteHelper(context);
+    }
+
+    public static ScheduleDAO getInstance(Context context) {
+        if (instance == null) {
+            synchronized (ScheduleDAO.class) {
+                if (instance == null) {
+                    instance = new ScheduleDAO(context);
+                }
+            }
+        }
+        return instance;
     }
 
     public void open() throws SQLException {

@@ -5,4 +5,16 @@
     <string name="new_schedule">Add New Schedule</string>
     <string name="action_search">Search Schedule</string>
     <string name="search_schedules">Search Schedules</string>
+    <string name="detailsNameOfSchedule">Name of the schedule</string>
+    <string name="detailsRoute">Route:</string>
+    <string name="detailsMonday">Monday:</string>
+    <string name="detailsTuesday">Tuesday:</string>
+    <string name="detailsWednesday">Wednesday:</string>
+    <string name="detailsThursday">Thursday:</string>
+    <string name="detailsFriday">Friday:</string>
+    <string name="detailsSaturday">Saturday:</string>
+    <string name="detailsSunday">Sunday:</string>
+    <string name="detailsModifySchedule">Modify schedule</string>
+    <string name="detailsDeleteSchedule">Delete schedule</string>
+    <string name="modify_schedule">Modify Schedule</string>
 </resources>
