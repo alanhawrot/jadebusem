@@ -50,6 +50,10 @@ public final class R {
     public static final class string {
         public static final int action_search=0x7f040003;
         public static final int app_name=0x7f040000;
+        public static final int delete_alert_dialog_content=0x7f040012;
+        public static final int delete_alert_dialog_negative=0x7f040014;
+        public static final int delete_alert_dialog_positive=0x7f040013;
+        public static final int delete_alert_dialog_title=0x7f040011;
         public static final int details=0x7f040001;
         public static final int detailsDeleteSchedule=0x7f04000f;
         public static final int detailsFriday=0x7f04000b;
