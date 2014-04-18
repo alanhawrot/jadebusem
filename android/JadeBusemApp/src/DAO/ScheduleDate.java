@@ -2,6 +2,7 @@ package DAO;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ScheduleDate implements Serializable {
 
     private long id;

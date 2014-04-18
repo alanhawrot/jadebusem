@@ -2,6 +2,7 @@ package DAO;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ScheduleTracePoint implements Serializable {
 
     private long id;

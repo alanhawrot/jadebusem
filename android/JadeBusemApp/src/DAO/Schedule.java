@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by alanhawrot on 19.03.14.
  */
+@SuppressWarnings("serial")
 public class Schedule implements Serializable {
 
     private long id;
