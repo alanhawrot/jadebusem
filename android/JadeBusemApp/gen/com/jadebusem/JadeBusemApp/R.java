@@ -68,6 +68,9 @@ public final class R {
         public static final int detailsWednesday=0x7f040009;
         public static final int modify_schedule=0x7f040010;
         public static final int new_schedule=0x7f040002;
+        public static final int search_alert_dialog_content=0x7f040016;
+        public static final int search_alert_dialog_positive=0x7f040017;
+        public static final int search_alert_dialog_title=0x7f040015;
         public static final int search_schedules=0x7f040004;
     }
 }
