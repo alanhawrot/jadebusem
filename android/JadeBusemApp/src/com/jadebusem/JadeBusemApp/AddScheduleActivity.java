@@ -9,12 +9,12 @@ import android.widget.TextView;
  */
 public class AddScheduleActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TextView textView = new TextView(this);
-        textView.setText("Tutaj będzie tworzony nowy rozkład (formularz do wypełnienia)");
-        setContentView(textView);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		TextView textView = new TextView(this);
+		textView.setText("Tutaj będzie tworzony nowy rozkład (formularz do wypełnienia)");
+		setContentView(textView);
+	}
 
 }

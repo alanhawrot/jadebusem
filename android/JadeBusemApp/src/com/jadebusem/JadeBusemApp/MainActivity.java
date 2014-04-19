@@ -22,7 +22,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 class Mock {
-	public static Schedule testSchedule() {
+	
+	public static Schedule testSchedule1() {
 		Schedule schedule = new Schedule();
 		schedule.setName("Test");
 		ScheduleTracePoint scheduleTracePoint1 = new ScheduleTracePoint();
@@ -37,6 +38,23 @@ class Mock {
 		schedule.getScheduleDates().add(scheduleDate);
 		return schedule;
 	}
+
+	public static Schedule testSchedule2() {
+		Schedule schedule = new Schedule();
+		schedule.setName("Test2");
+		ScheduleTracePoint scheduleTracePoint1 = new ScheduleTracePoint();
+		scheduleTracePoint1.setAddress("Gdynia");
+		ScheduleTracePoint scheduleTracePoint2 = new ScheduleTracePoint();
+		scheduleTracePoint2.setAddress("Zakopane");
+		schedule.getScheduleTracePoints().add(scheduleTracePoint1);
+		schedule.getScheduleTracePoints().add(scheduleTracePoint2);
+		ScheduleDate scheduleDate = new ScheduleDate();
+		scheduleDate.setTime("8:30");
+		scheduleDate.setDay(scheduleDate.toEnum("TUESDAY"));
+		schedule.getScheduleDates().add(scheduleDate);
+		return schedule;
+	}
+
 }
 
 public class MainActivity extends ListActivity {
@@ -54,9 +72,14 @@ public class MainActivity extends ListActivity {
 		datasource = ScheduleDAO.getInstance(this);
 		datasource.open();
 
-		// Schedule schedule = Mock.testSchedule();
-		// datasource.createSchedule(schedule.getName(),
-		// schedule.getScheduleTracePoints(), schedule.getScheduleDates());
+		/*
+		 * Schedule schedule = Mock.testSchedule1();
+		 * datasource.createSchedule(schedule.getName(),
+		 * schedule.getScheduleTracePoints(), schedule.getScheduleDates());
+		 * Schedule schedule2 = Mock.testSchedule2();
+		 * datasource.createSchedule(schedule2.getName(),
+		 * schedule2.getScheduleTracePoints(), schedule2.getScheduleDates());
+		 */
 
 		List<Schedule> scheduleList = datasource.getAllSchedules();
 		ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(
@@ -90,7 +113,7 @@ public class MainActivity extends ListActivity {
 					.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 						@Override
 						public boolean onQueryTextSubmit(String query) {
-							String regularExpression = "[\\w ]+";
+							String regularExpression = "[\\w :]+";
 							if (query.matches(regularExpression)) {
 								Intent intent = new Intent(MainActivity.this,
 										SearchActivity.class);

@@ -33,42 +33,47 @@ public class ScheduleDetailsActivity extends Activity {
 
 		if (schedule != null) {
 			TextView nameOfSchedule = (TextView) findViewById(R.id.detailsNameOfSchedule);
+
+			String emptyName = "Empty name";
+			String emptyRoute = "Empty route";
+			String none = "None";
+
 			nameOfSchedule.setText(schedule.getName().length() != 0 ? schedule
-					.getName() : "Empty name");
+					.getName() : emptyName);
 
 			TextView routeContent = (TextView) findViewById(R.id.detailsRouteContent);
 			String route = schedule.toStringScheduleTracePoints();
-			routeContent.setText(route.length() != 0 ? route : "Empty route");
+			routeContent.setText(route.length() != 0 ? route : emptyRoute);
 
 			TextView mondayContent = (TextView) findViewById(R.id.detailsMondayContent);
 			String monday = schedule.toStringScheduleDateTime(days.MONDAY);
-			mondayContent.setText(monday.length() != 0 ? monday : "None");
+			mondayContent.setText(monday.length() != 0 ? monday : none);
 
 			TextView tuesdayContent = (TextView) findViewById(R.id.detailsTuesdayContent);
 			String tuesday = schedule.toStringScheduleDateTime(days.TUESDAY);
-			tuesdayContent.setText(tuesday.length() != 0 ? tuesday : "None");
+			tuesdayContent.setText(tuesday.length() != 0 ? tuesday : none);
 
 			TextView wednesdayContent = (TextView) findViewById(R.id.detailsWednesdayContent);
 			String wednesday = schedule
 					.toStringScheduleDateTime(days.WEDNESDAY);
-			wednesdayContent.setText(wednesday.length() != 0 ? wednesday
-					: "None");
+			wednesdayContent
+					.setText(wednesday.length() != 0 ? wednesday : none);
 
 			TextView thursdayContent = (TextView) findViewById(R.id.detailsThursdayContent);
 			String thursday = schedule.toStringScheduleDateTime(days.THURSDAY);
-			thursdayContent.setText(thursday.length() != 0 ? thursday : "None");
+			thursdayContent.setText(thursday.length() != 0 ? thursday : none);
 
 			TextView fridayContent = (TextView) findViewById(R.id.detailsFridayContent);
 			String friday = schedule.toStringScheduleDateTime(days.FRIDAY);
-			fridayContent.setText(friday.length() != 0 ? friday : "None");
+			fridayContent.setText(friday.length() != 0 ? friday : none);
 
 			TextView saturdayContent = (TextView) findViewById(R.id.detailsSaturdayContent);
 			String saturday = schedule.toStringScheduleDateTime(days.SATURDAY);
-			saturdayContent.setText(saturday.length() != 0 ? saturday : "None");
+			saturdayContent.setText(saturday.length() != 0 ? saturday : none);
 
 			TextView sundayContent = (TextView) findViewById(R.id.detailsSundayContent);
 			String sunday = schedule.toStringScheduleDateTime(days.SUNDAY);
-			sundayContent.setText(sunday.length() != 0 ? sunday : "None");
+			sundayContent.setText(sunday.length() != 0 ? sunday : none);
 		}
 	}
 
