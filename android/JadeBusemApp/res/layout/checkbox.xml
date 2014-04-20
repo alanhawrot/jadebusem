@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/T"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TimePicker
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/timePicker"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true" />
+
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/tableLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+            <CheckBox
+                android:id="@+id/checkboxMonday"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Monday"
+                android:layout_margin="5dp"
+                android:checked="true"/>
+
+            <CheckBox
+                android:id="@+id/checkboxFriday"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Friday"
+                android:layout_margin="5dp"
+                android:checked="true"/>
+        </TableRow>
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+                <CheckBox
+                    android:id="@+id/checkboxTuesday"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday"
+                    android:layout_margin="5dp"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/checkboxSaturday"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Saturday"
+                    android:layout_margin="5dp"
+                    android:checked="true"/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+                <CheckBox
+                    android:id="@+id/checkboxWednesday"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday"
+                    android:layout_margin="5dp"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/checkboxSunday"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sunday"
+                    android:layout_margin="5dp"
+                    android:checked="true"/>
+            </TableRow>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
+
+            <CheckBox
+                android:id="@+id/checkboxThursday"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Thursday"
+                android:layout_margin="5dp"
+                android:checked="true"/>
+
+        </TableRow>
+    </TableLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".AddScheduleActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/tracePointText"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.12" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add trace point"
+        android:onClick="addTracePointButton"
+        android:id="@+id/AddTracePointButton"
+        android:layout_weight="0.11" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your trace:"
+        android:id="@+id/TracePointView" android:layout_weight="0" android:gravity="center_horizontal"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:id="@+id/tracePointList"
+        android:layout_weight="0.56"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Trace Point"
+        android:onClick="saveTracePointButton"
+        android:id="@+id/button"/>
+</LinearLayout>

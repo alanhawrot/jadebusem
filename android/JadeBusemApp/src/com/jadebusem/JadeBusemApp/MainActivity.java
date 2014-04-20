@@ -39,6 +39,8 @@ public class MainActivity extends ListActivity {
 
     private ScheduleDAO datasource;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
+    private List<Schedule> scheduleList;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,8 @@ public class MainActivity extends ListActivity {
         datasource = new ScheduleDAO(this);
         datasource.open();
 
-//        Schedule schedule = Mock.testSchedule();
-//        datasource.createSchedule(schedule.getName(), schedule.getScheduleTracePoints(), schedule.getScheduleDates());
+        scheduleList = datasource.getAllSchedules();
 
-        List<Schedule> scheduleList = datasource.getAllSchedules();
         ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(this, android.R.layout.simple_list_item_1, scheduleList);
         setListAdapter(scheduleAdapter);
     }
@@ -97,6 +97,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onResume() {
         datasource.open();
+        getListView().invalidate();
         super.onResume();
     }
 

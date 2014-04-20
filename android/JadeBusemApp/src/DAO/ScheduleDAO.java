@@ -24,7 +24,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DAY = "day";
 
     private static final String DATABASE_NAME = "jb.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database creation sql statement
     private static final String CREATE_TABLE_SCHEDULE = "create table "

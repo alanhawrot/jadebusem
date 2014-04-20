@@ -82,6 +82,32 @@ public class ScheduleDate implements Serializable {
         return days.MONDAY;
     }
 
+    public days toEnumFromInt(int day)
+    {
+        if(day == 0){
+            return days.MONDAY;
+        }
+        else if(day == 1){
+            return days.TUESDAY;
+        }
+        else if(day == 2){
+            return days.WEDNESDAY;
+        }
+        else if(day == 3){
+            return days.THURSDAY;
+        }
+        else if(day == 4){
+            return days.FRIDAY;
+        }
+        else if(day == 5){
+            return days.SATURDAY;
+        }
+        else if(day == 6){
+            return days.SUNDAY;
+        }
+        return days.MONDAY;
+    }
+
 
     // Will be used by the ArrayAdapter in the ListView
     @Override
