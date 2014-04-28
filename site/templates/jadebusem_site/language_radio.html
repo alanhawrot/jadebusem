@@ -1,8 +1,7 @@
 
 {% load i18n %}
-<div class="floating" style="margin: -5px">
+<div>
 <form action="/i18n/setlang/" method="post" role="form">
-    {% csrf_token %}
     <div class="btn-group btn-sm">
         {% for lang in LANGUAGES %}
             <button type="submit" name="language" value="{{ lang.0 }}" class="btn btn-primary btn-sm

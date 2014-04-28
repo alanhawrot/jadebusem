@@ -33,7 +33,7 @@ def register(request):
                     user.address = request.POST['address']
                     user.company_name = request.POST['company_name']
                     user.save()
-                    return render(request, 'user/thanks.html', {})
+                    return render(request, 'user/thanks.html', Context({}))
                 except:
                     email_error = _("This e-mail is already in use")
             else:
@@ -44,7 +44,7 @@ def register(request):
     # if error than display form again but with filled fields and error
     if (email_error != "" or password_error != ""):
         f = RegisterForm()
-        context = RequestContext(
+        context = Context(
             {'form': f,
              'email': request.POST['email'],
              'first_name': request.POST['first_name'],

@@ -1,9 +1,8 @@
 {% load i18n %}
 <div style="margin-top: 25px;">
 
-    {% include "jadebusem_site/language_radio.html" %}
     {% if login %}
-        <div class="floating btn-group-vertical">
+        <div class="floatingRight btn-group-vertical">
             <div class="input-group">
                 <div class="input-group-btn">
                     <a class="btn btn-success btn-sm" href="{% url "Users.views.user_settings" user.user_id %}">
@@ -23,20 +22,26 @@
             </div>
         </div>
     {% else %}
-        <div class="input-group">
+        <div class="floatingRight">
+            <div class="input-group">
 
-            <div class="input-group-addon btn-sm">
-                <span class="glyphicon glyphicon-user"></span>
-            </div>
-            <div class="input-group-btn">
-                <a class="btn btn-success btn-sm" href="{% url "Users.views.sign_in" %}">
-                    {% trans 'Sign in' %}
-                </a></div>
-            <div class="input-group-btn">
-                <a class="btn btn-primary btn-sm" href="{% url "Users.views.register" %}">
-                    {% trans 'Register' %}
-                </a>
+                <div class="input-group-addon btn-sm">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="input-group-btn">
+                    <a class="btn btn-success btn-sm" href="{% url "Users.views.sign_in" %}">
+                        {% trans 'Sign in' %}
+                    </a></div>
+                <div class="input-group-btn">
+                    <a class="btn btn-warning btn-sm" href="{% url "Users.views.register" %}">
+                        {% trans 'Register' %}
+                    </a>
+                </div>
             </div>
         </div>
     {% endif %}
+
+   <div class="floatingRight" style="margin-top: -5px; margin-right: 10px;">
+        {% include "jadebusem_site/language_radio.html" %}
+    </div>
 </div>

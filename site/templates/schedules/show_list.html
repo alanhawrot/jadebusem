@@ -11,7 +11,7 @@
         {% trans "My schedules list" %}
     </h3>
     {% for schedule in schedules %}
-        <div class="input-group" style="margin: 20px 0px 0px 0px;">
+        <div class="input-group" style="margin: 10px 0px 0px 0px;">
 
                 <div class="input-group-addon">
                     {% if not schedule.verified %}
@@ -20,7 +20,7 @@
                         <span class="glyphicon glyphicon-ok" alt="Schedule is verified."></span>
                     {% endif %}
                 </div>
-                <div class="input-group-addon" style="width: auto !important;text-align: left;">{{ schedule.company }}
+                <div class="input-group-addon" style=" background: #c5c5c5;width: auto !important;text-align: left;">{{ schedule.company }}
                 </div>
 
             <div class="input-group-btn">
@@ -37,6 +37,6 @@
             </div>
         </div>
     {% empty %}
-        {% trans "No schedules found by" %} {{ user.name }}
+        {% trans "You don't have own schedules" %}
     {% endfor %}
 {% endblock content %}
