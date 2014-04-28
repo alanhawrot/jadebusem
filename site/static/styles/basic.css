@@ -183,12 +183,12 @@ input {
     border: 1px solid goldenrod;
 }
 
-select {
+.select-form {
     border: 1px solid #efefef;
     -moz-appearance: none; /* Firefox */
     -webkit-appearance: none; /* Safari and Chrome */
     width: 200px;
-    height: 24px;
+    height: 30px;
     background: url("/static/images/arrow.png") no-repeat;
     background-position: 182px 5px;
     text-indent: 0.01px; /* Removes default arrow from firefox*/
@@ -250,9 +250,6 @@ img {
     pointer-events: none;
 }
 
-.selectOption {
-
-}
 
 hr {
     border-top: 1px dotted #efefef;

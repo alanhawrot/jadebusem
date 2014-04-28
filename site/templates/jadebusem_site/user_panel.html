@@ -1,8 +1,9 @@
 {% load i18n %}
-
 <div style="margin-top: 25px;">
+
+    {% include "jadebusem_site/language_radio.html" %}
     {% if login %}
-        <div class="btn-group-vertical">
+        <div class="floating btn-group-vertical">
             <div class="input-group">
                 <div class="input-group-btn">
                     <a class="btn btn-success btn-sm" href="{% url "Users.views.user_settings" user.user_id %}">
@@ -12,7 +13,7 @@
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                         {{ user.name }}
-                        <span class="caret"></span>
+                        <span class="caret" style="margin-left: 10px"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{% url "Users.views.user_settings" user.user_id %}">Settings</a></li>

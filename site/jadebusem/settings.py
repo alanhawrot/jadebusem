@@ -9,7 +9,6 @@ ADMINS = (
     ('mateuszbobinski', 'mat.bobinski@gmail.com'),
 )
 
-
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -47,11 +46,11 @@ DATABASES = {
     ## Michal's local db
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/michal/jadebusem/site/db.sqlite',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/michal/jadebusem/site/db.sqlite', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': '', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',
     }
 
@@ -59,7 +58,7 @@ DATABASES = {
     #'default': {
     #    'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     #    'NAME': 'sql420739',                   # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+    # The following settings are not used with sqlite3:
     #    'USER': 'sql420739',
     #    'PASSWORD': 'pW3*mD1%',
     #    'HOST': 'sql4.freesqldatabase.com',   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
@@ -130,13 +129,15 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-
+import django.conf.global_settings as DEFAULT_SETTINGS
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS +\
+                              ('jadebusem_site.context_processors.language_processor',)
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -146,7 +147,7 @@ SECRET_KEY = 'eu6+-i04v%ia1wj7=mxz=n+e7l3!g+!sb^))+_g+or0=r4kufx'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (

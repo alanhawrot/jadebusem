@@ -4,7 +4,7 @@ import time
 
 from django.http.response import HttpResponseForbidden, HttpResponseNotFound, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
-from django.template import Context
+from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import transaction

@@ -1,0 +1,18 @@
+
+{% load i18n %}
+<div class="floating" style="margin: -5px">
+<form action="/i18n/setlang/" method="post" role="form">
+    {% csrf_token %}
+    <div class="btn-group btn-sm">
+        {% for lang in LANGUAGES %}
+            <button type="submit" name="language" value="{{ lang.0 }}" class="btn btn-primary btn-sm
+                 {% if current_lang == lang.0 %}
+                           active
+                 {% endif %}
+                ">
+                {{ lang.1 }}
+            </button>
+        {% endfor %}
+    </div>
+</form>
+</div>

@@ -10,28 +10,33 @@
     <h3>
         {% trans "My schedules list" %}
     </h3>
+    {% for schedule in schedules %}
+        <div class="input-group" style="margin: 20px 0px 0px 0px;">
 
-    <div class="btn-group-vertical">
-        {% for schedule in schedules %}
-            <div class="btn-group">
-                <button class="btn btn-default dropdown-toggle" style="text-align: left"
-                         id="button-{{ forloop.counter0 }}" data-toggle="dropdown" type="button">
+                <div class="input-group-addon">
                     {% if not schedule.verified %}
                         <span class="glyphicon glyphicon-tag" alt="Pending verification"></span>
                     {% else %}
                         <span class="glyphicon glyphicon-ok" alt="Schedule is verified."></span>
                     {% endif %}
-                    {{ schedule.company }}
-                    <span class="caret" style="float:right;margin-left: 10px; margin-top: -12px"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{ forloop.counter0 }}">
-                    <li><a href="{% url 'schedules.views.modify' schedule.id %}">Edit</a></li>
-                    <li><a href="{% url 'schedules.views.delete' schedule.id %}">Delete</a></li>
-                </ul>
+                </div>
+                <div class="input-group-addon" style="width: auto !important;text-align: left;">{{ schedule.company }}
+                </div>
+
+            <div class="input-group-btn">
+                <a class="btn btn-default" href="{% url 'schedules.views.modify' schedule.id %}">
+                    <span class="glyphicon glyphicon-edit" style="margin-right: 7px;"></span>
+                    Edit
+                </a>
             </div>
-        {% empty %}
-            {% trans "No schedules found by" %} {{ user.name }}
-        {% endfor %}
-        <br/><br/><br/><br/><br/>
-    </div>
+            <div class="input-group-btn">
+                <a class="btn btn-default" href="{% url 'schedules.views.delete' schedule.id %}">
+                    <span class="glyphicon glyphicon-remove" style="margin-right: 7px;"></span>
+                    Delete
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        {% trans "No schedules found by" %} {{ user.name }}
+    {% endfor %}
 {% endblock content %}
