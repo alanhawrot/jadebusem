@@ -77,7 +77,7 @@ def sign_in(request):
                 request.session['email'] = user.email
                 request.session['name'] = user.first_name
                 request.session['user_id'] = user.user_id
-                return render(request, 'jadebusem_site/index.html', Context({'user': request.session, 'login': True}))
+                return HttpResponseRedirect('/', Context({'user': request.session, 'login': True}))
             else:
                 error = True
     else:
