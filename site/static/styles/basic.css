@@ -175,9 +175,14 @@ nav {
     margin-right: 10px;
 }
 li .li-nav-main-menu {
-    background-image: url("/static/images/li2.png");
+    /*background-image: url("/static/images/li2.png");*/
 }
-
+.li-nav-main-menu a:hover {
+    text-decoration: none;
+}
+.li-nav-main-menu a:active {
+    color: red;
+}
 select {
     height: 25px;
 }
