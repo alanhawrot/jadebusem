@@ -1,7 +1,12 @@
 {% load i18n %}
-<ul>
-    <li><a href="{% url "SearchEngine.views.search" %}">{% trans 'Search for connection' %}</a></li>
-    <li><a href={% url "schedules.views.add" %}>{% trans 'Add schedule' %}</a></li>
-    <li><a href={% url "jadebusem_site.views.about" %}>{% trans 'About page' %}</a></li>
-    <li><a href={% url "jadebusem_site.views.language" %}>{% trans 'Change language' %}</a></li>
+<ul class="ul-nav-main-menu">
+    <li class="li-nav-main-menu"><a href="{% url "SearchEngine.views.search" %}">{% trans 'Search for connection' %}</a>
+    </li>
+    {% if login %}
+        <li class="li-nav-main-menu"><a href={% url "schedules.views.show_list" %}>{% trans 'My schedules' %}</a></li>
+        <li class="li-nav-main-menu"><a href={% url "schedules.views.add" %}>{% trans 'Add schedule' %}</a></li>
+    {% endif %}
+    <li class="li-nav-main-menu"><a href={% url "jadebusem_site.views.about" %}>{% trans 'About page' %}</a></li>
+    <li class="li-nav-main-menu"><a href={% url "jadebusem_site.views.language" %}>{% trans 'Change language' %}</a>
+    </li>
 </ul>

@@ -13,38 +13,38 @@
         <table class="formTable">
             <tr>
                 <td>{% trans 'E-mail' %}</td>
-                <td><input class="textInput" type="email" name="email" value="{{ email }}" placeholder="{% trans "E-mail" %}"
+                <td><input class="form-control" type="email" name="email" value="{{ email }}" placeholder="{% trans "E-mail" %}"
                            required> {{ email_error }}
                 </td>
             <tr>
                 <td>{% trans 'Password' %}</td>
-                <td><input class="textInput" type="password" name="password" value="{{ password }}" placeholder="{% trans "Password" %}"
+                <td><input class="form-control" type="password" name="password" value="{{ password }}" placeholder="{% trans "Password" %}"
                            required>
                 </td>
             <tr>
                 <td>{% trans 'Re-type Password' %}</td>
-                <td><input class="textInput" type="password" name="password2" value="{{ password }}"
+                <td><input class="form-control" type="password" name="password2" value="{{ password }}"
                            placeholder={% trans "Re-type Password" %}"" required> {{ password_error }}
                 </td>
             <tr>
                 <td>{% trans 'First name' %}</td>
-                <td><input class="textInput" type="text" name="first_name" value="{{ first_name }}" placeholder={% trans "First Name" %}>
+                <td><input class="form-control" type="text" name="first_name" value="{{ first_name }}" placeholder={% trans "First Name" %}>
                 </td>
             <tr>
                 <td>{% trans 'Last name' %}</td>
-                <td><input class="textInput" type="text" name="last_name" value="{{ last_name }}" placeholder={% trans "Last Name" %}>
+                <td><input class="form-control" type="text" name="last_name" value="{{ last_name }}" placeholder={% trans "Last Name" %}>
                 </td>
             <tr>
                 <td>{% trans 'Address' %}</td>
-                <td><input class="textInput" type="text" name="address" value="{{ address }}" placeholder={% trans "Address" %}>
+                <td><input class="form-control" type="text" name="address" value="{{ address }}" placeholder={% trans "Address" %}>
                 </td>
             <tr>
                 <td>{% trans 'Company Name' %}</td>
-                <td><input class="textInput" type="text" name="company_name" value="{{ company_name }}"
+                <td><input class="form-control" type="text" name="company_name" value="{{ company_name }}"
                            placeholder={% trans "Company Name" %}>
                 </td>
             <tr>
-                <td colspan="2" class="centered"><input class="submitInput" type="submit" value={% trans "Register now" %}>
+                <td colspan="2" class="centered"><input class="btn btn-default" type="submit" value={% trans "Register now" %}>
                 </td>
             </tr>
         </table>

@@ -7,20 +7,31 @@
 {% endblock title %}
 
 {% block content %}
-    <h3>{% trans "Schedules list" %}</h3>
-    <table class="formTable">
-        <tr>
-            <td>Company name</td>
-            <td>is verified</td>
-        </tr>
+    <h3>
+        {% trans "My schedules list" %}
+    </h3>
+
+    <div class="btn-group-vertical">
         {% for schedule in schedules %}
-            <tr>
-                <td><a href="{% url 'schedules.views.modify' schedule_id=schedule.id %}">{{ schedule.verified }}</a>
-                </td>
-                <td><a href="{% url 'schedules.views.modify' schedule.id %}">{{ schedule.company }}</a></td>
-            </tr>
+            <div class="btn-group">
+                <button class="btn btn-default dropdown-toggle" style="text-align: left"
+                         id="button-{{ forloop.counter0 }}" data-toggle="dropdown" type="button">
+                    {% if not schedule.verified %}
+                        <span class="glyphicon glyphicon-tag" alt="Pending verification"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-ok" alt="Schedule is verified."></span>
+                    {% endif %}
+                    {{ schedule.company }}
+                    <span class="caret" style="float:right;margin-left: 10px; margin-top: -12px"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{ forloop.counter0 }}">
+                    <li><a href="{% url 'schedules.views.modify' schedule.id %}">Edit</a></li>
+                    <li><a href="{% url 'schedules.views.delete' schedule.id %}">Delete</a></li>
+                </ul>
+            </div>
         {% empty %}
             {% trans "No schedules found by" %} {{ user.name }}
         {% endfor %}
-    </table>
+        <br/><br/><br/><br/><br/>
+    </div>
 {% endblock content %}

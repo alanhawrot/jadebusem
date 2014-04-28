@@ -103,13 +103,12 @@ footer {
     padding-top: 30px;
 }
 
-ul {
+.ul-nav-main-menu {
     list-style-type: none;
 
 }
 
 body {
-    font-family: Calibri, Consolas, "Courier New";
     font-size: 14px;
     color: #262423;
     border: 0px;
@@ -146,11 +145,13 @@ body {
     right: 50%;
     position: relative;
 }
+
 .inner-center {
     float: right;
     right: -50%;
     position: relative;
 }
+
 a {
     color: #000000;
     text-decoration: none;
@@ -166,7 +167,7 @@ nav {
     width: 250px;
 }
 
-li {
+.li-nav-main-menu {
     background-image: url("/static/images/li1.png");
     background-repeat: no-repeat;
     background-position: 1px center;
@@ -174,21 +175,12 @@ li {
     padding-left: 20px;
 }
 
-li li {
+li .li-nav-main-menu {
     background-image: url("/static/images/li2.png");
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 input {
     border: 1px solid goldenrod;
-=======
-=======
->>>>>>> 69ad516cba9bb228258fe01fca684e7850bc9909
-input :{
-    border: 1px solid #efefef;
->>>>>>> 69ad516cba9bb228258fe01fca684e7850bc9909
-
 }
 
 select {
@@ -234,9 +226,11 @@ select {
 .radioInput {
 
 }
+
 img {
     border: 0px;
 }
+
 .fileInput {
     border: 0px !important;
     display: block !important;
@@ -258,15 +252,6 @@ img {
 
 .selectOption {
 
-}
-
-.scheduleHourNavigator {
-    width: 24px;
-    height: 24px;
-}
-
-.scheduleHour {
-    width: 50px;
 }
 
 hr {

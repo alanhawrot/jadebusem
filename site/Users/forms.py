@@ -42,5 +42,7 @@ class JadeBusemUserChangeForm(UserChangeForm):
 
 class SignInForm(forms.Form):
     email = forms.EmailField(label=_('Your email address'))
+    email.widget.attrs.update({'class': 'form-control'})
     password = forms.CharField(widget=forms.PasswordInput())
+    password.widget.attrs.update({'class': 'form-control'})
 
