@@ -3,6 +3,7 @@
 <div>
 <form action="/i18n/setlang/" method="post" role="form">
     <div class="btn-group btn-sm">
+        <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-flag"></span></div>
         {% for lang in LANGUAGES %}
             <button type="submit" name="language" value="{{ lang.0 }}" class="btn btn-primary btn-sm
                  {% if current_lang == lang.0 %}
