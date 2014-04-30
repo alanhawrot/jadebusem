@@ -1,7 +1,21 @@
+Activating virtual environment:
+source venv/bin/activate
 
+Database initialization:
+heroku run python site/manage.py syncdb
+
+Update database schema migration:
+heroku run python site/manage.py migrate
+
+Create database schema migration.
+heroku run python site/manage.py schemamigration appname --auto
 
 Static files fix:
 use below command to let heroku know where your settings file is
-heroku config:set DJANGO_SETTINGS_MODULE=jadebusem.settings
 Use this guide, but use double dirname for PROJECT_PATH
 https://devcenter.heroku.com/articles/django-assets
+
+Use this to remove translation errors after static files fix
+heroku config:set DJANGO_SETTINGS_MODULE=jadebusem.settings
+
+
