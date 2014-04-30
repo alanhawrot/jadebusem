@@ -9,7 +9,12 @@
 .centered {
     text-align: center;
 }
-
+.keep-floating-children:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
 .floatingRight {
     float: right;
 }
