@@ -28,11 +28,12 @@
         </activity>
 
         <activity android:name=".AddScheduleDatesActivity"
-            android:label="@string/add_schedule_dates"
-            android:parentActivityName=".MainActivity">
+                  android:label="@string/add_schedule_dates"
+                  android:parentActivityName=".MainActivity">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
+        </activity>
 
         <activity android:name=".ModifyScheduleActivity"
             android:label="@string/modify_schedule"
@@ -42,6 +43,15 @@
                 android:value=".ScheduleDetailsActivity"/>
 
         </activity>
+        <activity android:name=".ModifyScheduleDatesActivity"
+            android:label="@string/modify_schedule"
+            android:parentActivityName=".ModifyScheduleActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ModifyScheduleActivity"/>
+
+        </activity>
+
         <activity android:name=".SearchActivity"
                   android:label="@string/search_schedules"
                   android:parentActivityName=".MainActivity">

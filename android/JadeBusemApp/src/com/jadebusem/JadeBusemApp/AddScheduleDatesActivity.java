@@ -106,15 +106,16 @@ public class AddScheduleDatesActivity extends Activity {
 ####################################################################################################*/
     public void saveTimetableButton(View view)
     {
-        ScheduleDate scheduleDate = new ScheduleDate();
+
         for(int i=0;i<7;i++)
         {
             for(int j=0;j<timeList[i].size();j++) {
+                ScheduleDate scheduleDate = new ScheduleDate();
                 scheduleDate.setTime(timeList[i].get(j));
                 scheduleDate.setDay(scheduleDate.toEnumFromInt(i));
+                schedule.getScheduleDates().add(scheduleDate);
             }
         }
-        schedule.getScheduleDates().add(scheduleDate);
 
         datasource = new ScheduleDAO(this);
         datasource.open();

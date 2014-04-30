@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-    tools:context=".MainActivity">
-=======
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
->>>>>>> origin/ScheduleDetailsActivity
+    android:layout_height="fill_parent"
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -21,20 +15,12 @@
         android:gravity="center_horizontal" />
 
     <ListView
-<<<<<<< HEAD
             android:layout_width="match_parent"
             android:layout_height="175dp"
             android:id="@android:id/list"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
-=======
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:id="@android:id/list"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1" />
 
->>>>>>> origin/ScheduleDetailsActivity
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

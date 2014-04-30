@@ -40,12 +40,9 @@ public class MainActivity extends ListActivity {
 
     private ScheduleDAO datasource;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
-<<<<<<< HEAD
     private List<Schedule> scheduleList;
     private ListView list;
-=======
     public final static String SCHEDULE_DAO = "com.jadebusem.JadeBusemApp.SCHEDULE_DAO";
->>>>>>> origin/ScheduleDetailsActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

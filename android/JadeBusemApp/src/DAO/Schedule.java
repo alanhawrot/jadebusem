@@ -2,6 +2,7 @@ package DAO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alanhawrot on 19.03.14.

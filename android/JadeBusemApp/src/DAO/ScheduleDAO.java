@@ -83,7 +83,7 @@ public class ScheduleDAO {
     private String[] allColumnsTracePoint = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_SCHEDULE_ID,
             MySQLiteHelper.COLUMN_ADDRESS};
 
-    private ScheduleDAO(Context context) {
+    public ScheduleDAO(Context context) {
         dbHelper = new MySQLiteHelper(context);
     }
 
