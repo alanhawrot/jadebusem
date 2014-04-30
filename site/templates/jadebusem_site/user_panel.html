@@ -23,21 +23,21 @@
         </div>
     {% else %}
         <div class="floatingRight">
-            <div class="input-group">
+            <span class="input-group">
 
-                <div class="input-group-addon btn-sm">
+                <span class="input-group-addon btn-sm">
                     <span class="glyphicon glyphicon-user"></span>
-                </div>
-                <div class="input-group-btn">
+                </span>
+                <span class="input-group-btn">
                     <a class="btn btn-success btn-sm" href="{% url "Users.views.sign_in" %}">
                         {% trans 'Sign in' %}
                     </a></div>
-                <div class="input-group-btn">
+                <span class="input-group-btn">
                     <a class="btn btn-warning btn-sm" href="{% url "Users.views.register" %}">
                         {% trans 'Register' %}
                     </a>
-                </div>
-            </div>
+                </span>
+            </span>
         </div>
     {% endif %}
 
