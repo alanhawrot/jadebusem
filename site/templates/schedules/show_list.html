@@ -26,13 +26,13 @@
             <div class="input-group-btn">
                 <a class="btn btn-default" href="{% url 'schedules.views.modify' schedule.id %}">
                     <span class="glyphicon glyphicon-edit" style="margin-right: 7px;"></span>
-                    Edit
+                    {% trans 'Edit' %}
                 </a>
             </div>
             <div class="input-group-btn">
                 <a class="btn btn-default" href="{% url 'schedules.views.delete' schedule.id %}">
                     <span class="glyphicon glyphicon-remove" style="margin-right: 7px;"></span>
-                    Delete
+                    {% trans 'Delete' %}
                 </a>
             </div>
         </div>
