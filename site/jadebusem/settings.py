@@ -247,6 +247,21 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+import sys
+LOGGING = {
+    'handlers': {
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'strm': sys.stdout
+        },
+    }
+}
+
+
+
+
+
 print 'DB', DATABASES['default']
 print 'CWD', os.getcwd()
 print 'PROJECT_ROOT', PROJECT_ROOT
