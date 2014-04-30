@@ -136,6 +136,7 @@ public class AddScheduleActivity extends Activity {
             else {
                 text.setError(null);
                 tracePointList.add(text.getText().toString());
+                text.setText("");
                 list.invalidateViews();
             }
         }

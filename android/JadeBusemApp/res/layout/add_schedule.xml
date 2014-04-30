@@ -12,16 +12,14 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/tracePointText"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.12" />
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add trace point"
         android:onClick="addTracePointButton"
-        android:id="@+id/AddTracePointButton"
-        android:layout_weight="0.11" />
+        android:id="@+id/AddTracePointButton"/>
 
     <TextView
         android:layout_width="match_parent"
