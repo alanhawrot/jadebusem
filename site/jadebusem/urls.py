@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from jadebusem import settings
 
 from jadebusem_site.views import about, language
 
@@ -29,4 +30,7 @@ urlpatterns = patterns('',
     url(r'^schedules/', include('schedules.urls')),
     url(r'^about/', about),
     url(r'^language', language),
+)
+urlpatterns += patterns('',
+    (r"^static/(.*)$", 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )

@@ -1,0 +1,7 @@
+
+
+Static files fix:
+use below command to let heroku know where your settings file is
+heroku config:set DJANGO_SETTINGS_MODULE=jadebusem.settings
+Use this guide, but use double dirname for PROJECT_PATH
+https://devcenter.heroku.com/articles/django-assets

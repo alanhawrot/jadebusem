@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 22:53+0100\n"
+"POT-Creation-Date: 2014-04-29 20:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: SearchEngine/views.py:86 SearchEngine/views.py:121
+#: SearchEngine/views.py:87 SearchEngine/views.py:122
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
-#: SearchEngine/views.py:320 SearchEngine/views.py:355
+#: SearchEngine/views.py:321 SearchEngine/views.py:356
 #: templates/search_engine/search.html:34
 msgid "All"
 msgstr "Wszystkie"
 
-#: SearchEngine/views.py:343
+#: SearchEngine/views.py:344
 msgid "Sorry, we cant find any schedule."
-msgstr "Błąd podczas tworzenia rozkładu"
+msgstr "Przepraszamy, nie znaleziono żadnego rozkładu."
 
-#: SearchEngine/views.py:345
+#: SearchEngine/views.py:346
 msgid " Maybe try to search with interchanges."
 msgstr " Może spróbuj wyszukać połączenia z przesiadkami."
 
@@ -81,7 +80,7 @@ msgid "staff status"
 msgstr "stan personelu"
 
 #: Users/models.py:47
-msgid "Designates whether the user can log into this admin site."
+msgid "Designates whether the user can log into this admin "
 msgstr "Decyduje, czy użytkownik może zalogować się do sekcji administratora"
 
 #: Users/models.py:49
@@ -89,11 +88,8 @@ msgid "active"
 msgstr "aktywny"
 
 #: Users/models.py:50
-msgid ""
-"Designates whether this user should be treated as active. Unselect this "
-"instead of deleting accounts."
-msgstr ""
-"Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
+msgid "Designates whether this user should be treated as "
+msgstr "Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
 "zamiast usuwać konto."
 
 #: Users/models.py:52
@@ -128,11 +124,11 @@ msgstr "Zmiany zostały zapisane"
 msgid "Password is incorrect"
 msgstr "Hasło jest niepoprawne"
 
-#: jadebusem/settings.py:68
+#: jadebusem/settings.py:86
 msgid "English"
 msgstr "Angielski"
 
-#: jadebusem/settings.py:69
+#: jadebusem/settings.py:87
 msgid "Polish"
 msgstr "Polski"
 
@@ -152,7 +148,7 @@ msgstr "ścieżka_do_zdjęcia"
 msgid "verified"
 msgstr "zweryfikowany"
 
-#: schedules/models.py:14 templates/schedules/add.html:50
+#: schedules/models.py:14 templates/schedules/schedule.html:31
 msgid "Company name"
 msgstr "Nazwa firmy"
 
@@ -166,7 +162,7 @@ msgstr "Czy zweryfikowany"
 
 #: schedules/models.py:19
 msgid "Author: "
-msgstr "Autor"
+msgstr "Autor: "
 
 #: schedules/models.py:19
 msgid ", Company name: "
@@ -178,57 +174,44 @@ msgstr ", Nazwa firmy: "
 msgid "Address"
 msgstr "Adres"
 
-#: schedules/models.py:28
+#: schedules/models.py:29
 msgid "Poniedziałek"
 msgstr "Monday"
 
-#: schedules/models.py:29
+#: schedules/models.py:30
 msgid "Wtorek"
 msgstr "Tuesday"
 
-#: schedules/models.py:30
+#: schedules/models.py:31
 msgid "Środa"
 msgstr "Wednesday"
 
-#: schedules/models.py:31
+#: schedules/models.py:32
 msgid "Czwartek"
 msgstr "Thursday"
 
-#: schedules/models.py:32
+#: schedules/models.py:33
 msgid "Piątek"
 msgstr "Friday"
 
-#: schedules/models.py:33
+#: schedules/models.py:34
 msgid "Sobota"
 msgstr "Saturday"
 
-#: schedules/models.py:34
+#: schedules/models.py:35
 msgid "Niedziela"
 msgstr "Sunday"
 
-#: schedules/models.py:37
+#: schedules/models.py:38
 msgid "Departure time"
 msgstr "Czas odjazdu"
 
-#: schedules/views.py:14 templates/jadebusem_site/nav.html:4
-#: templates/schedules/add.html:12
-msgid "Add schedule"
-msgstr "Dodaj rozkład"
+#: schedules/views.py:90
+msgid "Successfully modified schedule."
+msgstr "Pomyślnie zmodyfikowano rozkład"
 
-#: schedules/views.py:17 templates/schedules/add.html:31
-msgid "Send picture"
-msgstr "Wyślij zdjęcie"
-
-#: schedules/views.py:20
-msgid "Fill form"
-msgstr "Wypełnij formularz"
-
-#: schedules/views.py:34
-msgid "Data verification"
-msgstr "Weryfikacja daty"
-
-#: schedules/views.py:43
-msgid "Successfully added schedule!"
+#: schedules/views.py:92
+msgid "Successfully added schedule."
 msgstr "Pomyślnie dodano rozkład"
 
 #: schedules/templatetags/filters.py:10
@@ -311,7 +294,7 @@ msgstr ""
 "zwiększa wiarygodność wśród klientów.<br>\n"
 "        "
 
-#: templates/jadebusem_site/base.html:42
+#: templates/jadebusem_site/base.html:45
 msgid "Footer"
 msgstr "Stopka"
 
@@ -325,71 +308,83 @@ msgstr "Język"
 
 #: templates/jadebusem_site/language.html:10
 #: templates/jadebusem_site/language.html:29
-#: templates/jadebusem_site/nav.html:6
+#: templates/jadebusem_site/nav.html:33
 msgid "Change language"
 msgstr "Zmień język"
 
-#: templates/jadebusem_site/nav.html:3 templates/search_engine/search.html:19
+#: templates/jadebusem_site/nav.html:6 templates/search_engine/search.html:19
 msgid "Search for connection"
 msgstr "Szukaj połączenia"
 
-#: templates/jadebusem_site/nav.html:5
+#: templates/jadebusem_site/nav.html:13
+msgid "My schedules"
+msgstr "Moje rozkłady"
+
+#: templates/jadebusem_site/nav.html:20
+msgid "Add schedule"
+msgstr "Dodaj rozkład"
+
+#: templates/jadebusem_site/nav.html:27
 msgid "About page"
 msgstr "Informacje"
 
-#: templates/jadebusem_site/user_panel.html:4
-msgid "Welcome"
-msgstr "Witaj"
-
-#: templates/jadebusem_site/user_panel.html:10
-msgid "Account settings"
-msgstr "Ustawienia konta"
-
-#: templates/jadebusem_site/user_panel.html:11
-msgid "Sign out"
-msgstr "Wyloguj się"
-
-#: templates/jadebusem_site/user_panel.html:13
+#: templates/jadebusem_site/user_panel.html:33
 msgid "Sign in"
 msgstr "Zaloguj się"
 
-#: templates/jadebusem_site/user_panel.html:14
+#: templates/jadebusem_site/user_panel.html:37
 #: templates/user/registration.html:12
 msgid "Register"
 msgstr "Zarejestruj się"
 
-#: templates/schedules/add.html:27
-msgid "Pick a photo"
-msgstr "Wybierz zdjęcie"
+#: templates/schedules/schedule.html:12 templates/schedules/schedule.html:21
+msgid "Modify schedule"
+msgstr "Modyfikuj rozkład"
 
-#: templates/schedules/add.html:52
+#: templates/schedules/schedule.html:19
+msgid "Create new schedule"
+msgstr "Stwórz nowy rozkład"
+
+#: templates/schedules/schedule.html:35
 msgid "Name of the carrier"
 msgstr "Nazwa przewoźnika"
 
-#: templates/schedules/add.html:56
-msgid "Next trace point"
-msgstr "Następny punkt trasy"
+#: templates/schedules/schedule.html:44
+msgid "Trace points"
+msgstr "Przystanki"
 
-#: templates/schedules/add.html:62
-msgid "Add tracepoint"
-msgstr "Dodaj przystanek"
+#: templates/schedules/schedule.html:61 templates/schedules/schedule.html:77
+msgid "Address.."
+msgstr "Adres.."
 
-#: templates/schedules/add.html:125
+#: templates/schedules/schedule.html:164
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
+
+#: templates/schedules/show_list.html:6
+msgid "Schedules list"
+msgstr "Lista rozkładów"
+
+#: templates/schedules/show_list.html:11
+msgid "My schedules list"
+msgstr "Lista moich rozkładów"
+
+#: templates/schedules/show_list.html:40
+msgid "You don't have own schedules"
+msgstr "Nie masz własnych rozkładów"
 
 #: templates/search_engine/search.html:29
 msgid "Pick company"
 msgstr "Firma"
 
 #: templates/search_engine/search.html:42
-#: templates/search_engine/search.html:76
+#: templates/search_engine/search.html:77
 msgid "Search"
 msgstr "Szukaj"
 
 #: templates/search_engine/search.html:48
 msgid "Pick trace points"
-msgstr "Dodaj przystanek"
+msgstr "Wybierz przystanki"
 
 #: templates/search_engine/search.html:53
 msgid "From..."
@@ -399,35 +394,35 @@ msgstr "Z..."
 msgid "To..."
 msgstr "Do..."
 
-#: templates/search_engine/search.html:70
+#: templates/search_engine/search.html:71
 msgid "Avoid interchanges"
 msgstr "Unikaj przesiadek"
 
-#: templates/search_engine/search.html:135
+#: templates/search_engine/search.html:136
 msgid "Trace proposition"
 msgstr "Propozycja trasy"
 
-#: templates/search_engine/search.html:135
+#: templates/search_engine/search.html:136
 msgid "Changes"
 msgstr "Przesiadki"
 
-#: templates/search_engine/search.html:140
+#: templates/search_engine/search.html:141
 msgid "Company"
 msgstr "Firma:"
 
-#: templates/search_engine/search.html:141
+#: templates/search_engine/search.html:142
 msgid "Tracepoints"
 msgstr "Przystanki:"
 
-#: templates/search_engine/search.html:142
+#: templates/search_engine/search.html:143
 msgid "Submitted by"
 msgstr "Wysłany przez"
 
-#: templates/search_engine/search.html:161
+#: templates/search_engine/search.html:162
 msgid "Show schedule"
 msgstr "Pokaż rozkład"
 
-#: templates/search_engine/search.html:173
+#: templates/search_engine/search.html:174
 msgid ""
 "\n"
 "                                                                            <td>Hours</"
@@ -584,6 +579,33 @@ msgstr "Wpisz hasło, aby potwierdzić"
 #: templates/user/user_settings.html:60
 msgid "Save"
 msgstr "Zapisz"
+
+#~ msgid "Send picture"
+#~ msgstr "Wyślij zdjęcie"
+
+#~ msgid "Fill form"
+#~ msgstr "Wypełnij formularz"
+
+#~ msgid "Data verification"
+#~ msgstr "Weryfikacja daty"
+
+#~ msgid "Welcome"
+#~ msgstr "Witaj"
+
+#~ msgid "Account settings"
+#~ msgstr "Ustawienia konta"
+
+#~ msgid "Sign out"
+#~ msgstr "Wyloguj się"
+
+#~ msgid "Pick a photo"
+#~ msgstr "Wybierz zdjęcie"
+
+#~ msgid "Next trace point"
+#~ msgstr "Następny punkt trasy"
+
+#~ msgid "Add tracepoint"
+#~ msgstr "Dodaj przystanek"
 
 #~ msgid "Distance"
 #~ msgstr "Dystans"
