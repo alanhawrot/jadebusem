@@ -119,21 +119,25 @@ def schedule(request, user, _schedule):
 @transaction.commit_manually
 def handle_schedule_change_request(data, errors, _schedule):
     try:
+
         if _schedule.id:
             _schedule.trace_points.all().delete()
             _schedule.departures.all().delete()
         _schedule.company = data['company_name']
         _schedule.save()
+        if not data['trace_points'] or len(data['trace_points']) < 2:
+            errors[_('trace points error ')] = _("At least two trace points are needed.")
         for trace_point in data['trace_points']:
             tp = ScheduleTracePoint(schedule_id=_schedule.id,
                                     position=trace_point.get('id'),
                                     address=trace_point.get('address'))
-            print trace_point.get('address')
             try:
                 tp.full_clean()
                 tp.save()
             except ValidationError as e:
                 errors.update(e.message_dict)
+
+        no_hours = True
         for day_num, day in enumerate(data['days']):
             for departure in day:
                 try:
@@ -142,13 +146,15 @@ def handle_schedule_change_request(data, errors, _schedule):
                         departure['hour'] = time.strptime(hour, "%H:%M")
                     except BaseException as e:
                         print e
-
-                    print hour
+                    if hour:
+                        no_hours = False
                     sd_model = ScheduleDate(schedule_id=_schedule.id, time=hour, day=day_num)
                     sd_model.full_clean()
                     sd_model.save()
                 except ValidationError as e:
                     errors.update(e.message_dict)
+        if no_hours:
+            errors[_('departures error')] = _("Need to add at least one departure.")
 
         try:
             _schedule.full_clean()
@@ -161,4 +167,5 @@ def handle_schedule_change_request(data, errors, _schedule):
         else:
             transaction.commit()
     except BaseException as E:
+        transaction.rollback()
         print E
