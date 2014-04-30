@@ -9,12 +9,14 @@
 .centered {
     text-align: center;
 }
+
 .keep-floating-children:after {
-   content: " ";
-   display: block;
-   height: 0;
-   clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
 }
+
 .floatingRight {
     float: right;
 }
@@ -176,34 +178,38 @@ nav {
     /*background: url("/static/images/li1.png") no-repeat 1px center;*/
     padding: 15px 0px 0px 0px;
 }
+
 .li-nav-main-menu span {
     margin-right: 10px;
 }
+
 li .li-nav-main-menu {
     /*background-image: url("/static/images/li2.png");*/
 }
+
 .li-nav-main-menu a:hover {
     text-decoration: none;
 }
+
 .li-nav-main-menu a:active {
     color: red;
 }
+
 select {
     height: 25px;
 }
+
 /*.select-form {*/
-    /*border: 1px solid #efefef;*/
-    /*-moz-appearance: none; *//* Firefox */
-    /*-webkit-appearance: none; *//* Safari and Chrome */
-    /*width: 200px;*/
-    /*height: 30px;*/
-    /*background: url("/static/images/arrow.png") no-repeat;*/
-    /*background-position: 182px 5px;*/
-    /*text-indent: 0.01px; *//* Removes default arrow from firefox*/
-    /*text-overflow: ""; *//*Removes default arrow from firefox*/
+/*border: 1px solid #efefef;*/
+/*-moz-appearance: none; *//* Firefox */
+/*-webkit-appearance: none; *//* Safari and Chrome */
+/*width: 200px;*/
+/*height: 30px;*/
+/*background: url("/static/images/arrow.png") no-repeat;*/
+/*background-position: 182px 5px;*/
+/*text-indent: 0.01px; *//* Removes default arrow from firefox*/
+/*text-overflow: ""; *//*Removes default arrow from firefox*/
 /*}*/
-
-
 
 .checkboxInput {
     width: auto !important;
@@ -232,7 +238,6 @@ img {
     pointer-events: none;
 }
 
-
 hr {
     border-top: 1px dotted #efefef;
     background: #ffffff;
@@ -244,4 +249,42 @@ table tr td a {
     width: 100%;
     border: 0px;
 
+}
+
+.day {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.day-header {
+    /*display: inline-block;*/
+    /*margin: 0px 10px 5px 0px;*/
+}
+
+.days .input-group-btn, .days .input-group, .day-label {
+    display: inline-block;
+    width: inherit !important;
+    vertical-align: top;
+}
+
+.day-label, .trace-points-label, .company-name-label {
+    background: #c5c5c5;
+    text-align: left;
+}
+
+.trace-points-label {
+    width: auto !important;
+}
+
+.departure {
+}
+
+.btn-add, .btn-remove {
+    display: inline-block;
+    width: 20px !important;
+    vertical-align: top;
+}
+
+.hour-field {
+    width: 62px !important;
 }
