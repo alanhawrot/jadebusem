@@ -1,14 +1,14 @@
 {% load i18n %}
 <div class="keep-floating-children floatingRight" style="margin-top: 25px;">
     {% if login %}
-        <div class="floatingRight btn-group-vertical">
+        <div class="btn-group-vertical floatingRight">
             <div class="input-group">
-                <div class="input-group-btn">
+                <div class="input-group-btn" style="width: auto">
                     <a class="btn btn-success btn-sm" href="{% url "Users.views.user_settings" user.user_id %}">
                         <span class="glyphicon glyphicon-user"></span>
                     </a>
                 </div>
-                <div class="input-group-btn">
+                <div class="input-group-btn" style="width: auto">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                         {{ user.name }}
                         <span class="caret" style="margin-left: 10px"></span>
