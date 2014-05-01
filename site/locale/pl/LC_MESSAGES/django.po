@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 19:56+0200\n"
+"POT-Creation-Date: 2014-05-01 19:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,7 @@ msgstr "ścieżka_do_zdjęcia"
 msgid "verified"
 msgstr "zweryfikowany"
 
-#: schedules/models.py:14 templates/schedules/schedule.html:31
+#: schedules/models.py:14 templates/schedules/schedule.html:32
 msgid "Company name"
 msgstr "Nazwa firmy"
 
@@ -345,6 +345,14 @@ msgstr "Dodaj rozkład"
 msgid "About page"
 msgstr "Informacje"
 
+#: templates/jadebusem_site/user_panel.html:17
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: templates/jadebusem_site/user_panel.html:18
+msgid "Sign out"
+msgstr "Wyloguj się"
+
 #: templates/jadebusem_site/user_panel.html:31
 msgid "Sign in"
 msgstr "Zaloguj się"
@@ -362,19 +370,19 @@ msgstr "Modyfikuj rozkład"
 msgid "Create new schedule"
 msgstr "Stwórz nowy rozkład"
 
-#: templates/schedules/schedule.html:35
+#: templates/schedules/schedule.html:36
 msgid "Name of the carrier"
 msgstr "Nazwa przewoźnika"
 
-#: templates/schedules/schedule.html:44
+#: templates/schedules/schedule.html:43
 msgid "Trace points"
 msgstr "Przystanki"
 
-#: templates/schedules/schedule.html:61 templates/schedules/schedule.html:77
+#: templates/schedules/schedule.html:60 templates/schedules/schedule.html:76
 msgid "Address.."
 msgstr "Adres.."
 
-#: templates/schedules/schedule.html:164
+#: templates/schedules/schedule.html:168
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
 
@@ -619,9 +627,6 @@ msgstr "Zapisz"
 
 #~ msgid "Account settings"
 #~ msgstr "Ustawienia konta"
-
-#~ msgid "Sign out"
-#~ msgstr "Wyloguj się"
 
 #~ msgid "Pick a photo"
 #~ msgstr "Wybierz zdjęcie"
