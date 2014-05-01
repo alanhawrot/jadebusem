@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-29 20:19+0200\n"
+"POT-Creation-Date: 2014-04-30 19:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,8 @@ msgstr "aktywny"
 
 #: Users/models.py:50
 msgid "Designates whether this user should be treated as "
-msgstr "Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
+msgstr ""
+"Decyduje, czy użytkownik powinien być traktowany jako aktywny. Odznacz to "
 "zamiast usuwać konto."
 
 #: Users/models.py:52
@@ -124,11 +125,11 @@ msgstr "Zmiany zostały zapisane"
 msgid "Password is incorrect"
 msgstr "Hasło jest niepoprawne"
 
-#: jadebusem/settings.py:86
+#: jadebusem/settings.py:89
 msgid "English"
 msgstr "Angielski"
 
-#: jadebusem/settings.py:87
+#: jadebusem/settings.py:90
 msgid "Polish"
 msgstr "Polski"
 
@@ -213,6 +214,22 @@ msgstr "Pomyślnie zmodyfikowano rozkład"
 #: schedules/views.py:92
 msgid "Successfully added schedule."
 msgstr "Pomyślnie dodano rozkład"
+
+#: schedules/views.py:129
+msgid "trace points error "
+msgstr "błąd wprzystankach "
+
+#: schedules/views.py:129
+msgid "At least two trace points are needed."
+msgstr "Conajmniej dwa punkty trasy muszą zostać wybrane."
+
+#: schedules/views.py:157
+msgid "departures error"
+msgstr "błąd w odjazdach"
+
+#: schedules/views.py:157
+msgid "Need to add at least one departure."
+msgstr "Trzeba dodać conajmniej jedną godzinę."
 
 #: schedules/templatetags/filters.py:10
 msgid "Monday"
@@ -328,11 +345,11 @@ msgstr "Dodaj rozkład"
 msgid "About page"
 msgstr "Informacje"
 
-#: templates/jadebusem_site/user_panel.html:33
+#: templates/jadebusem_site/user_panel.html:31
 msgid "Sign in"
 msgstr "Zaloguj się"
 
-#: templates/jadebusem_site/user_panel.html:37
+#: templates/jadebusem_site/user_panel.html:35
 #: templates/user/registration.html:12
 msgid "Register"
 msgstr "Zarejestruj się"
@@ -368,6 +385,14 @@ msgstr "Lista rozkładów"
 #: templates/schedules/show_list.html:11
 msgid "My schedules list"
 msgstr "Lista moich rozkładów"
+
+#: templates/schedules/show_list.html:29
+msgid "Edit"
+msgstr "Zmień"
+
+#: templates/schedules/show_list.html:35
+msgid "Delete"
+msgstr "Usuń"
 
 #: templates/schedules/show_list.html:40
 msgid "You don't have own schedules"

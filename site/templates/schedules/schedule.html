@@ -23,11 +23,12 @@
     </h3>
     <form id="scheduleForm" data-id="{{ schedule.id }}" method="post" enctype="multipart/form-data">
         <input name="schedule_id" type="hidden" value="{{ schedule_id }}">
+
         <div class="floating">
 
             {# Company name #}
             <div class="input-group">
-                <div class="input-group-addon" style="background: #c5c5c5;">
+                <div class="input-group-addon company-name-label">
                     {% trans "Company name" %}
                 </div>
                 <input class="form-control"
@@ -36,23 +37,21 @@
             </div>
 
             {# Trace points #}
-            <span>
-                <div class="trace-point-control input-group" style="margin: 20px 0px 5px 0px">
+            <div class="trace-point-control input-group" style="margin: 20px 0px 5px 0px">
 
-                                <span class="input-group-addon"
-                                      style=" width: inherit !important; background: #c5c5c5; text-align: left">
-                                    {% trans "Trace points" %}
-                                </span>
-
-                    <div class="input-group-btn">
-                        <input class="btn btn-success" style="width: 20px"
-                               name="add-trace-point" type="button"
-                               value="+"/>
-
-                    </div>
+                <div class="input-group-addon trace-points-label">
+                    {% trans "Trace points" %}
                 </div>
 
-                <div class="trace-points">
+                <div class="input-group-btn">
+                    <input class="btn btn-success" style="width: 20px"
+                           name="add-trace-point" type="button"
+                           value="+"/>
+
+                </div>
+            </div>
+
+            <div class="trace-points">
                         <span class="input-group trace-point hidden"
                               data-trace-point-id="">
                             <span class="input-group-addon trace-point-number"></span>
@@ -61,14 +60,14 @@
                                    value="" placeholder="{% trans 'Address..' %}"/>
 
                             <div class="input-group-btn">
-                                <input class="btn btn-danger" style="width: 20px"
+                                <input class="btn btn-danger btn-remove"
                                        name="remove-trace-point" type="button"
                                        value="-"/>
                             </div>
                         </span>
-                    {% for tracePoint in schedule.trace_points %}
-                        <span class="input-group trace-point"
-                              data-trace-point-id="{{ tracePoint.id }}">
+                {% for tracePoint in schedule.trace_points %}
+                    <span class="input-group trace-point"
+                          data-trace-point-id="{{ tracePoint.id }}">
                                         <span class="input-group-addon trace-point-number">
                                             {{ forloop.counter }}
                                         </span>
@@ -77,14 +76,13 @@
                                                value="{{ tracePoint.address }}" placeholder="{% trans 'Address..' %}"/>
 
                                         <div class="input-group-btn">
-                                            <input class="btn btn-danger" style="width: 20px"
+                                            <input class="btn btn-danger btn-remove"
                                                    name="remove-trace-point" type="button"
                                                    value="-"/>
                                         </div>
                         </span>
-                    {% endfor %}
-                </div>
-            </span>
+                {% endfor %}
+            </div>
             <br/>
 
             {# Departures #}
@@ -92,48 +90,54 @@
             <div class="days">
                 {% load filters %}
                 {% for day in schedule.days %}
-                    <span class="floating day" style="display: inline-block;"
-                          data-day-id="{{ forloop.counter0 }}">
-                            <span class="input-group" style="margin: 0px 10px 5px 0px">
-                                <span class="input-group-addon" style="background: #c5c5c5;">
+                    <div class="day" style="display: inline-block;" data-day-id="{{ forloop.counter0 }}">
+                        <div style="margin-bottom: 10px">
+                            <span class="input-group day-header">
+                                <div class="input-group-addon btn-lg day-label" style="position: relative; left: 3px; height: 32px">
                                     {{ forloop.counter0|days_of_week }}
-                                </span>
+                                </div>
 
-                                <div class="input-group-btn">
-                                    <input class="btn btn-success" style="width: 20px"
+                                <span class="input-group-btn">
+                                    <input class="btn btn-success btn-add" style="height: 32px"
                                            name="add-hour" type="button"
                                            value="+"/>
-                                </div>
+                                </span>
                             </span>
 
-                            <span class="departures" style="display: inline-block;">
-                                <span class="input-group departure hidden" data-departure-id="">
-                                        <input class="form-control" style="width: 62px;"
+                        </div>
+                            <span class="departures">
+                                <div class="departure hidden" data-departure-id="">
+                                    <div class="input-group">
+                                        <input class="form-control hour-field"
                                                name="hour" type="text"
                                                value="" placeholder="8:00"/>
 
                                         <div class="input-group-btn">
-                                            <input class="btn btn-danger" style="width: 20px"
+                                            <input class="btn btn-danger btn-remove"
                                                    name="remove-hour" type="button"
                                                    value="-"/>
 
                                         </div>
-                                    </span>
+                                    </div>
+                                </div>
                                 {% for departure in day %}
-                                    <span class="input-group departure" data-departure-id="{{ departure.id }}">
-                                        <input class="form-control" style="width: 62px;"
-                                               name="hour" type="text"
-                                               value="{{ departure.hour | date:"H:i" }}" placeholder="8:00"/>
+                                    <div class="departure"
+                                         data-departure-id="{{ departure.id }}">
+                                        <div class="input-group">
+                                            <input class="form-control hour-field"
+                                                   name="hour" type="text"
+                                                   value="{{ departure.hour | date:"H:i" }}" placeholder="8:00"/>
 
-                                        <div class="input-group-btn">
-                                            <input class="btn btn-danger" style="width: 20px"
-                                                   name="remove-hour" type="button"
-                                                   value="-"/>
+                                            <div class="input-group-btn">
+                                                <input class="btn btn-danger btn-remove"
+                                                       name="remove-hour" type="button"
+                                                       value="-"/>
+                                            </div>
                                         </div>
-                                    </span>
+                                    </div>
                                 {% endfor %}
                             </span>
-                        </span>
+                    </div>
                 {% endfor %}
             </div>
             <div class="clearing"></div>
