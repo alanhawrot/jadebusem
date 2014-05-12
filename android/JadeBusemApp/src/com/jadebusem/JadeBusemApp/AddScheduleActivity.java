@@ -141,7 +141,7 @@ public class AddScheduleActivity extends Activity {
             }
         }
         else {
-            text.setError("Trace point must have 2 characters at least");
+             text.setError("Trace point must have 2 characters at least");
         }
     }
 
