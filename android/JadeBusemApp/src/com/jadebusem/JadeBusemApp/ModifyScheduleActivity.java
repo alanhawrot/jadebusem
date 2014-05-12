@@ -131,6 +131,11 @@ public class ModifyScheduleActivity extends Activity {
             startActivity(intent);
             finish();
         }
+        else
+        {
+            TextView text = (TextView) findViewById(R.id.tracePointText);
+            text.setError("You need at least two stops added");
+        }
     }
 
 /*####################################################################################################
