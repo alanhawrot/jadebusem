@@ -17,7 +17,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add trace point"
+        android:text="Add tracepoint"
         android:onClick="addTracePointButton"
         android:id="@+id/AddTracePointButton"/>
 
@@ -35,7 +35,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Trace Point"
+        android:text="Save TracePoints"
         android:onClick="saveTracePointButton"
         android:id="@+id/button"/>
 </LinearLayout>
