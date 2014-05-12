@@ -91,20 +91,26 @@ public class AddScheduleActivity extends Activity {
 # Action of saveTracePointButton -> create scheduleTracePoint and start AddScheduleDatesActivity
 ####################################################################################################*/
     public void saveTracePointButton(View view) {
-        String schedule_name = tracePointList.get(0)+"->"+tracePointList.get(tracePointList.size()-1);
-        Schedule schedule = new Schedule();
-        schedule.setName(schedule_name);
-        for(int i=0;i<tracePointList.size();i++)
-        {
-            ScheduleTracePoint scheduleTracePoint = new ScheduleTracePoint();
-            scheduleTracePoint.setAddress(tracePointList.get(i));
-            schedule.getScheduleTracePoints().add(scheduleTracePoint);
-        }
+        if(tracePointList.size() > 1) {
+            String schedule_name = tracePointList.get(0) + "->" + tracePointList.get(tracePointList.size() - 1);
+            Schedule schedule = new Schedule();
+            schedule.setName(schedule_name);
+            for (int i = 0; i < tracePointList.size(); i++) {
+                ScheduleTracePoint scheduleTracePoint = new ScheduleTracePoint();
+                scheduleTracePoint.setAddress(tracePointList.get(i));
+                schedule.getScheduleTracePoints().add(scheduleTracePoint);
+            }
 
-        Intent intent = new Intent(this, AddScheduleDatesActivity.class);
-        intent.putExtra("schedule", schedule);
-        startActivity(intent);
-        finish();
+            Intent intent = new Intent(this, AddScheduleDatesActivity.class);
+            intent.putExtra("schedule", schedule);
+            startActivity(intent);
+            finish();
+        }
+        else
+        {
+            TextView text = (TextView) findViewById(R.id.tracePointText);
+            text.setError("You need at least two stops added");
+        }
     }
 
 /*####################################################################################################
