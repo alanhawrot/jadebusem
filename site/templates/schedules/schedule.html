@@ -1,0 +1,173 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {% trans "Modify schedule" %}
+{% endblock %}
+
+{% block content %}
+
+    <h3>
+        {% if not schedule.id %}
+            {% trans "Create new schedule" %}
+        {% else %}
+            {% trans "Modify schedule" %}
+        {% endif %}
+    </h3>
+    <form id="scheduleForm" data-id="{{ schedule.id }}" method="post" enctype="multipart/form-data">
+        <input name="schedule_id" type="hidden" value="{{ schedule_id }}">
+
+        <div class="floating">
+
+            {# Company name #}
+            <div class="input-group">
+                <div class="input-group-addon company-name-label">
+                    {% trans "Company name" %}
+                </div>
+                <input class="form-control"
+                       name="company-name" type="text"
+                       placeholder={% trans "Name of the carrier" %} value="{{ schedule.company }}"/>
+            </div>
+
+            {# Trace points #}
+            <div class="trace-point-control input-group" style="margin: 20px 0px 5px 0px">
+
+                <div class="input-group-addon trace-points-label">
+                    {% trans "Trace points" %}
+                </div>
+
+                <div class="input-group-btn">
+                    <input class="btn btn-success" style="width: 20px"
+                           name="add-trace-point" type="button"
+                           value="+"/>
+
+                </div>
+            </div>
+
+            <div class="trace-points">
+                        <span class="input-group trace-point hidden"
+                              data-trace-point-id="">
+                            <span class="input-group-addon trace-point-number"></span>
+                            <input class="form-control"
+                                   name="address" type="text"
+                                   value="" placeholder="{% trans 'Address..' %}"/>
+
+                            <div class="input-group-btn">
+                                <input class="btn btn-danger btn-remove"
+                                       name="remove-trace-point" type="button"
+                                       value="-"/>
+                            </div>
+                        </span>
+                {% for tracePoint in schedule.trace_points %}
+                    <span class="input-group trace-point"
+                          data-trace-point-id="{{ tracePoint.id }}">
+                                        <span class="input-group-addon trace-point-number">
+                                            {{ forloop.counter }}
+                                        </span>
+                                        <input class="form-control"
+                                               name="address" type="text"
+                                               value="{{ tracePoint.address }}" placeholder="{% trans 'Address..' %}"/>
+
+                                        <div class="input-group-btn">
+                                            <input class="btn btn-danger btn-remove"
+                                                   name="remove-trace-point" type="button"
+                                                   value="-"/>
+                                        </div>
+                        </span>
+                {% endfor %}
+            </div>
+            <br/>
+
+            {# Departures #}
+
+            <div class="days">
+                {% load filters %}
+                {% for day in schedule.days %}
+                    <div class="day" style="display: inline-block;" data-day-id="{{ forloop.counter0 }}">
+                        <div style="margin-bottom: 10px">
+                            <span class="input-group day-header">
+                                <div class="input-group-addon btn-lg day-label" style="position: relative; left: 3px; height: 32px">
+                                    {{ forloop.counter0|days_of_week }}
+                                </div>
+
+                                <span class="input-group-btn">
+                                    <input class="btn btn-success btn-add" style="height: 32px"
+                                           name="add-hour" type="button"
+                                           value="+"/>
+                                </span>
+                            </span>
+
+                        </div>
+                            <span class="departures">
+                                <div class="departure hidden" data-departure-id="">
+                                    <div class="input-group">
+                                        <input class="form-control hour-field"
+                                               name="hour" type="text"
+                                               value="" placeholder="8:00"/>
+
+                                        <div class="input-group-btn">
+                                            <input class="btn btn-danger btn-remove"
+                                                   name="remove-hour" type="button"
+                                                   value="-"/>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for departure in day %}
+                                    <div class="departure"
+                                         data-departure-id="{{ departure.id }}">
+                                        <div class="input-group">
+                                            <input class="form-control hour-field"
+                                                   name="hour" type="text"
+                                                   value="{{ departure.hour | date:"H:i" }}" placeholder="8:00"/>
+
+                                            <div class="input-group-btn">
+                                                <input class="btn btn-danger btn-remove"
+                                                       name="remove-hour" type="button"
+                                                       value="-"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </span>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="clearing"></div>
+
+            {# Ajax error responses #}
+
+            <div class="response-errors alert alert-danger hidden" style="margin:20px; padding-left:30px;">
+                <ul>
+                    <div class="response-error">
+                        <li>
+                            <label class="error-label"></label>
+                            <span>:</span>
+                            <span class="error-message"></span>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+
+            {# Ajax success responses #}
+            <div class="response-success alert alert-success hidden" style="margin:20px; padding-left:30px;"></div>
+
+            <div class="clearing"></div>
+
+            {# submit button #}
+            <div class="centered">
+                <input class="formMargin btn btn-primary btn-lg"
+                       name="submit-schedule" type="button"
+                       value={% trans "Send schedule" %}/>
+            </div>
+            <br/>
+        </div>
+    </form>
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from Users.models import JadeBusemUser
 from forms import RegisterForm
-from django.template import Context
+from django.template import Context, RequestContext
 from forms import SignInForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -33,7 +33,7 @@ def register(request):
                     user.address = request.POST['address']
                     user.company_name = request.POST['company_name']
                     user.save()
-                    return render_to_response('user/thanks.html')
+                    return render(request, 'user/thanks.html', Context({}))
                 except:
                     email_error = _("This e-mail is already in use")
             else:
@@ -58,7 +58,7 @@ def register(request):
         # Create blank form - we get here only at first time
         f = RegisterForm()
         context = Context({'form': f})
-    return render_to_response('user/registration.html', context)
+    return render(request, 'user/registration.html', context)
 
 
 def sign_in(request):
@@ -77,12 +77,12 @@ def sign_in(request):
                 request.session['email'] = user.email
                 request.session['name'] = user.first_name
                 request.session['user_id'] = user.user_id
-                return render(request, 'jadebusem_site/index.html', {'user': request.session, 'login': True})
+                return HttpResponseRedirect('/', Context({'user': request.session, 'login': True}))
             else:
                 error = True
     else:
         form = SignInForm()
-    return render(request, 'user/sign_in.html', {'form': form, 'error': error})
+    return render(request, 'user/sign_in.html', Context({'form': form, 'error': error}))
 
 def log_out(request):
     request.session.flush()
@@ -152,4 +152,4 @@ def user_settings(request, userid):
                             'user': request.session,
                             'login': login
                             })
-    return render_to_response('user/user_settings.html', context)
+    return render(request, 'user/user_settings.html', context)

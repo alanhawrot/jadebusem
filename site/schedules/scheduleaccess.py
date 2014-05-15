@@ -64,7 +64,7 @@ class BaseScheduleAccessManager(object):
 
 class DefaultScheduleAccessManager(BaseScheduleAccessManager):
     def can_delete(self):
-        return False
+        return True
 
     def can_write(self):
         return self.user.id == self.schedule.author.id

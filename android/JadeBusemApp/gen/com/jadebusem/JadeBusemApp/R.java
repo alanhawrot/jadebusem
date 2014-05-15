@@ -87,6 +87,7 @@ public final class R {
         public static final int details=0x7f030003;
         public static final int main=0x7f030004;
         public static final int schedule_days_view=0x7f030005;
+        public static final int search=0x7f030006;
     }
     public static final class menu {
         public static final int main_activity_actions=0x7f060000;
@@ -114,9 +115,15 @@ public final class R {
         public static final int detailsThursday=0x7f050010;
         public static final int detailsTuesday=0x7f05000e;
         public static final int detailsWednesday=0x7f05000f;
+        public static final int main_activity_add_button_text=0x7f050020;
+        public static final int main_activity_main_text=0x7f05001f;
         public static final int modify_schedule=0x7f050016;
         public static final int new_schedule=0x7f050002;
         public static final int ok=0x7f050007;
+        public static final int search_activity_main_text=0x7f05001e;
+        public static final int search_alert_dialog_content=0x7f05001c;
+        public static final int search_alert_dialog_positive=0x7f05001d;
+        public static final int search_alert_dialog_title=0x7f05001b;
         public static final int search_schedules=0x7f050004;
         public static final int set_time=0x7f050006;
     }

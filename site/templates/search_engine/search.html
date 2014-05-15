@@ -38,7 +38,7 @@
                                         </select></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="centered"><input class="submitInput" type="submit"
+                                    <td colspan="2" class="centered"><input class="btn btn-primary" type="submit"
                                                                             value={% trans "Search" %}>
                                     </td>
                                 </tr>
@@ -49,19 +49,20 @@
                             <table class="formTable">
                                 <tr>
                                     <td colspan="2">
-                                        <input class="textInput" type="text" name="from" value="{{ search_from }}"
+                                        <input class="form-control" type="text" name="from" value="{{ search_from }}"
                                                placeholder={% trans "From..." %}>
                                         <input type="hidden" id="start" value="{{ search_from }}"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <input class="textInput" type="text" name="to" value="{{ search_to }}"
+                                        <input class="form-control" type="text" name="to" value="{{ search_to }}"
                                                placeholder={% trans "To..." %}>
                                         <input type="hidden" id="end" value="{{ search_to }}">
                                     </td>
                                 </tr>
                                 <tr>
+
                                     <td><input class="checkboxInput" type="checkbox" name="interchange"
                                                value="Interchange"
                                                id="interchange"/>
@@ -72,7 +73,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="centered"><input class="submitInput" type="submit"
+                                    <td colspan="2" class="centered"><input class="btn btn-success" type="submit"
                                                                             value={% trans "Search" %}></td>
                                 </tr>
 

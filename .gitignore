@@ -1,10 +1,18 @@
 #PyCharm files
 **/.idea
+
+#Wirtual environment
+venv
+
+#django collected static files
+site/staticfiles
+
 #Python and django related temporary files.
 **/*.log
 **/*.pot
 **/*.pyc
 local_settings.py
+
 #Android bin folder
 android/JadeBusemApp/bin/*
 android/JadeBusemApp/out/*
