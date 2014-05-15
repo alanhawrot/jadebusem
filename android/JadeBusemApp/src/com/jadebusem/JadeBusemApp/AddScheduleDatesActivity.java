@@ -117,7 +117,7 @@ public class AddScheduleDatesActivity extends Activity {
             }
         }
 
-        datasource = new ScheduleDAO(this);
+        datasource = ScheduleDAO.getInstance(this);
         datasource.open();
 
         datasource.createSchedule(schedule.getName(), schedule.getScheduleTracePoints(), schedule.getScheduleDates());
@@ -150,7 +150,7 @@ public class AddScheduleDatesActivity extends Activity {
             minuteString = '0' + minuteString;
         }
 
-        return hourString + " : " + minuteString;
+        return hourString + ":" + minuteString;
     }
 
 /*####################################################################################################
