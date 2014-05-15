@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -185,6 +187,19 @@ public class ModifyScheduleActivity extends Activity {
     public Activity getActivity()
     {
         return this;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    	case android.R.id.home:
+    		Intent intent = new Intent();
+    		intent.putExtra(MainActivity.SCHEDULE_DETAILS, schedule);
+    		navigateUpTo(intent);
+    		finish();
+    		return true;
+    	}
+    	return super.onOptionsItemSelected(item);
     }
 
 }
