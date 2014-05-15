@@ -24,7 +24,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DAY = "day";
 
     private static final String DATABASE_NAME = "jb.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database creation sql statement
     private static final String CREATE_TABLE_SCHEDULE = "create table "
@@ -73,6 +73,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 
 public class ScheduleDAO {
 
+    private static volatile ScheduleDAO instance = null;
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
@@ -84,6 +85,17 @@ public class ScheduleDAO {
 
     public ScheduleDAO(Context context) {
         dbHelper = new MySQLiteHelper(context);
+    }
+
+    public static ScheduleDAO getInstance(Context context) {
+        if (instance == null) {
+            synchronized (ScheduleDAO.class) {
+                if (instance == null) {
+                    instance = new ScheduleDAO(context);
+                }
+            }
+        }
+        return instance;
     }
 
     public void open() throws SQLException {
