@@ -5,6 +5,12 @@
     <string name="new_schedule">Add New Schedule</string>
     <string name="action_search">Search Schedule</string>
     <string name="search_schedules">Search Schedules</string>
+    <string name="add_schedule_dates">Schedule Dates</string>
+    <string name="set_time">Set Time</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_title">"Delete Time"</string>
+    <string name="delete_title_trace_point">"Delete Trace Point"</string>
     <string name="detailsNameOfSchedule">Name of the schedule</string>
     <string name="detailsRoute">Route:</string>
     <string name="detailsMonday">Monday:</string>

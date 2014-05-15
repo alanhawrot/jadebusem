@@ -61,6 +61,67 @@ public class ScheduleDate implements Serializable {
         return days.MONDAY;
     }
 
+    public days toEnumFromInt(int day)
+    {
+        if(day == 0){
+            return days.MONDAY;
+        }
+        else if(day == 1){
+            return days.TUESDAY;
+        }
+        else if(day == 2){
+            return days.WEDNESDAY;
+        }
+        else if(day == 3){
+            return days.THURSDAY;
+        }
+        else if(day == 4){
+            return days.FRIDAY;
+        }
+        else if(day == 5){
+            return days.SATURDAY;
+        }
+        else if(day == 6){
+            return days.SUNDAY;
+        }
+        return days.MONDAY;
+    }
+
+    public int toIntFromEnum(days day)
+    {
+        if(day.equals(day.MONDAY))
+        {
+            return 0;
+        }
+        else if(day.equals(day.TUESDAY))
+        {
+            return 1;
+        }
+        else if(day.equals(day.WEDNESDAY))
+        {
+            return 2;
+        }
+        else if(day.equals(day.THURSDAY))
+        {
+            return 3;
+        }
+        else if(day.equals(day.FRIDAY))
+        {
+            return 4;
+        }
+        else if(day.equals(day.SATURDAY))
+        {
+            return 5;
+        }
+        else if(day.equals(day.SUNDAY))
+        {
+            return 6;
+        }
+        return 0;
+    }
+
+
+    // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
         return time;
