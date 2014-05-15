@@ -43,6 +43,7 @@ public final class R {
     public static final class layout {
         public static final int details=0x7f030000;
         public static final int main=0x7f030001;
+        public static final int search=0x7f030002;
     }
     public static final class menu {
         public static final int main_activity_actions=0x7f050000;
@@ -66,8 +67,14 @@ public final class R {
         public static final int detailsThursday=0x7f04000a;
         public static final int detailsTuesday=0x7f040008;
         public static final int detailsWednesday=0x7f040009;
+        public static final int main_activity_add_button_text=0x7f04001a;
+        public static final int main_activity_main_text=0x7f040019;
         public static final int modify_schedule=0x7f040010;
         public static final int new_schedule=0x7f040002;
+        public static final int search_activity_main_text=0x7f040018;
+        public static final int search_alert_dialog_content=0x7f040016;
+        public static final int search_alert_dialog_positive=0x7f040017;
+        public static final int search_alert_dialog_title=0x7f040015;
         public static final int search_schedules=0x7f040004;
     }
 }
