@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
+from django.template import RequestContext, Context
 from schedules.models import Schedule
 from schedules.models import ScheduleTracePoint
 from schedules.models import ScheduleDate
@@ -362,7 +363,7 @@ def search(request):
 
     companies = Schedule.objects.values('company').distinct()
 
-    return render_to_response('search_engine/search.html', {
+    return render(request, 'search_engine/search.html', {
         'login': login,
         'user': request.session,
         'error': error,

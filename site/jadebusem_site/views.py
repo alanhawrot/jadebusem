@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.template import RequestContext, Context
 from django.utils import translation
 
 def about(request):
@@ -9,8 +10,7 @@ def about(request):
 
 
 def language(request):
-    current_lang = translation.get_language()
     if 'email' in request.session:
-        return render(request, 'jadebusem_site/language.html', {'login': True, 'user': request.session, 'current_lang': current_lang})
+        return render(request, 'jadebusem_site/language.html', Context({'login': True, 'user': request.session}))
     else:
-        return render(request, 'jadebusem_site/language.html', {'current_lang': current_lang})
+        return render(request, 'jadebusem_site/language.html', Context({}))

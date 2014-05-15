@@ -11,7 +11,7 @@ def upload_url(self, instance, filename):
 
 class Schedule(models.Model):
     author =        models.ForeignKey(JadeBusemUser)
-    company =       models.CharField(_('Company name'), max_length=200, blank=True, null=True)
+    company =       models.CharField(_('Company name'), max_length=200, blank=False, null=False)
     image_path =    models.FileField(_("Image path"), upload_to=upload_url, blank=True, null=True)
     verified =      models.BooleanField(_("Is verified"), default=False)
 
@@ -20,8 +20,9 @@ class Schedule(models.Model):
 
 
 class ScheduleTracePoint(models.Model):
-    schedule =      models.ForeignKey(Schedule)
+    schedule =      models.ForeignKey(Schedule, related_name='trace_points')
     address =       models.CharField(_("Address"), max_length=200)
+    position =      models.IntegerField()
 
 
 class ScheduleDate(models.Model):
@@ -33,6 +34,6 @@ class ScheduleDate(models.Model):
             (5, _(u'Sobota')),
             (6, _(u'Niedziela'))]
 
-    schedule =      models.ForeignKey(Schedule)
+    schedule =      models.ForeignKey(Schedule, related_name='departures')
     time =          models.TimeField(_("Departure time"))
     day =           models.PositiveSmallIntegerField(choices=days)

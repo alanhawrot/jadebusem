@@ -10,6 +10,13 @@
     text-align: center;
 }
 
+.keep-floating-children:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
 .floatingRight {
     float: right;
 }
@@ -103,13 +110,12 @@ footer {
     padding-top: 30px;
 }
 
-ul {
+.ul-nav-main-menu {
     list-style-type: none;
 
 }
 
 body {
-    font-family: Calibri, Consolas, "Courier New";
     font-size: 14px;
     color: #262423;
     border: 0px;
@@ -146,18 +152,20 @@ body {
     right: 50%;
     position: relative;
 }
+
 .inner-center {
     float: right;
     right: -50%;
     position: relative;
 }
-a {
+
+.li-nav-main-menu a {
     color: #000000;
     text-decoration: none;
     font-weight: 500;
 }
 
-a:hover {
+.li-nav-main-menu a:hover {
     color: #443f3c;
 }
 
@@ -166,77 +174,51 @@ nav {
     width: 250px;
 }
 
-li {
-    background-image: url("/static/images/li1.png");
-    background-repeat: no-repeat;
-    background-position: 1px center;
-    padding: 1px;
-    padding-left: 20px;
+.li-nav-main-menu {
+    /*background: url("/static/images/li1.png") no-repeat 1px center;*/
+    padding: 15px 0px 0px 0px;
 }
 
-li li {
-    background-image: url("/static/images/li2.png");
+.li-nav-main-menu span {
+    margin-right: 10px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-input {
-    border: 1px solid goldenrod;
-=======
-=======
->>>>>>> 69ad516cba9bb228258fe01fca684e7850bc9909
-input :{
-    border: 1px solid #efefef;
->>>>>>> 69ad516cba9bb228258fe01fca684e7850bc9909
+li .li-nav-main-menu {
+    /*background-image: url("/static/images/li2.png");*/
+}
 
+.li-nav-main-menu a:hover {
+    text-decoration: none;
+}
+
+.li-nav-main-menu a:active {
+    color: red;
 }
 
 select {
-    border: 1px solid #efefef;
-    -moz-appearance: none; /* Firefox */
-    -webkit-appearance: none; /* Safari and Chrome */
-    width: 200px;
-    height: 24px;
-    background: url("/static/images/arrow.png") no-repeat;
-    background-position: 182px 5px;
-    text-indent: 0.01px; /* Removes default arrow from firefox*/
-    text-overflow: ""; /*Removes default arrow from firefox*/
+    height: 25px;
 }
 
-.submitInput {
-    width: 100px;
-    height: 30px;
-    background: #f7f6f6;
-    border: 1px solid #efefef;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    cursor: hand;
-}
-
-.submitInput:hover {
-    background: #eeeeee;
-}
-
-.textInput {
-    height: 24px;
-    width: 200px;
-}
+/*.select-form {*/
+/*border: 1px solid #efefef;*/
+/*-moz-appearance: none; *//* Firefox */
+/*-webkit-appearance: none; *//* Safari and Chrome */
+/*width: 200px;*/
+/*height: 30px;*/
+/*background: url("/static/images/arrow.png") no-repeat;*/
+/*background-position: 182px 5px;*/
+/*text-indent: 0.01px; *//* Removes default arrow from firefox*/
+/*text-overflow: ""; *//*Removes default arrow from firefox*/
+/*}*/
 
 .checkboxInput {
     width: auto !important;
 }
 
-.radioInput {
-
-}
 img {
     border: 0px;
 }
+
 .fileInput {
     border: 0px !important;
     display: block !important;
@@ -256,27 +238,9 @@ img {
     pointer-events: none;
 }
 
-.selectOption {
-
-}
-
-.scheduleHourNavigator {
-    width: 24px;
-    height: 24px;
-}
-
-.scheduleHour {
-    width: 50px;
-}
-
 hr {
     border-top: 1px dotted #efefef;
     background: #ffffff;
-}
-
-.centeredBlock {
-    display: inline-block;
-<!-- ? ? ? -->
 }
 
 table tr td a {
@@ -287,18 +251,40 @@ table tr td a {
 
 }
 
-table tr td a:hover {
-    color: #443f3c;
+.day {
+    display: inline-block;
+    vertical-align: top;
 }
 
-.scheduleTable td {
-    margin: 0px;
-    border: 0px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+.day-header {
+    /*display: inline-block;*/
+    /*margin: 0px 10px 5px 0px;*/
 }
 
-.tracePoint:hover a {
-    background: #f7f6f6;
-    color: #443f3c;
+.days .input-group-btn, .days .input-group, .day-label {
+    display: inline-block;
+    width: inherit !important;
+    vertical-align: top;
+}
+
+.day-label, .trace-points-label, .company-name-label {
+    background: #c5c5c5;
+    text-align: left;
+}
+
+.trace-points-label {
+    width: auto !important;
+}
+
+.departure {
+}
+
+.btn-add, .btn-remove {
+    display: inline-block;
+    width: 20px !important;
+    vertical-align: top;
+}
+
+.hour-field {
+    width: 62px !important;
 }

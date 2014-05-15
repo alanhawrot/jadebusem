@@ -1,29 +1,42 @@
+# coding=utf-8
 # Django settings for jadebusem project.
+
+import django.conf.global_settings as DEFAULT_SETTINGS
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
     ('alanhawrot', 'alan.hawrot@gmail.com'),
     ('michalsemik', 'michal.semik@gmail.com'),
     ('mateuszbobinski', 'mat.bobinski@gmail.com'),
 )
 
-
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-         'NAME': 'd1kj79e4uus55f',                      # Or path to database file if using sqlite3.
-         # The following settings are not used with sqlite3:
-         'USER': 'hriaoepqihdupl',
-         'PASSWORD': 'o6RZgPY-qQX6GCqJLCzlcHydH6',
-         'HOST': 'ec2-184-73-254-144.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-         'PORT': '5432',
-    }
+    #######################################################################################
+    #
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! UWAGA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    #
+    # Przy konfiguracji lokalnej proszę o pozostawienie tej konfiguracji bez zmian.
+    # Nadpisywać jedynie wpis 'local', 'default' nie ruszać.
+    # To może być konieczne bo na dole dzieje się konfiguracja związana z heroku.
+    #
+    #######################################################################################
+    'default': { #konfiguracja heroku
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'd1kj79e4uus55f', # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'hriaoepqihdupl',
+        'PASSWORD': 'o6RZgPY-qQX6GCqJLCzlcHydH6',
+        'HOST': 'ec2-184-73-254-144.compute-1.amazonaws.com',
+        # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',
+    },
+
     # Localhost database
-    # 'default': {
+    # 'local': {
     #     'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     #     'NAME': 'D:\\Programowanie\\Eclipse workspace\\sqlite.db',                      # Or path to database file if using sqlite3.
     #     # The following settings are not used with sqlite3:
@@ -34,7 +47,7 @@ DATABASES = {
     # }
 
     ## Alan's local db
-    #'default': {
+    #'local': {
     #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     #    'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
     #    # The following settings are not used with sqlite3:
@@ -44,16 +57,16 @@ DATABASES = {
     #    'PORT': '',
     #}
 
-    # Database created by Michal Semik
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    #    'NAME': 'sql420739',                   # Or path to database file if using sqlite3.
+    ## Michal's local db
+    'local': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.dirname(os.path.dirname(__file__)) + "/db.sqlite",                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-    #    'USER': 'sql420739',
-    #    'PASSWORD': 'pW3*mD1%',
-    #    'HOST': 'sql4.freesqldatabase.com',   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-    #    'PORT': '3306',                       # Set to empty string for default.
-    #}
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',
+    }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -103,29 +116,21 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+# Static asset configuration
+import os
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    #Actually it break rules below but stills work.
-    #We need it to achieve compatibility.
-    './static/',
-    './schedules/static',
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
+
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + \
+                              ('jadebusem_site.context_processors.language_processor',)
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -135,7 +140,7 @@ SECRET_KEY = 'eu6+-i04v%ia1wj7=mxz=n+e7l3!g+!sb^))+_g+or0=r4kufx'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -187,24 +192,41 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
     },
     'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': [],
         }
     },
     'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True,
+            'propagate': False,
         },
     }
 }
@@ -212,3 +234,39 @@ LOGGING = {
 LOCALE_PATHS = (
     'locale',
 )
+
+##############################################################
+#
+#   Below commands are added to configure project for heroku
+#
+##############################################################
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATABASES['default'] = dj_database_url.config()
+if not DATABASES['default']:
+    DATABASES['default'] = DATABASES['local']
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+print 'DB', DATABASES['default']
+print 'CWD', os.getcwd()
+print 'PROJECT_ROOT', PROJECT_ROOT
+print 'STATIC_ROOT', STATIC_ROOT
+print 'STATIC_URL', STATIC_URL
+print 'STATICFILES_DIRS', STATICFILES_DIRS

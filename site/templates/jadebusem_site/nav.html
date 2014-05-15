@@ -1,7 +1,36 @@
 {% load i18n %}
-<ul>
-    <li><a href="{% url "SearchEngine.views.search" %}">{% trans 'Search for connection' %}</a></li>
-    <li><a href={% url "schedules.views.add" %}>{% trans 'Add schedule' %}</a></li>
-    <li><a href={% url "jadebusem_site.views.about" %}>{% trans 'About page' %}</a></li>
-    <li><a href={% url "jadebusem_site.views.language" %}>{% trans 'Change language' %}</a></li>
+<ul class="list-unstyled" style="margin-left: 30px">
+    <li class="li-nav-main-menu active">
+        <a href="{% url "SearchEngine.views.search" %}">
+            <span class="glyphicon glyphicon-search"></span>
+            {% trans 'Search for connection' %}
+        </a>
+    </li>
+    {% if login %}
+        <li class="li-nav-main-menu">
+            <a href={% url "schedules.views.show_list" %}>
+                <span class="glyphicon glyphicon-list-alt"></span>
+                {% trans 'My schedules' %}
+            </a>
+        </li>
+
+        <li class="li-nav-main-menu">
+            <a href={% url "schedules.views.add" %}>
+                <span class="glyphicon glyphicon-pencil"></span>
+                {% trans 'Add schedule' %}
+            </a>
+        </li>
+    {% endif %}
+    <li class="li-nav-main-menu">
+        <a href={% url "jadebusem_site.views.about" %}>
+            <span class="glyphicon glyphicon-earphone"></span>
+            {% trans 'About page' %}
+        </a>
+    </li>
+    <li class="li-nav-main-menu">
+        <a href={% url "jadebusem_site.views.language" %}>
+            <span class="glyphicon glyphicon-flag"></span>
+            {% trans 'Change language' %}
+        </a>
+    </li>
 </ul>

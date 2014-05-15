@@ -1,16 +1,44 @@
 {% load i18n %}
-<ul>
+<div class="keep-floating-children floatingRight" style="margin-top: 25px;">
     {% if login %}
-        {% trans 'Welcome' %}
-        {% if user.name != "" %}
-            {{ user.name }}
-        {% else %}
-            {{ user.email }}
-        {% endif %}
-        <li><a href="/users/user_settings/{{ user.user_id }}" >{% trans 'Account settings' %}</a></li>
-        <li><a href="/users/log_out/" >{% trans 'Sign out' %}</a></li>
+        <div class="btn-group-vertical floatingRight">
+            <div class="input-group">
+                <div class="input-group-btn" style="width: auto">
+                <a class="btn btn-success btn-sm" href="{% url "Users.views.user_settings" user.user_id %}">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
+                <div class="input-group-btn" style="width: auto">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                        {{ user.name }}
+                        <span class="caret" style="margin-left: 10px"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url "Users.views.user_settings" user.user_id %}">{% trans 'Settings' %}</a></li>
+                        <li><a href="{% url "Users.views.log_out" %}">{% trans 'Sign out' %}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     {% else %}
-        <li><a href={% url "Users.views.sign_in" %}>{% trans 'Sign in' %}</a></li>
-        <li><a href={% url "Users.views.register" %}>{% trans 'Register' %}</a></li>
+        <div class=" input-group-sm btn-group-sm floatingRight">
+
+            <div class="input-group-addon btn-sm" style="width: auto;">
+                <span class="glyphicon glyphicon-user"></span>
+            </div>
+            <div class="input-group-btn" style="width: auto;">
+                <a class="btn btn-success btn-sm" href="{% url "Users.views.sign_in" %}">
+                    {% trans 'Sign in' %}
+                </a></div>
+            <div class="input-group-btn" style="width: auto;">
+                <a class="btn btn-warning btn-sm" href="{% url "Users.views.register" %}">
+                    {% trans 'Register' %}
+                </a>
+            </div>
+        </div>
     {% endif %}
-</ul>
+
+    <div class="floatingRight" style="margin-top: -5px; margin-right: 10px;">
+        {% include "jadebusem_site/language_radio.html" %}
+    </div>
+</div>
