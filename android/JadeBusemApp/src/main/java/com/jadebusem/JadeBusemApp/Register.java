@@ -81,7 +81,7 @@ public class Register extends Activity {
                 email.setError(null);
                 password.setError(null);
                 repassword.setError(null);
-                Intent intent = new Intent(getActivity(), MainList.class);
+                Intent intent = new Intent(getActivity(), MainListActivity.class);
                 startActivity(intent);
             } else {
                 if(result.contains("This e-mail is already in use")){

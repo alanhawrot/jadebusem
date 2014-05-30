@@ -28,7 +28,7 @@ public class ScheduleDetailsActivity extends Activity {
 
 		Intent intent = getIntent();
 		Schedule schedule = (Schedule) intent
-				.getSerializableExtra(MainList.SCHEDULE_DETAILS);
+				.getSerializableExtra(MainListActivity.SCHEDULE_DETAILS);
 		this.schedule = schedule;
 
 		if (schedule != null) {

@@ -118,7 +118,7 @@ public class AddScheduleDatesActivity extends Activity {
 
         datasource.close();
 
-        Intent i=new Intent(this, MainList.class);
+        Intent i=new Intent(this, MainListActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

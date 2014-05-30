@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainList.class);
+                Intent intent = new Intent(getActivity(), MainListActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = saveSettings.edit();
                 editor.putString("USER_NAME", email.getText().toString());
                 editor.commit();
-                Intent intent = new Intent(getActivity(), MainList.class);
+                Intent intent = new Intent(getActivity(), MainListActivity.class);
                 startActivity(intent);
             }
             else {

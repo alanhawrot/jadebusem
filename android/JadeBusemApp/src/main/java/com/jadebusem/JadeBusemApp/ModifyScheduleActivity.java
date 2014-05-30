@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -194,7 +193,7 @@ public class ModifyScheduleActivity extends Activity {
     	switch (item.getItemId()) {
     	case android.R.id.home:
     		Intent intent = new Intent();
-    		intent.putExtra(MainList.SCHEDULE_DETAILS, schedule);
+    		intent.putExtra(MainListActivity.SCHEDULE_DETAILS, schedule);
     		navigateUpTo(intent);
     		finish();
     		return true;

@@ -23,14 +23,17 @@ import org.springframework.web.client.RestTemplate;
 import utils.ResponseTypeFromJadeBusemServer;
 import utils.Result;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class MainList extends ListActivity {
+public class MainListActivity extends ListActivity {
 
     private ScheduleDAO datasource;
     private List<Schedule> schedules;
-    private ArrayAdapter<Schedule> scheduleAdapter;
+    private Set<Schedule> scheduleSet;
     private int page;
+    private ArrayAdapter<Schedule> scheduleAdapter;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
     public static final String SEARCH_QUERY = "com.jadebusem.JadeBusemApp.SEARCH_QUERY";
 
@@ -43,6 +46,7 @@ public class MainList extends ListActivity {
         datasource.open();
 
         page = 1;
+        scheduleSet = new HashSet<>();
 
         schedules = datasource.getAllSchedules();
         scheduleAdapter = new ArrayAdapter<Schedule>(
@@ -79,13 +83,13 @@ public class MainList extends ListActivity {
                         public boolean onQueryTextSubmit(String query) {
                             String regularExpression = "[\\w :]+";
                             if (query.matches(regularExpression)) {
-                                Intent intent = new Intent(MainList.this,
+                                Intent intent = new Intent(MainListActivity.this,
                                         SearchActivity.class);
                                 intent.putExtra(SEARCH_QUERY, query);
                                 startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new Builder(
-                                        MainList.this);
+                                        MainListActivity.this);
                                 builder.setTitle(R.string.search_alert_dialog_title);
                                 builder.setMessage(R.string.search_alert_dialog_content);
                                 builder.setPositiveButton(
@@ -111,6 +115,12 @@ public class MainList extends ListActivity {
                     });
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new GetSchedulesFromJadeBusemServerTask().execute(page);
     }
 
     @Override
@@ -143,24 +153,19 @@ public class MainList extends ListActivity {
                 ResponseTypeFromJadeBusemServer response = restTemplate.getForObject(url, ResponseTypeFromJadeBusemServer.class);
                 return response.getResults();
             } catch (Exception e) {
-                Log.e("MainList", e.getMessage(), e);
+                Log.e("MainListActivity", e.getMessage(), e);
             }
             return null;
         }
-
         @Override
         protected void onPostExecute(List<Result> list) {
             super.onPostExecute(list);
             for (Result result : list) {
-                schedules.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
+                scheduleSet.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
             }
+            schedules.addAll(scheduleSet);
             scheduleAdapter.notifyDataSetChanged();
         }
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        new GetSchedulesFromJadeBusemServerTask().execute(page);
     }
 }
