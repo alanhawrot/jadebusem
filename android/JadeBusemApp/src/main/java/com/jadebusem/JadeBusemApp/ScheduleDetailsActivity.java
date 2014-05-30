@@ -83,7 +83,7 @@ public class ScheduleDetailsActivity extends Activity {
 
 	public void deleteSchedule(View view) {
         if (schedule.getName().compareTo("Server") == 0) {
-            showDenyModifyDeleteOrSynchronizeRemoteSchedule();
+            showDenyModifyDeleteOrSynchronizeRemoteScheduleDialog();
         } else {
             AlertDialog.Builder builder = new Builder(this);
             builder.setTitle(R.string.delete_alert_dialog_title);
@@ -110,7 +110,7 @@ public class ScheduleDetailsActivity extends Activity {
 
     public void startModifyScheduleActivity(View view) {
         if (schedule.getName().compareTo("Server") == 0) {
-            showDenyModifyDeleteOrSynchronizeRemoteSchedule();
+            showDenyModifyDeleteOrSynchronizeRemoteScheduleDialog();
         } else {
             Intent intent = new Intent(this, ModifyScheduleActivity.class);
             intent.putExtra(SCHEDULE, schedule);
@@ -128,11 +128,26 @@ public class ScheduleDetailsActivity extends Activity {
                 getParentActivityIntent());
     }
 
-    private void showDenyModifyDeleteOrSynchronizeRemoteSchedule() {
+    private void showDenyModifyDeleteOrSynchronizeRemoteScheduleDialog() {
         Builder builder = new Builder(this);
         builder.setTitle(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_title));
         builder.setMessage(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_message));
         builder.setPositiveButton(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_positive_button),
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showDenyOfflineSynchronizeDialog() {
+        Builder builder = new Builder(this);
+        builder.setTitle(getString(R.string.deny_synchronize_schedule_title));
+        builder.setMessage(getString(R.string.deny_synchronize_schedule_message));
+        builder.setPositiveButton(getString(R.string.deny_synchronize_schedule_positive_button),
                 new OnClickListener() {
 
                     @Override
@@ -157,21 +172,10 @@ public class ScheduleDetailsActivity extends Activity {
                 if (schedule.getName().compareTo("Server") != 0) {
                     new SynchronizeScheduleTask().execute();
                 } else {
-                    showDenyModifyDeleteOrSynchronizeRemoteSchedule();
+                    showDenyModifyDeleteOrSynchronizeRemoteScheduleDialog();
                 }
             } else {
-                Builder builder = new Builder(this);
-                builder.setTitle(getString(R.string.deny_synchronize_schedule_title));
-                builder.setMessage(getString(R.string.deny_synchronize_schedule_message));
-                builder.setPositiveButton(getString(R.string.deny_synchronize_schedule_positive_button),
-                        new OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                showDenyOfflineSynchronizeDialog();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -183,8 +187,9 @@ public class ScheduleDetailsActivity extends Activity {
         protected Void doInBackground(Void... params) {
             try {
                 final String url = getString(R.string.url_rest_new_schedule);
+                final String companySuffix = "-UserAndroidApp";
                 RequestTypeForSynchronizeScheduleMethod requestObject =
-                        new RequestTypeForSynchronizeScheduleMethod(User.EMAIL, User.EMAIL + "-UserAndroidApp",
+                        new RequestTypeForSynchronizeScheduleMethod(User.EMAIL, User.EMAIL + companySuffix,
                                 schedule.getScheduleTracePoints());
                 for (ScheduleDate date : schedule.getScheduleDates()) {
                     int index = date.toIntFromEnum(date.getDay());
