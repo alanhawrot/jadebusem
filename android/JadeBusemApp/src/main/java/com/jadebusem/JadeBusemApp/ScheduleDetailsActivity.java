@@ -191,8 +191,7 @@ public class ScheduleDetailsActivity extends Activity {
                 HttpEntity<RequestTypeForSynchronizeScheduleMethod> requestEntity = new HttpEntity<>(requestObject, requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-                String result = responseEntity.getBody();
+                restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }
