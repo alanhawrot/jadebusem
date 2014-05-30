@@ -114,6 +114,15 @@ public class MainListActivity extends ListActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_fetch_more_schedules) {
+            page++;
+            new GetSchedulesFromJadeBusemServerTask().execute(page);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         new GetSchedulesFromJadeBusemServerTask().execute(page);
@@ -147,6 +156,9 @@ public class MainListActivity extends ListActivity {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 ResponseTypeFromJadeBusemServer response = restTemplate.getForObject(url, ResponseTypeFromJadeBusemServer.class);
+                if (response.getNext() == null && page > 0) {
+                    page--;
+                }
                 return response.getResults();
             } catch (Exception e) {
                 Log.e("MainListActivity", e.getMessage(), e);
