@@ -143,7 +143,7 @@ public class MainListActivity extends ListActivity {
         protected List<Result> doInBackground(Integer... params) {
             try {
                 int page = params[0];
-                final String url = "http://jadebusem1.herokuapp.com/schedules/all_schedules/" + page;
+                final String url = getString(R.string.url_rest_all_schedules) + page;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 ResponseTypeFromJadeBusemServer response = restTemplate.getForObject(url, ResponseTypeFromJadeBusemServer.class);

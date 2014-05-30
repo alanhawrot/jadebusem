@@ -32,5 +32,6 @@
 	<string name="search_alert_dialog_positive">OK</string>
 	<string name="search_activity_main_text">Your schedules:</string>
 	<string name="main_activity_main_text">Your schedules:</string>
-	<string name="main_activity_add_button_text">Add new schedule</string>    
+	<string name="main_activity_add_button_text">Add new schedule</string>
+    <string name="url_rest_all_schedules">http://jadebusem1.herokuapp.com/schedules/all_schedules/</string>
 </resources>
