@@ -29,9 +29,9 @@ public class MainList extends ListActivity {
 
     private ScheduleDAO datasource;
     private List<Schedule> schedules;
+    private ArrayAdapter<Schedule> scheduleAdapter;
     private int page;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
-    public final static String SCHEDULE_DAO = "com.jadebusem.JadeBusemApp.SCHEDULE_DAO";
     public static final String SEARCH_QUERY = "com.jadebusem.JadeBusemApp.SEARCH_QUERY";
 
     @Override
@@ -45,8 +45,7 @@ public class MainList extends ListActivity {
         page = 1;
 
         schedules = datasource.getAllSchedules();
-        new GetSchedulesFromJadeBusemServerTask().execute(page);
-        ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(
+        scheduleAdapter = new ArrayAdapter<Schedule>(
                 this, android.R.layout.simple_list_item_1, schedules);
         setListAdapter(scheduleAdapter);
     }
@@ -116,14 +115,15 @@ public class MainList extends ListActivity {
 
     @Override
     protected void onResume() {
-        datasource.open();
         super.onResume();
+        datasource.open();
+        new GetSchedulesFromJadeBusemServerTask().execute(page);
     }
 
     @Override
     protected void onPause() {
-        datasource.close();
         super.onPause();
+        datasource.close();
     }
 
     public void startAddScheduleActivity(View view) {
@@ -154,7 +154,13 @@ public class MainList extends ListActivity {
             for (Result result : list) {
                 schedules.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
             }
+            scheduleAdapter.notifyDataSetChanged();
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new GetSchedulesFromJadeBusemServerTask().execute(page);
+    }
 }
