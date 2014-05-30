@@ -2,12 +2,10 @@ package com.jadebusem.JadeBusemApp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
-import android.widget.EditText;
 import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
@@ -23,83 +21,49 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
-    private EditText email;
-    private EditText password;
-    private TextView tv1, tv2;
+public class Register extends Activity {
+    private TextView email, password, repassword, text;
 
 /*####################################################################################################
 # onCreate()
 # Inputs: savedInstanceState
 # Return: None
-# Initialize Main Activity
+# Initialize Register Activity
 ####################################################################################################*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_page);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-
-        tv1 = (TextView) this.findViewById(R.id.without_login);
-        tv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainList.class);
-                startActivity(intent);
-            }
-        });
-
-        tv2 = (TextView) this.findViewById(R.id.register);
-        tv2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Register.class);
-                startActivity(intent);
-            }
-        });
-
+        setContentView(R.layout.register);
+        email = (TextView) findViewById(R.id.email);
+        password = (TextView) findViewById(R.id.password);
+        repassword = (TextView) findViewById(R.id.repassword);
+        text = (TextView) findViewById(R.id.text);
     }
 
 /*####################################################################################################
-# onResume()
-# Inputs: None
-# Return: None
-# Initialize Main Activity when Resume
-####################################################################################################*/
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        SharedPreferences resSettings = getSharedPreferences("BYLECO", MODE_PRIVATE);
-        String Uname = resSettings.getString("USER_NAME", "");
-        email.setText(Uname);
-    }
-
-/*####################################################################################################
-# loginButton()
+# register()
 # Inputs: view
 # Return: None
-# Action of login button
+# Action of register button
 ####################################################################################################*/
-    public void loginButton(View view) {
-        new TheTask().execute("http://jadebusem1.herokuapp.com/users/sign_in/");
+    public void register(View view) {
+        new TheTask().execute("http://jadebusem1.herokuapp.com/users/registration/");
     }
 
 /*####################################################################################################
 # getActivity()
 # Inputs: None
 # Return: Activity
-# Return address to this activity
+# Return address of activity
 ####################################################################################################*/
     public Activity getActivity()
     {
         return this;
     }
 
-
     class TheTask extends AsyncTask<String,String,String>
     {
+
 
 /*####################################################################################################
 # onPostExecute()
@@ -112,20 +76,24 @@ public class MainActivity extends Activity {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             // update textview here
-            if(result.contains("Logged successfully"))
-            {
+
+            if (result.contains("Account created successfully")) {
                 email.setError(null);
                 password.setError(null);
-                SharedPreferences saveSettings = getSharedPreferences("BYLECO", MODE_PRIVATE);
-                SharedPreferences.Editor editor = saveSettings.edit();
-                editor.putString("USER_NAME", email.getText().toString());
-                editor.commit();
+                repassword.setError(null);
                 Intent intent = new Intent(getActivity(), MainList.class);
                 startActivity(intent);
-            }
-            else {
-                email.setError(result);
-                password.setError(result);
+            } else {
+                if(result.contains("This e-mail is already in use")){
+                    email.setError(result);
+                    password.setError(null);
+                    repassword.setError(null);
+                }
+                else {
+                    email.setError(null);
+                    password.setError(result);
+                    repassword.setError(result);
+                }
             }
         }
 
@@ -145,7 +113,7 @@ public class MainActivity extends Activity {
 # doInBackground()
 # Inputs: params
 # Return: String
-# Body of thread, POST request with login informations
+# Body of thread, POST request with register informations
 ####################################################################################################*/
         @Override
         protected String doInBackground(String... params) {
@@ -156,18 +124,33 @@ public class MainActivity extends Activity {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("password", password.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("password2", repassword.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("first_name", ""));
+                nameValuePairs.add(new BasicNameValuePair("last_name", ""));
+                nameValuePairs.add(new BasicNameValuePair("address", ""));
+                nameValuePairs.add(new BasicNameValuePair("company_name", ""));
+
                 method.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(method);
                 HttpEntity entity = response.getEntity();
                 if(entity != null){
                     String temp = EntityUtils.toString(entity);
 
-                    if(temp.contains("Please correct the errors below.") || temp.contains("Please correct the error below.") || temp.contains("Error, please check your email or password.")){
-                        return "Check your email or password";
+                    if(temp.contains("This e-mail is already in use")){
+                        return "This e-mail is already in use";
+                    }
+                    else if(temp.contains("Password must be at least six characters long")){
+                        return "Password must be at least six characters long";
+                    }
+                    else if(temp.contains("Password must be at least six characters long")){
+                        return "Password must be at least six characters long";
+                    }
+                    else if(temp.contains("Passwords do not match")){
+                        return "Passwords do not match";
                     }
                     else
                     {
-                        return "Logged successfully";
+                        return "Account created successfully";
                     }
 
                 }
