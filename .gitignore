@@ -16,3 +16,11 @@ local_settings.py
 #Android bin folder
 android/JadeBusemApp/bin/*
 android/JadeBusemApp/out/*
+android/JadeBusemApp/.classpath
+android/JadeBusemApp/.project
+android/JadeBusemApp/.settings
+android/JadeBusemApp/ant.properties
+android/JadeBusemApp/build.xml
+android/JadeBusemApp/JadeBusemApp.iml
+android/JadeBusemApp/local.properties
+android/JadeBusemApp/assets/*

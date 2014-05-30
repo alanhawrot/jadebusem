@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,18 +19,33 @@ import java.util.List;
 import DAO.Schedule;
 import DAO.ScheduleTracePoint;
 
-public class AddScheduleActivity extends Activity {
+/*####################################################################################################
+# ModifyScheduleActivity()
+# Main class in Activity
+####################################################################################################*/
+public class ModifyScheduleActivity extends Activity {
+    public final static String SCHEDULE = "com.jadebusem.JadeBusemApp.SCHEDULE";
     private List<String> tracePointList;
     private ListView list;
+    private Schedule schedule;
 
 /*####################################################################################################
 # onCreate()
 # Inputs: Bundle savedInstanceState
 # Return: None
-# Method that initialize all needed stuff to add TracePoint
+# Method that initialize all needed stuff to modify TracePoint
 ####################################################################################################*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent iin= getIntent();
+        Bundle schedule_temp = iin.getExtras();
+
+        if(schedule_temp!=null)
+        {
+            schedule = (Schedule) schedule_temp.get(SCHEDULE);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_schedule);
 
@@ -38,6 +55,15 @@ public class AddScheduleActivity extends Activity {
 
         ArrayAdapter<String> tracePointAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tracePointList);
         list.setAdapter(tracePointAdapter);
+
+        if(schedule != null)
+        {
+            ArrayList<ScheduleTracePoint> trace = schedule.getScheduleTracePoints();
+            for(int i=0;i<trace.size();i++)
+            {
+                tracePointList.add(trace.get(i).toString());
+            }
+        }
 
         // Initialize onClickListener to list
         init_onClickListener();
@@ -88,21 +114,22 @@ public class AddScheduleActivity extends Activity {
 # saveTracePointButton()
 # Inputs: View view
 # Return: None
-# Action of saveTracePointButton -> create scheduleTracePoint and start AddScheduleDatesActivity
+# Action of saveTracePointButton -> create scheduleTracePoint and start ModifyScheduleDatesActivity
 ####################################################################################################*/
     public void saveTracePointButton(View view) {
         if(tracePointList.size() > 1) {
             String schedule_name = tracePointList.get(0) + "->" + tracePointList.get(tracePointList.size() - 1);
-            Schedule schedule = new Schedule();
-            schedule.setName(schedule_name);
+            Schedule new_schedule = new Schedule();
+            new_schedule.setName(schedule_name);
             for (int i = 0; i < tracePointList.size(); i++) {
                 ScheduleTracePoint scheduleTracePoint = new ScheduleTracePoint();
                 scheduleTracePoint.setAddress(tracePointList.get(i));
-                schedule.getScheduleTracePoints().add(scheduleTracePoint);
+                new_schedule.getScheduleTracePoints().add(scheduleTracePoint);
             }
 
-            Intent intent = new Intent(this, AddScheduleDatesActivity.class);
+            Intent intent = new Intent(this, ModifyScheduleDatesActivity.class);
             intent.putExtra("schedule", schedule);
+            intent.putExtra("new_schedule", new_schedule);
             startActivity(intent);
             finish();
         }
@@ -147,7 +174,7 @@ public class AddScheduleActivity extends Activity {
             }
         }
         else {
-             text.setError("Trace point must have 2 characters at least");
+            text.setError("Trace point must have 2 characters at least");
         }
     }
 
@@ -161,5 +188,19 @@ public class AddScheduleActivity extends Activity {
     {
         return this;
     }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    	case android.R.id.home:
+    		Intent intent = new Intent();
+    		intent.putExtra(MainActivity.SCHEDULE_DETAILS, schedule);
+    		navigateUpTo(intent);
+    		finish();
+    		return true;
+    	}
+    	return super.onOptionsItemSelected(item);
+    }
 
 }
+

@@ -4,6 +4,7 @@
     <facet type="android" name="Android">
       <configuration>
         <option name="UPDATE_PROPERTY_FILES" value="true" />
+        <option name="APK_PATH" value="/build/apk/YourProject.apk" />
       </configuration>
     </facet>
   </component>
