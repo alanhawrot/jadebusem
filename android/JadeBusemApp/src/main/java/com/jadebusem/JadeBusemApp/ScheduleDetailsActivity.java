@@ -70,38 +70,61 @@ public class ScheduleDetailsActivity extends Activity {
 	}
 
 	public void deleteSchedule(View view) {
-		AlertDialog.Builder builder = new Builder(this);
-		builder.setTitle(R.string.delete_alert_dialog_title);
-		builder.setMessage(R.string.delete_alert_dialog_content);
-		builder.setPositiveButton(R.string.delete_alert_dialog_positive,
-				new OnClickListener() {
+        if (schedule.getName().compareTo("Server") == 0) {
+            showDenyModifyOrDeleteRemoteScheduleDialog();
+        } else {
+            AlertDialog.Builder builder = new Builder(this);
+            builder.setTitle(R.string.delete_alert_dialog_title);
+            builder.setMessage(R.string.delete_alert_dialog_content);
+            builder.setPositiveButton(R.string.delete_alert_dialog_positive,
+                    new OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						ScheduleDAO scheduleDAO = ScheduleDAO
-								.getInstance(ScheduleDetailsActivity.this);
-						scheduleDAO.open();
-						scheduleDAO.deleteSchedule(schedule);
-						scheduleDAO.close();
-						navigateUpToFromChild(ScheduleDetailsActivity.this,
-								getParentActivityIntent());
-					}
-				});
-		builder.setNegativeButton(R.string.delete_alert_dialog_negative,
-				new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ScheduleDAO scheduleDAO = ScheduleDAO
+                                    .getInstance(ScheduleDetailsActivity.this);
+                            scheduleDAO.open();
+                            scheduleDAO.deleteSchedule(schedule);
+                            scheduleDAO.close();
+                            navigateUpToFromChild(ScheduleDetailsActivity.this,
+                                    getParentActivityIntent());
+                        }
+                    });
+            builder.setNegativeButton(R.string.delete_alert_dialog_negative,
+                    new OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-					}
-				});
-		AlertDialog dialog = builder.create();
-		dialog.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
 	}
 
-	public void startModifyScheduleActivity(View view) {
-		Intent intent = new Intent(this, ModifyScheduleActivity.class);
-		intent.putExtra(SCHEDULE, schedule);
-		startActivity(intent);
+    private void showDenyModifyOrDeleteRemoteScheduleDialog() {
+        Builder builder = new Builder(this);
+        builder.setTitle(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_title));
+        builder.setMessage(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_message));
+        builder.setPositiveButton(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_positive_button),
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void startModifyScheduleActivity(View view) {
+        if (schedule.getName().compareTo("Server") == 0) {
+            showDenyModifyOrDeleteRemoteScheduleDialog();
+        } else {
+            Intent intent = new Intent(this, ModifyScheduleActivity.class);
+            intent.putExtra(SCHEDULE, schedule);
+            startActivity(intent);
+        }
 	}
 
 }
