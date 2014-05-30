@@ -20,7 +20,8 @@ public class Schedule implements Serializable {
         scheduleTracePoints = new ArrayList<ScheduleTracePoint>();
     }
 
-    public Schedule(String name, List<ScheduleDate> scheduleDates, List<ScheduleTracePoint> scheduleTracePoints) {
+    public Schedule(int id, String name, List<ScheduleDate> scheduleDates, List<ScheduleTracePoint> scheduleTracePoints) {
+        this.id = id;
         this.name = name;
         this.scheduleDates = (ArrayList<ScheduleDate>) scheduleDates;
         this.scheduleTracePoints = (ArrayList<ScheduleTracePoint>) scheduleTracePoints;
@@ -92,26 +93,21 @@ public class Schedule implements Serializable {
         return sb.toString();
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Schedule)) return false;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Schedule))
-			return false;
-		Schedule other = (Schedule) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+        Schedule schedule = (Schedule) o;
+
+        if (id != schedule.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 
 }

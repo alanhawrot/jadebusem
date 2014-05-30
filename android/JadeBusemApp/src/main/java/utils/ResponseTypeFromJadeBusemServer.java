@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ResponseTypeFromJadeBusemServer {
 
+
     private int count;
     private String next;
     private String previous;

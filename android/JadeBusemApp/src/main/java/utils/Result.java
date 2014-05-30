@@ -10,15 +10,25 @@ import java.util.List;
  */
 public class Result {
 
+    private int id;
     private List<ScheduleTracePoint> trace_points;
     private List<ScheduleDate> departures;
 
     Result() {
     }
 
-    Result(List<ScheduleTracePoint> trace_points, List<ScheduleDate> departures) {
+    Result(int id, List<ScheduleTracePoint> trace_points, List<ScheduleDate> departures) {
+        this.id = id;
         this.trace_points = trace_points;
         this.departures = departures;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<ScheduleTracePoint> getTrace_points() {

@@ -23,15 +23,12 @@ import org.springframework.web.client.RestTemplate;
 import utils.ResponseTypeFromJadeBusemServer;
 import utils.Result;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MainListActivity extends ListActivity {
 
     private ScheduleDAO datasource;
     private List<Schedule> schedules;
-    private Set<Schedule> scheduleSet;
     private int page;
     private ArrayAdapter<Schedule> scheduleAdapter;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
@@ -46,7 +43,6 @@ public class MainListActivity extends ListActivity {
         datasource.open();
 
         page = 1;
-        scheduleSet = new HashSet<>();
 
         schedules = datasource.getAllSchedules();
         scheduleAdapter = new ArrayAdapter<Schedule>(
@@ -157,13 +153,16 @@ public class MainListActivity extends ListActivity {
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(List<Result> list) {
             super.onPostExecute(list);
             for (Result result : list) {
-                scheduleSet.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
+                Schedule schedule = new Schedule(result.getId(), "Server", result.getDepartures(), result.getTrace_points());
+                if (!schedules.contains(schedule)) {
+                    schedules.add(schedule);
+                }
             }
-            schedules.addAll(scheduleSet);
             scheduleAdapter.notifyDataSetChanged();
         }
 
