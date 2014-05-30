@@ -2,8 +2,6 @@ package com.jadebusem.JadeBusemApp;
 
 import DAO.Schedule;
 import DAO.ScheduleDAO;
-import DAO.ScheduleDate;
-import DAO.ScheduleTracePoint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
@@ -22,6 +20,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import utils.ResponseTypeFromJadeBusemServer;
+import utils.Result;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class MainList extends ListActivity {
         page = 1;
 
         schedules = datasource.getAllSchedules();
-//        new GetSchedulesFromJadeBusemServerTask().execute(page);
+        new GetSchedulesFromJadeBusemServerTask().execute(page);
         ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(
                 this, android.R.layout.simple_list_item_1, schedules);
         setListAdapter(scheduleAdapter);
@@ -131,13 +131,13 @@ public class MainList extends ListActivity {
         startActivity(intent);
     }
 
-    class GetSchedulesFromJadeBusemServerTask extends AsyncTask<Integer, Void, List<ResponseTypeFromJadeBusemServer.Results>> {
+    class GetSchedulesFromJadeBusemServerTask extends AsyncTask<Integer, Void, List<Result>> {
 
         @Override
-        protected List<ResponseTypeFromJadeBusemServer.Results> doInBackground(Integer... params) {
+        protected List<Result> doInBackground(Integer... params) {
             try {
                 int page = params[0];
-                final String url = "http://10.0.2.2:8000/schedules/all_schedules/" + page;
+                final String url = "http://jadebusem1.herokuapp.com/schedules/all_schedules/" + page;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 ResponseTypeFromJadeBusemServer response = restTemplate.getForObject(url, ResponseTypeFromJadeBusemServer.class);
@@ -149,73 +149,11 @@ public class MainList extends ListActivity {
         }
 
         @Override
-        protected void onPostExecute(List<ResponseTypeFromJadeBusemServer.Results> list) {
+        protected void onPostExecute(List<Result> list) {
             super.onPostExecute(list);
-            for (ResponseTypeFromJadeBusemServer.Results result : list) {
+            for (Result result : list) {
                 schedules.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
             }
-        }
-    }
-
-    class ResponseTypeFromJadeBusemServer {
-
-        private int count;
-        private String next;
-        private String previous;
-        private List<Results> results;
-
-        class Results {
-
-            private List<ScheduleTracePoint> trace_points;
-            private List<ScheduleDate> departures;
-
-            public List<ScheduleTracePoint> getTrace_points() {
-                return trace_points;
-            }
-
-            public void setTrace_points(List<ScheduleTracePoint> trace_points) {
-                this.trace_points = trace_points;
-            }
-
-            public List<ScheduleDate> getDepartures() {
-                return departures;
-            }
-
-            public void setDepartures(List<ScheduleDate> departures) {
-                this.departures = departures;
-            }
-        }
-
-        public int getCount() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public String getNext() {
-            return next;
-        }
-
-        public void setNext(String next) {
-            this.next = next;
-        }
-
-        public String getPrevious() {
-            return previous;
-        }
-
-        public void setPrevious(String previous) {
-            this.previous = previous;
-        }
-
-        public List<Results> getResults() {
-            return results;
-        }
-
-        public void setResults(List<Results> results) {
-            this.results = results;
         }
     }
 

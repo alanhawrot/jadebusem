@@ -91,7 +91,6 @@ public class ScheduleDAO {
 	private Schedule cursorToSchedule(Cursor cursor) {
 		Schedule schedule = new Schedule();
 		schedule.setId(cursor.getLong(0));
-//		schedule.setName(cursor.getString(1));
 		schedule.setName("Local");
 		schedule.setScheduleDates((ArrayList<ScheduleDate>) getAllScheduleDate(schedule
 				.getId()));
