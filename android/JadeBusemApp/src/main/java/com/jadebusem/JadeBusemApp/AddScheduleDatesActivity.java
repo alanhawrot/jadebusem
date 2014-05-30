@@ -1,5 +1,8 @@
 package com.jadebusem.JadeBusemApp;
 
+import DAO.Schedule;
+import DAO.ScheduleDAO;
+import DAO.ScheduleDate;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,19 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TimePicker;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import DAO.Schedule;
-import DAO.ScheduleDAO;
-import DAO.ScheduleDate;
 
 /*####################################################################################################
 # AddScheduleDatesActivity()
@@ -124,7 +118,7 @@ public class AddScheduleDatesActivity extends Activity {
 
         datasource.close();
 
-        Intent i=new Intent(this, MainActivity.class);
+        Intent i=new Intent(this, MainList.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
