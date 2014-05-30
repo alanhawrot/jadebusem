@@ -122,7 +122,7 @@ public class Register extends Activity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost method = new HttpPost(params[0]);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("EMAIL", email.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("password", password.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("password2", repassword.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("first_name", ""));

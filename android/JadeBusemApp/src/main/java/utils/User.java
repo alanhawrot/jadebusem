@@ -6,7 +6,7 @@ package utils;
 public class User {
 
     // zmienić później!!
-    public static boolean LOGGED = true;
-    public static String EMAIL = "test@test.com";
+    public static boolean LOGGED = false;
+    public static String EMAIL = "";
 
 }
