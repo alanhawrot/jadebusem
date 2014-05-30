@@ -44,4 +44,10 @@
     <string name="deny_synchronize_schedule_message">You can synchronize only when you are online and logged in</string>
     <string name="deny_synchronize_schedule_positive_button">OK</string>
     <string name="url_rest_new_schedule">http://jadebusem1.herokuapp.com/schedules/new_schedule/</string>
+    <string name="success_synchronize_dialog_title">Success</string>
+    <string name="success_synchronize_dialog_message">You have successfully synchronized schedule</string>
+    <string name="success_synchronize_dialog_positive_button">OK</string>
+    <string name="error_connection_dialog_title">Error</string>
+    <string name="error_connection_dialog_message">Check your connection (or server may be down)</string>
+    <string name="error_connection_dialog_positive_button">OK</string>
 </resources>

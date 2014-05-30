@@ -22,6 +22,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import utils.ResponseTypeFromJadeBusemServer;
 import utils.Result;
+import utils.User;
 
 import java.util.List;
 
@@ -116,8 +117,10 @@ public class MainListActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_fetch_more_schedules) {
-            page++;
-            new GetSchedulesFromJadeBusemServerTask().execute(page);
+            if (User.LOGGED) {
+                page++;
+                new GetSchedulesFromJadeBusemServerTask().execute(page);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,14 +128,18 @@ public class MainListActivity extends ListActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new GetSchedulesFromJadeBusemServerTask().execute(page);
+        if (User.LOGGED) {
+            new GetSchedulesFromJadeBusemServerTask().execute(page);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         datasource.open();
-        new GetSchedulesFromJadeBusemServerTask().execute(page);
+        if (User.LOGGED) {
+            new GetSchedulesFromJadeBusemServerTask().execute(page);
+        }
     }
 
     @Override
@@ -169,13 +176,28 @@ public class MainListActivity extends ListActivity {
         @Override
         protected void onPostExecute(List<Result> list) {
             super.onPostExecute(list);
-            for (Result result : list) {
-                Schedule schedule = new Schedule(result.getId(), "Server", result.getDepartures(), result.getTrace_points());
-                if (!schedules.contains(schedule)) {
-                    schedules.add(schedule);
+            if (list != null) {
+                for (Result result : list) {
+                    Schedule schedule = new Schedule(result.getId(), "Server", result.getDepartures(), result.getTrace_points());
+                    if (!schedules.contains(schedule)) {
+                        schedules.add(schedule);
+                    }
                 }
+                scheduleAdapter.notifyDataSetChanged();
+            } else {
+                Builder builder = new Builder(MainListActivity.this);
+                builder.setTitle(R.string.error_connection_dialog_title);
+                builder.setMessage(R.string.error_connection_dialog_message);
+                builder.setPositiveButton(R.string.error_connection_dialog_positive_button,
+                        new OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
-            scheduleAdapter.notifyDataSetChanged();
         }
 
     }

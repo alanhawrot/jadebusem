@@ -181,10 +181,10 @@ public class ScheduleDetailsActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    class SynchronizeScheduleTask extends AsyncTask<Void, Void, Void> {
+    class SynchronizeScheduleTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Boolean doInBackground(Void... params) {
             try {
                 final String url = getString(R.string.url_rest_new_schedule);
                 final String companySuffix = "-UserAndroidApp";
@@ -203,8 +203,49 @@ public class ScheduleDetailsActivity extends Activity {
                 restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
             } catch (Exception e) {
                 Log.e("ScheduleDetailsActivity", e.getMessage(), e);
+                return false;
             }
-            return null;
+            return true;
         }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result) {
+                showSuccessSynchronizeDialog();
+            } else {
+                showErrorConnectionDialog();
+            }
+        }
+    }
+
+    private void showSuccessSynchronizeDialog() {
+        Builder builder = new Builder(this);
+        builder.setTitle(getString(R.string.success_synchronize_dialog_title));
+        builder.setMessage(getString(R.string.success_synchronize_dialog_message));
+        builder.setPositiveButton(getString(R.string.success_synchronize_dialog_positive_button),
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showErrorConnectionDialog() {
+        Builder builder = new Builder(this);
+        builder.setTitle(getString(R.string.error_connection_dialog_title));
+        builder.setMessage(getString(R.string.error_connection_dialog_message));
+        builder.setPositiveButton(getString(R.string.error_connection_dialog_positive_button),
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
