@@ -35,10 +35,10 @@
 	<string name="main_activity_add_button_text">Add new schedule</string>
     <string name="url_rest_all_schedules">http://jadebusem1.herokuapp.com/schedules/all_schedules/</string>
     <string name="action_fetch_more_schedules_title">Fetch more schedules</string>
-    <string name="deny_modify_or_delete_remote_schedule_dialog_title">Deny</string>
-    <string name="deny_modify_or_delete_remote_schedule_dialog_message">You cannot modify or delete remote schedule
+    <string name="deny_modify_delete_or_synchronize_remote_schedule_dialog_title">Deny</string>
+    <string name="deny_modify_delete_or_synchronize_remote_schedule_dialog_message">You cannot modify, delete or synchronize remote schedule
     </string>
-    <string name="deny_modify_or_delete_remote_schedule_dialog_positive_button">OK</string>
+    <string name="deny_modify_delete_or_synchronize_remote_schedule_dialog_positive_button">OK</string>
     <string name="action_synchronize_schedule_title">Synchronize</string>
     <string name="deny_synchronize_schedule_title">Offline mode</string>
     <string name="deny_synchronize_schedule_message">You can synchronize only when you are online and logged in</string>

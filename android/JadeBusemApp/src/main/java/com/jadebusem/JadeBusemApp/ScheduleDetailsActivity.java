@@ -83,7 +83,7 @@ public class ScheduleDetailsActivity extends Activity {
 
 	public void deleteSchedule(View view) {
         if (schedule.getName().compareTo("Server") == 0) {
-            showDenyModifyOrDeleteRemoteScheduleDialog();
+            showDenyModifyDeleteOrSynchronizeRemoteSchedule();
         } else {
             AlertDialog.Builder builder = new Builder(this);
             builder.setTitle(R.string.delete_alert_dialog_title);
@@ -110,7 +110,7 @@ public class ScheduleDetailsActivity extends Activity {
 
     public void startModifyScheduleActivity(View view) {
         if (schedule.getName().compareTo("Server") == 0) {
-            showDenyModifyOrDeleteRemoteScheduleDialog();
+            showDenyModifyDeleteOrSynchronizeRemoteSchedule();
         } else {
             Intent intent = new Intent(this, ModifyScheduleActivity.class);
             intent.putExtra(SCHEDULE, schedule);
@@ -128,11 +128,11 @@ public class ScheduleDetailsActivity extends Activity {
                 getParentActivityIntent());
     }
 
-    private void showDenyModifyOrDeleteRemoteScheduleDialog() {
+    private void showDenyModifyDeleteOrSynchronizeRemoteSchedule() {
         Builder builder = new Builder(this);
-        builder.setTitle(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_title));
-        builder.setMessage(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_message));
-        builder.setPositiveButton(getString(R.string.deny_modify_or_delete_remote_schedule_dialog_positive_button),
+        builder.setTitle(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_title));
+        builder.setMessage(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_message));
+        builder.setPositiveButton(getString(R.string.deny_modify_delete_or_synchronize_remote_schedule_dialog_positive_button),
                 new OnClickListener() {
 
                     @Override
@@ -154,7 +154,11 @@ public class ScheduleDetailsActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_synchronize_schedule) {
             if (User.LOGGED) {
-                new SynchronizeScheduleTask().execute();
+                if (schedule.getName().compareTo("Server") != 0) {
+                    new SynchronizeScheduleTask().execute();
+                } else {
+                    showDenyModifyDeleteOrSynchronizeRemoteSchedule();
+                }
             } else {
                 Builder builder = new Builder(this);
                 builder.setTitle(getString(R.string.deny_synchronize_schedule_title));
@@ -193,7 +197,7 @@ public class ScheduleDetailsActivity extends Activity {
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
             } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Log.e("ScheduleDetailsActivity", e.getMessage(), e);
             }
             return null;
         }
