@@ -2,17 +2,22 @@
 import json
 import time
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import HttpResponseForbidden, HttpResponseNotFound, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, render_to_response
-from django.template import Context, RequestContext
+from django.shortcuts import render
+from django.template import Context
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import transaction
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from Users.models import JadeBusemUser
 from Users.views import sign_in
 from schedules.models import ScheduleDate, ScheduleTracePoint
 from models import Schedule
+from schedules.serializers import PaginatedScheduleSerializer
 from schedules_settings import ScheduleAccessManager
 
 
@@ -169,3 +174,19 @@ def handle_schedule_change_request(data, errors, _schedule):
     except BaseException as E:
         transaction.rollback()
         print E
+
+
+@api_view(['GET'])
+def get_all_schedules(request, page):
+    queryset = Schedule.objects.all()
+    paginator = Paginator(queryset, 1)
+    print page
+    try:
+        schedules = paginator.page(page)
+    except PageNotAnInteger:
+        schedules = paginator.page(1)
+    except EmptyPage:
+        schedules = paginator.page(paginator.num_pages)
+    serializer_context = {'request': request}
+    serializer = PaginatedScheduleSerializer(schedules, context=serializer_context)
+    return Response(serializer.data)
