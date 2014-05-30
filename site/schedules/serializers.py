@@ -11,13 +11,13 @@ __author__ = 'alanhawrot'
 class ScheduleTracePointSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScheduleTracePoint
-        fields = ('id', 'schedule', 'address', 'position')
+        fields = ('address', 'position')
 
 
 class ScheduleDateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScheduleDate
-        fields = ('id', 'schedule', 'time', 'day')
+        fields = ('time', 'day')
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule
-        fields = ('id', 'author', 'company', 'image_path', 'verified', 'trace_points', 'departures')
+        fields = ('trace_points', 'departures')
         depth = 1
 
 

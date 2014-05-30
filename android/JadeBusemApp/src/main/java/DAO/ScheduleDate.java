@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class ScheduleDate implements Serializable {
 
     private long id;
-    private long schedule_id;
+    private long schedule;
     private String time;
     private days day;
 
@@ -18,12 +18,12 @@ public class ScheduleDate implements Serializable {
         this.id = id;
     }
 
-    public long getSchedule_id() {
-        return schedule_id;
+    public long getSchedule() {
+        return schedule;
     }
 
-    public void setSchedule_id(long schedule_id) {
-        this.schedule_id = schedule_id;
+    public void setSchedule(long schedule) {
+        this.schedule = schedule;
     }
 
     public String getTime() {

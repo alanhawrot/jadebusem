@@ -2,6 +2,7 @@ package DAO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alanhawrot on 19.03.14.
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Schedule implements Serializable {
 
-    private long  id;
+    private long id;
     private String name;
     private ArrayList<ScheduleDate> scheduleDates;
     private ArrayList<ScheduleTracePoint> scheduleTracePoints;
@@ -17,6 +18,12 @@ public class Schedule implements Serializable {
     public Schedule() {
         scheduleDates = new ArrayList<ScheduleDate>();
         scheduleTracePoints = new ArrayList<ScheduleTracePoint>();
+    }
+
+    public Schedule(String name, List<ScheduleDate> scheduleDates, List<ScheduleTracePoint> scheduleTracePoints) {
+        this.name = name;
+        this.scheduleDates = (ArrayList<ScheduleDate>) scheduleDates;
+        this.scheduleTracePoints = (ArrayList<ScheduleTracePoint>) scheduleTracePoints;
     }
 
     public long getId() {

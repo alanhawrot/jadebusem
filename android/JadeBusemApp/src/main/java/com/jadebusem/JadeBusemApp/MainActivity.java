@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 # Action of login button
 ####################################################################################################*/
     public void loginButton(View view) {
-        new TheTask().execute("http://jadebusem1.herokuapp.com/users/sign_in/");
+        new TheTask().execute("http://10.0.2.2:8000/users/sign_in/");
     }
 
 /*####################################################################################################

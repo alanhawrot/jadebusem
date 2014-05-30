@@ -26,3 +26,4 @@ android/JadeBusemApp/local.properties
 android/JadeBusemApp/assets/*
 android/JadeBusemApp/gen/*
 android/JadeBusemApp/JadeBusemApp.iml
+android/JadeBusemApp/target/*

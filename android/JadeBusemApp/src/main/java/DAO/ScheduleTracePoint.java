@@ -6,8 +6,9 @@ import java.io.Serializable;
 public class ScheduleTracePoint implements Serializable {
 
     private long id;
-    private long schedule_id;
+    private long schedule;
     private String address;
+    private int position;
 
     public long getId() {
         return id;
@@ -17,12 +18,12 @@ public class ScheduleTracePoint implements Serializable {
         this.id = id;
     }
 
-    public long getSchedule_id() {
-        return schedule_id;
+    public long getSchedule() {
+        return schedule;
     }
 
-    public void setSchedule_id(long schedule_id) {
-        this.schedule_id = schedule_id;
+    public void setSchedule(long schedule) {
+        this.schedule = schedule;
     }
 
     public String getAddress() {
@@ -31,6 +32,14 @@ public class ScheduleTracePoint implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override

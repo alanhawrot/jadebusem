@@ -179,8 +179,7 @@ def handle_schedule_change_request(data, errors, _schedule):
 @api_view(['GET'])
 def get_all_schedules(request, page):
     queryset = Schedule.objects.all()
-    paginator = Paginator(queryset, 1)
-    print page
+    paginator = Paginator(queryset, 10)
     try:
         schedules = paginator.page(page)
     except PageNotAnInteger:

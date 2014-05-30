@@ -1,18 +1,12 @@
 package DAO;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import java.util.*;
 
 public class ScheduleDAO {
 
@@ -25,7 +19,7 @@ public class ScheduleDAO {
 			MySQLiteHelper.COLUMN_SCHEDULE_ID, MySQLiteHelper.COLUMN_TIME,
 			MySQLiteHelper.COLUMN_DAY };
 	private String[] allColumnsTracePoint = { MySQLiteHelper.COLUMN_ID,
-			MySQLiteHelper.COLUMN_SCHEDULE_ID, MySQLiteHelper.COLUMN_ADDRESS };
+			MySQLiteHelper.COLUMN_SCHEDULE_ID, MySQLiteHelper.COLUMN_ADDRESS, MySQLiteHelper.COLUMN_POSITION };
 
 	private ScheduleDAO(Context context) {
 		dbHelper = new MySQLiteHelper(context);
@@ -79,15 +73,16 @@ public class ScheduleDAO {
 	private ScheduleTracePoint cursorToTracePoint(Cursor cursor) {
 		ScheduleTracePoint tracePoint = new ScheduleTracePoint();
 		tracePoint.setId(cursor.getLong(0));
-		tracePoint.setSchedule_id(cursor.getLong(1));
+		tracePoint.setSchedule(cursor.getLong(1));
 		tracePoint.setAddress(cursor.getString(2));
+        tracePoint.setPosition(cursor.getInt(3));
 		return tracePoint;
 	}
 
 	private ScheduleDate cursorToDate(Cursor cursor) {
 		ScheduleDate date = new ScheduleDate();
 		date.setId(cursor.getLong(0));
-		date.setSchedule_id(cursor.getLong(1));
+		date.setSchedule(cursor.getLong(1));
 		date.setTime(cursor.getString(2));
 		date.setDay(date.toEnum(cursor.getString(3)));
 		return date;
@@ -96,7 +91,8 @@ public class ScheduleDAO {
 	private Schedule cursorToSchedule(Cursor cursor) {
 		Schedule schedule = new Schedule();
 		schedule.setId(cursor.getLong(0));
-		schedule.setName(cursor.getString(1));
+//		schedule.setName(cursor.getString(1));
+		schedule.setName("Local");
 		schedule.setScheduleDates((ArrayList<ScheduleDate>) getAllScheduleDate(schedule
 				.getId()));
 		schedule.setScheduleTracePoints((ArrayList<ScheduleTracePoint>) getAllScheduleTracePoint(schedule
@@ -111,8 +107,9 @@ public class ScheduleDAO {
 		values.put(MySQLiteHelper.COLUMN_NAME, name);
 		long insertID = database.insert(MySQLiteHelper.TABLE_SCHEDULE, null,
 				values);
+        int i = 1;
 		for (ScheduleTracePoint scheduleTracePoint : scheduleTracePoints) {
-			createScheduleTracePoint(insertID, scheduleTracePoint.getAddress());
+			createScheduleTracePoint(insertID, scheduleTracePoint.getAddress(), i++);
 		}
 		for (ScheduleDate scheduleDate : scheduleDates) {
 			createScheduleDate(insertID, scheduleDate.getTime(), scheduleDate
@@ -129,10 +126,11 @@ public class ScheduleDAO {
 	}
 
 	public ScheduleTracePoint createScheduleTracePoint(long schedule_id,
-			String address) {
+			String address, int position) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.COLUMN_SCHEDULE_ID, schedule_id);
 		values.put(MySQLiteHelper.COLUMN_ADDRESS, address);
+        values.put(MySQLiteHelper.COLUMN_POSITION, position);
 		long insertId = database.insert(
 				MySQLiteHelper.TABLE_SCHEDULE_TRACE_POINT, null, values);
 		Cursor cursor = database.query(

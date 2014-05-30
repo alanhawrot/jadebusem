@@ -1,7 +1,5 @@
 package com.jadebusem.JadeBusemApp;
 
-import java.util.List;
-
 import DAO.Schedule;
 import DAO.ScheduleDAO;
 import DAO.ScheduleDate;
@@ -12,7 +10,9 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,46 +20,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
-class Mock {
-
-    public static Schedule testSchedule1() {
-        Schedule schedule = new Schedule();
-        schedule.setName("Test");
-        ScheduleTracePoint scheduleTracePoint1 = new ScheduleTracePoint();
-        scheduleTracePoint1.setAddress("Kraków");
-        ScheduleTracePoint scheduleTracePoint2 = new ScheduleTracePoint();
-        scheduleTracePoint2.setAddress("Zakopane");
-        schedule.getScheduleTracePoints().add(scheduleTracePoint1);
-        schedule.getScheduleTracePoints().add(scheduleTracePoint2);
-        ScheduleDate scheduleDate = new ScheduleDate();
-        scheduleDate.setTime("7:30");
-        scheduleDate.setDay(scheduleDate.toEnum("MONDAY"));
-        schedule.getScheduleDates().add(scheduleDate);
-        return schedule;
-    }
-
-    public static Schedule testSchedule2() {
-        Schedule schedule = new Schedule();
-        schedule.setName("Test2");
-        ScheduleTracePoint scheduleTracePoint1 = new ScheduleTracePoint();
-        scheduleTracePoint1.setAddress("Gdynia");
-        ScheduleTracePoint scheduleTracePoint2 = new ScheduleTracePoint();
-        scheduleTracePoint2.setAddress("Zakopane");
-        schedule.getScheduleTracePoints().add(scheduleTracePoint1);
-        schedule.getScheduleTracePoints().add(scheduleTracePoint2);
-        ScheduleDate scheduleDate = new ScheduleDate();
-        scheduleDate.setTime("8:30");
-        scheduleDate.setDay(scheduleDate.toEnum("TUESDAY"));
-        schedule.getScheduleDates().add(scheduleDate);
-        return schedule;
-    }
-
-}
+import java.util.List;
 
 public class MainList extends ListActivity {
 
     private ScheduleDAO datasource;
+    private List<Schedule> schedules;
+    private int page;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
     public final static String SCHEDULE_DAO = "com.jadebusem.JadeBusemApp.SCHEDULE_DAO";
     public static final String SEARCH_QUERY = "com.jadebusem.JadeBusemApp.SEARCH_QUERY";
@@ -72,20 +42,15 @@ public class MainList extends ListActivity {
         datasource = ScheduleDAO.getInstance(this);
         datasource.open();
 
-		/*
-		 * Schedule schedule = Mock.testSchedule1();
-		 * datasource.createSchedule(schedule.getName(),
-		 * schedule.getScheduleTracePoints(), schedule.getScheduleDates());
-		 * Schedule schedule2 = Mock.testSchedule2();
-		 * datasource.createSchedule(schedule2.getName(),
-		 * schedule2.getScheduleTracePoints(), schedule2.getScheduleDates());
-		 */
+        page = 1;
 
-        List<Schedule> scheduleList = datasource.getAllSchedules();
+        schedules = datasource.getAllSchedules();
+//        new GetSchedulesFromJadeBusemServerTask().execute(page);
         ArrayAdapter<Schedule> scheduleAdapter = new ArrayAdapter<Schedule>(
-                this, android.R.layout.simple_list_item_1, scheduleList);
+                this, android.R.layout.simple_list_item_1, schedules);
         setListAdapter(scheduleAdapter);
     }
+
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -164,6 +129,94 @@ public class MainList extends ListActivity {
     public void startAddScheduleActivity(View view) {
         Intent intent = new Intent(this, AddScheduleActivity.class);
         startActivity(intent);
+    }
+
+    class GetSchedulesFromJadeBusemServerTask extends AsyncTask<Integer, Void, List<ResponseTypeFromJadeBusemServer.Results>> {
+
+        @Override
+        protected List<ResponseTypeFromJadeBusemServer.Results> doInBackground(Integer... params) {
+            try {
+                int page = params[0];
+                final String url = "http://10.0.2.2:8000/schedules/all_schedules/" + page;
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                ResponseTypeFromJadeBusemServer response = restTemplate.getForObject(url, ResponseTypeFromJadeBusemServer.class);
+                return response.getResults();
+            } catch (Exception e) {
+                Log.e("MainList", e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<ResponseTypeFromJadeBusemServer.Results> list) {
+            super.onPostExecute(list);
+            for (ResponseTypeFromJadeBusemServer.Results result : list) {
+                schedules.add(new Schedule("Server", result.getDepartures(), result.getTrace_points()));
+            }
+        }
+    }
+
+    class ResponseTypeFromJadeBusemServer {
+
+        private int count;
+        private String next;
+        private String previous;
+        private List<Results> results;
+
+        class Results {
+
+            private List<ScheduleTracePoint> trace_points;
+            private List<ScheduleDate> departures;
+
+            public List<ScheduleTracePoint> getTrace_points() {
+                return trace_points;
+            }
+
+            public void setTrace_points(List<ScheduleTracePoint> trace_points) {
+                this.trace_points = trace_points;
+            }
+
+            public List<ScheduleDate> getDepartures() {
+                return departures;
+            }
+
+            public void setDepartures(List<ScheduleDate> departures) {
+                this.departures = departures;
+            }
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public String getNext() {
+            return next;
+        }
+
+        public void setNext(String next) {
+            this.next = next;
+        }
+
+        public String getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(String previous) {
+            this.previous = previous;
+        }
+
+        public List<Results> getResults() {
+            return results;
+        }
+
+        public void setResults(List<Results> results) {
+            this.results = results;
+        }
     }
 
 }

@@ -12,12 +12,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_SCHEDULE_DATE = "ScheduleDate";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "name";
-	public static final String COLUMN_SCHEDULE_ID = "schedule_id";
+	public static final String COLUMN_SCHEDULE_ID = "schedule";
 	public static final String COLUMN_ADDRESS = "address";
 	public static final String COLUMN_TIME = "time";
 	public static final String COLUMN_DAY = "day";
+    public static final String COLUMN_POSITION = "position";
 
-	private static final String DATABASE_NAME = "jb.db";
+    private static final String DATABASE_NAME = "jb.db";
+
 	private static final int DATABASE_VERSION = 1;
 
 	// Database creation sql statement
@@ -35,19 +37,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " integer, "
 			+ COLUMN_ADDRESS
 			+ " text not null, "
+            + COLUMN_POSITION
+            + " integer, "
 			+ " foreign key("
 			+ COLUMN_SCHEDULE_ID
 			+ ") references "
 			+ TABLE_SCHEDULE + "(" + COLUMN_ID + "));";
-
-	private static final String CREATE_TABLE_SCHEDULE_DATE = " create table "
+    private static final String CREATE_TABLE_SCHEDULE_DATE = " create table "
 			+ TABLE_SCHEDULE_DATE + "(" + COLUMN_ID
 			+ " integer primary key autoincrement, " + COLUMN_SCHEDULE_ID
 			+ " integer, " + COLUMN_TIME + " text not null, " + COLUMN_DAY
 			+ " text not null, " + " foreign key(" + COLUMN_SCHEDULE_ID
 			+ ") references " + TABLE_SCHEDULE + "(" + COLUMN_ID + "));";
 
-	public MySQLiteHelper(Context context) {
+    public MySQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
