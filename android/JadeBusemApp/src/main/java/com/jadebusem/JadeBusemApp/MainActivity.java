@@ -6,10 +6,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.EditText;
 import android.widget.TextView;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -19,11 +17,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import utils.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
+
     private EditText email;
     private EditText password;
     private TextView tv1, tv2;
@@ -120,6 +120,8 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = saveSettings.edit();
                 editor.putString("USER_NAME", email.getText().toString());
                 editor.commit();
+                User.LOGGED = true;
+                User.EMAIL = email.getText().toString();
                 Intent intent = new Intent(getActivity(), MainListActivity.class);
                 startActivity(intent);
             }
@@ -154,7 +156,7 @@ public class MainActivity extends Activity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost method = new HttpPost(params[0]);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("email", email.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("EMAIL", email.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("password", password.getText().toString()));
                 method.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(method);
@@ -162,8 +164,8 @@ public class MainActivity extends Activity {
                 if(entity != null){
                     String temp = EntityUtils.toString(entity);
 
-                    if(temp.contains("Please correct the errors below.") || temp.contains("Please correct the error below.") || temp.contains("Error, please check your email or password.")){
-                        return "Check your email or password";
+                    if(temp.contains("Please correct the errors below.") || temp.contains("Please correct the error below.") || temp.contains("Error, please check your EMAIL or password.")){
+                        return "Check your EMAIL or password";
                     }
                     else
                     {

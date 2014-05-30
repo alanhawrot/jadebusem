@@ -198,4 +198,4 @@ def create_new_schedule(request):
     schedule = Schedule(id=None, author=author_of_schedule)
     errors = {}
     handle_schedule_change_request(data, errors, schedule)
-    return Response()
+    return Response(content_type='application/json')
