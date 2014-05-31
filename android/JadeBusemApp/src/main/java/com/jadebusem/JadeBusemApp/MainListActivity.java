@@ -31,11 +31,12 @@ import java.util.List;
 public class MainListActivity extends ListActivity {
 
     private ScheduleDAO datasource;
-    private List<Schedule> schedules;
+    private ArrayList<Schedule> schedules;
     private int page;
     private ArrayAdapter<Schedule> scheduleAdapter;
     public final static String SCHEDULE_DETAILS = "com.jadebusem.JadeBusemApp.SCHEDULE_DETAILS";
-    public static final String SEARCH_QUERY = "com.jadebusem.JadeBusemApp.SEARCH_QUERY";
+    public final static String SEARCH_QUERY = "com.jadebusem.JadeBusemApp.SEARCH_QUERY";
+    public final static String SCHEDULES = "com.jadebusem.JadeBusemApp.SCHEDULES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class MainListActivity extends ListActivity {
                                 Intent intent = new Intent(MainListActivity.this,
                                         SearchActivity.class);
                                 intent.putExtra(SEARCH_QUERY, query);
+                                intent.putExtra(SCHEDULES, schedules);
                                 startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new Builder(
