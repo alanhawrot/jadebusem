@@ -73,7 +73,7 @@ public class MainListActivity extends ListActivity {
         SearchView searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
-            String hint = "Keywords separated by space";
+            String hint = getString(R.string.query_hint);
             searchView.setQueryHint(hint);
             searchView
                     .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
