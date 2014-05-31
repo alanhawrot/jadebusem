@@ -25,6 +25,7 @@ import utils.ResponseTypeFromJadeBusemServer;
 import utils.Result;
 import utils.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainListActivity extends ListActivity {
@@ -42,11 +43,10 @@ public class MainListActivity extends ListActivity {
         setContentView(R.layout.main);
 
         datasource = ScheduleDAO.getInstance(this);
-        datasource.open();
 
         page = 1;
 
-        schedules = datasource.getAllSchedules();
+        schedules = new ArrayList<Schedule>();
         scheduleAdapter = new ArrayAdapter<Schedule>(
                 this, android.R.layout.simple_list_item_1, schedules);
         setListAdapter(scheduleAdapter);
@@ -122,24 +122,28 @@ public class MainListActivity extends ListActivity {
                 page++;
                 new GetSchedulesFromJadeBusemServerTask().execute(page);
             }
+        } else if (item.getItemId() == R.id.action_refresh) {
+            refresh();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (User.LOGGED) {
-            new GetSchedulesFromJadeBusemServerTask().execute(page);
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         datasource.open();
+        refresh();
+    }
+
+    private void refresh() {
+        List<Schedule> scheduleList = datasource.getAllSchedules();
+        schedules.clear();
+        schedules.addAll(scheduleList);
+        scheduleAdapter.notifyDataSetChanged();
         if (User.LOGGED) {
-            new GetSchedulesFromJadeBusemServerTask().execute(page);
+            for (int i = 1; i <= page; i++) {
+                new GetSchedulesFromJadeBusemServerTask().execute(i);
+            }
         }
     }
 

@@ -1,7 +1,5 @@
 package com.jadebusem.JadeBusemApp;
 
-import java.util.List;
-
 import DAO.Schedule;
 import DAO.ScheduleDAO;
 import android.app.ListActivity;
@@ -10,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.List;
 
 public class SearchActivity extends ListActivity {
 	
