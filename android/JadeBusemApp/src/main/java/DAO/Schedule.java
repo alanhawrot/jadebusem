@@ -101,13 +101,16 @@ public class Schedule implements Serializable {
         Schedule schedule = (Schedule) o;
 
         if (id != schedule.id) return false;
+        if (!name.equals(schedule.name)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
     }
-
+    
 }
