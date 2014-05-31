@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/ic_launcher"
+    android:background="@drawable/bus_logo"
     android:gravity="center_horizontal"
     android:weightSum="1"
     android:baselineAligned="false">
