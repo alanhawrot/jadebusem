@@ -2,6 +2,7 @@ package com.jadebusem.JadeBusemApp;
 
 import DAO.Schedule;
 import DAO.ScheduleDAO;
+import DAO.ScheduleDate;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
@@ -178,6 +179,13 @@ public class MainListActivity extends ListActivity {
             super.onPostExecute(list);
             if (list != null) {
                 for (Result result : list) {
+                    for (ScheduleDate scheduleDate : result.getDepartures()) {
+                        String time = scheduleDate.getTime();
+                        int beginTimeFormat = 0;
+                        int endTimeFormat = 5;
+                        time = time.substring(beginTimeFormat, endTimeFormat);
+                        scheduleDate.setTime(time);
+                    }
                     Schedule schedule = new Schedule(result.getId(), "Server", result.getDepartures(), result.getTrace_points());
                     if (!schedules.contains(schedule)) {
                         schedules.add(schedule);
