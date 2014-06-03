@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="outer-center">
+    <div class="inner-center">
+        <div class="panel-option details" hidden="hidden">
+            {% trans 'Changes' %}: {{ i|length }}
+            <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
+        </div>
+    </div>
+</div>

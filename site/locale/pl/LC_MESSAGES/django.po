@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-01 19:39+0200\n"
+"POT-Creation-Date: 2014-06-04 01:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: SearchEngine/views.py:87 SearchEngine/views.py:122
+#: SearchEngine/views.py:86 SearchEngine/views.py:115
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
-#: SearchEngine/views.py:321 SearchEngine/views.py:356
-#: templates/search_engine/search.html:34
+#: SearchEngine/views.py:338 SearchEngine/views.py:376
+#: templates/search_engine/search.html:35
 msgid "All"
 msgstr "Wszystkie"
 
-#: SearchEngine/views.py:344
+#: SearchEngine/views.py:362
 msgid "Sorry, we cant find any schedule."
 msgstr "Przepraszamy, nie znaleziono żadnego rozkładu."
 
-#: SearchEngine/views.py:346
+#: SearchEngine/views.py:364
 msgid " Maybe try to search with interchanges."
 msgstr " Może spróbuj wyszukać połączenia z przesiadkami."
 
@@ -175,87 +175,94 @@ msgstr ", Nazwa firmy: "
 msgid "Address"
 msgstr "Adres"
 
-#: schedules/models.py:29
+#: schedules/models.py:32
 msgid "Poniedziałek"
 msgstr "Monday"
 
-#: schedules/models.py:30
+#: schedules/models.py:33
 msgid "Wtorek"
 msgstr "Tuesday"
 
-#: schedules/models.py:31
+#: schedules/models.py:34
 msgid "Środa"
 msgstr "Wednesday"
 
-#: schedules/models.py:32
+#: schedules/models.py:35
 msgid "Czwartek"
 msgstr "Thursday"
 
-#: schedules/models.py:33
+#: schedules/models.py:36
 msgid "Piątek"
 msgstr "Friday"
 
-#: schedules/models.py:34
+#: schedules/models.py:37
 msgid "Sobota"
 msgstr "Saturday"
 
-#: schedules/models.py:35
+#: schedules/models.py:38
 msgid "Niedziela"
 msgstr "Sunday"
 
-#: schedules/models.py:38
+#: schedules/models.py:41
 msgid "Departure time"
 msgstr "Czas odjazdu"
 
-#: schedules/views.py:90
+#: schedules/views.py:95
 msgid "Successfully modified schedule."
 msgstr "Pomyślnie zmodyfikowano rozkład"
 
-#: schedules/views.py:92
+#: schedules/views.py:97
 msgid "Successfully added schedule."
 msgstr "Pomyślnie dodano rozkład"
 
-#: schedules/views.py:129
+#: schedules/views.py:133
 msgid "trace points error "
 msgstr "błąd wprzystankach "
 
-#: schedules/views.py:129
+#: schedules/views.py:133
 msgid "At least two trace points are needed."
 msgstr "Conajmniej dwa punkty trasy muszą zostać wybrane."
 
-#: schedules/views.py:157
+#: schedules/views.py:161
 msgid "departures error"
 msgstr "błąd w odjazdach"
 
-#: schedules/views.py:157
+#: schedules/views.py:161
 msgid "Need to add at least one departure."
 msgstr "Trzeba dodać conajmniej jedną godzinę."
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:8
 msgid "Monday"
 msgstr "Poniedziałek"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:9
 msgid "Tuesday"
 msgstr "Wtorek"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:10
 msgid "Wednesday"
 msgstr "Środa"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:11
 msgid "Thursday"
 msgstr "Czwartek"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:12
 msgid "Friday"
 msgstr "Piątek"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:13
 msgid "Saturday"
 msgstr "Sobota"
 
 #: schedules/templatetags/filters.py:10
+#: templates/search_engine/schedule.html:14
 msgid "Sunday"
 msgstr "Niedziela"
 
@@ -311,9 +318,9 @@ msgstr ""
 "zwiększa wiarygodność wśród klientów.<br>\n"
 "        "
 
-#: templates/jadebusem_site/base.html:45
-msgid "Footer"
-msgstr "Stopka"
+#: templates/jadebusem_site/base.html:46
+msgid "© 2013 jadebusem.pl All Rights Reserved"
+msgstr "© 2013 jadebusem.pl Wszystkie prawa zastrzeżone"
 
 #: templates/jadebusem_site/index.html:11
 msgid "Welcome in Jadę Busem portal!"
@@ -325,23 +332,28 @@ msgstr "Język"
 
 #: templates/jadebusem_site/language.html:10
 #: templates/jadebusem_site/language.html:29
-#: templates/jadebusem_site/nav.html:33
+#: templates/jadebusem_site/nav.html:44
 msgid "Change language"
 msgstr "Zmień język"
 
 #: templates/jadebusem_site/nav.html:6 templates/search_engine/search.html:19
+#: templates/search_engine/search_result.html:19
 msgid "Search for connection"
 msgstr "Szukaj połączenia"
 
-#: templates/jadebusem_site/nav.html:13
+#: templates/jadebusem_site/nav.html:14 templates/jadebusem_site/nav.html:17
+msgid "Topics"
+msgstr "Tematy"
+
+#: templates/jadebusem_site/nav.html:24
 msgid "My schedules"
 msgstr "Moje rozkłady"
 
-#: templates/jadebusem_site/nav.html:20
+#: templates/jadebusem_site/nav.html:31
 msgid "Add schedule"
 msgstr "Dodaj rozkład"
 
-#: templates/jadebusem_site/nav.html:27
+#: templates/jadebusem_site/nav.html:38
 msgid "About page"
 msgstr "Informacje"
 
@@ -382,7 +394,7 @@ msgstr "Przystanki"
 msgid "Address.."
 msgstr "Adres.."
 
-#: templates/schedules/schedule.html:168
+#: templates/schedules/schedule.html:169
 msgid "Send schedule"
 msgstr "Wyślij zdjęcie"
 
@@ -394,99 +406,119 @@ msgstr "Lista rozkładów"
 msgid "My schedules list"
 msgstr "Lista moich rozkładów"
 
-#: templates/schedules/show_list.html:29
+#: templates/schedules/show_list.html:32
 msgid "Edit"
 msgstr "Zmień"
 
-#: templates/schedules/show_list.html:35
+#: templates/schedules/show_list.html:38
 msgid "Delete"
 msgstr "Usuń"
 
-#: templates/schedules/show_list.html:40
+#: templates/schedules/show_list.html:43
 msgid "You don't have own schedules"
 msgstr "Nie masz własnych rozkładów"
 
-#: templates/search_engine/search.html:29
-msgid "Pick company"
-msgstr "Firma"
-
-#: templates/search_engine/search.html:42
-#: templates/search_engine/search.html:77
-msgid "Search"
-msgstr "Szukaj"
-
-#: templates/search_engine/search.html:48
-msgid "Pick trace points"
-msgstr "Wybierz przystanki"
-
-#: templates/search_engine/search.html:53
-msgid "From..."
-msgstr "Z..."
-
-#: templates/search_engine/search.html:60
-msgid "To..."
-msgstr "Do..."
-
-#: templates/search_engine/search.html:71
-msgid "Avoid interchanges"
-msgstr "Unikaj przesiadek"
-
-#: templates/search_engine/search.html:136
-msgid "Trace proposition"
-msgstr "Propozycja trasy"
-
-#: templates/search_engine/search.html:136
+#: templates/search_engine/details.html:5
 msgid "Changes"
 msgstr "Przesiadki"
 
-#: templates/search_engine/search.html:141
-msgid "Company"
-msgstr "Firma:"
-
-#: templates/search_engine/search.html:142
-msgid "Tracepoints"
-msgstr "Przystanki:"
-
-#: templates/search_engine/search.html:143
-msgid "Submitted by"
-msgstr "Wysłany przez"
-
-#: templates/search_engine/search.html:162
-msgid "Show schedule"
-msgstr "Pokaż rozkład"
-
-#: templates/search_engine/search.html:174
-msgid ""
-"\n"
-"                                                                            <td>Hours</"
-"td>\n"
-"                                                                            <td>Monday</"
-"td>\n"
-"                                                                            <td>Tuesday</"
-"td>\n"
-"                                                                            <td>Wednesday</"
-"td>\n"
-"                                                                            <td>Thursday</"
-"td>\n"
-"                                                                            <td>Friday</"
-"td>\n"
-"                                                                            <td>Saturday</"
-"td>\n"
-"                                                                            <td>Sunday</"
-"td>\n"
-"                                                                        "
+#: templates/search_engine/schedule.html:7
+msgid "Hours"
 msgstr ""
-"\n"
-"                            <tr>\n"
-"                                <td>Godziny</td>\n"
-"                                <td>Poniedziałek</td>\n"
-"                                <td>Wtorek</td>\n"
-"                                <td>Środa</td>\n"
-"                                <td>Czwartek</td>\n"
-"                                <td>Piątek</td>\n"
-"                                <td>Sobota</td>\n"
-"                                <td>Niedziela</td>\n"
-"                            </tr> "
+
+#: templates/search_engine/search.html:30
+msgid "Pick company"
+msgstr "Firma"
+
+#: templates/search_engine/search.html:43
+#: templates/search_engine/search.html:78
+msgid "Search"
+msgstr "Szukaj"
+
+#: templates/search_engine/search.html:49
+msgid "Pick trace points"
+msgstr "Wybierz przystanki"
+
+#: templates/search_engine/search.html:54
+msgid "From..."
+msgstr "Z..."
+
+#: templates/search_engine/search.html:61
+msgid "To..."
+msgstr "Do..."
+
+#: templates/search_engine/search.html:72
+msgid "Avoid interchanges"
+msgstr "Unikaj przesiadek"
+
+#: templates/search_engine/search_result.html:47
+msgid "Schedule"
+msgstr "Rozkład"
+
+#: templates/search_engine/search_result.html:51
+msgid "Tracepoints"
+msgstr "Przystanki"
+
+#: templates/search_engine/search_result.html:55
+msgid "Map"
+msgstr "Mapa"
+
+#: templates/search_engine/search_result.html:59
+msgid "Route details"
+msgstr "Detale trasy"
+
+#: templates/search_engine/search_result.html:63
+msgid "Report problem"
+msgstr "Zgłoś problem"
+
+#: templates/topics/create.html:12 templates/topics/create.html.py:29
+#: templates/topics/show.html:12 topics/models.py:11
+msgid "Topic"
+msgstr "Temat"
+
+#: templates/topics/create.html:17
+msgid "Create topic"
+msgstr "Stwórz temat"
+
+#: templates/topics/create.html:20 templates/topics/show.html:20
+msgid "Company"
+msgstr "Firma"
+
+#: templates/topics/create.html:23 templates/topics/show.html:23
+msgid "Owner"
+msgstr "Właściciel"
+
+#: templates/topics/create.html:39
+msgid "Invite owner"
+msgstr "Zaproś właściciela"
+
+#: templates/topics/create.html:45
+msgid "Invite admin"
+msgstr "Zaproś administratora"
+
+#: templates/topics/create.html:70 templates/topics/show.html:68
+msgid "Send"
+msgstr "Wyślij"
+
+#: templates/topics/list_all.html:12
+msgid "List of topics"
+msgstr "Lista tematów"
+
+#: templates/topics/list_all.html:17
+msgid "My topics"
+msgstr "Moje tematy"
+
+#: templates/topics/list_all.html:48
+msgid "Closed"
+msgstr "Zamknięty"
+
+#: templates/topics/list_all.html:54
+msgid "Close"
+msgstr "Zamknij"
+
+#: templates/topics/list_all.html:60
+msgid "You don't contribute to any topics"
+msgstr "Nie uczestniczysz w żadnych tematach"
 
 #: templates/user/registration.html:6
 msgid "Registration"
@@ -613,32 +645,19 @@ msgstr "Wpisz hasło, aby potwierdzić"
 msgid "Save"
 msgstr "Zapisz"
 
-#~ msgid "Send picture"
-#~ msgstr "Wyślij zdjęcie"
+#: topics/models.py:12
+msgid "Is closed"
+msgstr "Zamknięty"
 
-#~ msgid "Fill form"
-#~ msgstr "Wypełnij formularz"
+#: topics/models.py:24
+msgid "Last check"
+msgstr "Ostatnio sprawdzane"
 
-#~ msgid "Data verification"
-#~ msgstr "Weryfikacja daty"
+#: topics/models.py:31
+msgid "Date"
+msgstr "Data"
 
-#~ msgid "Welcome"
-#~ msgstr "Witaj"
-
-#~ msgid "Account settings"
-#~ msgstr "Ustawienia konta"
-
-#~ msgid "Pick a photo"
-#~ msgstr "Wybierz zdjęcie"
-
-#~ msgid "Next trace point"
-#~ msgstr "Następny punkt trasy"
-
-#~ msgid "Add tracepoint"
-#~ msgstr "Dodaj przystanek"
-
-#~ msgid "Distance"
-#~ msgstr "Dystans"
-
-#~ msgid "Duration"
-#~ msgstr "Czas trwania"
+#: topics/views.py:152 topics/views.py:161 topics/views.py:164
+#: topics/views.py:182 topics/views.py:184
+msgid "Illegal access attempt"
+msgstr "Niedozwolona próba dostępu"

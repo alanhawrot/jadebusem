@@ -1,0 +1,96 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCByGygZtEMlgWlWqRUffg6CSbBZrHiRT8&sensor=false">
+    </script>
+    <script type="text/javascript"
+            src="{% static 'scripts/google_maps.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
+
+{% endblock %}
+
+{% block title %}
+    {% trans "Search for connection" %}
+{% endblock %}
+
+
+{% block content %}
+    <div>
+
+        {% include 'search_engine/page_changer.html' %}
+        <div class="clearing pages">
+            <div id="current"></div>
+{#                        {% for i in temp %}#}
+{#                            {{ i.address }}#}
+{#                        {% endfor %}#}
+{#                        {{ temp }}#}
+{#                        {% for i in schedule %}#}
+{#                            {{ i }}#}
+{#                        {% endfor %}#}
+
+            {% for i in list_of_tabs %}
+                <div class="page" data-page-id="{{ forloop.counter }}">
+                    {% for id, company, author, trace, schedule in i %}
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" style="padding-bottom: 40px;">
+                                <h5 class="panel-title pull-left" style="padding-top: 7.5px;">{{ company }}</h5>
+
+                                <div class="btn-group pull-right">
+                                    <a href="#" class="btn btn-primary btn-sm panel-option-link schedule-link" data-toggle="button">
+                                        <span class=" glyphicon glyphicon-list-alt" style="margin-right: 10px"></span>
+                                        {% trans 'Schedule' %}
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-sm panel-option-link trace-points-link">
+                                        <span class="glyphicon glyphicon-road" style="margin-right: 10px"></span>
+                                        {% trans 'Tracepoints' %}
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-sm panel-option-link map-link">
+                                        <span class="glyphicon glyphicon-globe" style="margin-right: 10px"></span>
+                                        {% trans 'Map' %}
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-sm panel-option-link details-link">
+                                        <span class="glyphicon glyphicon-stats" style="margin-right: 10px"></span>
+                                        {% trans 'Route details' %}
+                                    </a>
+                                    <a href="{% url 'topics.views.create' id %}" class="btn btn-primary btn-sm">
+                                        <span class="glyphicon glyphicon-envelope" style="margin-right: 10px"></span>
+                                        {% trans 'Report problem' %}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="panel-body schedule-info">
+                                {% include 'search_engine/schedule.html' %}
+                                {% include 'search_engine/trace_points.html' %}
+                                {% include 'search_engine/details.html' %}
+                                {% include 'search_engine/map.html' %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="largeSpacer">&nbsp;</div>
+        {% include 'search_engine/page_changer.html' %}
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+{% endblock %}

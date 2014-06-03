@@ -169,6 +169,19 @@ body {
     color: #443f3c;
 }
 
+.link-black {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-black:hover {
+    color: #443f3c;
+    text-decoration: none;
+}
+.link-black:active {
+    color: red;
+}
 nav {
     font-size: 18px;
     width: 250px;

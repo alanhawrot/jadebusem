@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $(".pages #current").attr('data-current-page-id', 1);
-    $(".pages .page-changer .change-page[data-page-id='1']").css('font-weight', 'bold')
+    var first_page = $(".page-changer .change-page[data-page-id='1']")
+    first_page.addClass("active")
+    first_page.css('font-weight', 'bold')
+
     var pages = $(".pages .page").length
     if (parseInt(pages) <= 1) {
         $(".pages .page-changer").hide();
@@ -9,14 +12,25 @@ $(document).ready(function () {
         $(".pages .page[data-page-id='1']").removeAttr("hidden");
 
         function changePage(clickedPage) {
-            $(".pages .page-changer .change-page").css('font-weight', '');
-            $(".pages .page-changer .change-page[data-page-id='" + clickedPage + "']").css('font-weight', 'bold')
+            var change_buttons = $(".page-changer .change-page")
+            change_buttons.removeClass("active")
+            change_buttons.css('font-weight', '');
+            var change_button = $(".page-changer .change-page[data-page-id='" + clickedPage + "']")
+            change_button.addClass("active")
+            change_button.css('font-weight', 'bold')
             $(".pages #current").attr('data-current-page-id', clickedPage);
-            $(".pages .page").attr("hidden", "hidden")
-            $(".pages .page[data-page-id='" + clickedPage + "']").removeAttr("hidden");
+            $(".pages .page").hide()
+            var clicked_page = $(".pages .page[data-page-id='" + clickedPage + "']")
+            clicked_page.show()
+            $(".panel-option-link").removeClass("active")
+            clicked_page.find(".schedule-link").addClass("active")
+            clicked_page.find(".schedule").show()
+            map = $(".map")
+            map.appendTo(clicked_page.find(".schedule-info"));
+            map.hide()
         }
 
-        $(".pages .page-changer .previous-page").click(function (eventObj) {
+        $(".page-changer .previous-page").click(function (eventObj) {
             eventObj.preventDefault();
             currentPage = parseInt($(".pages #current").attr('data-current-page-id'))
             currentPage -= 1;
@@ -25,7 +39,7 @@ $(document).ready(function () {
             }
         });
 
-        $(".pages .page-changer .next-page").click(function (eventObj) {
+        $(".page-changer .next-page").click(function (eventObj) {
             eventObj.preventDefault();
             currentPage = parseInt($(".pages #current").attr('data-current-page-id'))
             currentPage += 1;
@@ -34,7 +48,7 @@ $(document).ready(function () {
             }
         });
 
-        $(".pages .page-changer .change-page").click(function (eventObj) {
+        $(".page-changer .change-page").click(function (eventObj) {
             eventObj.preventDefault();
             $(".pages .page-changer .change-page").css('font-weight', '');
             clickedPage = $(this).css('font-weight', 'bold').attr('data-page-id')
@@ -43,18 +57,61 @@ $(document).ready(function () {
     }
     $(".schedule-link").click(function (eventObj) {
         eventObj.preventDefault();
-        trace = $(this).parents(".trace")
+        trace = $(this).parents(".page")
 
         schedule_id = $(this).attr('data-schedule-id');
 
-        trace_id = $(this).parents(".trace").attr("data-page-id");
-        schedule = $(".pages .trace[data-page-id='" + trace_id + "']" + " .schedule[data-schedule-id='" + schedule_id + "']")
-        if (schedule.is('[hidden]')) {
-            $(".pages .trace .schedule").attr('hidden', 'hidden');
-            schedule.removeAttr('hidden')
-        } else {
-            $(".pages .trace .schedule").attr('hidden', 'hidden');
-        }
+        trace_id = $(this).parents(".page").attr("data-page-id");
+        schedule = $(".pages .page[data-page-id='" + trace_id + "']" + " .schedule")
+        $(".panel-option-link").removeClass("active")
+        schedule.addClass("active")
+        $(".panel-option").hide()
+        schedule.show()
     });
 
+    $(".map-link").click(function (eventObj) {
+        eventObj.preventDefault();
+        trace = $(this).parents(".page")
+
+        schedule_id = $(this).attr('data-schedule-id');
+
+        trace_id = $(this).parents(".page").attr("data-page-id");
+        map = $(".pages .page[data-page-id='" + trace_id + "']" + " .map")
+        $(".panel-option-link").removeClass("active")
+        map.addClass("active")
+        $(".panel-option").hide()
+        map.show()
+    });
+
+
+    $(".details-link").click(function (eventObj) {
+        eventObj.preventDefault();
+        trace = $(this).parents(".page")
+
+        schedule_id = $(this).attr('data-schedule-id');
+
+        trace_id = $(this).parents(".page").attr("data-page-id");
+        details = $(".pages .page[data-page-id='" + trace_id + "']" + " .details")
+        $(".panel-option-link").removeClass("active")
+        details.addClass("active")
+        $(".panel-option").hide()
+        details.show()
+    });
+
+    $(".trace-points-link").click(function (eventObj) {
+        eventObj.preventDefault();
+        trace = $(this).parents(".page")
+
+        schedule_id = $(this).attr('data-schedule-id');
+
+        trace_id = $(this).parents(".page").attr("data-page-id");
+        trace_points = $(".pages .page[data-page-id='" + trace_id + "']" + " .trace-points")
+        $(".panel-option-link").removeClass("active")
+        trace_points.addClass("active")
+        $(".panel-option").hide()
+        trace_points.show()
+    });
+    first_page = $(".pages .page[data-page-id='1']")
+    first_page.find(".schedule-link").addClass("active")
+    first_page.find(".schedule").show()
 });

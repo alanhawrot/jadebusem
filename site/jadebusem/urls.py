@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'^users/', include('Users.urls')),
     url(r'^schedules/', include('schedules.urls')),
+    url(r'^topics/', include('topics.urls')),
     url(r'^about/', about),
     url(r'^language', language),
 )
