@@ -194,7 +194,7 @@ public class ModifyScheduleActivity extends Activity {
     	switch (item.getItemId()) {
     	case android.R.id.home:
     		Intent intent = new Intent();
-    		intent.putExtra(MainActivity.SCHEDULE_DETAILS, schedule);
+    		intent.putExtra(MainList.SCHEDULE_DETAILS, schedule);
     		navigateUpTo(intent);
     		finish();
     		return true;
