@@ -26,50 +26,84 @@
         {% include 'search_engine/page_changer.html' %}
         <div class="clearing pages">
             <div id="current"></div>
-{#                        {% for i in temp %}#}
-{#                            {{ i.address }}#}
-{#                        {% endfor %}#}
-{#                        {{ temp }}#}
-{#                        {% for i in schedule %}#}
-{#                            {{ i }}#}
-{#                        {% endfor %}#}
+            {#                        {% for i in temp %}#}
+            {#                            {{ i.address }}#}
+            {#                        {% endfor %}#}
+            {#                        {{ temp }}#}
+            {#                        {% for i in schedule %}#}
+            {#                            {{ i }}#}
+            {#                        {% endfor %}#}
 
-            {% for i in list_of_tabs %}
+            {% for i, full_route in list_of_tabs %}
                 <div class="page" data-page-id="{{ forloop.counter }}">
-                    {% for id, company, author, trace, schedule in i %}
+                    {% if i|length > 1 %}
                         <div class="panel panel-primary">
                             <div class="panel-heading" style="padding-bottom: 40px;">
-                                <h5 class="panel-title pull-left" style="padding-top: 7.5px;">{{ company }}</h5>
+                                <h5 class="panel-title pull-left" style="padding-top: 7.5px;">
+                                    {% trans 'Changes' %}: {{ i|length }}
+                                </h5>
 
                                 <div class="btn-group pull-right">
-                                    <a href="#" class="btn btn-primary btn-sm panel-option-link schedule-link" data-toggle="button">
-                                        <span class=" glyphicon glyphicon-list-alt" style="margin-right: 10px"></span>
-                                        {% trans 'Schedule' %}
-                                    </a>
-                                    <a href="#" class="btn btn-primary btn-sm panel-option-link trace-points-link">
+                                    <a href="#" class="btn btn-primary btn-sm disabled panel-option-link trace-points-link">
                                         <span class="glyphicon glyphicon-road" style="margin-right: 10px"></span>
-                                        {% trans 'Tracepoints' %}
+                                        {% trans 'Full trace' %}
                                     </a>
-                                    <a href="#" class="btn btn-primary btn-sm panel-option-link map-link">
+                                    <a href="#" class="btn btn-primary btn-sm disabled panel-option-link map-link">
                                         <span class="glyphicon glyphicon-globe" style="margin-right: 10px"></span>
                                         {% trans 'Map' %}
                                     </a>
-                                    <a href="#" class="btn btn-primary btn-sm panel-option-link details-link">
+                                    <a href="#" class="btn btn-primary btn-sm disabled panel-option-link details-link">
                                         <span class="glyphicon glyphicon-stats" style="margin-right: 10px"></span>
                                         {% trans 'Route details' %}
                                     </a>
-                                    <a href="{% url 'topics.views.create' id %}" class="btn btn-primary btn-sm">
-                                        <span class="glyphicon glyphicon-envelope" style="margin-right: 10px"></span>
-                                        {% trans 'Report problem' %}
-                                    </a>
                                 </div>
                             </div>
+                            <div class="panel-body">
+                                {% include 'search_engine/full_route.html' %}
+                            </div>
 
-                            <div class="panel-body schedule-info">
-                                {% include 'search_engine/schedule.html' %}
-                                {% include 'search_engine/trace_points.html' %}
-                                {% include 'search_engine/details.html' %}
-                                {% include 'search_engine/map.html' %}
+                        </div>
+                    {% endif %}
+
+                    {% for id, company, author, trace, schedule in i %}
+                        <div class="transfer">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding-bottom: 40px;">
+                                    <h5 class="panel-title pull-left" style="padding-top: 7.5px;">{{ company }}</h5>
+
+                                    <div class="btn-group pull-right">
+                                        <a href="#" class="btn btn-primary btn-sm panel-option-link schedule-link"
+                                           data-toggle="button">
+                                            <span class=" glyphicon glyphicon-list-alt"
+                                                  style="margin-right: 10px"></span>
+                                            {% trans 'Schedule' %}
+                                        </a>
+                                        <a href="#" class="btn btn-primary btn-sm panel-option-link trace-points-link">
+                                            <span class="glyphicon glyphicon-road" style="margin-right: 10px"></span>
+                                            {% trans 'Tracepoints' %}
+                                        </a>
+                                        <a href="#" class="btn btn-primary btn-sm panel-option-link map-link">
+                                            <span class="glyphicon glyphicon-globe" style="margin-right: 10px"></span>
+                                            {% trans 'Map' %}
+                                        </a>
+                                        <a href="#" class="btn btn-primary btn-sm panel-option-link details-link">
+                                            <span class="glyphicon glyphicon-stats" style="margin-right: 10px"></span>
+                                            {% trans 'Route details' %}
+                                        </a>
+                                        <a href="{% url 'topics.views.create' id %}" class="btn btn-primary btn-sm">
+                                            <span class="glyphicon glyphicon-envelope"
+                                                  style="margin-right: 10px"></span>
+                                            {% trans 'Report problem' %}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body schedule-info">
+                                    {% include 'search_engine/schedule.html' %}
+                                    {% include 'search_engine/trace_points.html' %}
+                                    {% include 'search_engine/details.html' %}
+                                    {% include 'search_engine/map.html' %}
+                                </div>
                             </div>
                         </div>
                     {% endfor %}

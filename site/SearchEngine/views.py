@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+import operator
+
+from django.shortcuts import render_to_response, render
+from django.template import RequestContext, Context
 from django.utils.translation import ugettext as _
 
 from schedules.models import Schedule
@@ -9,6 +12,7 @@ from schedules.models import ScheduleDate
 
 
 trace = ""
+
 #-------------------------------------------------------------------------------------
 # Function to translate polish chars to ascii
 #-------------------------------------------------------------------------------------
@@ -87,7 +91,7 @@ def create_schedule(schedule, dates, trace_points, start, stop):
 
         trace_in_schedule = trace_points.filter(schedule_id=schedule.id)
 
-        trace_points = []
+        trace = []
         trace_temp = []
         if start != "":
             flag = False
@@ -101,13 +105,13 @@ def create_schedule(schedule, dates, trace_points, start, stop):
             if start == trace_point.address:
                 flag = True
             if flag:
-                trace_points.append(trace_point.address)
+                trace.append(trace_point.address)
 
                 if flag_temp:
                     trace_temp.append(trace_point.address)
                 if stop == trace_point.address:
                     break
-        list_of_schedule.extend([schedule.id, schedule.company, schedule.author, trace_points])
+        list_of_schedule.extend([schedule.id, schedule.company, schedule.author, trace])
         list_of_schedule.extend([tab])
         dic['list_of_schedule'] = list_of_schedule
         dic['trace'] = trace_temp
@@ -152,8 +156,8 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
         for interchange in interchange_points:
             if (id < interchange.id):
                 list_of_stops.append(interchange.address)
-                # Search for interchanges
-                # Get those schedules that doesn't have start point
+            # Search for interchanges
+        # Get those schedules that doesn't have start point
         interchanges_stops_id = ScheduleTracePoint.objects.filter(address__iexact=start_address).values(
             "schedule_id").distinct()
         interchanges_stops = ScheduleTracePoint.objects.exclude(schedule_id__in=interchanges_stops_id)
@@ -188,7 +192,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
             dic = create_schedule(schedule, dates, trace_points, "", stop)
             list_of_schedule = dic['list_of_schedule']
             trace = dic['trace']
-        temp = trace + " -> "
+        temp = [trace]
         schedules = Schedule.objects.filter(id=id2)
         dates = ScheduleDate.objects.filter(schedule_id=id2)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
@@ -196,7 +200,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
             dic = create_schedule(schedule, dates, trace_points, stop, "")
             list_of_schedule2 = dic['list_of_schedule']
             trace = dic['trace']
-        temp = temp + trace
+        temp.append(trace)
         route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2]])
     return ""
@@ -277,7 +281,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, "", stop)
             list_of_schedule = dic['list_of_schedule']
             trace = dic['trace']
-        temp = trace + " -> "
+        temp = [trace]
         schedules = Schedule.objects.filter(id=id2)
         dates = ScheduleDate.objects.filter(schedule_id=id2)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
@@ -285,7 +289,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, stop, stop2)
             list_of_schedule2 = dic['list_of_schedule']
             trace = dic['trace']
-        temp = temp + trace + " -> "
+        temp.append(trace)
         schedules = Schedule.objects.filter(id=id3)
         dates = ScheduleDate.objects.filter(schedule_id=id3)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id3)
@@ -293,7 +297,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, stop2, "")
             list_of_schedule3 = dic['list_of_schedule']
             trace = dic['trace']
-        temp = temp + trace
+        temp.append(trace)
         route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2, list_of_schedule3]])
     return ""
@@ -304,16 +308,16 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
 #-------------------------------------------------------------------------------------
 
 
-def route_to_str(route_list):
-    str_routes = []
-    for route in route_list:
-        str_route = ""
-        for index, trace_point in enumerate(route):
+def routes_array_to_str_list(routes_array):
+    routes = []
+    for _trace in routes_array:
+        route_str = ""
+        for index, route in enumerate(_trace):
             if index != 0:
-                str_route += " -> "
-            str_route += trace_point
-        str_routes.append(str_route)
-    return str_routes
+                route_str += " -> "
+            route_str += route
+        routes.append(route)
+    return routes
 
 
 def search(request):
@@ -331,11 +335,11 @@ def search(request):
 
     # search engine
     if request.method == 'POST':
-        if request.POST['from'] and request.POST['to']:
+        if (request.POST['from'] != "" and request.POST['to'] != ""):
             start_address = plToAng(request.POST['from'])
             end_address = plToAng(request.POST['to'])
 
-            if request.POST['company_name'] == _("All"):
+            if (request.POST['company_name'] == _("All")):
                 schedules = Schedule.objects.all()
             else:
                 schedules = Schedule.objects.filter(company=request.POST['company_name'])
@@ -351,12 +355,12 @@ def search(request):
             schedules = schedules.filter(id__in=end_points)
 
             # Checking is bus driving in good direction
-            _list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
+            list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
 
-            if _list:
-                schedules = schedules.filter(id__in=_list)
-                end_points = start_points.filter(schedule_id__in=_list)
-                dates = ScheduleDate.objects.filter(schedule_id__in=_list)
+            if (len(list) != 0):
+                schedules = schedules.filter(id__in=list)
+                end_points = start_points.filter(schedule_id__in=list)
+                dates = ScheduleDate.objects.filter(schedule_id__in=list)
                 list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
             else:
                 error = _("Sorry, we cant find any schedule.")
@@ -373,7 +377,7 @@ def search(request):
             search_from = request.POST['from']
             search_to = request.POST['to']
         else:
-            if request.POST['company_name'] == _("All"):
+            if (request.POST['company_name'] == _("All")):
                 schedules = Schedule.objects.all()
             else:
                 schedules = Schedule.objects.filter(company=request.POST['company_name'])
@@ -387,8 +391,13 @@ def search(request):
     if request.POST and not error:
         context['search_from'] = search_from
         context['search_to'] = search_to
-        context['list_of_tabs'] = list_of_tabs
-        context['route_list'] = route_to_str(route_list)
+        full_route = reduce(operator.add, route_list[0])
+        list_of_tabs2 = []
+        for i in xrange(len(list_of_tabs)):
+            list_of_tabs2.append((list_of_tabs[i], full_route[i]))
+        context['list_of_tabs'] = list_of_tabs2
+        print context['list_of_tabs']
+        context['route_list'] = routes_array_to_str_list(route_list[0])
         return render(request, 'search_engine/search_result.html', context)
     context['companies'] = companies
     if error:

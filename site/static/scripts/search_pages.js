@@ -25,9 +25,6 @@ $(document).ready(function () {
             $(".panel-option-link").removeClass("active")
             clicked_page.find(".schedule-link").addClass("active")
             clicked_page.find(".schedule").show()
-            map = $(".map")
-            map.appendTo(clicked_page.find(".schedule-info"));
-            map.hide()
         }
 
         $(".page-changer .previous-page").click(function (eventObj) {
@@ -57,58 +54,59 @@ $(document).ready(function () {
     }
     $(".schedule-link").click(function (eventObj) {
         eventObj.preventDefault();
-        trace = $(this).parents(".page")
+        trace = $(this).parents(".transfer")
 
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".page").attr("data-page-id");
-        schedule = $(".pages .page[data-page-id='" + trace_id + "']" + " .schedule")
+        schedule = trace.find(".schedule")
         $(".panel-option-link").removeClass("active")
         schedule.addClass("active")
-        $(".panel-option").hide()
+        trace.find(".panel-option").hide()
         schedule.show()
     });
 
     $(".map-link").click(function (eventObj) {
         eventObj.preventDefault();
-        trace = $(this).parents(".page")
+        trace = $(this).parents(".transfer")
 
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".page").attr("data-page-id");
-        map = $(".pages .page[data-page-id='" + trace_id + "']" + " .map")
+        map = $(".pages").find(".map")
+        map.appendTo(trace.find(".map-container"));
         $(".panel-option-link").removeClass("active")
         map.addClass("active")
-        $(".panel-option").hide()
+        trace.find(".panel-option").hide()
         map.show()
     });
 
 
     $(".details-link").click(function (eventObj) {
         eventObj.preventDefault();
-        trace = $(this).parents(".page")
+        trace = $(this).parents(".transfer")
 
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".page").attr("data-page-id");
-        details = $(".pages .page[data-page-id='" + trace_id + "']" + " .details")
+        details = trace.find(".details")
         $(".panel-option-link").removeClass("active")
         details.addClass("active")
-        $(".panel-option").hide()
+        trace.find(".panel-option").hide()
         details.show()
     });
 
     $(".trace-points-link").click(function (eventObj) {
         eventObj.preventDefault();
-        trace = $(this).parents(".page")
+        trace = $(this).parents(".transfer")
 
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".page").attr("data-page-id");
-        trace_points = $(".pages .page[data-page-id='" + trace_id + "']" + " .trace-points")
+        trace_points = trace.find(".trace-points")
         $(".panel-option-link").removeClass("active")
         trace_points.addClass("active")
-        $(".panel-option").hide()
+        trace.find(".panel-option").hide()
         trace_points.show()
     });
     first_page = $(".pages .page[data-page-id='1']")
