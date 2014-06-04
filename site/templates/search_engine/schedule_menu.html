@@ -1,0 +1,14 @@
+{% load i18n %}
+<a href="#" class="btn btn-primary btn-sm panel-option-link schedule-link"
+   data-toggle="button">
+    <span class=" glyphicon glyphicon-list-alt" style="margin-right: 10px"></span>
+    {% trans 'Schedule' %}
+</a>
+<a href="#" class="btn btn-primary btn-sm panel-option-link trace-points-link">
+    <span class="glyphicon glyphicon-road" style="margin-right: 10px"></span>
+    {% trans 'Tracepoints' %}
+</a>
+<a href="{% url 'topics.views.create' id %}" class="btn btn-primary btn-sm">
+    <span class="glyphicon glyphicon-envelope" style="margin-right: 10px"></span>
+    {% trans 'Report problem' %}
+</a>

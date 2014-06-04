@@ -11,6 +11,7 @@ function initialize() {
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     directionsDisplay.setMap(map);
+    return map
 }
 
 function calcRoute(id) {
@@ -49,11 +50,11 @@ function calcRoute(id) {
 
     directionsService.route(request, function (response, status) {
         var mapErrorArray = document.getElementsByClassName('mapError');
-        var routeDetailsArray = document.getElementsByClassName('routeDetails');
-        for (var i = 0; i < mapErrorArray.length; i++) {
-            mapErrorArray[i].innerHTML = '';
-            routeDetailsArray[i].innerHTML = '';
-        }
+//        var routeDetailsArray = document.getElementsByClassName('routeDetails');
+//        for (var i = 0; i < mapErrorArray.length; i++) {
+//            mapErrorArray[i].innerHTML = '';
+//            //routeDetailsArray[i].innerHTML = '';
+//        }
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
@@ -68,14 +69,21 @@ function calcRoute(id) {
             //    summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
             //}
             //$('#routeDetails' + id).show();
-            var summaryPanel =  $("#routeDetails"+ id);
+            var routeDetails = $("#routeDetails" + parseInt(id));
+            var routeFragment = routeDetails.find(".fragment").first()
+            if (route.legs.length > 0) {
+                routeFragment.detach()
+                routeDetails.empty()
+            }
             for (var i = 0; i < route.legs.length; i++) {
-
-                summaryPanel.find(".number").val(i + 1);
-                summaryPanel.find(".start").val(route.legs[i].start_address);
-                summaryPanel.find(".end").val(route.legs[i].end_address);
-                summaryPanel.find(".duration").val(route.legs[i].duration.text);
-                summaryPanel.find(".distance").val(route.legs[i].distance.text);
+                var newRouteFragment = routeFragment.clone();
+                newRouteFragment.find(".number").html(i + 1);
+                newRouteFragment.find(".start").html(route.legs[i].start_address);
+                newRouteFragment.find(".end").html(route.legs[i].end_address);
+                newRouteFragment.find(".duration").html(route.legs[i].duration.text);
+                newRouteFragment.find(".distance").html(route.legs[i].distance.text);
+                routeDetails.append(newRouteFragment);
+                newRouteFragment.show()
             }
 
         } else {
@@ -83,13 +91,21 @@ function calcRoute(id) {
         }
     });
 
-    var bounds = map.getBounds();
-    map.fitBounds(bounds);
+    //var bounds = map.getBounds();
+    //map.fitBounds(bounds);
 }
 
 $(document).ready(function () {
-    initialize();
-    $(".map-link").click(function(event){
+    var map = initialize();
+    $(".map").hide()
+    $(".map-link").click(function (event) {
+        $(".map").show()
+        calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
+        google.maps.event.trigger(map, 'resize');
+        map.setZoom(map.getZoom());
+    });
+
+    $(".details-link").click(function (event) {
         calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
     });
 });

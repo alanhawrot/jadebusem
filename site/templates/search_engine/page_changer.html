@@ -5,7 +5,7 @@
                 <a href="#page-changer" class="btn btn-default previous-page">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-                    {% for i in list_of_tabs %}
+                    {% for i in traces %}
                         <a href="#page-changer" class="btn btn-default change-page"
                            data-page-id="{{ forloop.counter }}">{{ forloop.counter }}
                         </a>
@@ -17,4 +17,3 @@
         </div>
     </div>
 </div>
-<br/><br/>

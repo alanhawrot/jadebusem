@@ -192,7 +192,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
             dic = create_schedule(schedule, dates, trace_points, "", stop)
             list_of_schedule = dic['list_of_schedule']
             trace = dic['trace']
-        temp = [trace]
+        temp = trace
         schedules = Schedule.objects.filter(id=id2)
         dates = ScheduleDate.objects.filter(schedule_id=id2)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
@@ -200,7 +200,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
             dic = create_schedule(schedule, dates, trace_points, stop, "")
             list_of_schedule2 = dic['list_of_schedule']
             trace = dic['trace']
-        temp.append(trace)
+        temp.extend(trace)
         route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2]])
     return ""
@@ -281,7 +281,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, "", stop)
             list_of_schedule = dic['list_of_schedule']
             trace = dic['trace']
-        temp = [trace]
+        temp = trace
         schedules = Schedule.objects.filter(id=id2)
         dates = ScheduleDate.objects.filter(schedule_id=id2)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id2)
@@ -289,7 +289,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, stop, stop2)
             list_of_schedule2 = dic['list_of_schedule']
             trace = dic['trace']
-        temp.append(trace)
+        temp.extend(trace)
         schedules = Schedule.objects.filter(id=id3)
         dates = ScheduleDate.objects.filter(schedule_id=id3)
         trace_points = ScheduleTracePoint.objects.filter(schedule_id=id3)
@@ -297,7 +297,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
             dic = create_schedule(schedule, dates, trace_points, stop2, "")
             list_of_schedule3 = dic['list_of_schedule']
             trace = dic['trace']
-        temp.append(trace)
+        temp.extend(trace)
         route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2, list_of_schedule3]])
     return ""
@@ -308,7 +308,7 @@ def TwoInterchanges(start_points, exclude_list, start_address, end_address, list
 #-------------------------------------------------------------------------------------
 
 
-def routes_array_to_str_list(routes_array):
+def routes_array_to_str_arrows_list(routes_array):
     routes = []
     for _trace in routes_array:
         route_str = ""
@@ -327,7 +327,7 @@ def search(request):
     login = False
     list_of_tabs = []
     exclude_list = []
-    route_list = []
+    routes_list = []
 
     # session
     if 'email' in request.session:
@@ -361,7 +361,7 @@ def search(request):
                 schedules = schedules.filter(id__in=list)
                 end_points = start_points.filter(schedule_id__in=list)
                 dates = ScheduleDate.objects.filter(schedule_id__in=list)
-                list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, route_list)
+                list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, routes_list)
             else:
                 error = _("Sorry, we cant find any schedule.")
                 if "interchange" in request.POST.keys():
@@ -370,9 +370,9 @@ def search(request):
             # Searching for interchanges
             if "interchange" not in request.POST.keys():
                 error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
-                                       route_list)
+                                       routes_list)
                 error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
-                                        route_list)
+                                        routes_list)
 
             search_from = request.POST['from']
             search_to = request.POST['to']
@@ -383,7 +383,7 @@ def search(request):
                 schedules = Schedule.objects.filter(company=request.POST['company_name'])
             trace_points = ScheduleTracePoint.objects.all()
             dates = ScheduleDate.objects.all()
-            list_of_tabs = display_schedules(schedules, dates, trace_points, list_of_tabs, route_list)
+            list_of_tabs = display_schedules(schedules, dates, trace_points, list_of_tabs, routes_list)
 
     companies = Schedule.objects.values('company').distinct()
     context = {'login': login, 'user': request.session, 'companies': companies}
@@ -391,14 +391,11 @@ def search(request):
     if request.POST and not error:
         context['search_from'] = search_from
         context['search_to'] = search_to
-        full_route = reduce(operator.add, route_list[0])
-        list_of_tabs2 = []
+        traces = []
+        context['routes_list'] = routes_array_to_str_arrows_list(routes_list)
         for i in xrange(len(list_of_tabs)):
-            list_of_tabs2.append((list_of_tabs[i], full_route[i]))
-        context['list_of_tabs'] = list_of_tabs2
-        print route_list
-        print routes_array_to_str_list(route_list)
-        context['route_list'] = routes_array_to_str_list(route_list)
+            traces.append((list_of_tabs[i], routes_list[i], context['routes_list'][i]))
+        context['traces'] = traces
         return render(request, 'search_engine/search_result.html', context)
     context['companies'] = companies
     if error:

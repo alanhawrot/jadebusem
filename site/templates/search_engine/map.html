@@ -1,13 +1,12 @@
-
-    <div class="panel-option map">
-        {% for i in route_list %}
-            <input type="hidden" id="route{{ forloop.counter0 }}" value="{{ i }}"/>
-        {% endfor %}
-        <div class="outer-center">
-            <div class="inner-center">
-                <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
-                <div id="map-canvas" style="width: 800px; height: 600px"></div>
-            </div>
+<div class="panel-option map">
+    {% for i in routes_list %}
+        <input type="hidden" id="route{{ forloop.counter0 }}" value="{{ i }}"/>
+    {% endfor %}
+    <div class="outer-center">
+        <div class="inner-center">
+            <div id="mapError{{ forloop.counter0 }}" class="mapError"></div>
+            <div id="map-canvas" style="width: 800px; height: 600px"></div>
         </div>
     </div>
+</div>
 
