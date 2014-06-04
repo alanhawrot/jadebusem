@@ -25,7 +25,7 @@ public class SearchActivity extends ListActivity {
 		datasource.open();
 		
 		Intent intent = getIntent();
-		String query = intent.getStringExtra(MainActivity.SEARCH_QUERY);
+		String query = intent.getStringExtra(MainList.SEARCH_QUERY);
 
 		List<Schedule> scheduleList = datasource.getFilteredSchedules(query);
 		
