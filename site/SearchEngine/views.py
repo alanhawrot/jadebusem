@@ -316,7 +316,7 @@ def routes_array_to_str_list(routes_array):
             if index != 0:
                 route_str += " -> "
             route_str += route
-        routes.append(route)
+        routes.append(route_str)
     return routes
 
 
@@ -396,8 +396,9 @@ def search(request):
         for i in xrange(len(list_of_tabs)):
             list_of_tabs2.append((list_of_tabs[i], full_route[i]))
         context['list_of_tabs'] = list_of_tabs2
-        print context['list_of_tabs']
-        context['route_list'] = routes_array_to_str_list(route_list[0])
+        print route_list
+        print routes_array_to_str_list(route_list)
+        context['route_list'] = routes_array_to_str_list(route_list)
         return render(request, 'search_engine/search_result.html', context)
     context['companies'] = companies
     if error:

@@ -2,19 +2,6 @@
 
 {% load i18n %}
 
-{% block additional_head %}
-    {% load staticfiles %}
-    <script type="text/javascript" src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCByGygZtEMlgWlWqRUffg6CSbBZrHiRT8&sensor=false">
-    </script>
-    <script type="text/javascript"
-            src="{% static 'scripts/google_maps.js' %}">
-    </script>
-    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
-
-{% endblock %}
-
 {% block title %}
     {% trans "Search for connection" %}
 {% endblock %}

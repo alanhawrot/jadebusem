@@ -1,8 +1,25 @@
 {% load i18n %}
 <div class="outer-center">
     <div class="inner-center">
-        <div class="panel-option details" hidden="hidden">
-            <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails"></div>
+        <div class="panel-option details">
+            <div id="routeDetails{{ forloop.counter0 }}" class="routeDetails">
+                {% for x in list_of_tabs %}
+                <div class="fragment">fragment {{ forloop.counter0 }}
+                    <span class="number">b</span>
+                    <span class="start">b</span>
+                    <span class="end">b</span>
+                    <span class="distance">b</span>
+                    <span class="duration">b</span>
+                </div>
+                {% endfor %}
+                <div class="fragment">fragment {{ forloop.counter0 }}
+                    <span class="number">a</span>
+                    <span class="start">a</span>
+                    <span class="end">a</span>
+                    <span class="distance">a</span>
+                    <span class="duration">a</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

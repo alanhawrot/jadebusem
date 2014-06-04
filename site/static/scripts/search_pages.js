@@ -73,7 +73,7 @@ $(document).ready(function () {
         schedule_id = $(this).attr('data-schedule-id');
 
         trace_id = $(this).parents(".page").attr("data-page-id");
-        map = $(".pages").find(".map")
+        map = $(document).find(".map")
         map.appendTo(trace.find(".map-container"));
         $(".panel-option-link").removeClass("active")
         map.addClass("active")

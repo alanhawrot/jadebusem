@@ -5,13 +5,14 @@
 {% block additional_head %}
     {% load staticfiles %}
     <script type="text/javascript" src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCByGygZtEMlgWlWqRUffg6CSbBZrHiRT8&sensor=false">
     </script>
     <script type="text/javascript"
             src="{% static 'scripts/google_maps.js' %}">
     </script>
-    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
+
 
 {% endblock %}
 
@@ -26,13 +27,9 @@
         {% include 'search_engine/page_changer.html' %}
         <div class="clearing pages">
             <div id="current"></div>
-            {#                        {% for i in temp %}#}
-            {#                            {{ i.address }}#}
-            {#                        {% endfor %}#}
-            {#                        {{ temp }}#}
-            {#                        {% for i in schedule %}#}
-            {#                            {{ i }}#}
-            {#                        {% endfor %}#}
+
+
+
 
             {% for i, full_route in list_of_tabs %}
                 <div class="page" data-page-id="{{ forloop.counter }}">
@@ -102,13 +99,15 @@
                                     {% include 'search_engine/schedule.html' %}
                                     {% include 'search_engine/trace_points.html' %}
                                     {% include 'search_engine/details.html' %}
-                                    {% include 'search_engine/map.html' %}
+                                    <div class="map-container"></div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             {% endfor %}
+
+        {% include 'search_engine/map.html' %}
         </div>
         <div class="largeSpacer">&nbsp;</div>
         {% include 'search_engine/page_changer.html' %}

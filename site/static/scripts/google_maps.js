@@ -17,20 +17,11 @@ function calcRoute(id) {
     var waypts = [];
     var route = document.getElementById('route' + id).value;
     var waypoints = route.split("->");
-    var startElement = document.getElementById("start");
-    var endElement = document.getElementById("end");
     var start;
     var end;
-    if (startElement.value.trim().length > 0) {
-        start = startElement.value.trim();
-    } else {
-        start = waypoints[0].trim();
-    }
-    if (endElement.value.trim().length > 0) {
-        end = endElement.value.trim();
-    } else {
-        end = waypoints[waypoints.length - 1].trim();
-    }
+
+    start = waypoints[0].trim();
+    end = waypoints[waypoints.length - 1].trim();
     for (var i = 1; i < waypoints.length - 1; i++) {
         waypoints[i] = waypoints[i].trim();
         if (waypoints[i].toLocaleLowerCase() == end.toLocaleLowerCase()) {
@@ -55,6 +46,7 @@ function calcRoute(id) {
         unitSystem: google.maps.UnitSystem.METRIC,
         travelMode: google.maps.TravelMode.DRIVING
     };
+
     directionsService.route(request, function (response, status) {
         var mapErrorArray = document.getElementsByClassName('mapError');
         var routeDetailsArray = document.getElementsByClassName('routeDetails');
@@ -65,21 +57,39 @@ function calcRoute(id) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
-            var summaryPanel = document.getElementById('routeDetails' + id);
-            $('.routeDetails' + id).hide();
-            summaryPanel.innerHTML = '<br><b>' + gettext('Route details:') + '</b><br><br>';
+            //var summaryPanel = document.getElementById('routeDetails' + id);
+            //$('#routeDetails' + id).hide();
+            //summaryPanel.innerHTML = '<br><b>' + gettext('Route details:') + '</b><br><br>';
+            //for (var i = 0; i < route.legs.length; i++) {
+            //    summaryPanel.innerHTML += gettext('Route segment: ') + (i + 1) + '.<br>';
+            //    summaryPanel.innerHTML += route.legs[i].start_address + ' -> ';
+            //    summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+            //    summaryPanel.innerHTML += gettext('Duration: ') + route.legs[i].duration.text + '<br>';
+            //    summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
+            //}
+            //$('#routeDetails' + id).show();
+            var summaryPanel =  $("#routeDetails"+ id);
             for (var i = 0; i < route.legs.length; i++) {
-                summaryPanel.innerHTML += gettext('Route segment: ') + (i + 1) + '.<br>';
-                summaryPanel.innerHTML += route.legs[i].start_address + ' -> ';
-                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                summaryPanel.innerHTML += gettext('Duration: ') + route.legs[i].duration.text + '<br>';
-                summaryPanel.innerHTML += gettext('Distance: ') + route.legs[i].distance.text + '<br><br>';
+
+                summaryPanel.find(".number").val(i + 1);
+                summaryPanel.find(".start").val(route.legs[i].start_address);
+                summaryPanel.find(".end").val(route.legs[i].end_address);
+                summaryPanel.find(".duration").val(route.legs[i].duration.text);
+                summaryPanel.find(".distance").val(route.legs[i].distance.text);
             }
-             $('.routeDetails' + id).show();
+
         } else {
             document.getElementById('mapError' + id).innerHTML += gettext('Error in displaying route on map');
         }
     });
+
+    var bounds = map.getBounds();
+    map.fitBounds(bounds);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+$(document).ready(function () {
+    initialize();
+    $(".map-link").click(function(event){
+        calcRoute(parseInt($(".pages #current").attr('data-current-page-id')) - 1);
+    });
+});
