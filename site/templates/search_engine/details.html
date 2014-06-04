@@ -5,8 +5,8 @@
             <ul id="routeDetails{{ forloop.counter0 }}" class="list-group routeDetails">
                 <li class="list-group-item fragment" hidden="hidden">
                     <span class="badge pull-left number" style="margin-right: 20px">{{ forloop.counter }}</span>
-                    from <strong><span class="start"></span></strong>
-                    to <strong><span class="end"></span></strong>
+                    {% trans 'from' %} <strong><span class="start"></span></strong>
+                    {% trans 'to' %} <strong><span class="end"></span></strong>
                     , {% trans 'distance' %} <span class="distance"></span>, {% trans 'duration' %}
                     <span class="duration"></span>
                 </li>

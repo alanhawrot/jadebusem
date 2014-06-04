@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-04 01:48+0200\n"
+"POT-Creation-Date: 2014-06-05 00:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: SearchEngine/views.py:86 SearchEngine/views.py:115
+#: SearchEngine/views.py:90 SearchEngine/views.py:119
 msgid "Error while creating schedule"
 msgstr "Błąd podczas tworzenia rozkładu"
 
-#: SearchEngine/views.py:338 SearchEngine/views.py:376
-#: templates/search_engine/search.html:35
+#: SearchEngine/views.py:342 SearchEngine/views.py:380
+#: templates/search_engine/search.html:22
 msgid "All"
 msgstr "Wszystkie"
 
-#: SearchEngine/views.py:362
+#: SearchEngine/views.py:366
 msgid "Sorry, we cant find any schedule."
 msgstr "Przepraszamy, nie znaleziono żadnego rozkładu."
 
-#: SearchEngine/views.py:364
+#: SearchEngine/views.py:368
 msgid " Maybe try to search with interchanges."
 msgstr " Może spróbuj wyszukać połączenia z przesiadkami."
 
@@ -336,8 +336,8 @@ msgstr "Język"
 msgid "Change language"
 msgstr "Zmień język"
 
-#: templates/jadebusem_site/nav.html:6 templates/search_engine/search.html:19
-#: templates/search_engine/search_result.html:19
+#: templates/jadebusem_site/nav.html:6 templates/search_engine/search.html:6
+#: templates/search_engine/search_result.html:20
 msgid "Search for connection"
 msgstr "Szukaj połączenia"
 
@@ -418,58 +418,87 @@ msgstr "Usuń"
 msgid "You don't have own schedules"
 msgstr "Nie masz własnych rozkładów"
 
-#: templates/search_engine/details.html:5
-msgid "Changes"
-msgstr "Przesiadki"
+#: templates/search_engine/details.html:8
+msgid "from"
+msgstr "z"
+
+#: templates/search_engine/details.html:9
+#: templates/search_engine/search_result.html:27
+msgid "to"
+msgstr "do"
+
+#: templates/search_engine/details.html:10
+msgid "distance"
+msgstr "dystans"
+
+#: templates/search_engine/details.html:10
+msgid "duration"
+msgstr "czas jazdy"
 
 #: templates/search_engine/schedule.html:7
 msgid "Hours"
-msgstr ""
+msgstr "Godziny"
 
-#: templates/search_engine/search.html:30
-msgid "Pick company"
-msgstr "Firma"
-
-#: templates/search_engine/search.html:43
-#: templates/search_engine/search.html:78
-msgid "Search"
-msgstr "Szukaj"
-
-#: templates/search_engine/search.html:49
-msgid "Pick trace points"
-msgstr "Wybierz przystanki"
-
-#: templates/search_engine/search.html:54
-msgid "From..."
-msgstr "Z..."
-
-#: templates/search_engine/search.html:61
-msgid "To..."
-msgstr "Do..."
-
-#: templates/search_engine/search.html:72
-msgid "Avoid interchanges"
-msgstr "Unikaj przesiadek"
-
-#: templates/search_engine/search_result.html:47
+#: templates/search_engine/schedule_menu.html:5
 msgid "Schedule"
 msgstr "Rozkład"
 
-#: templates/search_engine/search_result.html:51
+#: templates/search_engine/schedule_menu.html:9
 msgid "Tracepoints"
 msgstr "Przystanki"
 
-#: templates/search_engine/search_result.html:55
+#: templates/search_engine/schedule_menu.html:13
+msgid "Report problem"
+msgstr "Zgłoś problem"
+
+#: templates/search_engine/search.html:17
+msgid "Pick company"
+msgstr "Firma"
+
+#: templates/search_engine/search.html:30
+#: templates/search_engine/search.html:65
+msgid "Search"
+msgstr "Szukaj"
+
+#: templates/search_engine/search.html:36
+msgid "Pick trace points"
+msgstr "Wybierz przystanki"
+
+#: templates/search_engine/search.html:41
+msgid "From..."
+msgstr "Z..."
+
+#: templates/search_engine/search.html:48
+msgid "To..."
+msgstr "Do..."
+
+#: templates/search_engine/search.html:59
+msgid "Avoid interchanges"
+msgstr "Unikaj przesiadek"
+
+#: templates/search_engine/search_result.html:27
+msgid "Traces from"
+msgstr "Trasy z"
+
+#: templates/search_engine/search_result.html:29
+msgid "Found traces"
+msgstr "Znalezione rozkłady"
+
+#: templates/search_engine/search_result.html:40
+msgid "Changes"
+msgstr "Przesiadki"
+
+#: templates/search_engine/trace_menu.html:5
+msgid "Full trace"
+msgstr "Pełna trasa"
+
+#: templates/search_engine/trace_menu.html:9
 msgid "Map"
 msgstr "Mapa"
 
-#: templates/search_engine/search_result.html:59
+#: templates/search_engine/trace_menu.html:13
 msgid "Route details"
 msgstr "Detale trasy"
-
-#: templates/search_engine/search_result.html:63
-msgid "Report problem"
-msgstr "Zgłoś problem"
 
 #: templates/topics/create.html:12 templates/topics/create.html.py:29
 #: templates/topics/show.html:12 topics/models.py:11
