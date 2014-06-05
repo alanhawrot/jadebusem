@@ -120,10 +120,8 @@ public class MainListActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_fetch_more_schedules) {
-            if (User.LOGGED) {
-                page++;
-                new GetSchedulesFromJadeBusemServerTask().execute(page);
-            }
+            page++;
+            new GetSchedulesFromJadeBusemServerTask().execute(page);
         } else if (item.getItemId() == R.id.action_refresh) {
             refresh();
         }
