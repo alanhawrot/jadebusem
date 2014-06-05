@@ -166,8 +166,10 @@ public class MainActivity extends Activity {
                 if(entity != null){
                     String temp = EntityUtils.toString(entity);
 
-                    if(temp.contains("Please correct the errors below.") || temp.contains("Please correct the error below.") || temp.contains("Error, please check your EMAIL or password.")){
-                        return "Check your EMAIL or password";
+                    System.out.println(temp);
+
+                    if(temp.contains("Please correct the errors below.") || temp.contains("Please correct the error below.") || temp.contains("Error, please check your email or password.")){
+                        return "Check your email or password";
                     }
                     else
                     {
