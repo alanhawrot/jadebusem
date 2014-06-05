@@ -2,8 +2,8 @@
 import os
 from django.db import models
 from Users.models import JadeBusemUser
-from jadebusem.settings import MEDIA_URL
 from django.utils.translation import ugettext as _
+
 
 def upload_url(self, instance, filename):
     return os.join('http://127.0.0.1:8000/static/schedule_images/', filename)
@@ -24,6 +24,9 @@ class ScheduleTracePoint(models.Model):
     address =       models.CharField(_("Address"), max_length=200)
     position =      models.IntegerField()
 
+    def __unicode__(self):
+        return unicode(self.address)
+
 
 class ScheduleDate(models.Model):
     days = [(0, _(u'Poniedziałek')),
@@ -37,3 +40,6 @@ class ScheduleDate(models.Model):
     schedule =      models.ForeignKey(Schedule, related_name='departures')
     time =          models.TimeField(_("Departure time"))
     day =           models.PositiveSmallIntegerField(choices=days)
+
+    def __unicode__(self):
+        return unicode(self.time) + unicode(self.day)

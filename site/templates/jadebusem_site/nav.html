@@ -8,6 +8,17 @@
     </li>
     {% if login %}
         <li class="li-nav-main-menu">
+            <a href={% url "topics.views.list_all" %}>
+                {% if new_messages %}
+                   <span class=" glyphicon glyphicon-envelope text-danger"></span>
+                   <strong>{% trans 'Topics' %}</strong>
+                {% else %}
+                    <span class=" glyphicon glyphicon-envelope"></span>
+                    {% trans 'Topics' %}
+                {% endif %}
+            </a>
+        </li>
+        <li class="li-nav-main-menu">
             <a href={% url "schedules.views.show_list" %}>
                 <span class="glyphicon glyphicon-list-alt"></span>
                 {% trans 'My schedules' %}

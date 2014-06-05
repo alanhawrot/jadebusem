@@ -1,0 +1,14 @@
+{% if errors %}
+    <div class="clearing"></div>
+    <div class="alert alert-danger" style="text-align:left; margin:20px; padding-left:30px;">
+        <ul>
+            {% for error in errors %}
+                <div class="">
+                    <li>
+                        <span class="error-message">{{ error }}</span>
+                    </li>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

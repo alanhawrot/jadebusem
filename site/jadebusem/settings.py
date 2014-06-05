@@ -47,25 +47,25 @@ DATABASES = {
     # }
 
     ## Alan's local db
-    #'local': {
-    #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    #    'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
-    #    # The following settings are not used with sqlite3:
-    #    'USER': '',
-    #    'PASSWORD': '',
-    #    'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-    #    'PORT': '',
-    #}
+    # 'local': {
+    #   'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #   'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
+    #   # The following settings are not used with sqlite3:
+    #   'USER': '',
+    #   'PASSWORD': '',
+    #   'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #   'PORT': '',
+    # }
 
-    ## Michal's local db
+    ## Michal'socal db
     'local': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.dirname(os.path.dirname(__file__)) + "/db.sqlite",                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',
+         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+         'NAME': os.path.dirname(os.path.dirname(__file__)) + "/db.sqlite",                      # Or path to database file if using sqlite3.
+         # The following settings are not used with sqlite3:
+         'USER': '',
+         'PASSWORD': '',
+         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+         'PORT': '',
     }
 }
 
@@ -124,7 +124,9 @@ import os
 
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + \
-                              ('jadebusem_site.context_processors.language_processor',)
+                              ('jadebusem_site.context_processors.language_processor',
+                               'jadebusem_site.context_processors.new_topics_processor'
+)
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -180,7 +182,9 @@ INSTALLED_APPS = (
     'south',
     'Users',
     'schedules',
+    'topics',
     'SearchEngine',
+    'rest_framework',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

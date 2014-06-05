@@ -1,0 +1,76 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {% trans "List of topics" %}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        {% trans "My topics" %}
+    </h3>
+    {% for topic, new_messages, last_message_date in topics %}
+        <div class="input-group" style="margin: 10px 0px 0px 0px;">
+
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope
+                {% if new_messages %}
+                    text-danger
+                {% endif %}
+                " alt="Pending verification">
+                </span>
+            </div>
+
+            <a href="{% url 'topics.views.show' topic.id %}" class="link-black input-group-addon" style=" background: #c5c5c5;width: auto !important;text-align: left;">
+
+                    {% if new_messages %}
+                        <strong>{{ topic.topic }}</strong>
+                    {% else %}
+                        {{ topic.topic }}
+                    {% endif %}
+                </a>
+
+            <div class="input-group-addon" style="font-size: 80.0%;text-align: left;">
+                {{ last_message_date }}
+            </div>
+
+            <div class="input-group-btn">
+                {% if topic.closed %}
+                    <div class="btn btn-default" style="color: darkgray">
+                        <span class="glyphicon glyphicon-ban-circle" style="margin-right: 7px;"></span>
+                        {% trans 'Closed' %}
+                    </div>
+                    </a>
+                {% else %}
+                    <a class="btn btn-default" href="{% url 'topics.views.close' topic.id %}">
+                        <span class="glyphicon glyphicon-ban-circle" style="margin-right: 7px;"></span>
+                        {% trans 'Close' %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        {% trans "You don't contribute to any topics" %}
+    {% endfor %}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{% endblock %}

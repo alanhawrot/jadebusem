@@ -1,0 +1,10 @@
+<div class="panel-option full-route" hidden="hidden">
+    <ul class="list-group">
+        {% for trace_point in route %}
+            <li class="list-group-item">
+                <span class="badge pull-left" style="margin-right: 20px">{{ forloop.counter }}</span>
+                {{ trace_point }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

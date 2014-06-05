@@ -7,4 +7,9 @@
           android:title="@string/action_search"
           android:showAsAction="ifRoom|collapseActionView"
           android:actionViewClass="android.widget.SearchView"/>
+    <item android:id="@+id/action_fetch_more_schedules"
+          android:title="@string/action_fetch_more_schedules_title" />
+    <item android:id="@+id/action_refresh"
+          android:title="@string/action_refresh_title" />
+
 </menu>
