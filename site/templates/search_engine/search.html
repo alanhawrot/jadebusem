@@ -12,7 +12,8 @@
         <div class="outer-center">
             <div class="inner-center">
                 <div style="text-align: center">
-                    <form action="./#page-changer" method="post">
+                    <form action="./#page-changer" method="get">
+                        <input type="hidden" name="search_request" value="1">
                         <div class="largeMargin floating">
                             <h3 class="formMargin" style="text-align: left">{% trans 'Pick company' %}</h3>
                             <table class="formTable">
