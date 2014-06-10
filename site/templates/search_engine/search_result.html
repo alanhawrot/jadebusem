@@ -1,0 +1,91 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/search_pages.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCByGygZtEMlgWlWqRUffg6CSbBZrHiRT8&sensor=false">
+    </script>
+    <script type="text/javascript"
+            src="{% static 'scripts/google_maps.js' %}">
+    </script>
+
+
+{% endblock %}
+
+{% block title %}
+    {% trans "Search for connection" %}
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        {% if search_from and search_to %}
+        <h3>{% trans 'Traces from' %} {{ search_from }} {% trans 'to' %} {{ search_to }}</h3>
+        {% else %}
+            <h3>{% trans 'Found traces' %}</h3>
+        {% endif %}
+        {% include 'search_engine/page_changer.html' %}
+        <div style="height: 50px">&nbsp;</div>
+        <div class="clearing pages">
+            <div id="current"></div>
+            {% for trace_schedules, route, route_arrows in traces %}
+                <div class="page" data-page-id="{{ forloop.counter }}">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="padding-bottom: 40px;">
+                            <h5 class="panel-title pull-left" style="padding-top: 7.5px;">
+                                {% trans 'Changes' %}: {{ trace_schedules|length|add:-1 }}
+                            </h5>
+                            <div class="btn-group pull-right">{% include 'search_engine/trace_menu.html' %}</div>
+                        </div>
+                        <div class="panel-body">
+                            {% include 'search_engine/full_route.html' %}
+                            {% include 'search_engine/details.html' %}
+                            <div class="map-container"></div>
+                        </div>
+                    </div>
+
+                    {% for id, company, author, trace, schedule in trace_schedules %}
+                        <div class="transfer">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="padding-bottom: 40px;">
+                                    <h5 class="panel-title pull-left" style="padding-top: 7.5px;">{{ company }}</h5>
+
+                                    <div class="btn-group pull-right">
+                                        {% include 'search_engine/schedule_menu.html' %}
+                                    </div>
+                                </div>
+
+                                <div class="panel-body schedule-info">
+                                    {% include 'search_engine/schedule.html' %}
+                                    {% include 'search_engine/trace_points.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            {% include 'search_engine/map.html' %}
+        </div>
+        {% include 'search_engine/page_changer.html' %}
+    </div>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+{% endblock %}

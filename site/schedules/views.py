@@ -124,7 +124,6 @@ def schedule(request, user, _schedule):
 @transaction.commit_manually
 def handle_schedule_change_request(data, errors, _schedule):
     try:
-
         if _schedule.id:
             _schedule.trace_points.all().delete()
             _schedule.departures.all().delete()

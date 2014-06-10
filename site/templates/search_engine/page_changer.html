@@ -1,0 +1,19 @@
+<div class="outer-center">
+    <div class="inner-center">
+        <div class="btn-group page-changer">
+            <div>
+                <a href="#page-changer" class="btn btn-default previous-page">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                    {% for i in traces %}
+                        <a href="#page-changer" class="btn btn-default change-page"
+                           data-page-id="{{ forloop.counter }}">{{ forloop.counter }}
+                        </a>
+                    {% endfor %}
+                <a href="#page-changer" class="btn btn-default next-page">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

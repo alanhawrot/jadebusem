@@ -1,0 +1,85 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {% trans "Topic" %}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        {{ topic.topic }}
+    </h3>
+    {% if topic.schedule.company %}
+        <h6>{% trans 'Company' %}: {{ topic.schedule.company }}</h6>
+    {% endif %}
+    {% if topic.schedule.author %}
+        <h6>{% trans 'Owner' %}: {{ topic.schedule.author }}</h6>
+    {% endif %}
+
+    <br/>
+    {% for message in messages %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5 class="panel-title"><strong>{{ message.author }}</strong>,
+                    <span style="font-size: 80.0%;">{{ message.date }}</span></h5>
+            </div>
+            <div class="panel-body">
+                {{ message.message }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <form role="form" action="{% url 'topics.views.reply' topic.id %}" method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" name="message" style="margin-bottom: 15px"
+                {% if topic.closed %}
+                  disabled
+                {% endif %}>{{ message }}</textarea>
+        {% if errors %}
+                <div class="alert alert-danger" style="margin:20px; padding-left:30px;">
+                    <ul>
+                        {% for key, error_list in errors.items %}
+                            {% for error in error_list %}
+                                <div class="">
+                                    <li>
+                                        <label class="error-label">{{ key }}</label>
+                                        <span>:</span>
+                                        <span class="error-message">{{ error }}</span>
+                                    </li>
+                                </div>
+                            {% endfor %}
+
+                        {% endfor %}
+                    </ul>
+                </div>
+        {% endif %}
+        <div class="floatingRight">
+            <button type="submit" class="btn btn-primary"
+                    {% if topic.closed %}
+                    disabled
+                    {% endif %}>{% trans 'Send' %}</button>
+        </div>
+    </form>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+{% endblock %}

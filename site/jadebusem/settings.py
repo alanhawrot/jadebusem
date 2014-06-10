@@ -2,6 +2,7 @@
 # Django settings for jadebusem project.
 
 import django.conf.global_settings as DEFAULT_SETTINGS
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -14,7 +15,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    # ######################################################################################
+    #######################################################################################
     #
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! UWAGA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     #
@@ -23,16 +24,15 @@ DATABASES = {
     # To może być konieczne bo na dole dzieje się konfiguracja związana z heroku.
     #
     #######################################################################################
-    'default': {  #konfiguracja heroku
-                  'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-                  'NAME': 'd1kj79e4uus55f',  # Or path to database file if using sqlite3.
-                  # The following settings are not used with sqlite3:
-                  'USER': 'hriaoepqihdupl',
-                  'PASSWORD': 'o6RZgPY-qQX6GCqJLCzlcHydH6',
-                  'HOST': 'ec2-184-73-254-144.compute-1.amazonaws.com',
-                  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-                  'PORT': '5432',
+    'default': { #konfiguracja heroku
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'd1kj79e4uus55f', # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'hriaoepqihdupl',
+        'PASSWORD': 'o6RZgPY-qQX6GCqJLCzlcHydH6',
+        'HOST': 'ec2-184-73-254-144.compute-1.amazonaws.com',
+        # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',
     },
 
     # Localhost database
@@ -48,13 +48,13 @@ DATABASES = {
 
     ## Alan's local db
     'local': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',  # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',
+       'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+       'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
+       # The following settings are not used with sqlite3:
+       'USER': '',
+       'PASSWORD': '',
+       'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+       'PORT': '',
     }
 
     ## Michal's local db
@@ -121,14 +121,18 @@ MEDIA_URL = ''
 import os
 
 
+
+
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + \
-                              ('jadebusem_site.context_processors.language_processor',)
+                              ('jadebusem_site.context_processors.language_processor',
+                               'jadebusem_site.context_processors.new_topics_processor'
+)
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -138,14 +142,14 @@ SECRET_KEY = 'eu6+-i04v%ia1wj7=mxz=n+e7l3!g+!sb^))+_g+or0=r4kufx'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -178,6 +182,7 @@ INSTALLED_APPS = (
     'south',
     'Users',
     'schedules',
+    'topics',
     'SearchEngine',
     'rest_framework',
 )
@@ -205,7 +210,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'console': {
+        'console':{
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
@@ -234,7 +239,7 @@ LOCALE_PATHS = (
     'locale',
 )
 
-# #############################################################
+##############################################################
 #
 #   Below commands are added to configure project for heroku
 #
@@ -251,6 +256,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),

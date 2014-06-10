@@ -1,0 +1,89 @@
+{% extends "jadebusem_site/base.html" %}
+
+{% load i18n %}
+
+{% block additional_head %}
+    {% load staticfiles %}
+    <script src="{% static '/static/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static '/static/scripts/schedules.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {% trans "Topic" %}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        {% trans "Create topic" %}
+    </h3>
+    {% if schedule.company %}
+        <h6>{% trans 'Company' %}: {{ schedule.company }}</h6>
+    {% endif %}
+    {% if schedule.author %}
+        <h6>{% trans 'Owner' %}: {{ schedule.author }}</h6>
+    {% endif %}
+
+    <form role="form" action="{% url 'topics.views.create' schedule.id %}" method="POST">
+        {% csrf_token %}
+        <div class="input-group" style="margin-bottom: 15px">
+            <span class="input-group-addon" style=" background: #c5c5c5;">{% trans 'Topic' %}</span>
+            <input type="text" name="topic" class="form-control" value="{{ topic }}">
+        </div>
+        <textarea class="form-control" rows="8" name="message" style="margin-bottom: 15px"
+                {% if topic.closed %}
+                  disabled
+                {% endif %}>{{ message }}</textarea>
+
+        <div class="checkbox disabled">
+            <label>
+                <input type="checkbox" disabled checked> {% trans 'Invite owner' %}
+            </label>
+        </div>
+
+        <div class="checkbox" style="text-decoration: line-through">
+            <label>
+                <input type="checkbox" name="invite_admin" {% if invite_admin %}checked{% endif %}> {% trans 'Invite admin' %}
+            </label>
+        </div>
+        <div class="clearing">
+        {% if errors %}
+            <div class="alert alert-danger" style="margin:20px; padding-left:30px;">
+                <ul>
+                    {% for key, error_list in errors.items %}
+                        {% for error in error_list %}
+                            <div class="">
+                                <li>
+                                    <label class="error-label">{{ key }}</label>
+                                    <span>:</span>
+                                    <span class="error-message">{{ error }}</span>
+                                </li>
+                            </div>
+                        {% endfor %}
+
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        </div>
+        <div class="clearing floatingRight">
+            <button type="submit" class="btn btn-primary" {% if topic.closed %}disabled{% endif %}>
+                {% trans 'Send' %}
+            </button>
+        </div>
+    </form>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+{% endblock %}

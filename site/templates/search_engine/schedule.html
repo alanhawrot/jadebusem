@@ -1,0 +1,30 @@
+{% load i18n %}
+<div class="outer-center">
+    <div class="inner-center">
+        <div class="panel-option schedule" data-schedule-id="{{ forloop.counter }}" hidden="hidden">
+            <table style="background-color: #f8f8f8">
+                <tr>
+                    <td style="padding: 5px">{% trans 'Hours' %}</td>
+                    <td style="padding: 5px">{% trans 'Monday' %}</td>
+                    <td style="padding: 5px">{% trans 'Tuesday' %}</td>
+                    <td style="padding: 5px">{% trans 'Wednesday' %}</td>
+                    <td style="padding: 5px">{% trans 'Thursday' %}</td>
+                    <td style="padding: 5px">{% trans 'Friday' %}</td>
+                    <td style="padding: 5px">{% trans 'Saturday' %}</td>
+                    <td style="padding: 5px">{% trans 'Sunday' %}</td>
+                </tr>
+                {% for hours in schedule %}
+                    <tr>
+                        {% for hour in hours %}
+                            {% if not hour %}
+                                <td style="padding: 5px">-</td>
+                            {% else %}
+                                <td style="padding: 5px">{{ hour }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
