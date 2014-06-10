@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
+import hashlib
 
-import operator
-
-from django.shortcuts import render_to_response, render
-from django.template import RequestContext, Context
+from django.core.cache import cache
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
 from schedules.models import Schedule
@@ -13,9 +12,9 @@ from schedules.models import ScheduleDate
 
 trace = ""
 
-#-------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
 # Function to translate polish chars to ascii
-#-------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
 
 def plToAng(text):
     translate = {u'ą': 'a', u'ć': 'c', u'ę': 'e', u'ł': 'l', u'ń': 'n', u'ó': 'o', u'ś': 's', u'ż': 'z', u'ź': 'z'}
@@ -27,18 +26,22 @@ def plToAng(text):
         newText = newText + c
     return newText
 
+
 #-------------------------------------------------------------------------------------
 # Function to display schedules
 #-------------------------------------------------------------------------------------
-def display_schedules(schedules, dates, trace_points, list_of_tabs, route_list):
+def display_schedules(schedules, dates, trace_points):
     temp_list = []
+    list_of_tabs = []
+    route_list = []
     for schedule in schedules:
         dic = create_schedule(schedule, dates, trace_points, "", "")
         list_of_schedule = dic['list_of_schedule']
         trace = dic['trace']
         list_of_tabs.extend([[list_of_schedule]])
         route_list.extend([trace])
-    return list_of_tabs
+    return list_of_tabs, route_list
+
 
 #-------------------------------------------------------------------------------------
 # Function to create timetable in schedules
@@ -119,6 +122,7 @@ def create_schedule(schedule, dates, trace_points, start, stop):
         error = _("Error while creating schedule")
     return dic
 
+
 #-------------------------------------------------------------------------------------
 # Function to check is bus go in that direction which we want
 #-------------------------------------------------------------------------------------
@@ -134,6 +138,7 @@ def isGoodDirection(schedules, trace_points, start_address, end_address, exclude
                     list.append(schedule.id)
         exclude_list.append(schedule.id)
     return list
+
 
 #-------------------------------------------------------------------------------------
 # Algorithm that find schedules with one interchange
@@ -156,7 +161,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
         for interchange in interchange_points:
             if (id < interchange.id):
                 list_of_stops.append(interchange.address)
-            # Search for interchanges
+                # Search for interchanges
         # Get those schedules that doesn't have start point
         interchanges_stops_id = ScheduleTracePoint.objects.filter(address__iexact=start_address).values(
             "schedule_id").distinct()
@@ -204,6 +209,7 @@ def OneInterchange(start_points, exclude_list, start_address, end_address, list_
         route_list.extend([temp])
         list_of_tabs.extend([[list_of_schedule, list_of_schedule2]])
     return ""
+
 
 #-------------------------------------------------------------------------------------
 # Algorith that find schedules with two interchanges
@@ -325,70 +331,83 @@ def search(request):
     search_from = ""
     search_to = ""
     login = False
-    list_of_tabs = []
     exclude_list = []
-    routes_list = []
 
     # session
     if 'email' in request.session:
         login = True
 
-    # search engine
-    if request.method == 'POST':
-        if (request.POST['from'] != "" and request.POST['to'] != ""):
-            start_address = plToAng(request.POST['from'])
-            end_address = plToAng(request.POST['to'])
-
-            if (request.POST['company_name'] == _("All")):
-                schedules = Schedule.objects.all()
-            else:
-                schedules = Schedule.objects.filter(company=request.POST['company_name'])
-
-            # Searching for start point
-            trace_id = ScheduleTracePoint.objects.filter(schedule_id__in=schedules).filter(
-                address__iexact=start_address).values("schedule_id")
-            schedules = schedules.filter(id__in=trace_id)
-            start_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
-
-            # Searching for end point
-            end_points = start_points.filter(address__iexact=end_address).values("schedule_id")
-            schedules = schedules.filter(id__in=end_points)
-
-            # Checking is bus driving in good direction
-            list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
-
-            if (len(list) != 0):
-                schedules = schedules.filter(id__in=list)
-                end_points = start_points.filter(schedule_id__in=list)
-                dates = ScheduleDate.objects.filter(schedule_id__in=list)
-                list_of_tabs = display_schedules(schedules, dates, end_points, list_of_tabs, routes_list)
-            else:
-                error = _("Sorry, we cant find any schedule.")
-                if "interchange" in request.POST.keys():
-                    error += _(" Maybe try to search with interchanges.")
-
-            # Searching for interchanges
-            if "interchange" not in request.POST.keys():
-                error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
-                                       routes_list)
-                error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
-                                        routes_list)
-
-            search_from = request.POST['from']
-            search_to = request.POST['to']
-        else:
-            if (request.POST['company_name'] == _("All")):
-                schedules = Schedule.objects.all()
-            else:
-                schedules = Schedule.objects.filter(company=request.POST['company_name'])
-            trace_points = ScheduleTracePoint.objects.all()
-            dates = ScheduleDate.objects.all()
-            list_of_tabs = display_schedules(schedules, dates, trace_points, list_of_tabs, routes_list)
-
     companies = Schedule.objects.values('company').distinct()
     context = {'login': login, 'user': request.session, 'companies': companies}
 
-    if request.POST and not error:
+    search_from = request.GET.get('from', '')
+    search_to = request.GET.get('to', '')
+    company_name = request.GET.get('company_name', '')
+
+    # search engine
+    if request.GET.get("search_request"):
+        if request.GET['from'] and request.GET['to']:
+            list_of_tabs, routes_list = cache.get(memcached_key(search_from, search_to, company_name), (None, None))
+            if not list_of_tabs and not routes_list:
+                print "not cached:{}".format(memcached_key(search_from, search_to, company_name))
+                start_address = plToAng(request.GET['from'])
+                end_address = plToAng(request.GET['to'])
+
+                if request.GET['company_name'] == _("All"):
+                    schedules = Schedule.objects.all()
+                else:
+                    schedules = Schedule.objects.filter(company=request.GET['company_name'])
+
+                # Searching for start point
+                trace_id = ScheduleTracePoint.objects.filter(schedule_id__in=schedules).filter(
+                    address__iexact=start_address).values("schedule_id")
+                schedules = schedules.filter(id__in=trace_id)
+                start_points = ScheduleTracePoint.objects.filter(schedule_id__in=schedules)
+
+                # Searching for end point
+                end_points = start_points.filter(address__iexact=end_address).values("schedule_id")
+                schedules = schedules.filter(id__in=end_points)
+
+                # Checking is bus driving in good direction
+                list = isGoodDirection(schedules, start_points, start_address, end_address, exclude_list)
+
+                (list_of_tabs, routes_list) = ([],[])
+                if list:
+                    schedules = schedules.filter(id__in=list)
+                    end_points = start_points.filter(schedule_id__in=list)
+                    dates = ScheduleDate.objects.filter(schedule_id__in=list)
+                    list_of_tabs, routes_list = display_schedules(schedules, dates, end_points)
+                else:
+                    error = _("Sorry, we cant find any schedule.")
+                    if "interchange" in request.GET.keys():
+                        error += _(" Maybe try to search with interchanges.")
+
+                # Searching for interchanges
+                if "interchange" not in request.GET.keys():
+                    error = OneInterchange(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
+                                           routes_list)
+                    error = TwoInterchanges(start_points, exclude_list, start_address, end_address, list_of_tabs, error,
+                                            routes_list)
+                if not error:
+                    cache.set(memcached_key(search_from, search_to, company_name), (list_of_tabs, routes_list), 60 * 60)
+            else:
+                print "cached:{}".format(memcached_key(search_from, search_to, company_name))
+        else:
+            list_of_tabs, routes_list = cache.get(memcached_key(search_from, search_to, company_name), (None, None))
+            if not list_of_tabs and not routes_list:
+                print "not cached:{}".format(memcached_key(search_from, search_to, company_name))
+                if request.GET['company_name'] == _("All"):
+                    schedules = Schedule.objects.all()
+                else:
+                    schedules = Schedule.objects.filter(company=request.GET['company_name'])
+                trace_points = ScheduleTracePoint.objects.all()
+                dates = ScheduleDate.objects.all()
+                list_of_tabs, routes_list = display_schedules(schedules, dates, trace_points)
+                cache.set(memcached_key(search_from, search_to, company_name), (list_of_tabs, routes_list), 60 * 60)
+            else:
+                print "cached:{}".format(memcached_key(search_from, search_to, company_name))
+
+    if request.GET.get("search_request") and not error:
         context['search_from'] = search_from
         context['search_to'] = search_to
         traces = []
@@ -401,3 +420,9 @@ def search(request):
     if error:
         context['errors'] = [error]
     return render(request, 'search_engine/search.html', context)
+
+
+def memcached_key(search_from, search_to, company_name):
+    sha=hashlib.sha512()
+    sha.update("{};{};{}".format(search_from.strip(), search_to.strip(), company_name.strip()))
+    return sha.hexdigest()

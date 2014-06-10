@@ -48,24 +48,24 @@ DATABASES = {
 
     ## Alan's local db
     # 'local': {
-    #   'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    #   'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
-    #   # The following settings are not used with sqlite3:
-    #   'USER': '',
-    #   'PASSWORD': '',
-    #   'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-    #   'PORT': '',
+    #    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #    'NAME': '/home/alanhawrot/Dokumenty/sqlite.db',                      # Or path to database file if using sqlite3.
+    #    # The following settings are not used with sqlite3:
+    #    'USER': '',
+    #    'PASSWORD': '',
+    #    'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #    'PORT': '',
     # }
 
-    ## Michal'socal db
+    ## Michal's local db
     'local': {
-         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-         'NAME': os.path.dirname(os.path.dirname(__file__)) + "/db.sqlite",                      # Or path to database file if using sqlite3.
-         # The following settings are not used with sqlite3:
-         'USER': '',
-         'PASSWORD': '',
-         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-         'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.dirname(os.path.dirname(__file__)) + "/db.sqlite",                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',
     }
 }
 
@@ -274,3 +274,13 @@ print 'PROJECT_ROOT', PROJECT_ROOT
 print 'STATIC_ROOT', STATIC_ROOT
 print 'STATIC_URL', STATIC_URL
 print 'STATICFILES_DIRS', STATICFILES_DIRS
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': [
+            '127.0.0.1:11211',
+            '127.0.0.1:11212',
+        ]
+    }
+}
