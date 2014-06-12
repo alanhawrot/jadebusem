@@ -275,6 +275,15 @@ print 'STATIC_ROOT', STATIC_ROOT
 print 'STATIC_URL', STATIC_URL
 print 'STATICFILES_DIRS', STATICFILES_DIRS
 
-from memcacheify import memcacheify
+os.environ['MEMCACHE_SERVERS'] = 'mc4.dev.eu.ec2.memcachier.com:11211'.replace(',', ';')
+os.environ['MEMCACHE_USERNAME'] = '95623c'
+os.environ['MEMCACHE_PASSWORD'] = '2ac0f71769'
 
-CACHES = memcacheify()
+CACHES = {
+  'default': {
+    'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+    'TIMEOUT': 500,
+    'BINARY': True,
+    'OPTIONS': { 'tcp_nodelay': True }
+  }
+}
