@@ -275,12 +275,6 @@ print 'STATIC_ROOT', STATIC_ROOT
 print 'STATIC_URL', STATIC_URL
 print 'STATICFILES_DIRS', STATICFILES_DIRS
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': [
-            '127.0.0.1:11211',
-            '127.0.0.1:11212',
-        ]
-    }
-}
+from memcacheify import memcacheify
+
+CACHES = memcacheify()
