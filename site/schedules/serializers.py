@@ -26,7 +26,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule
-        fields = ('id', 'company', 'trace_points', 'departures')
+        fields = ('id', 'author', 'company', 'trace_points', 'departures')
         depth = 1
 
 
