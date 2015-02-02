@@ -196,7 +196,7 @@ def handle_schedule(request):
     author_of_schedule = JadeBusemUser.objects.get(email=data['email'])
     if not data['schedule_id']:
         schedule = Schedule(id=None, author=author_of_schedule)
-    else
+    else:
         schedule = Schedule(id=data['schedule_id'], author=author_of_schedule)
     errors = {}
     handle_schedule_change_request(data, errors, schedule)
