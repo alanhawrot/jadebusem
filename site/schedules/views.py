@@ -189,12 +189,15 @@ def get_all_schedules(request, page):
     serializer = PaginatedScheduleSerializer(schedules, context=serializer_context)
     return Response(serializer.data)
 
-
+      
 @api_view(['POST'])
-def create_new_schedule(request):
+def handle_schedule(request):
     data = json.loads(request.body)
     author_of_schedule = JadeBusemUser.objects.get(email=data['email'])
-    schedule = Schedule(id=None, author=author_of_schedule)
+    if not data['schedule_id']:
+        schedule = Schedule(id=None, author=author_of_schedule)
+    else
+        schedule = Schedule(id=data['schedule_id'], author=author_of_schedule)
     errors = {}
     handle_schedule_change_request(data, errors, schedule)
     return Response(content_type='application/json')

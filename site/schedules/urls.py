@@ -13,7 +13,7 @@ urlpatterns = patterns('schedules.views',
                        (r'^modify/(?P<schedule_id>\d+)$', 'modify'),
                        (r'^delete/(?P<schedule_id>\d+)$', 'delete'),
                        (r'^all_schedules/(?P<page>\d+)$', 'get_all_schedules'),
-                       (r'^new_schedule/$', 'create_new_schedule'),
+                       (r'^schedule/$', 'handle_schedule'),
 )
 urlpatterns += (patterns('', (r'^static/(.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}), )
 )
