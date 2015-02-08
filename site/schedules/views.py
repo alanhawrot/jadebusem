@@ -201,3 +201,10 @@ def handle_schedule(request):
     errors = {}
     handle_schedule_change_request(data, errors, schedule)
     return Response(content_type='application/json')
+    
+
+@api_view(['GET'])
+def delete_schedule(request, schedule_id):
+    schedule = Schedule.objects.get(id=schedule_id)
+    schedule.delete()
+    return HttpResponse('')
