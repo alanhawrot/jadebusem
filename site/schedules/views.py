@@ -170,6 +170,8 @@ def handle_schedule_change_request(data, errors, _schedule):
             transaction.rollback()
         else:
             transaction.commit()
+            
+        return _schedule.id
     except BaseException as E:
         transaction.rollback()
         print E
@@ -199,8 +201,9 @@ def handle_schedule(request):
     else:
         schedule = Schedule(id=data['schedule_id'], author=author_of_schedule)
     errors = {}
-    handle_schedule_change_request(data, errors, schedule)
-    return Response(content_type='application/json')
+    schedule_id = handle_schedule_change_request(data, errors, schedule)
+    response_body = json.dumps({'schedule_id': schedule_id}, sort_keys=True, indent=4, separators=(',', ': '))
+    return HttpResponse(response_body, content_type="application/json")
     
 
 @api_view(['GET'])
