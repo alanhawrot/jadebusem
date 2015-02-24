@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context="pl.edu.uj.jadebusem.RegisterActivity"
+                android:id="@+id/registerParent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/register_label"
+        android:id="@+id/registerRegisterTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/registerUsernameEditText"
+        android:hint="@string/login_edit_text_hint"
+        android:layout_below="@+id/registerRegisterTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="@string/password_text_hint"
+        android:id="@+id/registerPasswordEditText"
+        android:layout_below="@+id/registerUsernameEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerUsernameEditText"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/registerRepasswordEditText"
+        android:hint="@string/repassword_edit_text_hint"
+        android:layout_below="@+id/registerPasswordEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerPasswordEditText"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/firstname_edit_text_hint"
+        android:ems="10"
+        android:id="@+id/registerFirstnameEditText"
+        android:layout_below="@+id/registerRepasswordEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerRepasswordEditText"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/surname_edit_text_hint"
+        android:ems="10"
+        android:id="@+id/registerSurnameEditText"
+        android:layout_below="@+id/registerFirstnameEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerFirstnameEditText"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerAddressEditText"
+        android:hint="@string/address_edit_text_hint"
+        android:layout_below="@+id/registerSurnameEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerSurnameEditText"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerCompanyNameEditText"
+        android:hint="@string/company_name_edit_text_hint"
+        android:layout_below="@+id/registerAddressEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/registerAddressEditText"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button_text"
+        android:id="@+id/registerCancelButton"
+        android:layout_below="@+id/registerCompanyNameEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:onClick="cancelButtonClicked"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_button_text"
+        android:id="@+id/registerRegisterButton"
+        android:layout_alignBottom="@+id/registerCancelButton"
+        android:layout_alignParentEnd="true"
+        android:onClick="registerButtonClicked"/>
+</RelativeLayout>

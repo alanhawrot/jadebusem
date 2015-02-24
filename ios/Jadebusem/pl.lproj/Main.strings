@@ -1,0 +1,150 @@
+
+/* Class = "IBUIButton"; normalTitle = "Sign In As Guest"; ObjectID = "26e-1B-MLl"; */
+"26e-1B-MLl.normalTitle" = "Zaloguj jako gość";
+
+/* Class = "IBUILabel"; text = "Register"; ObjectID = "8vo-PK-TgQ"; */
+"8vo-PK-TgQ.text" = "Zarejestruj";
+
+/* Class = "IBUIButton"; normalTitle = "SMS"; ObjectID = "9mJ-rS-CgO"; */
+"9mJ-rS-CgO.normalTitle" = "SMS";
+
+/* Class = "IBUINavigationItem"; title = "New schedule"; ObjectID = "AEw-4y-ye7"; */
+"AEw-4y-ye7.title" = "Nowy rozkład";
+
+/* Class = "IBUINavigationItem"; title = "Schedules"; ObjectID = "AY7-Up-MDH"; */
+"AY7-Up-MDH.title" = "Rozkłady";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[0] = "MON"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[0]" = "PON";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[1] = "TUE"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[1]" = "WTO";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[2] = "WED"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[2]" = "ŚRO";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[3] = "THU"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[3]" = "CZW";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[4] = "FRI"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[4]" = "PIĄ";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[5] = "SAT"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[5]" = "SOB";
+
+/* Class = "IBUISegmentedControl"; Bap-oj-gwl.segmentTitles[6] = "SUN"; ObjectID = "Bap-oj-gwl"; */
+"Bap-oj-gwl.segmentTitles[6]" = "NIE";
+
+/* Class = "IBUITextField"; placeholder = "Firstname"; ObjectID = "DwJ-fD-ThG"; */
+"DwJ-fD-ThG.placeholder" = "Imię";
+
+/* Class = "IBUIButton"; normalTitle = "Upload"; ObjectID = "F8y-28-YXl"; */
+"F8y-28-YXl.normalTitle" = "Wyślij";
+
+/* Class = "IBUINavigationItem"; title = "Schedules"; ObjectID = "FxU-TE-d5w"; */
+"FxU-TE-d5w.title" = "Rozkłady";
+
+/* Class = "IBUIBarButtonItem"; title = "Add"; ObjectID = "GBW-9w-c5z"; */
+"GBW-9w-c5z.title" = "Dodaj";
+
+/* Class = "IBUITextField"; placeholder = "Address"; ObjectID = "K7z-XK-WuA"; */
+"K7z-XK-WuA.placeholder" = "Adres";
+
+/* Class = "IBUIBarButtonItem"; title = "Sign Out"; ObjectID = "MqW-Uk-uFj"; */
+"MqW-Uk-uFj.title" = "Wyloguj";
+
+/* Class = "IBUIButton"; normalTitle = "Sign In"; ObjectID = "NYi-TV-bg5"; */
+"NYi-TV-bg5.normalTitle" = "Zaloguj";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[0] = "MON"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[0]" = "PON";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[1] = "TUE"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[1]" = "WTO";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[2] = "WED"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[2]" = "ŚRO";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[3] = "THU"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[3]" = "CZW";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[4] = "FRI"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[4]" = "PIĄ";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[5] = "SAT"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[5]" = "SOB";
+
+/* Class = "IBUISegmentedControl"; Oup-0d-Vlz.segmentTitles[6] = "SUN"; ObjectID = "Oup-0d-Vlz"; */
+"Oup-0d-Vlz.segmentTitles[6]" = "NIE";
+
+/* Class = "IBUITextField"; placeholder = "Re-enter password"; ObjectID = "S1z-Mx-fgV"; */
+"S1z-Mx-fgV.placeholder" = "Powtórz hasło";
+
+/* Class = "IBUITextField"; placeholder = "E-Mail Address"; ObjectID = "TVd-IH-tQ6"; */
+"TVd-IH-tQ6.placeholder" = "Adres e-mail";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "XCt-TL-eZt"; */
+"XCt-TL-eZt.placeholder" = "Hasło";
+
+/* Class = "IBUIBarButtonItem"; title = "Add"; ObjectID = "cuK-Jd-PJd"; */
+"cuK-Jd-PJd.title" = "Dodaj";
+
+/* Class = "IBUIButton"; normalTitle = "Remove"; ObjectID = "dFv-hi-oMw"; */
+"dFv-hi-oMw.normalTitle" = "Usuń";
+
+/* Class = "IBUITextField"; placeholder = "Company"; ObjectID = "fql-Tg-eDp"; */
+"fql-Tg-eDp.placeholder" = "Firma";
+
+/* Class = "IBUILabel"; text = "Jadebusem"; ObjectID = "ftc-1x-kAy"; */
+"ftc-1x-kAy.text" = "Jadebusem";
+
+/* Class = "IBUIButton"; normalTitle = "Cancel"; ObjectID = "g9d-o4-3kG"; */
+"g9d-o4-3kG.normalTitle" = "Anuluj";
+
+/* Class = "IBUITextField"; placeholder = "Login"; ObjectID = "gCa-2u-3wP"; */
+"gCa-2u-3wP.placeholder" = "Login";
+
+/* Class = "IBUIButton"; normalTitle = "Register"; ObjectID = "gdI-oD-X5z"; */
+"gdI-oD-X5z.normalTitle" = "Zarejestruj";
+
+/* Class = "IBUITextField"; placeholder = "Surname"; ObjectID = "gqS-6f-XX9"; */
+"gqS-6f-XX9.placeholder" = "Nazwisko";
+
+/* Class = "IBUILabel"; text = "Schedule Name"; ObjectID = "hls-Ty-kJK"; */
+"hls-Ty-kJK.text" = "Nazwa rozkładu";
+
+/* Class = "IBUIBarButtonItem"; title = "Save"; ObjectID = "i72-3k-okv"; */
+"i72-3k-okv.title" = "Zapisz";
+
+/* Class = "IBUIBarButtonItem"; title = "Continue"; ObjectID = "khH-hg-wmd"; */
+"khH-hg-wmd.title" = "Kontynuuj";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "o2h-2O-2xV"; */
+"o2h-2O-2xV.placeholder" = "Hasło";
+
+/* Class = "IBUINavigationItem"; title = "New schedule"; ObjectID = "rbA-sT-5aE"; */
+"rbA-sT-5aE.title" = "Nowy rozkład";
+
+/* Class = "IBUIBarButtonItem"; title = "Sign Out"; ObjectID = "rlv-cj-vqY"; */
+"rlv-cj-vqY.title" = "Wyloguj";
+
+/* Class = "IBUILabel"; text = "Name:"; ObjectID = "t8P-yV-uFA"; */
+"t8P-yV-uFA.text" = "Nazwa:";
+
+/* Class = "IBUIButton"; normalTitle = "Add"; ObjectID = "tA5-mH-yFr"; */
+"tA5-mH-yFr.normalTitle" = "Dodaj";
+
+/* Class = "IBUIButton"; normalTitle = "Register"; ObjectID = "tEu-zD-w6Y"; */
+"tEu-zD-w6Y.normalTitle" = "Rejestruj";
+
+/* Class = "IBUIButton"; normalTitle = "Add"; ObjectID = "w4P-dd-Buq"; */
+"w4P-dd-Buq.normalTitle" = "Dodaj";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "wAL-bs-6Ob"; */
+"wAL-bs-6Ob.text" = "Nazwa";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "yHk-kw-aJV"; */
+"yHk-kw-aJV.title" = "Anuluj";
+
+/* Class = "IBUILabel"; text = "Tracepoints:"; ObjectID = "yJa-Mr-vsi"; */
+"yJa-Mr-vsi.text" = "Punkty na trasie:";
