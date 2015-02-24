@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="pl.edu.uj.jadebusem.DetailsActivity">
+    <item
+        android:id="@+id/action_options"
+        android:title="@string/details_menu_actions_title"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item android:id="@+id/action_edit"
+                  android:title="@string/details_action_edit_title" />
+            <item android:id="@+id/action_delete"
+                  android:title="@string/details_action_delete_title" />
+            <item android:id="@+id/action_upload"
+                  android:title="@string/details_action_upload_title" />
+            <item android:id="@+id/action_sms"
+                  android:title="@string/details_action_sms_title" />
+        </menu>
+
+        </item>
+</menu>

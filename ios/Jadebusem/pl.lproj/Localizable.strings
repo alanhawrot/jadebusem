@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Jadebusem
+
+  Created by Alan Hawrot on 18.01.2015.
+  Copyright (c) 2015 Alan Hawrot. All rights reserved.
+*/
+
+"ERROR" = "Błąd";
+"OK" = "OK";
+"CORRECT_ERRORS_MESSAGE" = "Proszę popraw błędy";
+"CORRECT_ERROR_MESSAGE" = "Proszę popraw błąd";
+"EMAIL_PASSWORD_ERROR" = "Sprawdź swój adres e-mail i hasło";
+"TRY_AGAIN" = "Spróbuj ponownie";
+"NETWORK_PROBLEMS" = "Problem z połączeniem";
+"SHORT_PASSWORD" = "Hasło powinno mieć przynajmniej 6 znaków";
+"NOT_EQUAL_PASSWORDS" = "Podane hasła się nie zgadzają";
+"EMAIL_IN_USE" = "Podany adres e-mail jest już używany";
+"SUCCESS" = "Sukces";
+"REGISTERED_SUCCESSFULLY" = "Rejestracja przebiegła pomyślnie";
+"DATABASE_ERROR" = "Błąd bazy danych";
+"FAILURE" = "Błąd";
+"SIGNED_USERS_REMOVE" = "Tylko zalogowani użytkownicy mogą usuwać rozkłady";
+"EXTERNAL_SCHEDULE_REMOVE_ERROR" = "Nie można usunąć tego rozkładu. Jeśli jesteś twórcą/właścicielem tego rozkładu zaloguj sie na stronie jadebusem1.herokuapp.com w celu usunięcia";
+"ADD_SCHEDULE_SIGNED_USERS" = "Tylko zalogowani użytkownicy mogą dodawać nowe rozkłady";
+"TWO_ROUTE_POINTS" = "Rozkład powinien mieć przynajmniej dwa punkty na trasie";
+"ONE_DEPARTURE_TIME" = "Rozkład powinien mieć przynajmniej jedną godzinę odjazdu";
+"COULD_NOT_SAVE" = "Nie można zapisać rozkładu";
+"SIGNED_USERS_UPLOAD" = "Tylko zalogowani użytkownicy mogą wysyłać rozkład";
+"SMS_SUPPORT" = "Twoje urządzenie nie wspiera funkcji SMS";
+"SMS_CANCELED" = "SMS został anulowany";
+"SMS_FAILED" = "Nastąpił błąd podczas próby wysłania wiadomości SMS";
+"SMS_SENT" = "SMS został wysłany";
+"SCHEDULE_UPLOADED" = "Rozkład został wysłany";
+"CHECK_CONNECTION_TRY_AGAIN" = "Sprawdź swoje połączenie i spróbuj ponownie";
+"DRAW_ROUTE_MAP" = "Trasa w wyniku błędu nie może zostać zoznaczona na mapie";
+"EXTERNAL_SCHEDULE_UPLOAD" = "Nie można wysłać rozkładu, który został już umieszczony na serwerze";

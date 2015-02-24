@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="pl.edu.uj.jadebusem.MySchedulesActivity">
+    <item
+        android:id="@+id/action_add_schedule"
+        android:title="@string/action_add_schedule_title"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_refresh_my_schedules"
+        android:title="@string/action_refresh_title"
+        android:orderInCategory="90"
+        app:showAsAction="ifRoom"/>
+</menu>

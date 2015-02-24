@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Jadebusem
+
+  Created by Alan Hawrot on 18.01.2015.
+  Copyright (c) 2015 Alan Hawrot. All rights reserved.
+*/
+
+"ERROR" = "Error";
+"OK" = "OK";
+"CORRECT_ERRORS_MESSAGE" = "Please correct the errors below";
+"CORRECT_ERROR_MESSAGE" = "Please correct the error below";
+"EMAIL_PASSWORD_ERROR" = "Error, please check your email or password";
+"TRY_AGAIN" = "Try again";
+"NETWORK_PROBLEMS" = "Network problems";
+"SHORT_PASSWORD" = "Your password is too short (6 characters is minimum)";
+"NOT_EQUAL_PASSWORDS" = "Given password are not equal";
+"EMAIL_IN_USE" = "This e-mail is already in use";
+"SUCCESS" = "Success";
+"REGISTERED_SUCCESSFULLY" = "Registered successfully";
+"DATABASE_ERROR" = "Database error";
+"FAILURE" = "Failure";
+"SIGNED_USERS_REMOVE" = "Only signed users can delete schedule";
+"EXTERNAL_SCHEDULE_REMOVE_ERROR" = "You cannot delete external schedule. If are the owner of this schedule you can sign in at jadebusem1.herokuapp.com in order to delete it";
+"ADD_SCHEDULE_SIGNED_USERS" = "Only signed users can add new schedules";
+"TWO_ROUTE_POINTS" = "Schedule must have at least two tracepoints";
+"ONE_DEPARTURE_TIME" = "Schedule must have at least one departure times";
+"COULD_NOT_SAVE" = "Could not save schedule";
+"SIGNED_USERS_UPLOAD" = "Only signed users can upload schedule";
+"SMS_SUPPORT" = "Your device does not support SMS feature";
+"SMS_CANCELED" = "SMS has been canceled";
+"SMS_FAILED" = "Sending SMS has failed";
+"SMS_SENT" = "SMS has been sent";
+"SCHEDULE_UPLOADED" = "Schedule has been uploaded";
+"CHECK_CONNECTION_TRY_AGAIN" = "Check your connection and try again";
+"DRAW_ROUTE_MAP" = "Route cannot be drawn on map";
+"EXTERNAL_SCHEDULE_UPLOAD" = "This schedule is already uploaded";

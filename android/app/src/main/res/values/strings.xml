@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Jadebusem</string>
+    <string name="action_add_schedule_title">Add</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_schedules">Schedules</string>
+    <string name="title_activity_details">Schedule Details</string>
+    <string name="title_section1">Details</string>
+    <string name="title_section2">Map</string>
+    <string name="title_activity_edit">Edit Schedule</string>
+    <string name="logo_image_view_description">Logo</string>
+    <string name="login_edit_text_hint">E-Mail Address (Username)</string>
+    <string name="password_text_hint">Password</string>
+    <string name="login_button_text">Sign In</string>
+    <string name="guest_login_button_text">Sign In as Guest</string>
+    <string name="register_button_text">Register</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="register_label">Register</string>
+    <string name="firstname_edit_text_hint">Firstname</string>
+    <string name="surname_edit_text_hint">Surname</string>
+    <string name="repassword_edit_text_hint">Re-enter password</string>
+    <string name="address_edit_text_hint">Address</string>
+    <string name="company_name_edit_text_hint">Company name</string>
+    <string name="register_email_not_valid">E-Mail address is not valid</string>
+    <string name="register_short_password">Password is too short (6 characters is the minimum)</string>
+    <string name="register_not_equal_passwords">Passwords are not equal</string>
+    <string name="network_problem_title">Network problem</string>
+    <string name="network_problem_message">Check your connection and try again</string>
+    <string name="register_email_in_use">This e-mail is already in use</string>
+    <string name="login_error_title">Sign in error</string>
+    <string name="login_error_message">Please check your email or password and try again</string>
+    <string name="title_activity_my_schedules">My Schedules</string>
+    <string name="action_my_schedules_title">My Schedules</string>
+    <string name="server_error_title">Server error</string>
+    <string name="server_error_message">Try again later</string>
+    <string name="refreshed">Refreshed</string>
+    <string name="details_menu_actions_title">Actions</string>
+    <string name="details_action_edit_title">Edit</string>
+    <string name="details_action_delete_title">Delete</string>
+    <string name="details_action_upload_title">Upload</string>
+    <string name="details_action_sms_title">SMS</string>
+    <string name="details_action_bluetooth_title">Bluetooth</string>
+    <string name="edit_schedule_name_edit_text_hint">Schedule name</string>
+    <string name="edit_add_tracepoint_button_text">Add tracepoint</string>
+    <string name="edit_add_departure_button_text">Add departure time</string>
+    <string name="edit_action_save_title">Save</string>
+    <string name="dialog_add_tracepoint_hint">Address</string>
+    <string name="dialog_add_tracepoint_title">Add tracepoint</string>
+    <string name="uploaded">Schedule uploaded</string>
+    <string name="tab_mon">M</string>
+    <string name="tab_tue">T</string>
+    <string name="tab_wed">W</string>
+    <string name="tab_thu">TH</string>
+    <string name="tab_fri">F</string>
+    <string name="tab_sat">SA</string>
+    <string name="tab_sun">SU</string>
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_error_author_edit_message">You cannot edit this schedule. Only its author can.</string>
+    <string name="dialog_error_one_departure_message">Schedule must have at least one departure times</string>
+    <string name="dialog_error_two_tracepoints_message">Schedule must have at least two tracepoints</string>
+    <string name="dialog_error_schedule_name_message">Schedule must have name</string>
+    <string name="dialog_error_author_upload_message">You cannot upload this schedule because you are not its
+        author</string>
+    <string name="dialog_error_author_delete_message">You cannot delete this schedule because you are not its
+        author</string>
+    <string name="toast_schedule_deleted">Schedule deleted</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Are you sure that you want to remove this object?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sms_tracepoints">Tracepoints:</string>
+    <string name="sms_departure_times">Departure times:</string>
+    <string name="sms_monday">Monday:</string>
+    <string name="sms_tuesday">Tuesday:</string>
+    <string name="sms_wednesday">Wednesday:</string>
+    <string name="sms_thursday">Thursday:</string>
+    <string name="sms_friday">Friday:</string>
+    <string name="sms_saturday">Saturday:</string>
+    <string name="sms_sunday">Sunday:</string>
+    <string name="dialog_error_my_schedules_signed_in_title">Permission denied</string>
+    <string name="dialog_error_my_schedules_signed_in_message">Only signed in users can access My Schedules
+        page</string>
+    <string name="action_refresh_title">Refresh</string>
+    <string name="search_hint">Search</string>
+
+</resources>

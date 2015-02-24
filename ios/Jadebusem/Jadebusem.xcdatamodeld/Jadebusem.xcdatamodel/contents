@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="DepartureTimes" representedClassName="ScheduleDepartureTime" syncable="YES">
+        <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Schedules" inverseName="departureTimes" inverseEntity="Schedules" syncable="YES"/>
+    </entity>
+    <entity name="Schedules" representedClassName="Schedule" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="departureTimes" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="DepartureTimes" inverseName="schedule" inverseEntity="DepartureTimes" syncable="YES"/>
+        <relationship name="tracepoints" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Tracepoints" inverseName="schedule" inverseEntity="Tracepoints" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="schedules" inverseEntity="Users" syncable="YES"/>
+    </entity>
+    <entity name="Tracepoints" representedClassName="ScheduleTracepoint" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Schedules" inverseName="tracepoints" inverseEntity="Schedules" syncable="YES"/>
+    </entity>
+    <entity name="Users" representedClassName="User" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Schedules" inverseName="user" inverseEntity="Schedules" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DepartureTimes" positionX="-20" positionY="189" width="128" height="90"/>
+        <element name="Schedules" positionX="-180" positionY="15" width="128" height="120"/>
+        <element name="Tracepoints" positionX="-2" positionY="-93" width="128" height="73"/>
+        <element name="Users" positionX="-371" positionY="30" width="128" height="105"/>
+    </elements>
+</model>
